@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ProjectServiceService} from "../project-service.service";
+import {ProjectModel} from "../project.model";
 
 @Component({
   selector: 'app-detail-project',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailProjectComponent implements OnInit {
 
-  constructor() { }
+  project: ProjectModel;
+  constructor(private projectService: ProjectServiceService) { }
 
   ngOnInit(): void {
+    this.onGetProjectById();
   }
 
+  onGetProjectById() {
+    this.projectService.getProjectById(localStorage.getItem('projectId'))
+      .subscribe(data => {
+        console.log(data)
+        this.project = data;
+      }, error => {
+        alert(error);
+      });
+  }
 }
