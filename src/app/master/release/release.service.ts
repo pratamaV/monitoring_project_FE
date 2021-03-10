@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable, Observer} from "rxjs";
 import {ProjectModel, ProjectModel2} from "../project/project.model";
-import {ReleaseModel, ReleaseModel2} from "./release.model";
+import {ReleaseModel, ReleaseModel2} from './release.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +34,19 @@ export class ReleaseService {
     });
   }
 
+  getReleaseByProjectId(id): Observable<ReleaseModel2> {
+    return new Observable((observer: Observer<ReleaseModel2>) => {
+      this.http.get(`api/releaseByProjectId/${id}`)
+        .subscribe((data: ReleaseModel2) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
 
-  saveProject(postData: ReleaseModel, id: string) {
+
+  saveRelease(postData: ReleaseModel, id: string) {
     return new Observable((observer: Observer<ReleaseModel>) => {
       if (id) {
         this.http.put('/api/release', postData)

@@ -45,5 +45,10 @@ export class ListProjectComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/project/form-project/' + project.id, {state: project});
   }
 
+  onGetReleaseByProjectId(projectId){
+    localStorage.setItem('projectId', projectId);
+    this.router.navigate(['/dashboard/release']);
+  }
+
 
 }

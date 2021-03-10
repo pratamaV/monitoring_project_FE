@@ -14,6 +14,7 @@ export interface ReleaseModel{
   estEnddate: Date;
   actStartdate: Date;
   actEnddate: Date;
+  statusRelease: string;
   project: {
     id: string;
   };
@@ -34,4 +35,5 @@ export interface ReleaseModel2{
   actStartdate: Date;
   actEnddate: Date;
   project: ProjectModel;
+  statusRelease: string;
 }

@@ -52,7 +52,7 @@
 <!--    <td>{{project.statusProject}}</td>-->
     <td>
       <button (click)="onGetProjectById(project.id)">Detail</button>&nbsp;
-      <button>Release</button>
+      <button (click)="onGetReleaseByProjectId(project.id)">Release</button>
       <button (click)="updateProject(project)">Update</button>
     </td>
   </tr>
