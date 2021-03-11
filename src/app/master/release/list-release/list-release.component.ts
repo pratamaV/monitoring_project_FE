@@ -22,7 +22,6 @@ export class ListReleaseComponent implements OnInit {
   onGetListRelease() {
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'))
       .subscribe(data => {
-        console.log(data);
         this.loadedRelease = data;
       }, error => {
         alert(error);
@@ -37,8 +36,19 @@ export class ListReleaseComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/release/form-release/' + release.id, {state: release});
   }
 
-  onGoTask(){
+  onGoTask(releaseId){
+    localStorage.setItem('releaseId', releaseId);
+    this.router.navigate(['/dashboard/task']);
+  }
 
+  onChangeStatusProject(id){
+    this.releaseService.changeStatusRelease(id)
+      .subscribe(data => {
+        window.location.reload();
+        this.router.navigate(['/dashboard/release']);
+      }, error => {
+        alert(error);
+      });
   }
 
 }

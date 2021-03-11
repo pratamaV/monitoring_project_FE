@@ -19,7 +19,6 @@ export class DetailProjectComponent implements OnInit {
   onGetProjectById() {
     this.projectService.getProjectById(localStorage.getItem('projectId'))
       .subscribe(data => {
-        console.log(data)
         this.project = data;
       }, error => {
         alert(error);

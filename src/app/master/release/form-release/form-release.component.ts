@@ -57,7 +57,6 @@ export class FormReleaseComponent implements OnInit {
   }
 
   onSaveRelease(postData, valid: boolean){
-    console.log(postData);
     this.release = {
       id: postData.id,
       releaseCode: postData.releaseCode,
@@ -77,7 +76,6 @@ export class FormReleaseComponent implements OnInit {
         id: postData.project
       }
     };
-
     if (valid) {
       this.releaseService.saveRelease(this.release, this.id)
         .subscribe(response => {

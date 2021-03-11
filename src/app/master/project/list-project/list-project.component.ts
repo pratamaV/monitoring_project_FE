@@ -50,5 +50,15 @@ export class ListProjectComponent implements OnInit {
     this.router.navigate(['/dashboard/release']);
   }
 
+  onChangeStatusProject(id){
+    this.projectService.changeStatusProject(id)
+      .subscribe(data => {
+        window.location.reload();
+        this.router.navigate(['/dashboard/project']);
+      }, error => {
+        alert(error);
+      });
+  }
+
 
 }
