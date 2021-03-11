@@ -1,4 +1,5 @@
 import {ProjectModel} from "../project/project.model";
+import {TaskModel, TaskModel2} from "../task/task.model";
 
 export interface ReleaseModel{
   id: string;
@@ -18,6 +19,7 @@ export interface ReleaseModel{
   project: {
     id: string;
   };
+  taskList?: TaskModel2[];
 }
 
 export interface ReleaseModel2{
