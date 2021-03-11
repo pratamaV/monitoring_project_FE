@@ -1,1 +1,31 @@
-<p>list-issued works!</p>
+<h1>List Issued</h1>
+<button (click)="onAddIssued()">Add New Task</button>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Issued Description</th>
+      <th scope="col">Issued Date</th>
+      <th scope="col">Issued Plan</th>
+      <th scope="col">Est. End Date</th>
+      <th scope="col">PIC</th>
+      <th scope="col">Release Code</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let issued of loadedIssued; let i = index">
+      <th scope="row">{{issued.issuedDescription}}</th>
+      <td>{{issued.issuedDate}}</td>
+      <td>{{issued.issuedPlan}}</td>
+      <td>{{issued.estEnddate}}</td>
+      <td>{{issued.pic}}</td>
+      <td>{{issued.release.releaseCode}}</td>
+      <td>
+        <button (click)="updateIssued(issued)">Update</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
