@@ -1,0 +1,46 @@
+<p>List Release</p>
+<button (click)="onAddRelease()">Add New Release</button>
+<div class="table-responsive">
+  <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Release Code</th>
+        <th scope="col">Release Name</th>
+        <th scope="col">Score</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Description</th>
+        <th scope="col">Status</th>
+        <th scope="col">Stage</th>
+        <th scope="col">Prosentase Release</th>
+        <th scope="col">Status Release</th>
+        <th scope="col">Est. StartDate</th>
+        <th scope="col">Act. StartDate</th>
+        <th scope="col">Est. End Date</th>
+        <th scope="col">Act. End Date</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let release of loadedRelease; let i = index">
+        <th scope="row">{{release.releaseCode}}</th>
+        <td>{{release.releaseName}}</td>
+        <td>{{release.score}}</td>
+        <td>{{release.weight}}</td>
+        <td>{{release.description}}</td>
+        <td>{{release.status}}</td>
+        <td>{{release.stage}}</td>
+        <td>{{release.prosentaseRelease}}</td>
+        <td>{{release.statusRelease}}</td>
+        <td>{{release.estStartdate | date}}</td>
+        <td>{{release.actStartdate | date}}</td>
+        <td>{{release.estEnddate | date}}</td>
+        <td>{{release.actEnddate | date}}</td>
+        <td>
+          <button (click)="updateRelease(release)">Update</button>
+          <button (click)="onGoTask(release.id)">Task</button>
+          <button (click)="onChangeStatusProject(release.id)">Change status</button>
+        </td>
+      </tr>
+      </tbody>
+  </table>
+</div>

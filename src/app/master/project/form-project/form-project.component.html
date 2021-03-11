@@ -1,1 +1,115 @@
-<p>form-project works!</p>
+<h1>Form Pembuatan Project</h1>
+
+<div class="container-fluid" style="padding: 15px; margin: 20px">
+  <form style="padding: 10px" [formGroup]="projectForm" method="post" (ngSubmit)="onSaveProject(projectForm.value, projectForm.valid)">
+    <div class="Form-group">
+      <input type="hidden" class="form-control" formControlName="id" id="id">
+      <input type="hidden" class="form-control" formControlName="projectCode" id="projectCode">
+    </div>
+
+    <div class="Form-group">
+      <label for="projectName">Project Name</label>
+      <input type="text" class="form-control" formControlName="projectName" id="projectName" placeholder="Project Name">
+    </div>
+
+    <div class="Form-group">
+      <label for="pmo">PMO</label>
+      <select class="form-select" formControlName="pmo" id="pmo" aria-label="Default select example">
+        <option *ngFor="let user of loadedUser" [value]="user.id" [selected]="pmoId===user.id">{{user.username}}</option>
+      </select>
+    </div>
+
+    <div class="Form-group">
+      <label for="pm">PM</label>
+      <select class="form-select" formControlName="pm" id="pm" aria-label="Default select example">
+        <option *ngFor="let user of loadedUser" [value]="user.id" [selected]="pmId===user.id" >{{user.username}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="benefit">Benefit</label>
+      <input type="text" class="form-control" formControlName="benefit" id="benefit" placeholder="Benefit">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" formControlName="description" id="description" placeholder="Description">
+    </div>
+
+    <div class="form-group">
+      <label for="coPM">User</label>
+      <select class="form-select" formControlName="coPM" id="coPM" aria-label="Default select example">
+        <option *ngFor="let user of loadedUser"  [value]="user.id" [selected]="coPMId===user.id" >{{user.username}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="divisiUser">Divisi User</label>
+      <select class="form-select" formControlName="divisiUser" id="divisiUser" aria-label="Default select example">
+        <option *ngFor="let division of loadedDivision" [value]="division.id" [selected]="divisionId===division.id" >{{division.divisionName}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="directorateUser">Directorate User</label>
+      <input type="text" class="form-control" formControlName="directorateUser" id="directorateUser" placeholder="Directorate User">
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input type="text" class="form-control" formControlName="status" id="status" placeholder="Status">
+    </div>
+
+    <div class="form-group">
+      <label for="targetLive">Target Live</label>
+      <input type="date" class="form-control" formControlName="targetLive" id="targetLive" placeholder="Target Live">
+    </div>
+
+    <div class="form-group">
+      <label for="budget">Budget</label>
+      <input type="text" class="form-control" formControlName="budget" id="budget" placeholder="Budget">
+    </div>
+
+    <div class="form-group">
+      <label for="contracted_value">Contracted Value</label>
+      <input type="text" class="form-control" formControlName="contracted_value" id="contracted_value" placeholder="Contracted Value">
+    </div>
+
+    <div class="form-group">
+      <label for="paymentRealization">Payment Realization</label>
+      <input type="text" class="form-control" formControlName="paymentRealization" id="paymentRealization" placeholder="Payment Realization">
+    </div>
+
+    <div class="form-group">
+      <label for="score">Score</label>
+      <select class="form-select" formControlName="score" id="score" aria-label="Default select example">
+        <option value="1">2</option>
+        <option value="1">3</option>
+        <option value="1">5</option>
+        <option value="1">8</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="categoryActivity">Category Activity</label>
+      <select class="form-select" formControlName="categoryActivity" id="categoryActivity" aria-label="Default select example">
+        <option value="Carry Over">Carry Over</option>
+        <option value="New">New</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="categoryInitiative">Category Initiative</label>
+      <select class="form-select" formControlName="categoryInitiative" id="categoryInitiative" aria-label="Default select example">
+        <option value="Project">Project</option>
+        <option value="Enhancement">Enhancement</option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <input type="hidden" class="form-control" formControlName="statusProject" id="statusProject">
+    </div>
+    <button [disabled]="!projectForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>
+  </form>
+</div>
