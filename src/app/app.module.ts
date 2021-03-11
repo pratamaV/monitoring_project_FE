@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {MasterModule} from './master/master.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
     NotFoundComponent,
   ],
   imports: [
+    MasterModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
