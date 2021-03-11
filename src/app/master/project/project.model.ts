@@ -1,3 +1,5 @@
+import {ReleaseModel} from '../release/release.model';
+
 export interface ProjectModel{
     id: string;
     projectCode: string;
@@ -20,6 +22,7 @@ export interface ProjectModel{
     categoryActivity: string;
     categoryInitiative: string;
     statusProject: string;
+    releaseList?: ReleaseModel[];
 
 }
 
