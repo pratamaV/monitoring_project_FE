@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {TaskModel} from '../task.model';
+import {TaskModel, TaskModel3} from '../task.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from '../task.service';
 import {UserModel} from '../../project/project.model';
@@ -14,7 +14,7 @@ import {ProjectServiceService} from '../../project/project-service.service';
 export class FormTaskComponent implements OnInit {
 
   taskForm: FormGroup;
-  task: TaskModel;
+  task: TaskModel3;
   id: string;
   loadedUser: UserModel[] = [];
   assignedToId: '';
@@ -41,7 +41,7 @@ export class FormTaskComponent implements OnInit {
       statusDone: new FormControl('Tidak'),
       taskProsentase: new FormControl(0),
       finalTarget: new FormControl(null),
-      taskDoc: new FormControl(null),
+      // taskDoc: new FormControl(null),
       release: new FormControl(localStorage.getItem('releaseId'))
     });
   }
@@ -51,22 +51,21 @@ export class FormTaskComponent implements OnInit {
       id: postData.id,
       taskName: postData.taskName,
       taskCode: postData.taskCode,
-      assignedTo: JSON.stringify({
+      assignedTo: {
         id: postData.assignedTo
-      }) ,
+      },
       score: postData.score,
       weight: postData.weight,
       statusDone: postData.statusDone,
       taskProsentase: postData.taskProsentase,
       finalTarget: new Date(postData.finalTarget),
-      taskDoc: postData.taskDoc,
-      release: JSON.stringify({
+      release: {
         id: postData.release
-      })
+      }
     };
     console.log(this.task);
     if (valid) {
-      this.taskService.createTask(this.task)
+      this.taskService.addTask(this.task, this.task.id)
         .subscribe(response => {
           this.router.navigate(['/dashboard/task']);
         }, error => {
@@ -75,12 +74,12 @@ export class FormTaskComponent implements OnInit {
     }
   }
 
-  processFile(imageInput: any) {
-    if (imageInput.files.length > 0) {
-      const file = imageInput.files[0];
-      this.taskForm.get('taskDoc').setValue(file);
-    }
-  }
+  // processFile(imageInput: any) {
+  //   if (imageInput.files.length > 0) {
+  //     const file = imageInput.files[0];
+  //     this.taskForm.get('taskDoc').setValue(file);
+  //   }
+  // }
 
   onGetAllUser() {
     this.projectService.getAllUser()
