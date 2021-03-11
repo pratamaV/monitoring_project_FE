@@ -1,1 +1,60 @@
-<p>form-task works!</p>
+<h1>Form Pembuatan Task</h1>
+
+<div class="container-fluid" style="padding: 15px; margin: 20px">
+  <form style="padding: 10px" [formGroup]="taskForm" method="post" (ngSubmit)="onSaveTask(taskForm.value, taskForm.valid)">
+    <div class="Form-group">
+      <input type="hidden" class="form-control" formControlName="id" id="id">
+      <input type="hidden" class="form-control" formControlName="taskCode" id="taskCode">
+    </div>
+
+    <div class="Form-group">
+      <label for="taskName">Task Name</label>
+      <input type="text" class="form-control" formControlName="taskName" id="taskName" placeholder="Task Name">
+    </div>
+
+    <div class="form-group">
+      <label for="assignedTo">User</label>
+      <select class="form-select" formControlName="assignedTo" id="assignedTo" aria-label="Default select example">
+        <option *ngFor="let user of loadedUser"  [value]="user.id" [selected]="assignedToId===user.id" >{{user.username}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="score">Score</label>
+      <select class="form-select" formControlName="score" id="score" aria-label="Default select example">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="8">8</option>
+      </select>
+    </div>
+
+    <div class="Form-group">
+      <input type="hidden" class="form-control" formControlName="weight" id="weight">
+    </div>
+
+    <div class="Form-group">
+      <input type="hidden" class="form-control" formControlName="statusDone" id="statusDone">
+    </div>
+
+
+    <div class="form-group">
+      <label for="finalTarget">Final Target</label>
+      <input type="date" class="form-control" formControlName="finalTarget" id="finalTarget">
+    </div>
+
+    <label class="image-upload-container btn btn-bwm" style="text-align: left">
+      <span style="color: red">Select Image *max file 10MB</span>
+      <input #imageInput
+             type="file"
+             accept="image/*"
+             (change)="processFile(imageInput)" class="form-control">
+    </label>
+
+    <div class="form-group">
+      <input type="hidden" class="form-control" formControlName="taskProsentase" id="taskProsentase">
+      <input type="hidden" class="form-control" formControlName="release" id="release">
+    </div>
+    <button [disabled]="!taskForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>
+  </form>
+</div>
