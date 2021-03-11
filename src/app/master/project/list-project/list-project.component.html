@@ -1,7 +1,7 @@
 
 <div class="container" style="margin: 20px">
   <h1>Daftar Project</h1>
-  <button (click)="onAddProject()">Tambahkan Project</button>
+  <button (click)="onAddProject()">Add New Project</button>
 <table class="table">
   <thead class="thead-dark">
   <tr>
@@ -15,14 +15,14 @@
     <th scope="col">Divisi User</th>
 <!--    <th scope="col">Directorate User</th>-->
 <!--    <th scope="col">Target Live</th>-->
-<!--    <th scope="col">Prosentase Project</th>-->
+    <th scope="col">Prosentase Project</th>
 <!--    <th scope="col">Budget</th>-->
 <!--    <th scope="col">Contracted Value</th>-->
 <!--    <th scope="col">Payment Realization</th>-->
 <!--    <th scope="col">Weight</th>-->
 <!--    <th scope="col">Category Initiative</th>-->
 <!--    <th scope="col">Category Activity</th>-->
-<!--    <th scope="col">Status Project</th>-->
+    <th scope="col">Status Project</th>
     <th scope="col">
       Detail Project
     </th>
@@ -42,18 +42,19 @@
     <td>{{project.divisiUser.divisionName}}</td>
 <!--    <td>{{project.directorateUser}}</td>-->
 <!--    <td>{{project.targetLive}}</td>-->
-<!--    <td>{{project.prosentaseProject}}</td>-->
+    <td>{{project.prosentaseProject}}</td>
 <!--    <td>{{project.budget}}</td>-->
 <!--    <td>{{project.contracted_value}}</td>-->
 <!--    <td>{{project.paymentRealization}}</td>-->
 <!--    <td>{{project.weight}}</td>-->
 <!--    <td>{{project.categoryInitiative}}</td>-->
 <!--    <td>{{project.categoryActivity}}</td>-->
-<!--    <td>{{project.statusProject}}</td>-->
+    <td>{{project.statusProject}}</td>
     <td>
       <button (click)="onGetProjectById(project.id)">Detail</button>&nbsp;
       <button (click)="onGetReleaseByProjectId(project.id)">Release</button>
       <button (click)="updateProject(project)">Update</button>
+      <button (click)="onChangeStatusProject(project.id)">Change status</button>
     </td>
   </tr>
   </tbody>

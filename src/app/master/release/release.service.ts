@@ -65,4 +65,15 @@ export class ReleaseService {
       }
     });
   }
+
+  changeStatusRelease(id): Observable<ReleaseModel> {
+    return new Observable((observer: Observer<ReleaseModel>) => {
+      this.http.put(`/api/releaseUpdate/${id}`, id)
+        .subscribe((response: ReleaseModel) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
 }

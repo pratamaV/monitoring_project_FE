@@ -74,5 +74,16 @@ export class ProjectServiceService {
     });
   }
 
+  changeStatusProject(id): Observable<ProjectModel> {
+    return new Observable((observer: Observer<ProjectModel>) => {
+      this.http.put(`/api/project/${id}`, id)
+        .subscribe((response: ProjectModel) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
+
 
 }
