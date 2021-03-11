@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {IssuedService} from "../issued.service";
-import {Router} from "@angular/router";
-import {IssuedModel, IssuedModel2} from "../issued.model";
-import {ProjectModel2} from "../../project/project.model";
+import {Component, OnInit} from '@angular/core';
+import {IssuedService} from '../issued.service';
+import {Router} from '@angular/router';
+import {IssuedModel, IssuedModel2} from '../issued.model';
 
 @Component({
   selector: 'app-list-issued',
