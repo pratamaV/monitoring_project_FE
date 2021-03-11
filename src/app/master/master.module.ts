@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MasterRoutingModule} from './master-routing.module';
 import {MasterComponent} from './master.component';
 import {LayoutModule} from '../layout/layout.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -11,7 +12,7 @@ import {LayoutModule} from '../layout/layout.module';
   imports: [
     CommonModule,
     MasterRoutingModule,
-    LayoutModule
+    LayoutModule,
   ]
 
 })

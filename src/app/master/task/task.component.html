@@ -1,1 +1,62 @@
-<p>task works!</p>
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" /> -->
+
+<div class="bg">
+    <br><br>
+    <div class="container-fluid mt-5">
+        <h1 class="title text-center">Task List</h1>
+        <br>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center text-white">NO</th>
+                    <th scope="col" class="text-center text-white">TASK NAME</th>
+                    <th scope="col" class="text-center text-white">ASSIGNED TO</th>
+                    <th scope="col" class="text-center text-white">SCORE</th>
+                    <th scope="col" class="text-center text-white">WEIGHT</th>
+                    <th scope="col" class="text-center text-white">PRECENTAGE</th>
+                    <th scope="col" class="text-center text-white">DEADLINE</th>
+                    <th scope="col" class="text-center text-white">DOCUMENT</th>
+                    <th scope="col" class="text-center text-white">STATUS</th>
+                    <th scope="col" class="text-center text-white">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of loadTask; let i=index">
+                    <td>{{i}}</td>
+                </tr>
+                <div *ngFor="let task of loadTask; let i=index">
+                    <tr>
+                        <td class="text-center text-white">{{i + 1}}</td>
+                        <td class="text-center text-white">{{task.taskName}}</td>
+                        <td class="text-center text-white">{{task.assignedTo}}</td>
+                        <td class="text-center text-white">{{task.score}}</td>
+                        <td class="text-center text-white">{{task.weight}}</td>
+                        <td class="text-center text-white">{{task.taskProsentase}}</td>
+                        <td class="text-center text-white">{{task.finalTarget}}</td>
+                        <!-- <td class="text-center text-white">{{task.finalTarget | CustomDatePipe}}</td> -->
+                        <td class="text-center text-white">{{task.taskDocument}}</td>
+                        <td class="text-center text-white">
+                            <div *ngIf="task.status==='done'" class="alert alert-success" role="alert">
+                                <b>Done</b>
+                            </div>
+                            <div *ngIf="task.status==='on progres'" class="alert alert-danger" role="alert">
+                                <b>Progres</b>
+                            </div>
+                        </td>
+                        <td class="text-center">
+
+                            <button type="button" class="btn btn-primary btn-create" (click)="onStatusChange(task.id)">Update</button>
+
+                            <button class="btn btn-danger ml-1" (click)='deleteTask(task.id)'>Delete</button>
+                        </td>
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+        <!-- <button [routerLink]="['/master/customer/form']" type="button" class="btn bg-blue fs-it-btn"> -->
+        <!-- <button [routerLink]="['/auth']" routerLinkActive="router-link-active"> -->
+        <!-- <i class="fa fa-plus" aria-hidden="true"></i> -->
+        <!-- <span class="fs-it-btn-vertical-line"></span> Add Task</button> -->
+        <!-- <pagination-controls class="text-center" (pageChange)="onPageChanges($event)"></pagination-controls> -->
+    </div>
+</div>
