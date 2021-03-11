@@ -38,6 +38,8 @@ export class TaskService {
     return new Observable((observer: Observer<TaskModel2>) => {
       this.http.get(`api/taskByReleaseId/${id}`)
         .subscribe((data: TaskModel2) => {
+          console.log(data, "ini yang pertama keluar");
+          
           observer.next(data);
         }, error => {
           observer.error(error.message);
@@ -110,6 +112,17 @@ export class TaskService {
           document.body.appendChild(downloadLink);
           downloadLink.click();
           observer.next(response);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
+  getTaskByUserId(id): Observable<TaskModel2> {
+    return new Observable((observer: Observer<TaskModel2>) => {
+      this.http.get(`api/task/${id}`)
+        .subscribe((data: TaskModel2) => {
+          observer.next(data);
         }, error => {
           observer.error(error.message);
         });
