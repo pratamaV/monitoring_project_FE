@@ -34,6 +34,17 @@ export class IssuedService {
     });
   }
 
+  getIssuedByReleaseId(id): Observable<IssuedModel2[]> {
+    return new Observable((observer: Observer<IssuedModel2[]>) => {
+      this.http.get(`api/issuedByReleaseId/${id}`)
+        .subscribe((data: IssuedModel2[]) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
   saveIssued(postData: IssuedModel, id: string) {
     return new Observable((observer: Observer<IssuedModel>) => {
       if (id) {

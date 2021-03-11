@@ -19,7 +19,7 @@ export class ListIssuedComponent implements OnInit {
   }
 
   onGetListIssued() {
-    this.issuedService.getAllIssued()
+    this.issuedService.getIssuedByReleaseId(localStorage.getItem('idRelease'))
       .subscribe(data => {
         this.loadedIssued = data;
       }, error => {
