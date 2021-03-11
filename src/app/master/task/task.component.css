@@ -1,0 +1,35 @@
+.bg {
+    background-color: #f1f1f1;
+    height: 100vh;
+}
+
+.btn {
+    height: 40px;
+    width: 80px;
+}
+
+.title {
+    color: #2a3d66;
+}
+
+.bg-blue {
+    background-color: #2a3d66;
+    color: white;
+    height: 40px;
+    width: 150px;
+}
+
+.table {
+    background-color: #2a3d66;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+td,
+th {
+    color: white;
+    /*padding: $padding;*/
+}

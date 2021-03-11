@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MasterRoutingModule} from './master-routing.module';
 import {MasterComponent} from './master.component';
+<<<<<<< HEAD
 import {SidebarModule} from '../layout/sidebar/sidebar.module';
 import { FormReleaseComponent } from './release/form-release/form-release.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -20,6 +21,20 @@ import {SidebarComponent} from './sidebar/sidebar.component';
   exports: [
   SidebarComponent
 ]
+=======
+import {LayoutModule} from '../layout/layout.module';
+import { BrowserModule } from '@angular/platform-browser';
+
+
+
+@NgModule({
+  declarations: [MasterComponent],
+  imports: [
+    CommonModule,
+    MasterRoutingModule,
+    LayoutModule,
+  ]
+>>>>>>> origin/task
 
 })
 export class MasterModule { }
