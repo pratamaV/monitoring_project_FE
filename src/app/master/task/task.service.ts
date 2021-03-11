@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {ReleaseModel, ReleaseModel2} from '../release/release.model';
 import {HttpClient} from '@angular/common/http';
-import {TaskModel, TaskModel2} from './task.model';
+import {TaskModel, TaskModel2, TaskModel3} from './task.model';
+import {ProjectModel, ProjectModel2} from "../project/project.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,26 @@ export class TaskService {
         }, error => {
           observer.error(error.message);
         });
+    });
+  }
+
+  addTask(postData: TaskModel3, id: string) {
+    return new Observable((observer: Observer<TaskModel3>) => {
+      if (id) {
+        this.http.put('/api/task', postData)
+          .subscribe((response: TaskModel3) => {
+            observer.next(response);
+          }, (error) => {
+            observer.error(error);
+          });
+      } else {
+        this.http.post('/api/addTask', postData)
+          .subscribe((response: TaskModel3) => {
+            observer.next(response);
+          }, (error) => {
+            observer.error(error);
+          });
+      }
     });
   }
 

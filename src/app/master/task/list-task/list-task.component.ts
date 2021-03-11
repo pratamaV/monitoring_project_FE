@@ -65,7 +65,7 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
       alert('success');
     }, error => {
-      alert('error');
+      alert('tidak ada dokumen yang di upload');
     });
   }
 }

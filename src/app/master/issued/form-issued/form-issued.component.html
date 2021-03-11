@@ -1,1 +1,36 @@
-<p>form-issued works!</p>
+<h1>Form Pembuatan Issued</h1>
+
+<div class="container-fluid" style="padding: 15px; margin: 20px">
+  <form style="padding: 10px" [formGroup]="issuedForm" method="post" (ngSubmit)="onSaveIssued(issuedForm.value, issuedForm.valid)">
+    <div class="Form-group">
+      <input type="hidden" class="form-control" formControlName="id" id="id">
+    </div>
+
+    <div class="Form-group">
+      <label for="issuedDescription">Issued Description</label>
+      <input type="text" class="form-control" formControlName="issuedDescription" id="issuedDescription" placeholder="Description">
+    </div>
+
+    <div class="Form-group">
+      <label for="issuedPlan">Issued Plan</label>
+      <input type="text" class="form-control" formControlName="issuedPlan" id="issuedPlan" placeholder="Issued Plan">
+    </div>
+
+    <div class="Form-group">
+      <label for="estEnddate">Est. End Date</label>
+      <input type="date" class="form-control" formControlName="estEnddate" id="estEnddate" placeholder="Est. End Date">
+    </div>
+
+    <div class="Form-group">
+      <label for="pic">Issued Plan</label>
+      <input type="text" class="form-control" formControlName="pic" id="pic" placeholder="PIC">
+    </div>
+
+
+    <div class="form-group">
+      <input type="hidden" class="form-control" formControlName="release" id="issuedDate">
+      <input type="hidden" class="form-control" formControlName="release" id="release">
+    </div>
+    <button [disabled]="!issuedForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>
+  </form>
+</div>
