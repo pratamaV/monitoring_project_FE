@@ -5,8 +5,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './master/home/home.component';
 
 const routes: Routes = [
+  {path: 'login', loadChildren: () => import('./auth/auth.module').then((mod) => mod.AuthModule)},
   {path: '', component: HomeComponent},
-  {path: 'auth', component: LoginComponent},
   {path: 'dashboard', loadChildren: () => import('./master/master.module').then((m) => m.MasterModule)},
   {path: 'logout', loadChildren: () => import('./auth/auth.module').then((a) => a.AuthModule)},
   {path: '**', component: NotFoundComponent}
