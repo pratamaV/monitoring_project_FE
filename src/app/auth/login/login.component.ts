@@ -49,6 +49,13 @@ export class LoginComponent implements OnInit {
       .set('password', value.password)
       .set('grant_type', 'password');
     this.authService.login(body.toString()).subscribe(data => {
+      var resultBody;
+      resultBody = data;
+
+      localStorage.setItem('token', resultBody.access_token);
+      localStorage.setItem('role', resultBody.user.userRole);
+      localStorage.setItem('idUser', resultBody.user.id);
+
       window.sessionStorage.setItem('token', JSON.stringify(data));
       this.token = window.sessionStorage.getItem('token');
       this.x = JSON.parse(this.token);
