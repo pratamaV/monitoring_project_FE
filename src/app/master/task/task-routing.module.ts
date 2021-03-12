@@ -6,6 +6,7 @@ import {DetailReleaseComponent} from "../release/detail-release/detail-release.c
 import {ListTaskComponent} from "./list-task/list-task.component";
 import {FormTaskComponent} from "./form-task/form-task.component";
 import {DetailTaskComponent} from "./detail-task/detail-task.component";
+import { MyTaskComponent } from './my-task/my-task.component';
 
 const routes: Routes = [
 
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'detail-task',
     component: DetailTaskComponent
+  },
+  {
+    path: 'my-task',
+    component: MyTaskComponent
   }
 ];
 

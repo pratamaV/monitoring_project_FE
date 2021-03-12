@@ -1,1 +1,40 @@
-<p>my-task works!</p>
+<h1>
+    My Task</h1>
+
+<!-- <button (click)="onSaveTaskByReleaseId()">Add New Task</button> -->
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task Name</th>
+                <th scope="col">Assigned To</th>
+                <th scope="col">Score</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Status Done</th>
+                <th scope="col">Prosentase Task</th>
+                <th scope="col">Final Target</th>
+                <th scope="col">Task Document</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of loadedTask; let i = index">
+                <th scope="row">{{task.taskCode}}</th>
+                <td>{{task.taskName}}</td>
+                <td>{{task.assignedTo.username}}</td>
+                <td>{{task.score}}</td>
+                <td>{{task.weight}}</td>
+                <td>{{task.statusDone}}</td>
+                <td>{{task.taskProsentase}}</td>
+                <td>{{task.finalTarget | date}}</td>
+                <td>
+                    <!-- <button (click)="downloadTaskDoc(task.taskDocument)">Download</button> -->
+                </td>
+                <td>
+                    <!-- <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

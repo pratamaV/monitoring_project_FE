@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {TaskComponent} from './task/task.component';
 
 const routes: Routes = [
   {path: 'user', loadChildren: () => import('./user/user.module').then((u) => u.UserModule)},
