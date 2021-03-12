@@ -13,7 +13,7 @@ export class UserService {
   saveUser(postData: UserModel2, id: string) {
     return new Observable((observer: Observer<UserModel2>) => {
       if (id) {
-        this.http.put('/api/user', postData)
+        this.http.put('/api/user?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: UserModel2) => {
             observer.next(response);
           }, (error) => {
@@ -43,7 +43,7 @@ export class UserService {
 
   getUserById(id): Observable<UserModel> {
     return new Observable((observer: Observer<UserModel>) => {
-      this.http.get(`api/user/${id}`)
+      this.http.get(`api/user/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: UserModel) => {
           observer.next(data);
         }, error => {
@@ -54,7 +54,7 @@ export class UserService {
 
   changeStatusUser(id): Observable<UserModel2> {
     return new Observable((observer: Observer<UserModel2>) => {
-      this.http.put(`/api/user/${id}`, id)
+      this.http.put(`/api/user/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, id)
         .subscribe((response: UserModel2) => {
           observer.next(response);
         }, (error) => {
