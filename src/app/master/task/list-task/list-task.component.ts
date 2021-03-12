@@ -23,7 +23,6 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'))
       .subscribe(data => {
         this.loadedTask = data;
-        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
@@ -65,7 +64,7 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
       alert('success');
     }, error => {
-      alert('error');
+      alert('tidak ada dokumen yang di upload');
     });
   }
 }

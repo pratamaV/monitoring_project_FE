@@ -28,3 +28,16 @@ export interface TaskModel2{
   taskDoc: File;
   release: ReleaseModel ;
 }
+
+export interface TaskModel3{
+  id: string;
+  taskName: string ;
+  taskCode: string ;
+  assignedTo: { id: string } ;
+  score: number ;
+  weight: number ;
+  statusDone: string ;
+  taskProsentase: number ;
+  finalTarget: Date ;
+  release: { id: string } ;
+}

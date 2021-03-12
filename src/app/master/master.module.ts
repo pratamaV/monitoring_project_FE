@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MasterRoutingModule} from './master-routing.module';
 import {MasterComponent} from './master.component';
-import {LayoutModule} from '../layout/layout.module';
+import {SidebarModule} from '../layout/sidebar/sidebar.module';
 import { FormReleaseComponent } from './release/form-release/form-release.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListTaskComponent } from './task/list-task/list-task.component';
@@ -14,7 +14,7 @@ import {SidebarComponent} from './sidebar/sidebar.component';
     imports: [
         CommonModule,
         MasterRoutingModule,
-        LayoutModule,
+        SidebarModule,
         ReactiveFormsModule
     ],
   exports: [

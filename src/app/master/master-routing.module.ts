@@ -6,7 +6,8 @@ const routes: Routes = [
   {path: 'user', loadChildren: () => import('./user/user.module').then((u) => u.UserModule)},
   {path: 'project', loadChildren: () => import('./project/project.module').then((p) => p.ProjectModule)},
   {path: 'release', loadChildren: () => import('./release/release.module').then((p) => p.ReleaseModule)},
-  {path: 'task', loadChildren: () => import('./task/task.module').then((p) => p.TaskModule)}
+  {path: 'task', loadChildren: () => import('./task/task.module').then((p) => p.TaskModule)},
+  {path: 'issued', loadChildren: () => import('./issued/issued.module').then((p) => p.IssuedModule)}
   ];
 
 

@@ -56,6 +56,7 @@ export class FormReleaseComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   onSaveRelease(postData, valid: boolean){
     this.release = {
       id: postData.id,
