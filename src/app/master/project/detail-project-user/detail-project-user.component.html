@@ -14,21 +14,40 @@
   </tr>
   </thead>
 </table>
+<div *ngFor="let release of releaseModel; index as i">
+  <table class="table">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+      <th>Release Code</th>
+      <th>Release Name</th>
+      <th>Prosentase Release</th>
+    </tr>
+    <tr>
+      <td>{{release.releaseCode}}</td>
+      <td>{{release.releaseName}}</td>
+      <td>{{release.prosentaseRelease}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">TaskCode</th>
+      <th scope="col">Task Name</th>
+      <th scope="col">Assignto</th>
+      <th scope="col">Prosentase Task</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of release.taskList ; index as i">
+      <td>{{task.taskCode}}</td>
+      <td>{{task.taskName}}</td>
+      <td>{{task.assignedTo.username}}</td>
+      <td>{{task.taskProsentase}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">ReleaseCode</th>
-    <th scope="col">Release Name</th>
-    <th scope="col">Prosentase Release</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let release of releaseModel ;index as i">
-    <td>{{release.releaseCode}}</td>
-    <td>{{release.releaseName}}</td>
-    <td>{{release.prosentaseRelease}}</td>
-  </tr>
-
-  </tbody>
-</table>
