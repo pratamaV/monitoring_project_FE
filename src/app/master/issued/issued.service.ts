@@ -14,7 +14,7 @@ export class IssuedService {
 
   getAllIssued(): Observable<IssuedModel2[]> {
     return new Observable((observer: Observer<IssuedModel2[]>) => {
-      this.http.get('/api/issueds')
+      this.http.get('/api/issueds?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: IssuedModel2[]) => {
           observer.next(data);
         }, error => {
@@ -25,7 +25,7 @@ export class IssuedService {
 
   getIssuedById(id): Observable<IssuedModel2> {
     return new Observable((observer: Observer<IssuedModel2>) => {
-      this.http.get(`api/issued/${id}`)
+      this.http.get(`api/issued/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: IssuedModel2) => {
           observer.next(data);
         }, error => {
@@ -36,7 +36,7 @@ export class IssuedService {
 
   getIssuedByReleaseId(id): Observable<IssuedModel2[]> {
     return new Observable((observer: Observer<IssuedModel2[]>) => {
-      this.http.get(`api/issuedByReleaseId/${id}`)
+      this.http.get(`api/issuedByReleaseId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: IssuedModel2[]) => {
           observer.next(data);
         }, error => {
@@ -48,14 +48,14 @@ export class IssuedService {
   saveIssued(postData: IssuedModel, id: string) {
     return new Observable((observer: Observer<IssuedModel>) => {
       if (id) {
-        this.http.put('/api/issued', postData)
+        this.http.put('/api/issued?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: IssuedModel) => {
             observer.next(response);
           }, (error) => {
             observer.error(error);
           });
       } else {
-        this.http.post('/api/issued', postData)
+        this.http.post('/api/issued?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: IssuedModel) => {
             observer.next(response);
           }, (error) => {

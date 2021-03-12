@@ -12,7 +12,7 @@ export class ProjectServiceService {
 
   getAllProject(): Observable<ProjectModel[]> {
     return new Observable((observer: Observer<ProjectModel[]>) => {
-      this.http.get('/api/projects')
+      this.http.get('/api/projects?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: ProjectModel[]) => {
           observer.next(data);
         }, error => {
@@ -23,7 +23,7 @@ export class ProjectServiceService {
 
   getProjectById(id): Observable<ProjectModel> {
     return new Observable((observer: Observer<ProjectModel>) => {
-      this.http.get(`api/project/${id}`)
+      this.http.get(`api/project/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: ProjectModel) => {
           observer.next(data);
         }, error => {
@@ -35,14 +35,14 @@ export class ProjectServiceService {
   saveProject(postData: ProjectModel2, id: string) {
     return new Observable((observer: Observer<ProjectModel2>) => {
       if (id) {
-        this.http.put('/api/project', postData)
+        this.http.put('/api/project?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: ProjectModel2) => {
             observer.next(response);
           }, (error) => {
             observer.error(error);
           });
       } else {
-        this.http.post('/api/project', postData)
+        this.http.post('/api/project?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: ProjectModel) => {
             observer.next(response);
           }, (error) => {
@@ -54,7 +54,7 @@ export class ProjectServiceService {
 
   getAllUser(): Observable<UserModel[]> {
     return new Observable((observer: Observer<UserModel[]>) => {
-      this.http.get('/api/users')
+      this.http.get('/api/users?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: UserModel[]) => {
           observer.next(data);
         }, error => {
@@ -65,7 +65,7 @@ export class ProjectServiceService {
 
   getAllDivison(): Observable<DivisionModel[]> {
     return new Observable((observer: Observer<DivisionModel[]>) => {
-      this.http.get('/api/divisions')
+      this.http.get('/api/divisions?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: DivisionModel[]) => {
           observer.next(data);
         }, error => {
@@ -76,7 +76,7 @@ export class ProjectServiceService {
 
   changeStatusProject(id): Observable<ProjectModel> {
     return new Observable((observer: Observer<ProjectModel>) => {
-      this.http.put(`/api/project/${id}`, id)
+      this.http.put(`/api/project/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, id)
         .subscribe((response: ProjectModel) => {
           observer.next(response);
         }, (error) => {
