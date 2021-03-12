@@ -16,11 +16,11 @@
         </div>
         <div class="form-group">
           <label for="username">Name</label>
-          <input type="text" class="form-control" id="username" name="username" placeholder="username" required>
+          <input type="text" class="form-control" id="username" formControlName="username" name="username" placeholder="username" required>
         </div>
         <div class="form-group">
           <label for="userRole">Role</label>
-          <select class="form-select" formControlName="userRole" id="userRole" aria-label="Default select example">
+          <select class="form-select" formControlName="userRole" formControlName="userRole" id="userRole" aria-label="Default select example">
             <option value="01">01 - PMO</option>
             <option value="02">02 - PM</option>
             <option value="03">03 - co-PM</option>
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="text" class="form-control" id="email" name="email" placeholder="email" required>
+          <input type="text" class="form-control" id="email" formControlName="email" name="email" placeholder="email" required>
         </div>
         <div class="form-group">
           <label for="divisiUser">Divisi User</label>
@@ -39,15 +39,15 @@
         </div>
         <div class="form-group">
           <label for="directorateUser">Directorate User</label>
-          <input type="text" class="form-control" id="directorateUser" name="directorateUser" placeholder="directorateUser" required>
+          <input type="text" class="form-control" id="directorateUser" formControlName="directorateUser" name="directorateUser" placeholder="directorateUser" required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="text" class="form-control" id="password" name="password" placeholder="password" required>
+          <input type="text" class="form-control" id="password" formControlName="password" name="password" placeholder="password" required>
         </div>
         <div class="form-group">
-          <label for="confirmPassword">Password</label>
-          <input type="text" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="confirmPassword" required>
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="text" class="form-control" id="confirmPassword" formControlName="confirmPassword" name="confirmPassword" placeholder="confirmPassword" required>
         </div>
 <!--        <div class="form-group">-->
 <!--          <input type="text" class="form-control" id="directorateUser" name="directorateUser" placeholder="directorateUser" required>-->

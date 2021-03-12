@@ -74,6 +74,7 @@ export class FormUserComponent implements OnInit {
   }
 
   onSaveUser(postData, valid: boolean) {
+    console.log(postData);
     this.user = {
       id: postData.id,
       username: postData.username,
@@ -89,7 +90,7 @@ export class FormUserComponent implements OnInit {
       totalPerformance: postData.totalPerformance
     };
     if (valid) {
-      this.userService.saveProject(this.user, this.user.id)
+      this.userService.saveUser(this.user, this.user.id)
         .subscribe(response => {
           this.router.navigate(['/dashboard/user']);
         }, error => {

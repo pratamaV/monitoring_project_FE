@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  saveProject(postData: UserModel2, id: string) {
+  saveUser(postData: UserModel2, id: string) {
     return new Observable((observer: Observer<UserModel2>) => {
       if (id) {
         this.http.put('/api/user', postData)
@@ -32,7 +32,7 @@ export class UserService {
 
   getAllUser(): Observable<UserModel[]> {
     return new Observable((observer: Observer<UserModel[]>) => {
-      this.http.get('/api/users')
+      this.http.get('/api/users?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: UserModel[]) => {
           observer.next(data);
         }, error => {
