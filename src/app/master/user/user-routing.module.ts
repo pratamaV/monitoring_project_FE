@@ -15,6 +15,10 @@ const routes: Routes = [
     component: FormUserComponent
   },
   {
+    path: 'form-user/:id',
+    component: FormUserComponent
+  },
+  {
     path: 'detail-user',
     component: DetailUserComponent
   }
