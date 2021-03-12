@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProjectServiceService} from "../../project/project-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {IssuedService} from "../issued.service";
@@ -39,11 +39,11 @@ export class FormIssuedComponent implements OnInit {
   private buildForm(): void {
     this.issuedForm = new FormGroup({
       id: new FormControl(null),
-      issuedDescription: new FormControl(null),
+      issuedDescription: new FormControl(null, [Validators.required]),
       issuedDate: new FormControl(new Date()),
-      issuedPlan: new FormControl(null),
-      estEnddate: new FormControl(null),
-      pic: new FormControl(null),
+      issuedPlan: new FormControl(null, [Validators.required]),
+      estEnddate: new FormControl(null, [Validators.required]),
+      pic: new FormControl(null, [Validators.required]),
       release: new FormControl(localStorage.getItem('idRelease')),
     });
   }
