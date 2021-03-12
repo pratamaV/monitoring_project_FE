@@ -13,6 +13,7 @@
         <th scope="col">Prosentase Task</th>
         <th scope="col">Final Target</th>
         <th scope="col">Task Document</th>
+        <th scope="col">Upload Document</th>
         <th scope="col">Action</th>
       </tr>
       </thead>
@@ -27,6 +28,9 @@
         <td>{{task.taskProsentase}}</td>
         <td>{{task.finalTarget | date}}</td>
         <td>
+          <button (click)="downloadTaskDoc(task.taskDocument)">Download</button>
+        </td>
+        <td>
           <form style="padding: 10px" [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
               <label class="image-upload-container btn btn-bwm" style="text-align: left">
                 <span style="color: red">Select Image *max file 10MB</span>
@@ -39,7 +43,7 @@
           </form>
         </td>
         <td>
-          <button class="btn btn-success" (click)="onDoneTask(task.release.id, task )">Done</button>
+          <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button>
         </td>
       </tr>
       </tbody>

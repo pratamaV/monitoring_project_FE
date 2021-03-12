@@ -38,8 +38,25 @@ export class MyTaskComponent implements OnInit {
       });
   }
 
-  onDoneTask(idRelease, task){
-    this.taskService.doneTask(idRelease, task)
+  onDoneTask(task, idRelease){
+    this.task = {
+      id: task.id,
+      taskName: task.taskName,
+      taskCode: task.taskCode,
+      assignedTo: JSON.stringify({
+        id: task.assignedTo.id
+      }) ,
+      score: task.score,
+      weight: task.weight,
+      statusDone: 'Ya',
+      taskProsentase: task.taskProsentase,
+      finalTarget: new Date(task.finalTarget),
+      taskDoc: task.taskDoc,
+      release: JSON.stringify({
+        id: task.release.id
+      })
+    };
+    this.taskService.onDoneTask(this.task, idRelease)
       .subscribe(data => {
         alert('success');
         window.location.reload();
@@ -53,7 +70,7 @@ export class MyTaskComponent implements OnInit {
     if (valid) {
       this.taskService.uploadDocumentTask(postData, id)
         .subscribe(response => {
-          // this.router.navigate(['/dashboard/task']);
+          window.location.reload();
         }, error => {
           alert(error.message);
         });
@@ -65,6 +82,14 @@ export class MyTaskComponent implements OnInit {
       const file = imageInput.files[0];
       this.taskForm.get('taskDoc').setValue(file);
     }
+  }
+
+  downloadTaskDoc(taskCode){
+    this.taskService.getTaskDocument(taskCode).subscribe((response) => {
+      alert('success');
+    }, error => {
+      alert('tidak ada dokumen yang di upload');
+    });
   }
 
 }
