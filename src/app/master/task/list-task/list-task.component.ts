@@ -23,6 +23,7 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'))
       .subscribe(data => {
         this.loadedTask = data;
+        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });

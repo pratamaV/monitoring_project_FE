@@ -14,7 +14,7 @@ export class TaskService {
 
   getAllTask(): Observable<TaskModel2[]> {
     return new Observable((observer: Observer<TaskModel2[]>) => {
-      this.http.get('/api/tasks')
+      this.http.get('/api/tasks?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: TaskModel2[]) => {
           observer.next(data);
         }, error => {
@@ -26,14 +26,14 @@ export class TaskService {
   addTask(postData: TaskModel3, id: string) {
     return new Observable((observer: Observer<TaskModel3>) => {
       if (id) {
-        this.http.put('/api/task', postData)
+        this.http.put('/api/task?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: TaskModel3) => {
             observer.next(response);
           }, (error) => {
             observer.error(error);
           });
       } else {
-        this.http.post('/api/addTask', postData)
+        this.http.post('/api/addTask?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: TaskModel3) => {
             observer.next(response);
           }, (error) => {
@@ -46,7 +46,7 @@ export class TaskService {
 
   getTaskById(id): Observable<TaskModel2> {
     return new Observable((observer: Observer<TaskModel2>) => {
-      this.http.get(`api/task/${id}`)
+      this.http.get(`api/task/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: TaskModel2) => {
           observer.next(data);
         }, error => {
@@ -57,8 +57,10 @@ export class TaskService {
 
   getTaskByReleaseId(id): Observable<TaskModel2> {
     return new Observable((observer: Observer<TaskModel2>) => {
-      this.http.get(`api/taskByReleaseId/${id}`)
+      this.http.get(`api/taskByReleaseId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: TaskModel2) => {
+          console.log(data);
+          
           observer.next(data);
         }, error => {
           observer.error(error.message);
@@ -70,14 +72,14 @@ export class TaskService {
   saveTask(postData: TaskModel, id: string) {
     return new Observable((observer: Observer<TaskModel>) => {
       if (id) {
-        this.http.put('/api/task', postData)
+        this.http.put('/api/task?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: TaskModel) => {
             observer.next(response);
           }, (error) => {
             observer.error(error);
           });
       } else {
-        this.http.post('/api/task', postData)
+        this.http.post('/api/task?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
           .subscribe((response: TaskModel) => {
             observer.next(response);
           }, (error) => {
@@ -93,7 +95,7 @@ export class TaskService {
       formData.append(key, loadData[key]);
     }
     return new Observable((observer) => {
-      this.http.post(`api/task`, formData, { responseType: 'text'})
+      this.http.post(`api/task?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, { responseType: 'text'})
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {
@@ -108,7 +110,7 @@ export class TaskService {
       formData.append(key, loadData[key]);
     }
     return new Observable((observer) => {
-      this.http.put(`api/task/${id}`, formData, { responseType: 'text'})
+      this.http.put(`api/task/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, { responseType: 'text'})
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {
@@ -120,7 +122,7 @@ export class TaskService {
 
   getTaskDocument(taskCode): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this.http.get(`api/document-task/${taskCode}`, { responseType: 'blob' as 'json'})
+      this.http.get(`api/document-task/${taskCode}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, { responseType: 'blob' as 'json'})
         .subscribe((response: any) => {
           const dataType = response.type;
           const binaryData = [];
@@ -131,6 +133,17 @@ export class TaskService {
           document.body.appendChild(downloadLink);
           downloadLink.click();
           observer.next(response);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
+  getTaskByUserId(id): Observable<TaskModel2> {
+    return new Observable((observer: Observer<TaskModel2>) => {
+      this.http.get(`api/task/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+        .subscribe((data: TaskModel2) => {
+          observer.next(data);
         }, error => {
           observer.error(error.message);
         });
