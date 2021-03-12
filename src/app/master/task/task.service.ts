@@ -59,7 +59,7 @@ export class TaskService {
     return new Observable((observer: Observer<TaskModel2>) => {
       this.http.get(`api/taskByReleaseId/${id}`)
         .subscribe((data: TaskModel2) => {
-          console.log(data, "ini yang pertama keluar");
+          console.log(data);
           
           observer.next(data);
         }, error => {
