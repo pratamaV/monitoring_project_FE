@@ -1,34 +1,100 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">PMO</th>
-    <td>{{projectModel.pmo.username}}</td>
-  </tr>
-  <tr>
-    <th scope="col">PM</th>
-    <td>{{projectModel.pm.username}}</td>
-  </tr>
-  <tr>
-    <th scope="col">CoPM</th>
-    <td>{{projectModel.coPM.username}}</td>
-  </tr>
-  </thead>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>Project {{projectModel.projectName}}</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">PMO</th>
+        <td>{{projectModel.pmo.username}}</td>
+      </tr>
+      <tr>
+        <th scope="col">PM</th>
+        <td>{{projectModel.pm.username}}</td>
+      </tr>
+      <tr>
+        <th scope="col">CoPM</th>
+        <td>{{projectModel.coPM.username}}</td>
+      </tr>
+      </thead>
+    </table>
+  </div>
 
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">ReleaseCode</th>
-    <th scope="col">Release Name</th>
-    <th scope="col">Prosentase Release</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let release of releaseModel ;index as i">
-    <td>{{release.releaseCode}}</td>
-    <td>{{release.releaseName}}</td>
-    <td>{{release.prosentaseRelease}}</td>
-  </tr>
+  <div class="card-body">
+    <table class="table">
+      <thead>
+      </thead>
+      <tbody>
+      <tr>
+        <th>Release Code</th>
+        <th>Release Name</th>
+        <th>Prosentase Release</th>
+        <th>Detail</th>
+      </tr>
+      <tr *ngFor="let release of releaseModel; let i = index">
+        <td>{{release.releaseCode}}</td>
+        <td>{{release.releaseName}}</td>
+        <td>{{release.prosentaseRelease}}</td>
+        <td>
+          <button (click)="getTaskByReleaseId(release.id)" class="btn btn-warning">Detail</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
-  </tbody>
-</table>
+  <div class="card-footer" >
+  <table class="table">
+    <tbody *ngIf="taskModel!==[]">
+    <tr>
+      <th>Task Code</th>
+      <th>Task Name</th>
+      <th>Prosentase Task</th>
+      <th>Assign to</th>
+    </tr>
+    <tr *ngFor="let task of taskModel; let i = index">
+      <td>{{task.taskCode}}</td>
+      <td>{{task.taskName}}</td>
+      <td>{{task.taskProsentase}}</td>
+      <td>{{task.assignedTo.username}}</td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+  <!--  <div *ngFor="let release of releaseModel; index as i">-->
+  <!--    <table class="table">-->
+  <!--      <thead>-->
+  <!--      </thead>-->
+  <!--      <tbody>-->
+  <!--      <tr>-->
+  <!--        <th>Release Code</th>-->
+  <!--        <th>Release Name</th>-->
+  <!--        <th>Prosentase Release</th>-->
+  <!--      </tr>-->
+  <!--      <tr>-->
+  <!--        <td>{{release.releaseCode}}</td>-->
+  <!--        <td>{{release.releaseName}}</td>-->
+  <!--        <td>{{release.prosentaseRelease}}</td>-->
+  <!--      </tr>-->
+  <!--      </tbody>-->
+  <!--    </table>-->
+  <!--  <table class="table">-->
+  <!--    <thead>-->
+  <!--    <tr>-->
+  <!--      <th scope="col">TaskCode</th>-->
+  <!--      <th scope="col">Task Name</th>-->
+  <!--      <th scope="col">Assignto</th>-->
+  <!--      <th scope="col">Prosentase Task</th>-->
+  <!--    </tr>-->
+  <!--    </thead>-->
+  <!--    <tbody>-->
+  <!--    <tr *ngFor="let task of release.taskList ; index as i">-->
+  <!--      <td>{{task.taskCode}}</td>-->
+  <!--      <td>{{task.taskName}}</td>-->
+  <!--      <td>{{task.assignedTo.username}}</td>-->
+  <!--      <td>{{task.taskProsentase}}</td>-->
+  <!--    </tr>-->
+  <!--    </tbody>-->
+  <!--  </table>-->
+  <!--  </div>-->
+
+</div>

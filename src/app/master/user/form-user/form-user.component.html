@@ -6,27 +6,53 @@
 <div class="container">
   <div class="col-md-5">
     <div class="form-area">
-      <form role="form">
+      <form role="form" [formGroup]="userForm" method="post" (ngSubmit)="onSaveUser(userForm.value, userForm.valid)">
         <br style="clear:both">
-        <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
-        <div class="form-group">
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+        <h3 style="margin-bottom: 25px; text-align: center;">Register User</h3>
+        <div class="Form-group">
+          <input type="hidden" class="form-control" formControlName="id" id="id">
+          <input type="hidden" class="form-control" formControlName="totalWeight" id="totalWeight">
+          <input type="hidden" class="form-control" formControlName="totalPerformance" id="totalPerformance">
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+          <label for="username">Name</label>
+          <input type="text" class="form-control" id="username" formControlName="username" name="username" placeholder="username" required>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
+          <label for="userRole">Role</label>
+          <select class="form-select" formControlName="userRole" formControlName="userRole" id="userRole" aria-label="Default select example">
+            <option value="01">01 - PMO</option>
+            <option value="02">02 - PM</option>
+            <option value="03">03 - co-PM</option>
+            <option value="04">04 - Squad</option>
+          </select>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" formControlName="email" name="email" placeholder="email" required>
         </div>
         <div class="form-group">
-          <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
-          <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>
+          <label for="divisiUser">Divisi User</label>
+          <select class="form-select" formControlName="divisiUser" id="divisiUser" aria-label="Default select example">
+            <option *ngFor="let division of loadedDivision" [value]="division.id" [selected]="divisionId===division.id" >{{division.divisionName}}</option>
+          </select>
         </div>
-
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>
+        <div class="form-group">
+          <label for="directorateUser">Directorate User</label>
+          <input type="text" class="form-control" id="directorateUser" formControlName="directorateUser" name="directorateUser" placeholder="directorateUser" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password" formControlName="password" name="password" placeholder="password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="text" class="form-control" id="confirmPassword" formControlName="confirmPassword" name="confirmPassword" placeholder="confirmPassword" required>
+        </div>
+<!--        <div class="form-group">-->
+<!--          <input type="text" class="form-control" id="directorateUser" name="directorateUser" placeholder="directorateUser" required>-->
+<!--        </div>-->
+        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Submit Form</button>
       </form>
     </div>
   </div>

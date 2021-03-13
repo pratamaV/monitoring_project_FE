@@ -1,6 +1,8 @@
-<h1>Form Pembuatan Project</h1>
+<div class="container">
+  <h1>Form Pembuatan Project</h1>
 
 <div class="container-fluid" style="padding: 15px; margin: 20px">
+
   <form style="padding: 10px" [formGroup]="projectForm" method="post" (ngSubmit)="onSaveProject(projectForm.value, projectForm.valid)">
     <div class="Form-group">
       <input type="hidden" class="form-control" formControlName="id" id="id">
@@ -110,6 +112,7 @@
     <div class="form-group">
       <input type="hidden" class="form-control" formControlName="statusProject" id="statusProject">
     </div>
-    <button [disabled]="!projectForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>
+    <button [disabled]="!projectForm.valid" type="submit" class="btn btn-primary mt-3" style="width: 100%">Submit</button>
   </form>
+</div>
 </div>

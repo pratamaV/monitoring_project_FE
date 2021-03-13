@@ -51,4 +51,8 @@ export class ListReleaseComponent implements OnInit {
       });
   }
 
+  onAddIssued(id) {
+    localStorage.setItem('idRelease', id);
+    this.router.navigate(['dashboard/issued']);
+  }
 }

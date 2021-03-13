@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 <<<<<<< HEAD
 
 import { TaskRoutingModule } from './task-routing.module';
+import { MyTaskComponent } from './my-task/my-task.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [MyTaskComponent],
   imports: [
     CommonModule,
     TaskRoutingModule
