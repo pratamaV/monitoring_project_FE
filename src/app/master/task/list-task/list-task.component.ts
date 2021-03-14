@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2} from '../task.model';
+import * as XLSX from "xlsx";
 
 @Component({
   selector: 'app-list-task',
@@ -11,6 +12,7 @@ import {TaskModel, TaskModel2} from '../task.model';
 export class ListTaskComponent implements OnInit {
   task: TaskModel;
   loadedTask: TaskModel2;
+  fileName = 'List-Task-' + new Date().toDateString() + '.xlsx';
   constructor(private taskService: TaskService,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -67,5 +69,18 @@ export class ListTaskComponent implements OnInit {
     }, error => {
       alert('tidak ada dokumen yang di upload');
     });
+  }
+
+  exportexcel() {
+    /* table id is passed over here */
+    const element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
   }
 }
