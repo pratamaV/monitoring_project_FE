@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {TaskModel, TaskModel3} from '../task.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from '../task.service';
@@ -33,14 +33,14 @@ export class FormTaskComponent implements OnInit {
   private buildForm(): void {
     this.taskForm  = new FormGroup({
       id: new FormControl(null),
-      taskName: new FormControl(),
+      taskName: new FormControl(null, [Validators.required]),
       taskCode: new FormControl(null),
-      assignedTo: new FormControl(null),
-      score: new FormControl(null),
+      assignedTo: new FormControl(null, [Validators.required]),
+      score: new FormControl(null, [Validators.required]),
       weight: new FormControl(0),
       statusDone: new FormControl('Tidak'),
       taskProsentase: new FormControl(0),
-      finalTarget: new FormControl(null),
+      finalTarget: new FormControl(null, [Validators.required]),
       // taskDoc: new FormControl(null),
       release: new FormControl(localStorage.getItem('releaseId'))
     });

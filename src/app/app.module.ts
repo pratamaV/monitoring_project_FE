@@ -7,6 +7,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MasterModule} from './master/master.module';
+import {AuthService} from './AuthService';
+import {AuthGuardService} from './auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import {MasterModule} from './master/master.module';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

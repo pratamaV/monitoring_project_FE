@@ -1,4 +1,4 @@
-<div class="container" style="margin: 20px">
+<div class="card">
   <h1>Daftar Project</h1>
   <table class="table">
     <thead class="thead-dark">
@@ -29,7 +29,7 @@
       <td>{{project.prosentaseProject}}</td>
       <td>{{project.statusProject}}</td>
       <td>
-        <button (click)="getDetail(project)">Detail</button>&nbsp;
+        <button (click)="getDetail(project)" class="btn btn-warning">Detail</button>&nbsp;
       </td>
     </tr>
     </tbody>
