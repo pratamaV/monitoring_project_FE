@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart} from 'node_modules/chart.js';
 import {HomeService} from './home.service';
-import {ProjectServiceService} from "../project/project-service.service";
+import {ProjectServiceService} from '../project/project-service.service';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +24,22 @@ export class HomeComponent implements OnInit {
   onSchedule = 0;
   ptrLive = 0;
   notStart = 0;
+
+  KIV = 0;
+  PRJ = 0;
+  MBS = 0;
+  PKB = 0;
+  SKP = 0;
+  SDM = 0;
+  AKU = 0;
+  UWK = 0;
+  SKA = 0;
+  BUM = 0;
+  PKP = 0;
+  PTI = 0;
+  OTI = 0;
+  ASK = 0;
+
 
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService) { }
@@ -176,7 +192,37 @@ export class HomeComponent implements OnInit {
   onGetListProject() {
     this.projectService.getAllProject()
       .subscribe(data => {
-        console.log(data);
+        for (const project of data) {
+          if(project.divisiUser.divisionCode === 'KIV'){
+            this.KIV = this.KIV + 1;
+          } else if (project.divisiUser.divisionCode === 'PRJ'){
+            this.PRJ = this.PRJ + 1;
+          } else if (project.divisiUser.divisionCode === 'MBS'){
+            this.MBS = this.MBS + 1;
+          } else if (project.divisiUser.divisionCode === 'PKB'){
+            this.PKB = this.PKB + 1;
+          } else if (project.divisiUser.divisionCode === 'SKP'){
+            this.SKP = this.SKP + 1;
+          } else if (project.divisiUser.divisionCode === 'SDM'){
+            this.SDM = this.SDM + 1;
+          } else if (project.divisiUser.divisionCode === 'AKU'){
+            this.AKU = this.AKU + 1;
+          } else if (project.divisiUser.divisionCode === 'UWK'){
+            this.UWK = this.UWK + 1;
+          } else if (project.divisiUser.divisionCode === 'SKA'){
+            this.SKA = this.SKA + 1;
+          } else if (project.divisiUser.divisionCode === 'BUM'){
+            this.BUM = this.BUM + 1;
+          } else if (project.divisiUser.divisionCode === 'PKP'){
+            this.PKP = this.PKP + 1;
+          } else if (project.divisiUser.divisionCode === 'PTI'){
+            this.PTI = this.PTI + 1;
+          } else if (project.divisiUser.divisionCode === 'OTI'){
+            this.OTI = this.OTI + 1;
+          } else if (project.divisiUser.divisionCode === 'ASK'){
+            this.ASK = this.ASK + 1;
+          }
+        }
       }, error => {
         alert(error);
       });
