@@ -1,5 +1,6 @@
+<div class="card">
 <h1>List Task</h1>
-<button (click)="onSaveTaskByReleaseId()">Add New Task</button>
+<button (click)="onSaveTaskByReleaseId()" class="btn btn-dark mt-2 mb-2" style="width: 300px; align-self: flex-end">Add New Task</button>
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -13,7 +14,7 @@
       <th scope="col">Prosentase Task</th>
       <th scope="col">Final Target</th>
       <th scope="col">Task Document</th>
-      <th scope="col">Action</th>
+<!--      <th scope="col">Action</th>-->
     </tr>
     </thead>
     <tbody>
@@ -29,11 +30,11 @@
       <td>
         <button (click)="downloadTaskDoc(task.taskDocument)">Download</button>
       </td>
-      <td>
-        <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button>
-      </td>
+<!--      <td>-->
+<!--        <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button>-->
+<!--      </td>-->
     </tr>
     </tbody>
   </table>
 </div>
-
+</div>

@@ -15,6 +15,7 @@ export class LogoutComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('STATE');
+    localStorage.clear();
     this.router.navigate(['']);
   }
 

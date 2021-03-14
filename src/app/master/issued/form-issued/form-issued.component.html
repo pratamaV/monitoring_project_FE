@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Form Pembuatan Issued</h1>
 
 <div class="container-fluid" style="padding: 15px; margin: 20px">
@@ -9,21 +10,45 @@
     <div class="Form-group">
       <label for="issuedDescription">Issued Description</label>
       <input type="text" class="form-control" formControlName="issuedDescription" id="issuedDescription" placeholder="Description">
+      <small class="form-text text-danger "
+             *ngIf="form('issuedDescription').invalid && form('issuedDescription').dirty || form('issuedDescription').touched">
+        <div *ngIf="form('issuedDescription').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="Form-group">
       <label for="issuedPlan">Issued Plan</label>
       <input type="text" class="form-control" formControlName="issuedPlan" id="issuedPlan" placeholder="Issued Plan">
+      <small class="form-text text-danger "
+             *ngIf="form('issuedPlan').invalid && form('issuedPlan').dirty || form('issuedPlan').touched">
+        <div *ngIf="form('issuedPlan').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="Form-group">
       <label for="estEnddate">Est. End Date</label>
       <input type="date" class="form-control" formControlName="estEnddate" id="estEnddate" placeholder="Est. End Date">
+      <small class="form-text text-danger "
+             *ngIf="form('estEnddate').invalid && form('estEnddate').dirty || form('estEnddate').touched">
+        <div *ngIf="form('estEnddate').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="Form-group">
-      <label for="pic">Issued Plan</label>
+      <label for="pic">PIC</label>
       <input type="text" class="form-control" formControlName="pic" id="pic" placeholder="PIC">
+      <small class="form-text text-danger "
+             *ngIf="form('pic').invalid && form('pic').dirty || form('pic').touched">
+        <div *ngIf="form('pic').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
 
@@ -33,4 +58,5 @@
     </div>
     <button [disabled]="!issuedForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>
   </form>
+</div>
 </div>

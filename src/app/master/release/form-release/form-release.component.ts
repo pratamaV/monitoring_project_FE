@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ReleaseService} from '../release.service';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReleaseModel} from '../release.model';
 
 @Component({
@@ -40,17 +40,17 @@ export class FormReleaseComponent implements OnInit {
     this.releaseForm  = new FormGroup({
       id: new FormControl(null),
       releaseCode: new FormControl(null),
-      releaseName: new FormControl(null),
-      score: new FormControl(null),
+      releaseName: new FormControl(null, [Validators.required]),
+      score: new FormControl(null, [Validators.required]),
       weight: new FormControl(null),
-      description: new FormControl(null),
-      status: new FormControl(null),
-      stage: new FormControl(null),
+      description: new FormControl(null, [Validators.required]),
+      status: new FormControl(null, [Validators.required]),
+      stage: new FormControl(null, [Validators.required]),
       prosentaseRelease: new FormControl(0),
-      estStartdate: new FormControl(null),
-      estEnddate: new FormControl(null),
-      actStartdate: new FormControl(null),
-      actEnddate: new FormControl(null),
+      estStartdate: new FormControl(null, [Validators.required]),
+      estEnddate: new FormControl(null, [Validators.required]),
+      actStartdate: new FormControl(null, [Validators.required]),
+      actEnddate: new FormControl(null, [Validators.required]),
       statusRelease: new FormControl('aktif'),
       project: new FormControl(localStorage.getItem('projectId'))
     });

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProjectServiceService} from '../project-service.service';
 import {DivisionModel, ProjectModel, ProjectModel2, UserModel} from '../project.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -48,24 +48,24 @@ export class FormProjectComponent implements OnInit {
     this.projectForm = new FormGroup({
       id: new FormControl(null),
       projectCode: new FormControl(null),
-      projectName: new FormControl(null),
-      pmo: new FormControl(null),
-      pm: new FormControl(null),
-      benefit: new FormControl(null),
-      description: new FormControl(null),
-      coPM: new FormControl(null),
-      divisiUser: new FormControl(null),
-      directorateUser: new FormControl(null),
-      status: new FormControl(null),
-      targetLive: new FormControl(null),
+      projectName: new FormControl(null, [Validators.required]),
+      pmo: new FormControl(null, [Validators.required]),
+      pm: new FormControl(null, [Validators.required]),
+      benefit: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      coPM: new FormControl(null, [Validators.required]),
+      divisiUser: new FormControl(null, [Validators.required]),
+      directorateUser: new FormControl(null, [Validators.required]),
+      status: new FormControl(null, [Validators.required]),
+      targetLive: new FormControl(null, [Validators.required]),
       prosentaseProject: new FormControl(0),
-      budget: new FormControl(null),
-      contracted_value: new FormControl(null),
-      paymentRealization: new FormControl(null),
-      score: new FormControl(null),
+      budget: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
+      contracted_value: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
+      paymentRealization: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
+      score: new FormControl(null, [Validators.required]),
       weight: new FormControl(null),
-      categoryActivity: new FormControl(null),
-      categoryInitiative: new FormControl(null),
+      categoryActivity: new FormControl(null, [Validators.required]),
+      categoryInitiative: new FormControl(null, [Validators.required]),
       statusProject: new FormControl('aktif')
     });
   }

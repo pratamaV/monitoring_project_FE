@@ -13,7 +13,7 @@ import { User } from '../user.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+
   loginForm: FormGroup;
   user: User;
   token: any;
@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
 
   year: number;
 
-  constructor( private authService : AuthService, 
-               private auth: AuthGuard, 
+  constructor( private authService : AuthService,
+               private auth: AuthGuard,
                private router : Router ) { }
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('token', resultBody.access_token);
       localStorage.setItem('role', resultBody.user.userRole);
       localStorage.setItem('idUser', resultBody.user.id);
-      console.log("datanya adalah: ", localStorage.getItem('idUser'));
+      console.log('datanya adalah: ', localStorage.getItem('idUser'));
 
       window.sessionStorage.setItem('token', JSON.stringify(data));
       this.token = window.sessionStorage.getItem('token');

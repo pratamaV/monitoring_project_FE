@@ -1,0 +1,16 @@
+.container {
+  padding-top: 30px;
+  margin: 30px 30px 30px 30px;
+  align-content: center;
+  text-align: center;
+  background-color: #e7e7de;
+  border-radius: 30px;
+}
+
+h1{
+  align-self: center;
+}
+
+.container-fluid{
+  text-align: left;
+}

@@ -6,27 +6,108 @@
 <div class="container">
   <div class="col-md-5">
     <div class="form-area">
-      <form role="form">
+      <form role="form" [formGroup]="userForm" method="post" (ngSubmit)="onSaveUser(userForm.value, userForm.valid)">
         <br style="clear:both">
-        <h3 style="margin-bottom: 25px; text-align: center;">Contact Form</h3>
-        <div class="form-group">
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+        <h3 style="margin-bottom: 25px; text-align: center;">Register User</h3>
+        <div class="Form-group">
+          <input type="hidden" class="form-control" formControlName="id" id="id">
+          <input type="hidden" class="form-control" formControlName="totalWeight" id="totalWeight">
+          <input type="hidden" class="form-control" formControlName="totalPerformance" id="totalPerformance">
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
-          <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>
+          <label for="username">Name</label>
+          <input type="text" class="form-control" id="username" formControlName="username" name="username" placeholder="username" required>
+          <small class="form-text text-danger "
+                 *ngIf="form('username').invalid && form('username').dirty || form('username').touched">
+            <div *ngIf="form('username').errors?.required">
+              Bagian ini harus terisi
+            </div>
+          </small>
         </div>
 
-        <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>
+
+        <div class="form-group">
+          <label for="userRole">Role</label>
+          <select class="form-select" formControlName="userRole" formControlName="userRole" id="userRole" aria-label="Default select example">
+            <option value="01">01 - PMO</option>
+            <option value="02">02 - PM</option>
+            <option value="03">03 - co-PM</option>
+            <option value="04">04 - Squad</option>
+          </select>
+          <small class="form-text text-danger "
+                 *ngIf="form('userRole').invalid && form('userRole').dirty || form('userRole').touched">
+            <div *ngIf="form('userRole').errors?.required">
+              Bagian ini harus terisi
+            </div>
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" formControlName="email" name="email" placeholder="email" required>
+          <div class="row ml-2">
+            <small *ngIf="form('email').invalid && (form('email').dirty || (form('email').touched))"
+                   class="text text-danger float-left">
+              <div *ngIf="form('email').errors?.required">
+                Email harus di isi
+              </div>
+              <div *ngIf="form('email').errors?.pattern">
+                Harus sesuai dengan format email
+              </div>
+            </small>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="divisiUser">Divisi User</label>
+          <select class="form-select" formControlName="divisiUser" id="divisiUser" aria-label="Default select example">
+            <option *ngFor="let division of loadedDivision" [value]="division.id" [selected]="divisionId===division.id" >{{division.divisionName}}</option>
+          </select>
+          <small class="form-text text-danger "
+                 *ngIf="form('divisiUser').invalid && form('divisiUser').dirty || form('divisiUser').touched">
+            <div *ngIf="form('divisiUser').errors?.required">
+              Bagian ini harus terisi
+            </div>
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="directorateUser">Directorate User</label>
+          <input type="text" class="form-control" id="directorateUser" formControlName="directorateUser" name="directorateUser" placeholder="directorateUser" required>
+          <small class="form-text text-danger "
+                 *ngIf="form('directorateUser').invalid && form('directorateUser').dirty || form('directorateUser').touched">
+            <div *ngIf="form('directorateUser').errors?.required">
+              Bagian ini harus terisi
+            </div>
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password" [(ngModel)]="passwordFirst" formControlName="password" name="password" placeholder="password" required>
+          <small class="form-text text-danger "
+                 *ngIf="form('password').invalid && form('password').dirty || form('password').touched">
+            <div *ngIf="form('password').errors?.required">
+              Bagian ini harus terisi
+            </div>
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="text" class="form-control" id="confirmPassword" formControlName="confirmPassword" name="confirmPassword" [(ngModel)]="passwordSecond"
+                 (keyup)="passwordMatch()" placeholder="confirmPassword" required>
+          <small>
+            <div class="form-text text-danger" *ngIf="isErrorValidation">
+              {{ errorPassword }}
+            </div>
+          </small>
+          <small
+            *ngIf="form('confirmPassword').invalid && (form('confirmPassword').dirty || form('confirmPassword').touched)">
+            <div class="form-text text-danger" *ngIf="form('confirmPassword').errors?.required">
+              Konfirmasi kata sandi harus di isi
+            </div>
+          </small>
+        </div>
+<!--        <div class="form-group">-->
+<!--          <input type="text" class="form-control" id="directorateUser" name="directorateUser" placeholder="directorateUser" required>-->
+<!--        </div>-->
+        <button type="submit" id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="!userForm.valid">Submit Form</button>
       </form>
     </div>
   </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
 import {DivisionModel, ProjectModel, ProjectModel2, UserModel} from './project.model';
+import {TaskModel} from "../task/task.model";
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +82,17 @@ export class ProjectServiceService {
           observer.next(response);
         }, (error) => {
           observer.error(error);
+        });
+    });
+  }
+
+  getTaskByReleaseId(id): Observable<TaskModel[]> {
+    return new Observable((observer: Observer<TaskModel[]>) => {
+      this.http.get(`api/taskByReleaseId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+        .subscribe((data: TaskModel[]) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
         });
     });
   }

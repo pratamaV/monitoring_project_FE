@@ -3,7 +3,7 @@ import {Observable, Observer} from 'rxjs';
 import {ReleaseModel, ReleaseModel2} from '../release/release.model';
 import {HttpClient} from '@angular/common/http';
 import {TaskModel, TaskModel2, TaskModel3} from './task.model';
-import {ProjectModel, ProjectModel2} from "../project/project.model";
+import {ProjectModel, ProjectModel2} from '../project/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +60,7 @@ export class TaskService {
       this.http.get(`api/taskByReleaseId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: TaskModel2) => {
           console.log(data);
-          
+
           observer.next(data);
         }, error => {
           observer.error(error.message);
@@ -147,6 +147,33 @@ export class TaskService {
         }, error => {
           observer.error(error.message);
         });
+    });
+  }
+
+  uploadDocumentTask(postData, id: string) {
+    const formData = new FormData();
+    for (const key in postData){
+      formData.append(key, postData[key]);
+    }
+    return new Observable((observer) => {
+      this.http.put(`api/uploadTaskDoc/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, { responseType: 'text'})
+        .subscribe((response: any) => {
+          observer.next(response);
+        }, error => {
+          observer.error(error);
+        });
+    });
+  }
+
+  doneTask(id: string, postData) {
+    console.log('masuk yuk');
+    return new Observable((observer: Observer<TaskModel2>) => {
+        this.http.put(`/api/doneTask/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
+          .subscribe((response: TaskModel2) => {
+            observer.next(response);
+          }, (error) => {
+            observer.error(error);
+          });
     });
   }
 }
