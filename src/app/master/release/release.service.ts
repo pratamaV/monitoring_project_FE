@@ -34,9 +34,22 @@ export class ReleaseService {
     });
   }
 
-  getReleaseByProjectId(id): Observable<ReleaseModel2> {
+  getReleaseByProjectId(id, param): Observable<ReleaseModel2> {
+    let url = ``;
+    if (param.status == null && param.stage == null){
+        url = `api/releaseByProjectId/${id}`;
+    }
+    else if (param.stage == null){
+        url = `api/releaseByProjectId/${id}?status=${param.status}`;
+    }
+    else if (param.status == null){
+        url = `api/releaseByProjectId/${id}?stage=${param.stage}`;
+    }
+    else if (!(param.status == null && param.stage == null)){
+      url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
+    }
     return new Observable((observer: Observer<ReleaseModel2>) => {
-      this.http.get(`api/releaseByProjectId/${id}`)
+      this.http.get(url)
         .subscribe((data: ReleaseModel2) => {
           observer.next(data);
         }, error => {

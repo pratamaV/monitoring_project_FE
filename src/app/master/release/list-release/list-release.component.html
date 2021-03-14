@@ -1,47 +1,168 @@
-<p>List Release</p>
-<button (click)="onAddRelease()">Add New Release</button>
-<div class="table-responsive">
-  <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">Release Code</th>
-        <th scope="col">Release Name</th>
-        <th scope="col">Score</th>
-        <th scope="col">Weight</th>
-        <th scope="col">Description</th>
-        <th scope="col">Status</th>
-        <th scope="col">Stage</th>
-        <th scope="col">Prosentase Release</th>
-        <th scope="col">Status Release</th>
-        <th scope="col">Est. StartDate</th>
-        <th scope="col">Act. StartDate</th>
-        <th scope="col">Est. End Date</th>
-        <th scope="col">Act. End Date</th>
-        <th scope="col">Action</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let release of loadedRelease; let i = index">
-        <th scope="row">{{release.releaseCode}}</th>
-        <td>{{release.releaseName}}</td>
-        <td>{{release.score}}</td>
-        <td>{{release.weight}}</td>
-        <td>{{release.description}}</td>
-        <td>{{release.status}}</td>
-        <td>{{release.stage}}</td>
-        <td>{{release.prosentaseRelease}}</td>
-        <td>{{release.statusRelease}}</td>
-        <td>{{release.estStartdate | date}}</td>
-        <td>{{release.actStartdate | date}}</td>
-        <td>{{release.estEnddate | date}}</td>
-        <td>{{release.actEnddate | date}}</td>
-        <td>
-          <button (click)="updateRelease(release)">Update</button>
-          <button (click)="onGoTask(release.id)">Task</button>
-          <button (click)="onChangeStatusProject(release.id)">Change status</button>
-          <button (click)="onAddIssued(release.id)">Add Issued</button>
-        </td>
-      </tr>
-      </tbody>
-  </table>
+<div class="container-sm">
+  <div class="row">
+    <!--    <div class="col-md-12 col-md-offset-1">-->
+    <div class="col-md-12 col-md-offset-1">
+
+
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-12 col-md-offset-1">
+
+              <div class="panel panel-default panel-table">
+                <div>
+                  <div class="panel panel-default panel-table">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <!--                        <button type="button" class="btn btn-primary" data-toggle="modal"-->
+                        <!--                                data-target="#modal" >Lihat dokumen-->
+                        <!--                        </button>-->
+                        <div class="col col-xs-6 mt-3 mb-3">
+                          <h4 class="panel-title"><b>List Release</b></h4>
+                          <div class="panel-body" style="overflow-x:auto;">
+                            <div class="col col-xs-12">
+                              <div class="col col-xs-6">
+                                <button (click)="onAddRelease()">Add New Release</button>
+                              </div>
+                              <div class="col col-xs-6 float-right">
+                                <form [formGroup]="filterForm" method="POST"
+                                      (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
+                                  <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-select" formControlName="status" id="status"
+                                            aria-label="Default select example">
+                                      <option value="Not Started">Not Started</option>
+                                      <option value="OnSchedule">On Schedule</option>
+                                      <option value="PTR/ Live">PTR/ Live</option>
+                                    </select>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label for="stage">Stage</label>
+                                    <select class="form-select" formControlName="stage" id="stage"
+                                            aria-label="Default select example">
+                                      <option value="Delivery Barang">Delivery Barang</option>
+                                      <option value="Development">Development</option>
+                                      <option value="Implementation">Implementation</option>
+                                      <option value="Live">Live</option>
+                                      <option value="Migration">Migration</option>
+                                      <option value="Not Started">Not Started</option>
+                                      <option value="Procurement">Procurement</option>
+                                      <option value="PTR">PTR</option>
+                                      <option value="Requirement Gathering">Requirement Gathering</option>
+                                      <option value="UAT">UAT</option>
+                                    </select>
+                                  </div>
+                                  <button type="submit">Apply Filter</button>
+
+                                </form>
+                                <div class="col col-xs-6">
+                                  <button (click)="onGetListRelease()">Reset Filter</button>
+                                </div>
+                              </div>
+                            </div>
+
+                            <table class="table table-striped ">
+                              <thead>
+                              <tr>
+                                <th scope="col">Release Code</th>
+                                <th scope="col">Release Name</th>
+                                <th scope="col">Score</th>
+                                <th scope="col">Weight</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Stage</th>
+                                <th scope="col">Prosentase Release</th>
+                                <th scope="col">Status Release</th>
+                                <th scope="col">Est. StartDate</th>
+                                <th scope="col">Act. StartDate</th>
+                                <th scope="col">Est. End Date</th>
+                                <th scope="col">Act. End Date</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr *ngFor="let release of loadedRelease; let i = index">
+                                <th scope="row">{{release.releaseCode}}</th>
+                                <td>{{release.releaseName}}</td>
+                                <td>{{release.score}}</td>
+                                <td>{{release.weight}}</td>
+                                <td>{{release.description}}</td>
+                                <td>{{release.status}}</td>
+                                <td>{{release.stage}}</td>
+                                <td>{{release.prosentaseRelease}}</td>
+                                <td>{{release.statusRelease}}</td>
+                                <td>{{release.estStartdate | date}}</td>
+                                <td>{{release.actStartdate | date}}</td>
+                                <td>{{release.estEnddate | date}}</td>
+                                <td>{{release.actEnddate | date}}</td>
+                                <td>
+                                  <button (click)="updateRelease(release)">Update</button>
+                                  <button (click)="onGoTask(release.id)">Task</button>
+                                  <button (click)="onChangeStatusProject(release.id)">Change status</button>
+                                  <button (click)="onAddIssued(release.id)">Add Issued</button>
+                                </td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-example-modal-xl" id="modal" tabindex="-1" role="dialog"
+     aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Advanced Filter</h5>
+      </div>
+      <div class="modal-body">
+        <!--        <img style="width: 100%; height: auto;" src="api/image-claim/{{selectedItem}}"/>-->
+        <!--        <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">-->
+        <!--          <label for="email"></label>-->
+        <!--          <input style="width: 280px;height:50px" type="email" class="form-control" id="email" formControlName="email"-->
+        <!--                 placeholder="email">-->
+        <!--          <small *ngIf="form('email').invalid && (form('email').dirty || form('email').touched)"-->
+        <!--                 class="form-text text-danger">-->
+        <!--            <div *ngIf="form('email').errors?.required">-->
+        <!--              Harap diisi-->
+        <!--            </div>-->
+        <!--            <div *ngIf="form('email').errors?.pattern">-->
+        <!--              Harus mengandung email-->
+        <!--            </div>-->
+        <!--          </small>-->
+
+        <!--          <div class="form-group">-->
+        <!--            <input style="width: 280px;height:50px; margin-top: 10px" type="password" class="form-control" id="password"-->
+        <!--                   formControlName="password" placeholder="password">-->
+        <!--            <small *ngIf="form('password').invalid && (form('password').dirty || form('password').touched)"-->
+        <!--                   class="form-text text-danger">-->
+        <!--              <div *ngIf="form('password').errors?.required">-->
+        <!--                Harap diisi-->
+        <!--              </div>-->
+        <!--              <div *ngIf="form('password').errors?.minlength">-->
+        <!--                Password lebih dari 6 karakter dan mengandung huruf kapital-->
+        <!--              </div>-->
+        <!--            </small>-->
+        <!--          </div>-->
+        <!--          <button type="submit">Apply</button>-->
+
+        <!--        </form>-->
+
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
 </div>
