@@ -51,10 +51,10 @@
 <!--    <td>{{project.categoryActivity}}</td>-->
     <td>{{project.statusProject}}</td>
     <td>
-      <button (click)="onGetProjectById(project.id)">Detail</button>&nbsp;
-      <button (click)="onGetReleaseByProjectId(project.id)">Release</button>
-      <button (click)="updateProject(project)">Update</button>
-      <button (click)="onChangeStatusProject(project.id)">Change status</button>
+      <button (click)="onGetProjectById(project.id)" class="btn btn-info">Detail</button>&nbsp;
+      <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-warning">Release</button>&nbsp;
+      <button (click)="updateProject(project)" class="btn btn-success">Update</button>&nbsp;
+      <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-danger">Change status</button>
     </td>
   </tr>
   </tbody>

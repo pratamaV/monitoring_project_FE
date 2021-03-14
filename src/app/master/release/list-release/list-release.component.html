@@ -37,10 +37,10 @@
         <td>{{release.estEnddate | date}}</td>
         <td>{{release.actEnddate | date}}</td>
         <td>
-          <button (click)="updateRelease(release)">Update</button>
-          <button (click)="onGoTask(release.id)">Task</button>
-          <button (click)="onChangeStatusProject(release.id)">Change status</button>
-          <button (click)="onAddIssued(release.id)">Add Issued</button>
+          <button (click)="updateRelease(release)" class="btn btn-info">Update</button>&nbsp;
+          <button (click)="onGoTask(release.id)" class="btn btn-primary">Task</button>&nbsp;
+          <button (click)="onChangeStatusProject(release.id)" class="btn btn-outline-danger">Change status</button>&nbsp;
+          <button (click)="onAddIssued(release.id)" class="btn btn-primary">Issued</button>
         </td>
       </tr>
       </tbody>
