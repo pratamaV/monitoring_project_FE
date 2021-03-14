@@ -40,11 +40,11 @@
                        accept="image/*"
                        (change)="processFile(imageInput)" class="form-control">
               </label>
-          <button [disabled]="!taskForm.valid" type="submit" class="btn btn-primary mt-2">Upload</button>
+          <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-primary mt-2">Upload</button>
           </form>
         </td>
         <td>
-          <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button>
+          <button class="btn btn-success" [disabled]="task.statusDone==='Ya'" (click)="onDoneTask(task, task.release.id)">Done</button>
         </td>
       </tr>
       </tbody>
