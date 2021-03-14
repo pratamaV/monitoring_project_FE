@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProjectModel, ProjectModel2} from '../project.model';
 import {ProjectServiceService} from '../project-service.service';
 import {Router} from '@angular/router';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-list-project',
@@ -10,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class ListProjectComponent implements OnInit {
   loadedProject: ProjectModel[] = [];
+  fileName = 'List-Project-' + new Date().toDateString() + '.xlsx';
 
   constructor(private projectService: ProjectServiceService,
               private router: Router) { }
@@ -58,6 +60,19 @@ export class ListProjectComponent implements OnInit {
       }, error => {
         alert(error);
       });
+  }
+
+  exportexcel() {
+    /* table id is passed over here */
+    const element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
   }
 
 

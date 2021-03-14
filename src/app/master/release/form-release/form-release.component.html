@@ -11,6 +11,12 @@
     <div class="Form-group">
       <label for="releaseName">Release Name</label>
       <input type="text" class="form-control" formControlName="releaseName" id="releaseName" placeholder="Release Name">
+      <small class="form-text text-danger "
+             *ngIf="form('releaseName').invalid && form('releaseName').dirty || form('releaseName').touched">
+        <div *ngIf="form('releaseName').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">
@@ -21,6 +27,12 @@
         <option value="5">5</option>
         <option value="8">8</option>
       </select>
+      <small class="form-text text-danger "
+             *ngIf="form('score').invalid && form('score').dirty || form('score').touched">
+        <div *ngIf="form('score').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="Form-group">
@@ -30,6 +42,12 @@
     <div class="form-group">
       <label for="description">Description</label>
       <input type="text" class="form-control" formControlName="description" id="description" placeholder="Description">
+      <small class="form-text text-danger "
+             *ngIf="form('description').invalid && form('description').dirty || form('description').touched">
+        <div *ngIf="form('description').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">
@@ -39,6 +57,12 @@
         <option value="On Schedule">On Schedule</option>
         <option value="PTR/ Live">PTR/ Live</option>
       </select>
+      <small class="form-text text-danger "
+             *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
+        <div *ngIf="form('status').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">
@@ -55,26 +79,56 @@
         <option value="Requirement Gathering">Requirement Gathering</option>
         <option value="UAT">UAT</option>
       </select>
+      <small class="form-text text-danger "
+             *ngIf="form('stage').invalid && form('stage').dirty || form('stage').touched">
+        <div *ngIf="form('stage').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">
       <label for="estStartdate">Est. Start Date</label>
       <input type="date" class="form-control" formControlName="estStartdate" id="estStartdate">
+      <small class="form-text text-danger "
+             *ngIf="form('estStartdate').invalid && form('estStartdate').dirty || form('estStartdate').touched">
+        <div *ngIf="form('estStartdate').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">
       <label for="estEnddate">Est. End Date</label>
       <input type="date" class="form-control" formControlName="estEnddate" id="estEnddate">
+      <small class="form-text text-danger "
+             *ngIf="form('estEnddate').invalid && form('estEnddate').dirty || form('estEnddate').touched">
+        <div *ngIf="form('estEnddate').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">
       <label for="actStartdate">Act. Start Date</label>
       <input type="date" class="form-control" formControlName="actStartdate" id="actStartdate">
+      <small class="form-text text-danger "
+             *ngIf="form('actStartdate').invalid && form('actStartdate').dirty || form('actStartdate').touched">
+        <div *ngIf="form('actStartdate').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">
       <label for="actEnddate">Act. End Date</label>
       <input type="date" class="form-control" formControlName="actEnddate" id="actEnddate">
+      <small class="form-text text-danger "
+             *ngIf="form('actEnddate').invalid && form('actEnddate').dirty || form('actEnddate').touched">
+        <div *ngIf="form('actEnddate').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
     </div>
 
     <div class="form-group">

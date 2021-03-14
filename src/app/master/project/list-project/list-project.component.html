@@ -1,8 +1,10 @@
 <div class="card">
 
   <h1>Daftar Project</h1>
+  <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
   <button (click)="onAddProject()" class="btn btn-dark mt-2 mb-2" style="width: 300px; align-self: flex-end">Add New Project</button>
-<table class="table">
+
+<table class="table" id="excel-table">
   <thead class="thead-dark">
   <tr>
     <th scope="col">Project Code</th>
@@ -51,10 +53,10 @@
 <!--    <td>{{project.categoryActivity}}</td>-->
     <td>{{project.statusProject}}</td>
     <td>
-      <button (click)="onGetProjectById(project.id)">Detail</button>&nbsp;
-      <button (click)="onGetReleaseByProjectId(project.id)">Release</button>
-      <button (click)="updateProject(project)">Update</button>
-      <button (click)="onChangeStatusProject(project.id)">Change status</button>
+      <button (click)="onGetProjectById(project.id)" class="btn btn-info">Detail</button>&nbsp;
+      <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-warning">Release</button>&nbsp;
+      <button (click)="updateProject(project)" class="btn btn-success">Update</button>&nbsp;
+      <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-danger">Change status</button>
     </td>
   </tr>
   </tbody>

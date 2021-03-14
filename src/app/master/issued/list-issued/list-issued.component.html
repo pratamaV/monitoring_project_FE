@@ -1,8 +1,9 @@
 <div class="card">
 <h1>List Issued</h1>
+  <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
 <button (click)="onAddIssued()" class="btn btn-dark mt-2 mb-2" style="width: 300px; align-self: flex-end">Add New Issued</button>
 <div class="table-responsive">
-  <table class="table">
+  <table class="table" id="excel-table">
     <thead>
     <tr>
       <th scope="col">Issued Description</th>

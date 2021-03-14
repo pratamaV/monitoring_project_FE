@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {Observable, Observer} from "rxjs";
-import {ProjectModel, ProjectModel2} from "../project/project.model";
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {Observable, Observer} from 'rxjs';
+import {ProjectModel, ProjectModel2} from '../project/project.model';
 import {ReleaseModel, ReleaseModel2} from './release.model';
 
 @Injectable({
@@ -34,9 +34,29 @@ export class ReleaseService {
     });
   }
 
-  getReleaseByProjectId(id): Observable<ReleaseModel2> {
+  getReleaseByProjectId(id, param): Observable<ReleaseModel2> {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    let url = ``;
+    if (param.status == null && param.stage == null){
+        url = `api/releaseByProjectId/${id}`;
+    }
+    else if (param.stage == null){
+        url = `api/releaseByProjectId/${id}?status=${param.status}`;
+    }
+    else if (param.status == null){
+        url = `api/releaseByProjectId/${id}?stage=${param.stage}`;
+    }
+    else if (!(param.status == null && param.stage == null)){
+      url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
+    }
     return new Observable((observer: Observer<ReleaseModel2>) => {
-      this.http.get(`api/releaseByProjectId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+// <<<<<<< HEAD
+      this.http.get(url, header)
+// =======
+//       this.http.get(`api/releaseByProjectId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+// >>>>>>> 5c0ab1f9455636c7b71c7427e7a3b87ddf7b68fa
         .subscribe((data: ReleaseModel2) => {
           observer.next(data);
         }, error => {
@@ -46,6 +66,7 @@ export class ReleaseService {
   }
 
 
+  // tslint:disable-next-line:typedef
   saveRelease(postData: ReleaseModel, id: string) {
     return new Observable((observer: Observer<ReleaseModel>) => {
       if (id) {

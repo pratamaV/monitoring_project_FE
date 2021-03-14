@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../user.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DivisionModel} from '../../project/project.model';
 import {UserModel2} from '../user.model';
 import {ProjectServiceService} from '../../project/project-service.service';
@@ -51,20 +51,22 @@ export class FormUserComponent implements OnInit {
   private buildForm(): void {
     this.userForm = new FormGroup({
       id: new FormControl(null),
-      username: new FormControl(null),
-      userRole: new FormControl(null),
-      email: new FormControl(null),
-      divisiUser: new FormControl(null),
-      directorateUser: new FormControl(null),
-      password: new FormControl(null),
-      confirmPassword: new FormControl(null),
+      username: new FormControl(null, [Validators.required]),
+      userRole: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+      divisiUser: new FormControl(null, [Validators.required]),
+      directorateUser: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required]),
+      confirmPassword: new FormControl(null, [Validators.required]),
       statusUser: new FormControl('aktif'),
-      totalWeight: new FormControl(null),
-      totalPerformance: new FormControl(null)
+      totalWeight: new FormControl(0),
+      totalPerformance: new FormControl(0)
     });
   }
 
   passwordMatch() {
+    console.log(this.passwordFirst);
+    console.log(this.passwordSecond);
     if (this.passwordSecond !== this.passwordFirst) {
       this.errorPassword = 'Password does not match';
       this.isErrorValidation = true;
@@ -74,7 +76,6 @@ export class FormUserComponent implements OnInit {
   }
 
   onSaveUser(postData, valid: boolean) {
-    console.log(postData);
     this.user = {
       id: postData.id,
       username: postData.username,

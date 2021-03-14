@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectServiceService} from "../project-service.service";
 import {ProjectModel} from "../project.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-detail-project',
@@ -10,7 +11,8 @@ import {ProjectModel} from "../project.model";
 export class DetailProjectComponent implements OnInit {
 
   project: ProjectModel;
-  constructor(private projectService: ProjectServiceService) { }
+  constructor(private projectService: ProjectServiceService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.onGetProjectById();
@@ -23,5 +25,9 @@ export class DetailProjectComponent implements OnInit {
       }, error => {
         alert(error);
       });
+  }
+
+  onGolistProject() {
+    this.router.navigate(['/dashboard/project']);
   }
 }
