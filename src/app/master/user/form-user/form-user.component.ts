@@ -5,6 +5,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {DivisionModel} from '../../project/project.model';
 import {UserModel2} from '../user.model';
 import {ProjectServiceService} from '../../project/project-service.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-form-user',
@@ -93,9 +94,10 @@ export class FormUserComponent implements OnInit {
     if (valid) {
       this.userService.saveUser(this.user, this.user.id)
         .subscribe(response => {
+          Swal.fire( 'Success', 'User that you input was successfully saved' , 'success'  );
           this.router.navigate(['/dashboard/user']);
         }, error => {
-          alert(error.message);
+          Swal.fire( 'Failed', 'Failed to save user' , 'error'  );
         });
     }
   }

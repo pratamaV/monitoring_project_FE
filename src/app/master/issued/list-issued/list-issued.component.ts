@@ -3,6 +3,7 @@ import {IssuedService} from '../issued.service';
 import {Router} from '@angular/router';
 import {IssuedModel, IssuedModel2} from '../issued.model';
 import * as XLSX from "xlsx";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-list-issued',
@@ -24,7 +25,7 @@ export class ListIssuedComponent implements OnInit {
       .subscribe(data => {
         this.loadedIssued = data;
       }, error => {
-        alert(error);
+        Swal.fire( 'Failed', 'maybe you are not logged in' , 'question'  );
       });
   }
 

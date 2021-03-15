@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ReleaseService} from '../release.service';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReleaseModel} from '../release.model';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-form-release',
@@ -80,9 +81,10 @@ export class FormReleaseComponent implements OnInit {
     if (valid) {
       this.releaseService.saveRelease(this.release, this.id)
         .subscribe(response => {
+          Swal.fire( 'Success', 'Release that you input was successfully saved' , 'success'  );
           this.router.navigate(['/dashboard/release']);
         }, error => {
-          alert(error.message);
+          Swal.fire( 'Failed', 'Failed to save release' , 'error'  );
         });
     }
   }

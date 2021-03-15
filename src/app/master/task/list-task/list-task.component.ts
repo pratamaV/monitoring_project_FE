@@ -6,6 +6,7 @@ import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {UserModel} from '../../project/project.model';
 import {ProjectServiceService} from '../../project/project-service.service';
 import * as XLSX from 'xlsx';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-list-task',
@@ -74,7 +75,6 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
       .subscribe(data => {
         this.loadedTask = data;
-        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
@@ -106,20 +106,19 @@ export class ListTaskComponent implements OnInit {
     };
     this.taskService.onDoneTask(this.task, idRelease)
       .subscribe(data => {
-        alert('success');
+        Swal.fire( 'Success', 'Document successfully uploaded' , 'success'  );
         window.location.reload();
       }, error => {
-        alert(error.message);
+        Swal.fire( 'Failed', 'Failed to upload document, please check your size document' , 'error'  );
       });
   }
 
   // tslint:disable-next-line:typedef
   downloadTaskDoc(taskCode){
-    console.log(taskCode);
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
-      alert('success');
+      Swal.fire( 'Success', 'Document successfully downloaded' , 'success'  );
     }, error => {
-      alert('tidak ada dokumen yang di upload');
+      Swal.fire( 'Failed', 'Failed to download document' , 'error'  );
     });
   }
 

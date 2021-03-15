@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Chart} from 'node_modules/chart.js';
 import {HomeService} from './home.service';
 import {ProjectServiceService} from '../project/project-service.service';
+import {createLogErrorHandler} from "@angular/compiler-cli/ngcc/src/execution/tasks/completion";
 
 @Component({
   selector: 'app-home',
@@ -9,44 +10,15 @@ import {ProjectServiceService} from '../project/project-service.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  deliveryStage = 0;
-  development = 0;
-  implementation = 0;
-  live = 0;
-  migration = 0;
-  notStarted = 0;
-  procurement = 0;
-  PTR = 0;
-  requirementGathering = 0;
-  uat = 0;
-
-  onSchedule = 0;
-  ptrLive = 0;
-  notStart = 0;
-
-  KIV = 0;
-  PRJ = 0;
-  MBS = 0;
-  PKB = 0;
-  SKP = 0;
-  SDM = 0;
-  AKU = 0;
-  UWK = 0;
-  SKA = 0;
-  BUM = 0;
-  PKP = 0;
-  PTI = 0;
-  OTI = 0;
-  ASK = 0;
-
-
   constructor(private homeService: HomeService,
-              private projectService: ProjectServiceService) { }
-
-  ngOnInit(): void {
+              private projectService: ProjectServiceService) {
     this.onGetAllRelases();
     this.onGetListProject();
+  }
+
+
+
+  ngOnInit(): void {
     const productCanvas = document.getElementById('releaseByStage');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
@@ -65,8 +37,16 @@ export class HomeComponent implements OnInit {
       ],
       datasets: [
         {
-          data: [this.deliveryStage, this.development, this.implementation, this.live, this.migration, this.notStarted,
-            this.procurement, this.PTR, this.requirementGathering, this.uat],
+          data: [localStorage.getItem('deliveryStage'),
+            localStorage.getItem('development'),
+            localStorage.getItem('implementation'),
+            localStorage.getItem('live'),
+            localStorage.getItem('migration'),
+            localStorage.getItem('notStarted'),
+            localStorage.getItem('procurement'),
+            localStorage.getItem('PTR'),
+            localStorage.getItem('requirementGathering'),
+            localStorage.getItem('uat')],
           backgroundColor: [
             '#f9e0ae',
             '#fc8621',
@@ -104,8 +84,16 @@ export class HomeComponent implements OnInit {
           'UAT'],
         datasets: [{
           label: '',
-          data: [this.deliveryStage, this.development, this.implementation, this.live, this.migration, this.notStarted,
-            this.procurement, this.PTR, this.requirementGathering, this.uat],
+          data: [localStorage.getItem('deliveryStage'),
+          localStorage.getItem('development'),
+          localStorage.getItem('implementation'),
+          localStorage.getItem('live'),
+          localStorage.getItem('migration'),
+          localStorage.getItem('notStarted'),
+          localStorage.getItem('procurement'),
+          localStorage.getItem('PTR'),
+          localStorage.getItem('requirementGathering'),
+          localStorage.getItem('uat')],
           backgroundColor: [
             '#f9e0ae',
             '#fc8621',
@@ -150,82 +138,147 @@ export class HomeComponent implements OnInit {
         }
       }
     });
+
+    const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
+      type: 'horizontalBar',
+      data: {
+        labels: ['Kepatuhan & SDM', 'Keuangan', 'Operational Retail', 'Teknik', 'Utama', 'Semua Direktorat'],
+        datasets: [
+          {
+            label: '',
+            backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'],
+            data: [localStorage.getItem('KepatuhanandSDM'), localStorage.getItem('Keuangan'),
+              localStorage.getItem('OperationalRetail'), localStorage.getItem('Teknik'),
+              localStorage.getItem('Utama'), localStorage.getItem('allDirectorate')]
+          }
+        ]
+      },
+      options: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Number of projects per directorate'
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              beginAtZero: true,
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxRotation: 90,
+              minRotation: 80
+            }
+          }]
+        }
+      }
+    });
   }
 
   onGetAllRelases() {
     this.homeService.getAllRelease()
       .subscribe(data => {
+        let deliveryStage = 0;
+        let development = 0;
+        let implementation = 0;
+        let live = 0;
+        let migration = 0;
+        let notStarted = 0;
+        let procurement = 0;
+        let PTR = 0;
+        let requirementGathering = 0;
+        let uat = 0;
+        let onSchedule = 0;
+        let ptrLive = 0;
+        let notStart = 0;
         for (const release of data) {
           if (release.stage === 'Delivery Barang'){
-            this.deliveryStage = this.deliveryStage + 1;
+            deliveryStage = deliveryStage + 1;
           } else if (release.stage === 'Development'){
-            this.development = this.development + 1;
+            development = development + 1;
           } else if (release.stage === 'Implementation'){
-            this.implementation = this.implementation + 1;
+            implementation = implementation + 1;
           } else if (release.stage === 'Live'){
-            this.live = this.live + 1;
+            live = live + 1;
           } else if (release.stage === 'Migration'){
-            this.migration = this.migration + 1;
+            migration = migration + 1;
           } else if (release.stage === 'Not Started'){
-            this.notStarted = this.notStarted + 1;
+            notStarted = notStarted + 1;
           } else if (release.stage === 'Procurement'){
-            this.procurement = this.procurement + 1;
+            procurement = procurement + 1;
           } else if (release.stage === 'PTR'){
-            this.PTR = this.PTR + 1;
+            PTR = PTR + 1;
           } else if (release.stage === 'Requirement Gathering'){
-            this.requirementGathering = this.requirementGathering + 1;
+            requirementGathering = requirementGathering + 1;
           } else if (release.stage === 'UAT'){
-            this.uat = this.uat + 1;
+            uat = uat + 1;
           } else if (release.status === 'On Schedule'){
-            this.uat = this.onSchedule + 1;
+            onSchedule = onSchedule + 1;
           } else if (release.status === 'PTR/ Live'){
-            this.uat = this.ptrLive + 1;
+            ptrLive = ptrLive + 1;
           } else if (release.status === 'Not Started'){
-            this.uat = this.notStart + 1;
+            notStart = notStart + 1;
           }
         }
+        localStorage.setItem('deliveryStage', deliveryStage.toString());
+        localStorage.setItem('development', development.toString());
+        localStorage.setItem('implementation', implementation.toString());
+        localStorage.setItem('live', live.toString());
+        localStorage.setItem('migration', migration.toString());
+        localStorage.setItem('notStarted', notStarted.toString());
+        localStorage.setItem('procurement', procurement.toString());
+        localStorage.setItem('PTR', PTR.toString());
+        localStorage.setItem('requirementGathering', requirementGathering.toString());
+        localStorage.setItem('uat', uat.toString());
+        localStorage.setItem('onSchedule', onSchedule.toString());
+        localStorage.setItem('ptrLive', ptrLive.toString());
+        localStorage.setItem('notStart', notStart.toString());
       }, error => {
         alert(error);
       });
   }
 
+
+
   onGetListProject() {
     this.projectService.getAllProject()
       .subscribe(data => {
+        let KepatuhanandSDM = 0;
+        let Keuangan = 0;
+        let OperationalRetail = 0;
+        let Teknik = 0;
+        let Utama = 0;
+        let allDirectorate = 0;
         for (const project of data) {
-          if(project.divisiUser.divisionCode === 'KIV'){
-            this.KIV = this.KIV + 1;
-          } else if (project.divisiUser.divisionCode === 'PRJ'){
-            this.PRJ = this.PRJ + 1;
-          } else if (project.divisiUser.divisionCode === 'MBS'){
-            this.MBS = this.MBS + 1;
-          } else if (project.divisiUser.divisionCode === 'PKB'){
-            this.PKB = this.PKB + 1;
-          } else if (project.divisiUser.divisionCode === 'SKP'){
-            this.SKP = this.SKP + 1;
-          } else if (project.divisiUser.divisionCode === 'SDM'){
-            this.SDM = this.SDM + 1;
-          } else if (project.divisiUser.divisionCode === 'AKU'){
-            this.AKU = this.AKU + 1;
-          } else if (project.divisiUser.divisionCode === 'UWK'){
-            this.UWK = this.UWK + 1;
-          } else if (project.divisiUser.divisionCode === 'SKA'){
-            this.SKA = this.SKA + 1;
-          } else if (project.divisiUser.divisionCode === 'BUM'){
-            this.BUM = this.BUM + 1;
-          } else if (project.divisiUser.divisionCode === 'PKP'){
-            this.PKP = this.PKP + 1;
-          } else if (project.divisiUser.divisionCode === 'PTI'){
-            this.PTI = this.PTI + 1;
-          } else if (project.divisiUser.divisionCode === 'OTI'){
-            this.OTI = this.OTI + 1;
-          } else if (project.divisiUser.divisionCode === 'ASK'){
-            this.ASK = this.ASK + 1;
+          if (project.directorateUser === 'Kepatuhan & SDM'){
+            KepatuhanandSDM = KepatuhanandSDM + 1;
+          } else if (project.directorateUser === 'Keuangan'){
+            Keuangan = Keuangan + 1;
+          } else if (project.directorateUser === 'Operational Retail'){
+            OperationalRetail = OperationalRetail + 1;
+          } else if (project.directorateUser === 'Teknik'){
+            Teknik = Teknik + 1;
+          } else if (project.directorateUser === 'Utama'){
+            Utama = Utama + 1;
+          } else {
+            allDirectorate = allDirectorate + 1;
           }
         }
+        localStorage.setItem('KepatuhanandSDM', KepatuhanandSDM.toString());
+        localStorage.setItem('Keuangan', Keuangan.toString());
+        localStorage.setItem('OperationalRetail', OperationalRetail.toString());
+        localStorage.setItem('Teknik', Teknik.toString());
+        localStorage.setItem('Utama', Utama.toString());
+        localStorage.setItem('allDirectorate', allDirectorate.toString());
       }, error => {
         alert(error);
       });
   }
+
+
+
+
+
 
 }

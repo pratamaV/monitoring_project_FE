@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2} from '../task.model';
 import {FormControl, FormGroup} from "@angular/forms";
 import * as XLSX from "xlsx";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-my-task',
@@ -69,13 +70,13 @@ export class MyTaskComponent implements OnInit {
   }
 
   onUploadDocument(postData, valid: boolean, id){
-    console.log(postData);
     if (valid) {
       this.taskService.uploadDocumentTask(postData, id)
         .subscribe(response => {
+          Swal.fire( 'Success', 'Document successfully uploaded' , 'success'  );
           window.location.reload();
         }, error => {
-          alert(error.message);
+          Swal.fire( 'Failed', 'Failed to upload document, please check your size document' , 'error'  );
         });
     }
   }
@@ -89,9 +90,9 @@ export class MyTaskComponent implements OnInit {
 
   downloadTaskDoc(taskCode){
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
-      alert('success');
+      Swal.fire( 'Success', 'Document successfully downloaded' , 'success'  );
     }, error => {
-      alert('tidak ada dokumen yang di upload');
+      Swal.fire( 'Failed', 'Failed to download document' , 'error'  );
     });
   }
 
