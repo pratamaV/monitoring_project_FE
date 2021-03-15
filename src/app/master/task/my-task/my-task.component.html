@@ -34,26 +34,26 @@
                     </td>
                     <td>
                         <form [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
-                            <!-- <div class="input-group">
-                                <div class="custom-file">
-                                    <input #imageInput type="file" class="custom-file-input form-control" id="inputGroupFile04" (change)="processFile(imageInput)">
-                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <button [disabled]="!taskForm.valid || task.taskDocument!==null" class="btn btn-outline-secondary" type="submit" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
-                                </div>
-                            </div> -->
-                            <small style="color: red">*max file 10MB</small>
+
                             <!-- <label class="image-upload-container btn btn-bwm btn-sm" style="text-align: left"> -->
                             <!-- <small style="color: red">Select Image *max file 10MB</small> -->
-                            <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" class="form-control">
-                            <!-- </label> -->
-                            <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
+                            <div class="col-12 col-xs-6">
+                                <div class="row">
+                                    <div class="input-group-sm col">
+                                        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" class="form-control">
+                                    </div>
+                                    <div class="input-group-append col-2" style="margin-left: -20px;">
+                                        <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- </label> -->
+                            <small style="color: red">*max file 10MB</small>
                         </form>
                     </td>
                     <td>
-                        <button class="btn btn-success" [disabled]="task.statusDone==='Ya'" (click)="onDoneTask(task, task.release.id)">Done</button>
+                        <button [disabled]="task.statusDone==='Ya'" (click)="onDoneTask(task, task.release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i class="fa fa-check"></i></button>
                     </td>
                 </tr>
             </tbody>
