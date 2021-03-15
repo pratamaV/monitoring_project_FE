@@ -59,8 +59,8 @@ export class FormUserComponent implements OnInit {
       password: new FormControl(null, [Validators.required]),
       confirmPassword: new FormControl(null, [Validators.required]),
       statusUser: new FormControl('aktif'),
-      totalWeight: new FormControl(null),
-      totalPerformance: new FormControl(null)
+      totalWeight: new FormControl(0),
+      totalPerformance: new FormControl(0)
     });
   }
 

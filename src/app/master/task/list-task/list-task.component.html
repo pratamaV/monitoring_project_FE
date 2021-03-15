@@ -1,4 +1,3 @@
-
 <div class="container-sm">
   <div class="row">
     <div class="col-md-12 col-md-offset-1">
@@ -18,7 +17,7 @@
                             <div class="col col-xs-12">
                               <div class="col col-xs-6">
                                 <button (click)="onSaveTaskByReleaseId()" class="btn btn-dark mt-2 mb-2" style="width: 300px; align-self: flex-end">Add New Task</button>
-
+                                <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
                               </div>
                               <div class="col col-xs-6 float-right">
                                 <form [formGroup]="filterForm" method="POST"
@@ -54,7 +53,7 @@
                               </div>
                             </div>
 
-                            <table class="table">
+                            <table class="table" id="excel-table">
                               <thead>
                               <tr>
                                 <th scope="col">Task Code</th>

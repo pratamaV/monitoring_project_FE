@@ -1,7 +1,8 @@
 <div class="card">
   <h1>List Task</h1>
+  <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
   <div class="table-responsive">
-    <table class="table">
+    <table class="table" id="excel-table">
       <thead>
       <tr>
         <th scope="col">Task Code</th>
@@ -28,7 +29,7 @@
         <td>{{task.taskProsentase}}</td>
         <td>{{task.finalTarget | date}}</td>
         <td>
-          <button (click)="downloadTaskDoc(task.taskDocument)">Download</button>
+          <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-dark">Download</button>
         </td>
         <td>
           <form style="padding: 10px" [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
@@ -39,11 +40,11 @@
                        accept="image/*"
                        (change)="processFile(imageInput)" class="form-control">
               </label>
-          <button [disabled]="!taskForm.valid" type="submit" class="btn btn-primary mt-2">Upload</button>
+          <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-primary mt-2">Upload</button>
           </form>
         </td>
         <td>
-          <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button>
+          <button class="btn btn-success" [disabled]="task.statusDone==='Ya'" (click)="onDoneTask(task, task.release.id)">Done</button>
         </td>
       </tr>
       </tbody>

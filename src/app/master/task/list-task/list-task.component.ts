@@ -5,6 +5,7 @@ import {TaskModel, TaskModel2} from '../task.model';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {UserModel} from '../../project/project.model';
 import {ProjectServiceService} from '../../project/project-service.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-list-task',
@@ -21,6 +22,7 @@ export class ListTaskComponent implements OnInit {
     assignTo: null,
     statusDone: null
   };
+  fileName = 'List-Task-' + new Date().toDateString() + '.xlsx';
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
               private router: Router,
@@ -32,6 +34,7 @@ export class ListTaskComponent implements OnInit {
     this.onGetAllTask();
   }
 
+  // tslint:disable-next-line:typedef
   onGetAllTask() {
     this.filterForm.get('assignTo').setValue(null);
     this.filterForm.get('statusDone').setValue(null);
@@ -44,6 +47,7 @@ export class ListTaskComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
   onGetAllUser() {
     this.projectService.getAllUser()
       .subscribe(data => {
@@ -64,6 +68,7 @@ export class ListTaskComponent implements OnInit {
     return this.filterForm.get(property);
   }
 
+  // tslint:disable-next-line:typedef
   onGetFilterTask(param) {
     console.log(param);
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
@@ -80,6 +85,7 @@ export class ListTaskComponent implements OnInit {
     this.router.navigate(['/dashboard/task/form-task']);
   }
 
+  // tslint:disable-next-line:typedef
   onDoneTask(task, idRelease){
     this.task = {
       id: task.id,
@@ -107,6 +113,7 @@ export class ListTaskComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
   downloadTaskDoc(taskCode){
     console.log(taskCode);
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
@@ -114,5 +121,19 @@ export class ListTaskComponent implements OnInit {
     }, error => {
       alert('tidak ada dokumen yang di upload');
     });
+  }
+
+  // tslint:disable-next-line:typedef
+  exportexcel() {
+    /* table id is passed over here */
+    const element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
   }
 }

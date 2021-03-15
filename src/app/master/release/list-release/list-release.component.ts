@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {ReleaseService} from '../release.service';
 import {Router} from '@angular/router';
 import {ReleaseModel, ReleaseModel2} from '../release.model';
+import {ProjectModel2} from '../../project/project.model';
+import * as XLSX from 'xlsx';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+
 
 @Component({
   selector: 'app-list-release',
@@ -10,6 +13,8 @@ import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./list-release.component.css']
 })
 export class ListReleaseComponent implements OnInit {
+
+  fileName = 'List-Release-' + new Date().toDateString() + '.xlsx';
   filterForm: FormGroup;
   loadedRelease: ReleaseModel2;
   paramNull = {
@@ -84,5 +89,18 @@ export class ListReleaseComponent implements OnInit {
   onAddIssued(id) {
     localStorage.setItem('idRelease', id);
     this.router.navigate(['dashboard/issued']);
+  }
+
+  exportexcel() {
+    /* table id is passed over here */
+    const element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    /* save to file */
+    XLSX.writeFile(wb, this.fileName);
   }
 }

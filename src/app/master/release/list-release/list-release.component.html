@@ -1,3 +1,54 @@
+<!--<<<<<<< HEAD-->
+<!--<div class="card">-->
+<!--<h1>List Release</h1>-->
+<!--  <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>-->
+<!--<button (click)="onAddRelease()" class="btn btn-dark mt-2 mb-2" style="width: 300px; align-self: flex-end">Add New Release</button>-->
+<!--<div class="table-responsive">-->
+<!--  <table class="table" id="excel-table">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th scope="col">Release Code</th>-->
+<!--        <th scope="col">Release Name</th>-->
+<!--        <th scope="col">Score</th>-->
+<!--        <th scope="col">Weight</th>-->
+<!--        <th scope="col">Description</th>-->
+<!--        <th scope="col">Status</th>-->
+<!--        <th scope="col">Stage</th>-->
+<!--        <th scope="col">Prosentase Release</th>-->
+<!--        <th scope="col">Status Release</th>-->
+<!--        <th scope="col">Est. StartDate</th>-->
+<!--        <th scope="col">Act. StartDate</th>-->
+<!--        <th scope="col">Est. End Date</th>-->
+<!--        <th scope="col">Act. End Date</th>-->
+<!--        <th scope="col">Action</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr *ngFor="let release of loadedRelease; let i = index">-->
+<!--        <th scope="row">{{release.releaseCode}}</th>-->
+<!--        <td>{{release.releaseName}}</td>-->
+<!--        <td>{{release.score}}</td>-->
+<!--        <td>{{release.weight}}</td>-->
+<!--        <td>{{release.description}}</td>-->
+<!--        <td>{{release.status}}</td>-->
+<!--        <td>{{release.stage}}</td>-->
+<!--        <td>{{release.prosentaseRelease}}</td>-->
+<!--        <td>{{release.statusRelease}}</td>-->
+<!--        <td>{{release.estStartdate | date}}</td>-->
+<!--        <td>{{release.actStartdate | date}}</td>-->
+<!--        <td>{{release.estEnddate | date}}</td>-->
+<!--        <td>{{release.actEnddate | date}}</td>-->
+<!--        <td>-->
+<!--          <button (click)="updateRelease(release)" class="btn btn-info">Update</button>&nbsp;-->
+<!--          <button (click)="onGoTask(release.id)" class="btn btn-primary">Task</button>&nbsp;-->
+<!--          <button (click)="onChangeStatusProject(release.id)" class="btn btn-outline-danger">Change status</button>&nbsp;-->
+<!--          <button (click)="onAddIssued(release.id)" class="btn btn-primary">Issued</button>-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+<!--=======-->
 
 <div class="container-sm">
   <div class="row">
@@ -17,7 +68,8 @@
                           <div class="panel-body" style="overflow-x:auto;">
                             <div class="col col-xs-12">
                               <div class="col col-xs-6">
-                                <button (click)="onAddRelease()">Add New Release</button>
+                                <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
+                                <button (click)="onAddRelease()" class="btn btn-dark mt-2 mb-2" style="width: 300px; align-self: flex-end">Add New Release</button>
                               </div>
                               <div class="col col-xs-6 float-right">
                                 <form [formGroup]="filterForm" method="POST"
@@ -113,4 +165,5 @@
       </div>
     </div>
   </div>
+<!--&gt;>>>>>> 32b607d1068064697c6ddc860157d68607bd3a3f-->
 </div>
