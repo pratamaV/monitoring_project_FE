@@ -10,6 +10,7 @@ import {MasterModule} from './master/master.module';
 import {AuthService} from './AuthService';
 import {AuthGuardService} from './auth-guard.service';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import {AuthGuardService} from './auth-guard.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    // AngularFontAwesomeModule
   ],
   providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
