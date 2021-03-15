@@ -96,7 +96,13 @@
 
     <div class="form-group">
       <label for="directorateUser">Directorate User</label>
-      <input type="text" class="form-control" formControlName="directorateUser" id="directorateUser" placeholder="Directorate User">
+      <select class="form-select" formControlName="directorateUser" id="directorateUser" aria-label="Default select example">
+        <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
+        <option value="Keuangan">Keuangan</option>
+        <option value="Operational Retail">Operational Retail</option>
+        <option value="Teknik">Teknik</option>
+        <option value="Utama">Utama</option>
+      </select>
       <small class="form-text text-danger "
              *ngIf="form('directorateUser').invalid && form('directorateUser').dirty || form('directorateUser').touched">
         <div *ngIf="form('directorateUser').errors?.required">
@@ -107,7 +113,11 @@
 
     <div class="form-group">
       <label for="status">Status</label>
-      <input type="text" class="form-control" formControlName="status" id="status" placeholder="Status">
+      <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+        <option value="Not Started">Not Started</option>
+        <option value="On Schedule">On Schedule</option>
+        <option value="PTR/ Live">PTR/ Live</option>
+      </select>
       <small class="form-text text-danger "
              *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
         <div *ngIf="form('status').errors?.required">

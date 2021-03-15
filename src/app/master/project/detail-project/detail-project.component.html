@@ -1,7 +1,10 @@
 
 <div class="card m-5">
   <div class="card-header">
-    <h1>Detail Project {{project.projectName}}</h1>
+    <div class="row">
+    <div class="col-10"> <h1>Detail Project {{project.projectName}}</h1></div>
+    <div class="col-2"> <button class="btn btn-close float-lg-end" (click)="onGolistProject()"></button></div>
+    </div>
   </div>
   <div class="card-body">
     <p>Project Code : {{project.projectCode}}</p>
@@ -15,9 +18,9 @@
         <p>Directorate User : {{project.directorateUser}}</p>
         <p>Target Live : {{project.targetLive | date}}</p>
         <p>Prosentase Project : {{project.prosentaseProject*100}}%</p>
-        <p>Budget : {{project.budget}}</p>
-        <p>Contracted Value : {{project.contracted_value}}</p>
-        <p>Payment Realization : {{project.paymentRealization}}</p>
+        <p>Budget : {{project.budget | currency}}</p>
+        <p>Contracted Value : {{project.contracted_value | currency}}</p>
+        <p>Payment Realization : {{project.paymentRealization | currency}}</p>
         <p>Weight : {{project.weight}}</p>
         <p>Category Initiative : {{project.categoryInitiative}}</p>
         <p>Category Activity : {{project.categoryActivity}}</p>
