@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {TaskService} from '../../master/task/task.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TaskModel, TaskModel2} from '../../master/task/task.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+
+  numberTask = 0;
+  token = window.sessionStorage.getItem('token');
+  tokenParse = JSON.parse(this.token);
+  user = this.tokenParse.user;
+  constructor(private taskService: TaskService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.onGetTaskByUserId();
+  }
+
+  onGetTaskByUserId() {
+    this.taskService.getTaskByUserId(localStorage.getItem('idUser'))
+      .subscribe((data)  => {
+        for (const task of data) {
+          if (task.statusDone === 'Tidak'){
+            this.numberTask = this.numberTask + 1;
+          }
+        }
+      }, error => {
+        alert(error);
+      });
   }
 
 }
