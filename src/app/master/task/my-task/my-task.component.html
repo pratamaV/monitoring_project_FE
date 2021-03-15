@@ -45,7 +45,7 @@
           </form>
         </td>
         <td>
-          <button class="btn btn-success" [disabled]="task.statusDone==='Ya'" (click)="onDoneTask(task, task.release.id)">Done</button>
+          <button class="btn btn-success" [disabled]="task.statusDone==='Ya' || role==='03'" (click)="onDoneTask(task, task.release.id)">Done</button>
         </td>
       </tr>
       </tbody>

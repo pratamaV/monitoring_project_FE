@@ -44,6 +44,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<unknown>, Ca
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.authService.isLoggedIn()) {
       const userRole = this.authService.getRole();
+      console.log("userRolenya adalah: ", userRole);
       if (route.data.role && route.data.role.indexOf(userRole) === -1) {
         this.router.navigate(['/auth']);
         return false;

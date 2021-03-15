@@ -7,17 +7,38 @@ const routes: Routes = [
   {
     path: 'user',
     canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+        '03',
+      ]
+    },
     loadChildren: () => import('./user/user.module').then(u => u.UserModule)
   },
   {
     path: 'project',
     canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+        '03',
+      ]
+    },
     loadChildren: () =>
       import('./project/project.module').then(p => p.ProjectModule)
   },
   {
     path: 'release',
     canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+        '03',
+      ]
+    },
     loadChildren: () =>
       import('./release/release.module').then(p => p.ReleaseModule)
   },
@@ -29,6 +50,13 @@ const routes: Routes = [
   {
     path: 'issued',
     canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+        '03',
+      ]
+    },
     loadChildren: () =>
       import('./issued/issued.module').then(p => p.IssuedModule)
   }
