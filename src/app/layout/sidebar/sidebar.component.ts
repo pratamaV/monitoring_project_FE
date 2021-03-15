@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  token = window.sessionStorage.getItem('token');
+  tokenParse = JSON.parse(this.token);
+  user = this.tokenParse.user;
   constructor() { }
 
   ngOnInit(): void {
