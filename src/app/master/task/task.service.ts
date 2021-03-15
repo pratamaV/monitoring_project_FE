@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {ReleaseModel, ReleaseModel2} from '../release/release.model';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TaskModel, TaskModel2, TaskModel3} from './task.model';
 import {ProjectModel, ProjectModel2} from '../project/project.model';
 
@@ -55,9 +55,26 @@ export class TaskService {
     });
   }
 
-  getTaskByReleaseId(id): Observable<TaskModel2> {
+  getTaskByReleaseId(id, param): Observable<TaskModel2> {
+    console.log(param);
+    let url = ``;
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    if (param.assignTo == null && param.statusDone == null){
+      url = `api/taskByReleaseId/${id}`;
+    }
+    else if (param.statusDone == null){
+      url = `api/taskByReleaseId/${id}?assignTo=${param.assignTo}`;
+    }
+    else if (param.assignTo == null){
+      url = `api/taskByReleaseId/${id}?statusDone=${param.statusDone}`;
+    }
+    else if (!(param.assignTo == null && param.statusDone == null)){
+      url = `api/taskByReleaseId/${id}?assignTo=${param.assignTo}&statusDone=${param.statusDone}`;
+    }
     return new Observable((observer: Observer<TaskModel2>) => {
-      this.http.get(`api/taskByReleaseId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      this.http.get(url, header)
         .subscribe((data: TaskModel2) => {
           console.log(data);
 

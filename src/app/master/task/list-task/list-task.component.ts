@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2} from '../task.model';
+import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {UserModel} from '../../project/project.model';
+import {ProjectServiceService} from '../../project/project-service.service';
 
 @Component({
   selector: 'app-list-task',
@@ -9,18 +12,30 @@ import {TaskModel, TaskModel2} from '../task.model';
   styleUrls: ['./list-task.component.css']
 })
 export class ListTaskComponent implements OnInit {
+  filterForm: FormGroup;
   task: TaskModel;
+  assigntoId: '';
   loadedTask: TaskModel2;
+  loadedUser: UserModel[] = [];
+  paramNull = {
+    assignTo: null,
+    statusDone: null
+  };
   constructor(private taskService: TaskService,
+              private projectService: ProjectServiceService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.buildForm();
+    this.onGetAllUser();
     this.onGetAllTask();
   }
 
   onGetAllTask() {
-    this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'))
+    this.filterForm.get('assignTo').setValue(null);
+    this.filterForm.get('statusDone').setValue(null);
+    this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
       .subscribe(data => {
         this.loadedTask = data;
         console.log(this.loadedTask);
@@ -29,6 +44,38 @@ export class ListTaskComponent implements OnInit {
       });
   }
 
+  onGetAllUser() {
+    this.projectService.getAllUser()
+      .subscribe(data => {
+        this.loadedUser = data;
+      }, error => {
+        alert(error);
+      });
+  }
+
+  private buildForm(): void {
+    this.filterForm  = new FormGroup({
+      assignTo: new FormControl(null),
+      statusDone: new FormControl(null),
+    });
+  }
+
+  form(property): AbstractControl {
+    return this.filterForm.get(property);
+  }
+
+  onGetFilterTask(param) {
+    console.log(param);
+    this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
+      .subscribe(data => {
+        this.loadedTask = data;
+        console.log(this.loadedTask);
+      }, error => {
+        alert(error);
+      });
+  }
+
+  // tslint:disable-next-line:typedef
   onSaveTaskByReleaseId(){
     this.router.navigate(['/dashboard/task/form-task']);
   }
