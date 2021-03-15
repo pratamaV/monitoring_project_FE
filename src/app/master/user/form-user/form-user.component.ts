@@ -131,4 +131,7 @@ export class FormUserComponent implements OnInit {
     return this.userForm.get(property);
   }
 
+  goBack() {
+    this.router.navigate(['/dashboard/user'])
+  }
 }
