@@ -2,7 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2} from '../task.model';
-import * as XLSX from "xlsx";
+import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {UserModel} from '../../project/project.model';
+import {ProjectServiceService} from '../../project/project-service.service';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-list-task',
@@ -10,19 +13,32 @@ import * as XLSX from "xlsx";
   styleUrls: ['./list-task.component.css']
 })
 export class ListTaskComponent implements OnInit {
+  filterForm: FormGroup;
   task: TaskModel;
+  assigntoId: '';
   loadedTask: TaskModel2;
+  loadedUser: UserModel[] = [];
+  paramNull = {
+    assignTo: null,
+    statusDone: null
+  };
   fileName = 'List-Task-' + new Date().toDateString() + '.xlsx';
   constructor(private taskService: TaskService,
+              private projectService: ProjectServiceService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.buildForm();
+    this.onGetAllUser();
     this.onGetAllTask();
   }
 
+  // tslint:disable-next-line:typedef
   onGetAllTask() {
-    this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'))
+    this.filterForm.get('assignTo').setValue(null);
+    this.filterForm.get('statusDone').setValue(null);
+    this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
       .subscribe(data => {
         this.loadedTask = data;
         console.log(this.loadedTask);
@@ -31,10 +47,45 @@ export class ListTaskComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
+  onGetAllUser() {
+    this.projectService.getAllUser()
+      .subscribe(data => {
+        this.loadedUser = data;
+      }, error => {
+        alert(error);
+      });
+  }
+
+  private buildForm(): void {
+    this.filterForm  = new FormGroup({
+      assignTo: new FormControl(null),
+      statusDone: new FormControl(null),
+    });
+  }
+
+  form(property): AbstractControl {
+    return this.filterForm.get(property);
+  }
+
+  // tslint:disable-next-line:typedef
+  onGetFilterTask(param) {
+    console.log(param);
+    this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
+      .subscribe(data => {
+        this.loadedTask = data;
+        console.log(this.loadedTask);
+      }, error => {
+        alert(error);
+      });
+  }
+
+  // tslint:disable-next-line:typedef
   onSaveTaskByReleaseId(){
     this.router.navigate(['/dashboard/task/form-task']);
   }
 
+  // tslint:disable-next-line:typedef
   onDoneTask(task, idRelease){
     this.task = {
       id: task.id,
@@ -62,6 +113,7 @@ export class ListTaskComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
   downloadTaskDoc(taskCode){
     console.log(taskCode);
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
@@ -71,6 +123,7 @@ export class ListTaskComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   exportexcel() {
     /* table id is passed over here */
     const element = document.getElementById('excel-table');
