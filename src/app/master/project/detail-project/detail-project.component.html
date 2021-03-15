@@ -1,29 +1,181 @@
+<div class="container-sm">
+  <div class="row">
+    <div class="col-md-12 col-md-offset-1">
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-12 col-md-offset-1">
+              <div class="panel panel-default panel-table">
+                <div class="panel-heading">
+                  <div class="row">
 
-<div class="card m-5">
-  <div class="card-header">
-    <div class="row">
-    <div class="col-10"> <h1>Detail Project {{project.projectName}}</h1></div>
-    <div class="col-2"> <button class="btn btn-close float-lg-end" (click)="onGolistProject()"></button></div>
+                    <div class="col col-xs-6 mt-3 mb-3 text-right">
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <!-- <div class= "col col-lg-12">   -->
+                  <div class="panel panel-default panel-table col-lg-12">
+                    <div class="panel-heading">
+                      <div class="col col-xs-12">
+                        <div class="col col-xs-6 mt-3 mb-3 text-left">
+                          <h1>Detail Project {{project.projectName}}</h1>
+                        </div>
+                       <div class="col col-xs-6 mt-3 mb-3 text-right">
+                         <button (click)="onGolistProject()" class="btn btn-dark" style="width: 70px;">Back</button>
+                       </div>
+                      </div>
+                      <div class="row">
+                        <div class="col col-xs-6 mt-3 mb-3">
+                          <div class="panel-body" style="overflow-x:auto;">
+                            <table class="table table-striped ">
+                              <tbody>
+                              <tr>
+                                <td>Project Code</td>
+                                <td>:</td>
+                                <td>{{project.projectCode}}</td>
+                              </tr>
+                              <tr>
+                                <td>Project Name</td>
+                                <td>:</td>
+                                <td>{{project.projectName}}</td>
+                              </tr>
+                              <tr>
+                                <td>PMO</td>
+                                <td>:</td>
+                                <td>{{project.pmo.username}}</td>
+                              </tr>
+                              <tr>
+                                <td>PM</td>
+                                <td>:</td>
+                                <td>{{project.pm.username}}</td>
+                              </tr>
+                              <tr>
+                                <td>Benefit</td>
+                                <td>:</td>
+                                <td>{{project.benefit}}</td>
+                              </tr>
+                              <tr>
+                                <td>Description</td>
+                                <td>:</td>
+                                <td>{{project.description}}</td>
+                              </tr>
+                              <tr>
+                                <td>Category Initiative</td>
+                                <td>:</td>
+                                <td>{{project.categoryInitiative}}</td>
+                              </tr>
+                              <tr>
+                                <td>Category Activity</td>
+                                <td>:</td>
+                                <td>{{project.categoryActivity}}</td>
+                              </tr>
+                              <tr>
+                                <td>Status Project</td>
+                                <td>:</td>
+                                <td>{{project.statusProject}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div class="col col-xs-6 mt-3 mb-3">
+                          <div class="panel-body" style="overflow-x:auto;">
+                            <table class="table table-striped ">
+                              <tbody>
+                              <tr>
+                                <td>Directorate User</td>
+                                <td>:</td>
+                                <td>{{project.directorateUser}}</td>
+                              </tr>
+                              <tr>
+                                <td>Target Live</td>
+                                <td>:</td>
+                                <td>{{project.targetLive | date}}</td>
+                              </tr>
+                              <tr>
+                                <td>Prosentase Project</td>
+                                <td>:</td>
+                                <td>{{project.prosentaseProject*100}}%</td>
+                              </tr>
+                              <tr>
+                                <td>Budget</td>
+                                <td>:</td>
+                                <td>{{project.budget |  currency:'Rp.'}}</td>
+                              </tr>
+                              <tr>
+                                <td>Contracted Value</td>
+                                <td>:</td>
+                                <td>{{project.contracted_value | currency:'Rp.'}}</td>
+                              </tr>
+                              <tr>
+                                <td>Payment Realization</td>
+                                <td>:</td>
+                                <td>{{project.paymentRealization | currency:'Rp.'}}</td>
+                              </tr>
+                              <tr>
+                                <td>Weight</td>
+                                <td>:</td>
+                                <td>{{project.weight}}</td>
+                              </tr>
+                              <tr>
+                                <td>User</td>
+                                <td>:</td>
+                                <td>{{project.coPM.username}}</td>
+                              </tr>
+                              <tr>
+                                <td>Divisi User</td>
+                                <td>:</td>
+                                <td>{{project.divisiUser.divisionName}}</td>
+                              </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+<!--                        <div class="col col-xs-6 mt-3 mb-3">-->
+<!--                          <h4 class="panel-title"><b>Ahli Waris</b></h4>-->
+<!--                          <div class="panel-body" style="overflow-x:auto;">-->
+<!--                            <table class="table table-striped ">-->
+<!--                              <tbody>-->
+<!--                              <tr>-->
+<!--                                <td>NIK</td>-->
+<!--                                <td>:</td>-->
+<!--                                <td>{{heir.identityCardNumb}}</td>-->
+<!--                              </tr>-->
+<!--                              <tr>-->
+<!--                                <td>Nama</td>-->
+<!--                                <td>:</td>-->
+<!--                                <td>{{heir.fullname}}</td>-->
+<!--                              </tr>-->
+<!--                              <tr>-->
+<!--                                <td>Hubungan</td>-->
+<!--                                <td>:</td>-->
+<!--                                <td>{{heir.relation}}</td>-->
+<!--                              </tr>-->
+<!--                              <tr>-->
+<!--                                <td>Email</td>-->
+<!--                                <td>:</td>-->
+<!--                                <td>{{heir.email}}</td>-->
+<!--                              </tr>-->
+<!--                              <tr>-->
+<!--                                <td>No. Telpon</td>-->
+<!--                                <td>:</td>-->
+<!--                                <td>{{heir.phoneNumber}}</td>-->
+<!--                              </tr>-->
+<!--                              </tbody>-->
+<!--                            </table>-->
+<!--                          </div>-->
+<!--                        </div>-->
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="card-body">
-    <p>Project Code : {{project.projectCode}}</p>
-    <p>Project Name : {{project.projectName}}</p>
-    <p>PMO : {{project.pmo.username}}</p>
-    <p>PM : {{project.pm.username}}</p>
-    <p>Benefit : {{project.benefit}}</p>
-    <p>Description : {{project.description}}</p>
-    <p>User : {{project.coPM.username}}</p>
-    <p>Divisi User : {{project.divisiUser.divisionName}}</p>
-        <p>Directorate User : {{project.directorateUser}}</p>
-        <p>Target Live : {{project.targetLive | date}}</p>
-        <p>Prosentase Project : {{project.prosentaseProject*100}}%</p>
-        <p>Budget : {{project.budget | currency}}</p>
-        <p>Contracted Value : {{project.contracted_value | currency}}</p>
-        <p>Payment Realization : {{project.paymentRealization | currency}}</p>
-        <p>Weight : {{project.weight}}</p>
-        <p>Category Initiative : {{project.categoryInitiative}}</p>
-        <p>Category Activity : {{project.categoryActivity}}</p>
-        <p>Status Project : {{project.statusProject}}</p>
   </div>
 </div>
