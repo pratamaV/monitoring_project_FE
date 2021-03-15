@@ -1,13 +1,15 @@
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
+<app-sidebar></app-sidebar>
 <div class="card">
 
     <h4>Daftar Project</h4>
-    <button class="btn btn-success mt-2 mb-2" style="width: 200px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
-    <button (click)="onAddProject()" class="btn btn-secondary mt-2 mb-2" style="width: 200px; align-self: flex-end">Add New Project</button>
+    <div id="button-atas">
+        <button id="export-excel" class="btn btn-dark" (click)="exportexcel()"><i class="fa fa-file"></i> Export to excel</button>&nbsp;
+        <button id="add-project" class="btn btn-warning" (click)="onAddProject()"><i class="fa fa-plus"></i> Add New Project</button>
+    </div>
+
     <br>
     <table class="table" id="excel-table">
-        <thead class="thead-dark">
+        <thead>
             <tr>
                 <th scope="col">Project Code</th>
                 <th scope="col">Project Name</th>
@@ -17,15 +19,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">User</th>
                 <th scope="col">Divisi User</th>
-                <!--    <th scope="col">Directorate User</th>-->
-                <!--    <th scope="col">Target Live</th>-->
                 <th scope="col">Project Precentage</th>
-                <!--    <th scope="col">Budget</th>-->
-                <!--    <th scope="col">Contracted Value</th>-->
-                <!--    <th scope="col">Payment Realization</th>-->
-                <!--    <th scope="col">Weight</th>-->
-                <!--    <th scope="col">Category Initiative</th>-->
-                <!--    <th scope="col">Category Activity</th>-->
                 <th scope="col">Status Project</th>
                 <th scope="col">Detail Project</th>
 
@@ -41,21 +35,13 @@
                 <td>{{project.description}}</td>
                 <td>{{project.coPM.username}}</td>
                 <td>{{project.divisiUser.divisionName}}</td>
-                <!--    <td>{{project.directorateUser}}</td>-->
-                <!--    <td>{{project.targetLive}}</td>-->
                 <td>{{project.prosentaseProject}}</td>
-                <!--    <td>{{project.budget}}</td>-->
-                <!--    <td>{{project.contracted_value}}</td>-->
-                <!--    <td>{{project.paymentRealization}}</td>-->
-                <!--    <td>{{project.weight}}</td>-->
-                <!--    <td>{{project.categoryInitiative}}</td>-->
-                <!--    <td>{{project.categoryActivity}}</td>-->
                 <td>{{project.statusProject}}</td>
                 <td style="width: 200px;">
                     <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
                     <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Release"><i class="fa fa-bars"></i></button>&nbsp;
-                    <button (click)="updateProject(project)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
-                    <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Change Status"><i class="fa fa-exchange"></i></button>
+                    <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
+                    <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Change Status"><i class="fa fa-exchange"></i></button>
                 </td>
             </tr>
         </tbody>

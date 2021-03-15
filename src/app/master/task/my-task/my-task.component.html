@@ -1,5 +1,6 @@
+<app-sidebar></app-sidebar>
 <div class="card">
-    <h1>List Task</h1>
+    <h4>List Task</h4>
     <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
     <div class="table-responsive">
         <table class="table" id="excel-table">
@@ -29,18 +30,26 @@
                     <td>{{task.taskProsentase}}</td>
                     <td>{{task.finalTarget | date}}</td>
                     <td>
-                        <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-dark">Download</button>
+                        <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
                     </td>
                     <td>
-                        <form style="padding: 10px" [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
-                            <label class="image-upload-container btn btn-bwm" style="text-align: left">
-                <span style="color: red">Select Image *max file 10MB</span>
-                <input #imageInput
-                       type="file"
-                       accept="image/*"
-                       (change)="processFile(imageInput)" class="form-control">
-              </label>
-                            <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-primary mt-2">Upload</button>
+                        <form [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
+                            <!-- <div class="input-group">
+                                <div class="custom-file">
+                                    <input #imageInput type="file" class="custom-file-input form-control" id="inputGroupFile04" (change)="processFile(imageInput)">
+                                    <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                </div>
+                                <div class="input-group-append">
+                                    <button [disabled]="!taskForm.valid || task.taskDocument!==null" class="btn btn-outline-secondary" type="submit" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
+                                </div>
+                            </div> -->
+                            <small style="color: red">*max file 10MB</small>
+                            <!-- <label class="image-upload-container btn btn-bwm btn-sm" style="text-align: left"> -->
+                            <!-- <small style="color: red">Select Image *max file 10MB</small> -->
+                            <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" class="form-control">
+                            <!-- </label> -->
+                            <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
+
                         </form>
                     </td>
                     <td>

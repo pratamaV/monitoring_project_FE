@@ -18,6 +18,7 @@ export class DetailProjectComponent implements OnInit {
     this.onGetProjectById();
   }
 
+  // tslint:disable-next-line:typedef
   onGetProjectById() {
     this.projectService.getProjectById(localStorage.getItem('projectId'))
       .subscribe(data => {
@@ -27,6 +28,7 @@ export class DetailProjectComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
   onGolistProject() {
     this.router.navigate(['/dashboard/project']);
   }

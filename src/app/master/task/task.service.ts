@@ -156,10 +156,10 @@ export class TaskService {
     });
   }
 
-  getTaskByUserId(id): Observable<TaskModel2> {
-    return new Observable((observer: Observer<TaskModel2>) => {
+  getTaskByUserId(id): Observable<TaskModel2[]> {
+    return new Observable((observer: Observer<TaskModel2[]>) => {
       this.http.get(`api/taskByUserId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-        .subscribe((data: TaskModel2) => {
+        .subscribe((data: TaskModel2[]) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);

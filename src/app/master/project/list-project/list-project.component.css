@@ -1,7 +1,10 @@
 .card {
     padding: 30px;
-    margin: 30px;
+    /*margin: 30px;*/
     text-align: center;
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: all 0.4s;
 }
 
 h4 {
@@ -13,6 +16,18 @@ td {
     font-size: 10pt;
 }
 
-.btn-detail {
-    /* background-color: greenyellow; */
+#button-atas {
+    align-self: flex-end;
+    justify-content: space-around;
+}
+
+#export-excel {
+    width: 200px;
+    /* float: right; */
+    /* margin-right: 10px; */
+}
+
+#add-project {
+    width: 200px;
+    /* float: right; */
 }
