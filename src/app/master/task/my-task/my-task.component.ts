@@ -12,7 +12,7 @@ import * as XLSX from "xlsx";
 })
 export class MyTaskComponent implements OnInit {
   taskForm: FormGroup;
-  loadedTask: TaskModel2;
+  loadedTask: TaskModel2[] = [];
   task: TaskModel;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   constructor(private taskService: TaskService,
@@ -34,7 +34,6 @@ export class MyTaskComponent implements OnInit {
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'))
       .subscribe(data => {
         this.loadedTask = data;
-        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });

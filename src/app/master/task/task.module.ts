@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TaskRoutingModule } from './task-routing.module';
 import { MyTaskComponent } from './my-task/my-task.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {SidebarModule} from "../../layout/sidebar/sidebar.module";
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         TaskRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SidebarModule
     ]
 })
 export class TaskModule { }

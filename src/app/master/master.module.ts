@@ -7,10 +7,10 @@ import { FormReleaseComponent } from './release/form-release/form-release.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { ListTaskComponent } from './task/list-task/list-task.component';
 import { FormTaskComponent } from './task/form-task/form-task.component';
-import {SidebarComponent} from './sidebar/sidebar.component';
+import {SidebarComponent} from '../layout/sidebar/sidebar.component';
 
 @NgModule({
-  declarations: [MasterComponent, FormReleaseComponent, ListTaskComponent, FormTaskComponent, SidebarComponent],
+  declarations: [MasterComponent, FormReleaseComponent, ListTaskComponent, FormTaskComponent],
     imports: [
         CommonModule,
         MasterRoutingModule,
