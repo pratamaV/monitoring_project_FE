@@ -10,6 +10,15 @@ import { AuthGuardService } from 'src/app/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+        '03',
+        '04',
+      ]
+    },
     component: ListProjectComponent
   },
   {
