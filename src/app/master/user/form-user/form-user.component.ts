@@ -132,6 +132,6 @@ export class FormUserComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/dashboard/user'])
+    this.router.navigate(['/dashboard/user']);
   }
 }
