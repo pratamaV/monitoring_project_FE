@@ -4,6 +4,7 @@ import {ListProjectComponent} from '../project/list-project/list-project.compone
 import {ListReleaseComponent} from './list-release/list-release.component';
 import {FormReleaseComponent} from './form-release/form-release.component';
 import {DetailReleaseComponent} from './detail-release/detail-release.component';
+import { AuthGuardService } from 'src/app/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -12,10 +13,24 @@ const routes: Routes = [
   },
   {
     path: 'form-release',
+    canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+      ]
+    },
     component: FormReleaseComponent
   },
   {
     path: 'form-release/:id',
+    canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+      ]
+    },
     component: FormReleaseComponent
   },
   {

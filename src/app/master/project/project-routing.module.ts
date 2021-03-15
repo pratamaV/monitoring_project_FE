@@ -5,6 +5,7 @@ import { ListProjectComponent } from './list-project/list-project.component';
 import { DetailProjectComponent } from './detail-project/detail-project.component';
 import { ListProjectUserComponent } from './list-project-user/list-project-user.component';
 import { DetailProjectUserComponent } from './detail-project-user/detail-project-user.component';
+import { AuthGuardService } from 'src/app/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -13,10 +14,24 @@ const routes: Routes = [
   },
   {
     path: 'form-project',
+    canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+      ]
+    },
     component: FormProjectComponent
   },
   {
     path: 'form-project/:id',
+    canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+      ]
+    },
     component: FormProjectComponent
   },
   {
