@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import {Injectable} from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -11,12 +12,13 @@ import {
   UrlTree
 } from '@angular/router';
 import {Observable} from 'rxjs';
+import Swal from 'sweetalert2';
 import {AuthService} from './AuthService';
 
 @Injectable()
 
 export class AuthGuardService implements CanActivate, CanDeactivate<unknown>, CanLoad {
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private _location: Location) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -44,15 +46,26 @@ export class AuthGuardService implements CanActivate, CanDeactivate<unknown>, Ca
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.authService.isLoggedIn()) {
       const userRole = this.authService.getRole();
-      console.log("userRolenya adalah: ", userRole);
-      if (route.data.role && route.data.role.indexOf(userRole) === -1) {
-        this.router.navigate(['/auth']);
-        return false;
+
+      if(route.data.role != undefined){
+        if(route.data.role.indexOf(userRole) < 1){
+          Swal.fire( 'Failed', 'You haven not right access' , 'error'  );
+          this._location.back();
+          // this.router.navigate(['/404']);
+        }
       }
+
+      // if (route.data.role && route.data.role.indexOf(userRole) === -1) {
+      //   this.router.navigate(['/auth']);
+      //   return false;
+      // }
       return true;
     }
     this.router.navigate(['/auth']);
     return false;
+  }
+  data(){
+    console.log("ini data");
   }
 }
 
