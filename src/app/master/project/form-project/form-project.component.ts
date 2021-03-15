@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {ProjectServiceService} from '../project-service.service';
 import {DivisionModel, ProjectModel, ProjectModel2, UserModel} from '../project.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-form-project',
@@ -106,9 +107,10 @@ export class FormProjectComponent implements OnInit {
     if (valid) {
       this.projectService.saveProject(this.project, this.id)
         .subscribe(response => {
+          Swal.fire( 'Success', 'Project that you input was successfully saved' , 'success'  );
           this.router.navigate(['/dashboard/project']);
         }, error => {
-          alert(error.message);
+          Swal.fire( 'Failed', 'Failed to save project' , 'error'  );
         });
     }
   }
