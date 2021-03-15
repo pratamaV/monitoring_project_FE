@@ -25,7 +25,7 @@ export interface TaskModel2{
   statusDone: string ;
   taskProsentase: number ;
   finalTarget: Date ;
-  taskDoc: File;
+  taskDocument: string;
   release: ReleaseModel ;
 }
 

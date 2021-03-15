@@ -103,4 +103,8 @@ export class ListReleaseComponent implements OnInit {
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
   }
+
+  goToListProject() {
+    this.router.navigate(['/dashboard/project']);
+  }
 }

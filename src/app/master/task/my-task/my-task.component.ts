@@ -92,7 +92,7 @@ export class MyTaskComponent implements OnInit {
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
       Swal.fire( 'Success', 'Document successfully downloaded' , 'success'  );
     }, error => {
-      Swal.fire( 'Failed', 'Failed to download document' , 'error'  );
+      Swal.fire( 'Failed', 'Document not available' , 'error'  );
     });
   }
 
