@@ -9,12 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 import {MasterModule} from './master/master.module';
 import {AuthService} from './AuthService';
 import {AuthGuardService} from './auth-guard.service';
+import {SidebarModule} from './layout/sidebar/sidebar.module';
+import {HomeComponent} from './master/home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
+    HomeComponent
   ],
   imports: [
     MasterModule,
@@ -23,7 +26,7 @@ import {AuthGuardService} from './auth-guard.service';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // AngularFontAwesomeModule
+    SidebarModule
   ],
   providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]

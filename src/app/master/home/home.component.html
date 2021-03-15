@@ -1,28 +1,30 @@
+<app-sidebar></app-sidebar>
+<div class="card">
+  <!-- Page Heading -->
+  <div class="row" id="main">
+    <div class="col-sm-12 col-md-12 well" id="content">
+      <h1 style="text-align: center; margin-bottom: 30px">Dashboard</h1>
 
+      <div id="divChart" class="col-6">
+        <h4 style="text-align: center">Prosentase Release per Stage</h4>
+        <canvas id="releaseByStage"
+                width="600" height="500"></canvas>
+      </div>
 
+      <div class="row">
+        <div id="divChart3" class="col-6">
+          <h4>Progress Release per Stage</h4>
+          <canvas id="barChart"
+                  width="600" height="500"></canvas>
+        </div>
 
-<!--<app-sidebar></app-sidebar>-->
-    <div class="card">
-      <!-- Page Heading -->
-      <div class="row" id="main">
-        <div class="col-sm-12 col-md-12 well" id="content">
-          <h1 style="text-align: center; margin-bottom: 30px">Welcome Admin!</h1>
-
-          <div class="row">
-            <div id="divChart" class="col-6">
-              <h3 style="text-align: center">Prosentase Release per Stage</h3>
-              <canvas id="releaseByStage"
-                      width="600" height="500"></canvas>
-            </div>
-
-            <div id="divChart3" class="col-6">
-              <h4>Progress Release per Stage</h4>
-              <canvas id="barChart"
-                      width="600" height="500"></canvas>
-            </div>
-          </div>
-
+        <div class="col-6">
+          <canvas id="bar-chart-horizontal" width="600" height="500">
+          </canvas>
         </div>
       </div>
+
     </div>
+  </div>
+</div>
 

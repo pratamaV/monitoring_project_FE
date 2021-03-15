@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from '../task.service';
 import {UserModel} from '../../project/project.model';
 import {ProjectServiceService} from '../../project/project-service.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-form-task',
@@ -67,9 +68,10 @@ export class FormTaskComponent implements OnInit {
     if (valid) {
       this.taskService.addTask(this.task, this.task.id)
         .subscribe(response => {
+          Swal.fire( 'Success', 'Task that you input was successfully saved' , 'success'  );
           this.router.navigate(['/dashboard/task']);
         }, error => {
-          alert(error.message);
+          Swal.fire( 'Failed', 'Failed to save task' , 'error'  );
         });
     }
   }
