@@ -6,7 +6,8 @@
 <div class="container">
   <div class="col-md-5">
     <div class="form-area">
-      <i class="fa fa-plus" (click)="goBack()"> back</i>
+      <button class="btn btn-outline-dark"(click)="goBack()">
+      <i class="fa fa-chevron-circle-left"></i> Back</button>
       <form role="form" [formGroup]="userForm" method="post" (ngSubmit)="onSaveUser(userForm.value, userForm.valid)">
         <br style="clear:both">
         <h3 style="margin-bottom: 25px; text-align: center;">Register User</h3>
@@ -71,7 +72,13 @@
         </div>
         <div class="form-group">
           <label for="directorateUser">Directorate User</label>
-          <input type="text" class="form-control" id="directorateUser" formControlName="directorateUser" name="directorateUser" placeholder="directorateUser" required>
+          <select class="form-select" formControlName="directorateUser" id="directorateUser" aria-label="Default select example">
+            <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
+            <option value="Keuangan">Keuangan</option>
+            <option value="Operational Retail">Operational Retail</option>
+            <option value="Teknik">Teknik</option>
+            <option value="Utama">Utama</option>
+          </select>
           <small class="form-text text-danger "
                  *ngIf="form('directorateUser').invalid && form('directorateUser').dirty || form('directorateUser').touched">
             <div *ngIf="form('directorateUser').errors?.required">

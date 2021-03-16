@@ -164,4 +164,7 @@ export class FormProjectComponent implements OnInit {
     return this.projectForm.get(property);
   }
 
+  onGolistProject() {
+    this.router.navigate(['/dashboard/project'])
+  }
 }

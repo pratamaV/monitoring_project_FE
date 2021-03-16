@@ -114,4 +114,7 @@ export class FormReleaseComponent implements OnInit {
     return this.releaseForm.get(property);
   }
 
+  onGolistRelease() {
+    this.router.navigate(['/dashboard/release']);
+  }
 }

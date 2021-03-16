@@ -50,4 +50,7 @@ export class ListIssuedComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+  onGolistRelease() {
+    this.router.navigate(['/dashboard/release']);
+  }
 }

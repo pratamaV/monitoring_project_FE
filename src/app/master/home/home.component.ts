@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Chart} from 'node_modules/chart.js';
 import {HomeService} from './home.service';
 import {ProjectServiceService} from '../project/project-service.service';
-import {createLogErrorHandler} from "@angular/compiler-cli/ngcc/src/execution/tasks/completion";
 
 @Component({
   selector: 'app-home',
