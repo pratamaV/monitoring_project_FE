@@ -22,7 +22,7 @@ export class AuthService {
   }
   // tslint:disable-next-line:typedef
   getRole(){
-    this.roleAs = localStorage.getItem('ROLE');
+    this.roleAs = localStorage.getItem('role');
     return this.roleAs;
   }
 }

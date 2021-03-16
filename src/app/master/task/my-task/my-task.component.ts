@@ -15,12 +15,14 @@ export class MyTaskComponent implements OnInit {
   taskForm: FormGroup;
   loadedTask: TaskModel2[] = [];
   task: TaskModel;
+  role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   constructor(private taskService: TaskService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.role = localStorage.getItem('role');
     this.onGetTaskByUserId();
     this.buildForm();
   }
@@ -90,7 +92,7 @@ export class MyTaskComponent implements OnInit {
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
       Swal.fire( 'Success', 'Document successfully downloaded' , 'success'  );
     }, error => {
-      Swal.fire( 'Failed', 'Failed to download document' , 'error'  );
+      Swal.fire( 'Failed', 'Document not available' , 'error'  );
     });
   }
 

@@ -35,7 +35,7 @@
                 <td>{{project.description}}</td>
                 <td>{{project.coPM.username}}</td>
                 <td>{{project.divisiUser.divisionName}}</td>
-                <td>{{project.prosentaseProject}}</td>
+                <td>{{project.prosentaseProject*100}}%</td>
                 <td>{{project.statusProject}}</td>
                 <td style="width: 200px;">
                     <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;

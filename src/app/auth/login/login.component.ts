@@ -1,9 +1,14 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthService as AuthGuard} from '../../AuthService';
+import { AuthService as AuthGuard } from '../../AuthService';
 import { AuthService } from '../auth.service';
 import { User } from '../user.model';
 
@@ -13,7 +18,6 @@ import { User } from '../user.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
   user: User;
   token: any;
@@ -22,12 +26,13 @@ export class LoginComponent implements OnInit {
   forgetPassword;
   isLoading = false;
 
-
   year: number;
 
-  constructor( private authService : AuthService,
-               private auth: AuthGuard,
-               private router : Router ) { }
+  constructor(
+    private authService: AuthService,
+    private auth: AuthGuard,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     var d = new Date();
@@ -41,7 +46,10 @@ export class LoginComponent implements OnInit {
 
   private buildForm(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+      ]),
       password: new FormControl(null, [Validators.required])
     });
   }
@@ -51,34 +59,36 @@ export class LoginComponent implements OnInit {
       .set('username', value.email)
       .set('password', value.password)
       .set('grant_type', 'password');
-    this.authService.login(body.toString()).subscribe(data => {
-      var resultBody;
-      resultBody = data;
+    this.authService.login(body.toString()).subscribe(
+      data => {
+        var resultBody;
+        resultBody = data;
 
-      localStorage.setItem('token', resultBody.access_token);
-      localStorage.setItem('role', resultBody.user.userRole);
-      localStorage.setItem('idUser', resultBody.user.id);
-      console.log('datanya adalah: ', localStorage.getItem('idUser'));
+        localStorage.setItem('token', resultBody.access_token);
+        localStorage.setItem('role', resultBody.user.userRole);
+        localStorage.setItem('idUser', resultBody.user.id);
+        console.log('datanya adalah: ', localStorage.getItem('idUser'));
 
-      window.sessionStorage.setItem('token', JSON.stringify(data));
-      this.token = window.sessionStorage.getItem('token');
-      this.x = JSON.parse(this.token);
-      if(this.x.user.statusUser === 'aktif'){
-        this.auth.login(this.x.user.userRole);
-        if(this.x.user.userRole === '01' || this.x.user.userRole === '03'){
-          Swal.fire( 'Success', 'Success Login' , 'success'  );
+        window.sessionStorage.setItem('token', JSON.stringify(data));
+        this.token = window.sessionStorage.getItem('token');
+        this.x = JSON.parse(this.token);
+        if (this.x.user.statusUser === 'aktif') {
+          this.auth.login(this.x.user.userRole);
+          Swal.fire('Success', 'Success Login', 'success');
           this.router.navigate(['/']);
         } else {
-          Swal.fire("Failed",'You dont have access this page', 'error');
-          this.router.navigate(['/']);
+          Swal.fire(
+            'Failed',
+            'Your account still inactive, please check your email to verified your account',
+            'error'
+          );
+          this.router.navigate(['/login']);
         }
-      } else {
-        Swal.fire( "Failed",'Your account still inactive, please check your email to verified your account', "error");
-        this.router.navigate(['/login']);
+      },
+      error => {
+        Swal.fire('Failed', 'Email or password incorrect', 'error');
       }
-    }, (error) => {
-      Swal.fire('Failed','Email or password incorrect', 'error');
-    });
+    );
   }
 
   // onSendEmail(valueEmail: string) {
@@ -98,8 +108,4 @@ export class LoginComponent implements OnInit {
   //   this.router.navigate(['/admin']);
 
   // }
-
-
-
-
 }

@@ -64,7 +64,7 @@
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col col-xs-6 mt-3 mb-3">
-                                                    <h4 class="panel-title">Release List</h4>
+                                                    <h4 class="panel-title"><i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>  Release List</h4>
                                                     <br>
                                                     <div class="panel-body" style="overflow-x:auto;">
                                                         <div class="row col-xs-12">
@@ -108,7 +108,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <table class="table">
+                                                        <table class="table mt-3">
                                                             <thead>
                                                                 <tr>
                                                                     <th scope="col">Release Code</th>
@@ -136,7 +136,7 @@
                                                                     <td>{{release.description}}</td>
                                                                     <td>{{release.status}}</td>
                                                                     <td>{{release.stage}}</td>
-                                                                    <td>{{release.prosentaseRelease}}</td>
+                                                                    <td>{{release.prosentaseRelease*100}}%</td>
                                                                     <td>{{release.statusRelease}}</td>
                                                                     <td>{{release.estStartdate | date}}</td>
                                                                     <td>{{release.actStartdate | date}}</td>

@@ -18,9 +18,13 @@
                                     <div class="panel panel-default panel-table col-lg-12">
                                         <div class="panel-heading">
                                             <div class="col col-xs-12">
-                                                <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Detail Project {{project.projectName}}</h4>
+                                                <div class="col col-xs-6 mt-3 mb-3 text-left">
+                                                    <h1><i class="fa fa-chevron-circle-left"></i> Detail Project {{project.projectName}}</h1>
+                                                </div>
+                                                <div class="col col-xs-6 mt-3 mb-3 text-right">
+                                                    <button (click)="onGolistProject()" class="btn btn-outline-dark"><i class="fa fa-sign-out"></i> Back</button>
+                                                </div>
                                             </div>
-                                            <br>
                                             <div class="row">
                                                 <div class="col col-xs-6 mt-3 mb-3">
                                                     <div class="panel-body" style="overflow-x:auto;">
@@ -128,50 +132,9 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                                <!--                        <div class="col col-xs-6 mt-3 mb-3">-->
-                                                <!--                          <h4 class="panel-title"><b>Ahli Waris</b></h4>-->
-                                                <!--                          <div class="panel-body" style="overflow-x:auto;">-->
-                                                <!--                            <table class="table table-striped ">-->
-                                                <!--                              <tbody>-->
-                                                <!--                              <tr>-->
-                                                <!--                                <td>NIK</td>-->
-                                                <!--                                <td>:</td>-->
-                                                <!--                                <td>{{heir.identityCardNumb}}</td>-->
-                                                <!--                              </tr>-->
-                                                <!--                              <tr>-->
-                                                <!--                                <td>Nama</td>-->
-                                                <!--                                <td>:</td>-->
-                                                <!--                                <td>{{heir.fullname}}</td>-->
-                                                <!--                              </tr>-->
-                                                <!--                              <tr>-->
-                                                <!--                                <td>Hubungan</td>-->
-                                                <!--                                <td>:</td>-->
-                                                <!--                                <td>{{heir.relation}}</td>-->
-                                                <!--                              </tr>-->
-                                                <!--                              <tr>-->
-                                                <!--                                <td>Email</td>-->
-                                                <!--                                <td>:</td>-->
-                                                <!--                                <td>{{heir.email}}</td>-->
-                                                <!--                              </tr>-->
-                                                <!--                              <tr>-->
-                                                <!--                                <td>No. Telpon</td>-->
-                                                <!--                                <td>:</td>-->
-                                                <!--                                <td>{{heir.phoneNumber}}</td>-->
-                                                <!--                              </tr>-->
-                                                <!--                              </tbody>-->
-                                                <!--                            </table>-->
-                                                <!--                          </div>-->
-                                                <!--                        </div>-->
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
