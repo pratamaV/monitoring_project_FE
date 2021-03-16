@@ -22,6 +22,7 @@ export class AuthService {
   }
   // tslint:disable-next-line:typedef
   getRole(){
+    console.log("getrole nya disini");
     this.roleAs = localStorage.getItem('role');
     return this.roleAs;
   }

@@ -45,6 +45,14 @@ const routes: Routes = [
   {
     path: 'task',
     canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+        '03',
+        '04',
+      ]
+    },
     loadChildren: () => import('./task/task.module').then(p => p.TaskModule)
   },
   {
