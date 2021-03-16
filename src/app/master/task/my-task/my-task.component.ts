@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2} from '../task.model';
-import {FormControl, FormGroup} from "@angular/forms";
-import * as XLSX from "xlsx";
+import {FormControl, FormGroup} from '@angular/forms';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-my-task',

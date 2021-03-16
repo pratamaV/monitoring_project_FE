@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2} from '../task.model';
-import * as XLSX from "xlsx";
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-list-task',

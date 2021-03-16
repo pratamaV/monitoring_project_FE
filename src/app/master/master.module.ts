@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MasterRoutingModule} from './master-routing.module';
 import {MasterComponent} from './master.component';
 import { BrowserModule } from '@angular/platform-browser';
+import {SharedModule} from '../shared/shared.module';
 
 
 
@@ -11,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     CommonModule,
     MasterRoutingModule,
+    SharedModule
   ]
 
 })
