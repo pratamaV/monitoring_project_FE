@@ -37,6 +37,41 @@ export class ProjectServiceService {
     });
   }
 
+  getResultProject(param) {
+    var divisi =  param.divisi;
+    var direktorate = param.direktorate;
+    console.log("encode2: ", divisi.replace("&", "%26"));
+    console.log(`/api/project?divisiUser=${param.divisi}&directorateUser=${param.direktorate}&pm=${param.userPM}&pmo=${param.userPMO}`);
+
+    // console.log('/api/project?divisiUser=', param.divisi, '&directorateUser=', param.direktorate + '&pm=' + param.userPM + '&pmo=' param.userPMO);
+    return new Observable((observer: Observer<any[]>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      this.http.get('/api/project?divisiUser=' + divisi.replace("&", "%26") + '&directorateUser=' + direktorate.replace("&", "%26") + '&pm=' + param.userPM + '&pmo=' + param.userPMO, header).subscribe(
+        (data: any[]) => {
+          observer.next(data);
+        },
+        error => {
+          observer.error(error.message);
+        }
+      );
+    });
+  }
+
+  getAllDivisi(): Observable<any[]> {
+    return new Observable((observer: Observer<any[]>) => {
+      this.http.get('/api/divisions').subscribe(
+        (data: any[]) => {
+          observer.next(data);
+        },
+        error => {
+          observer.error(error.message);
+        }
+      );
+    });
+  }
+
   getProjectById(id): Observable<ProjectModel> {
     return new Observable((observer: Observer<ProjectModel>) => {
       this.http

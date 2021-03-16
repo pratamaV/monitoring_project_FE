@@ -12,13 +12,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ListProjectComponent implements OnInit {
   loadedProject: ProjectModel[] = [];
+  loadedProjectResult: ProjectModel[] = [];
   filterForm: FormGroup;
   loadedRelease: any;
+  filter: boolean = false;
   paramNull = {
     status: null,
     stage: null
   };
   fileName = 'List-Project-' + new Date().toDateString() + '.xlsx';
+  divitions: any[] = [];
+  users: any[] = [];
+  newData: any[] = [];
 
   constructor(
     private projectService: ProjectServiceService,
@@ -26,46 +31,81 @@ export class ListProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('OKASFADSF AS');
     this.buildForm();
     this.onGetListProject();
-    this.onGetListRelease();
+    this.getAllDivisi();
+    this.getAllUser();
+  }
+
+  getAllDivisi() {
+    this.projectService.getAllDivisi().subscribe(
+      response => {
+        this.divitions = response;
+        console.log('divisinya adalh: ', this.divitions);
+      },
+      error => {
+        alert(error);
+      }
+    );
+  }
+
+  getAllUser() {
+    this.projectService.getAllUser().subscribe(
+      response => {
+        this.users = response;
+      },
+      error => {
+        alert(error);
+      }
+    );
   }
 
   onGetListReleaseFilter(param) {
-    console.log('masuk sini');
-    console.log(param);
-    this.projectService
-      .getReleaseByProjectId(localStorage.getItem('projectId'), param)
-      .subscribe(
-        data => {
-          this.loadedRelease = data;
-        },
-        error => {
-          alert(error);
-        }
-      );
+    this.filter = true;
+    if (param.direktorate === null) {
+      param.direktorate = '';
+    }
+    if (param.divisi === null) {
+      param.divisi = '';
+    }
+    if (param.userPM === null) {
+      param.userPM = '';
+    }
+    if (param.userPMO === null) {
+      param.userPMO = '';
+    }
+
+    this.projectService.getResultProject(param).subscribe(
+      data => {
+        console.log('datanya adalah:', data);
+        this.newData = data;
+        console.log('newData adalah:', this.newData);
+        this.loadedProjectResult = data;
+      },
+      error => {
+        alert(error);
+      }
+    );
   }
 
   // tslint:disable-next-line:typedef
   onGetListRelease() {
-    this.filterForm.get('status').setValue(null);
-    this.filterForm.get('stage').setValue(null);
-    this.projectService
-      .getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
-      .subscribe(
-        data => {
-          this.loadedRelease = data;
-        },
-        error => {
-          alert(error);
-        }
-      );
+    this.filterForm.get('direktorate').setValue(null);
+    this.filterForm.get('divisi').setValue(null);
+    this.filterForm.get('userPMO').setValue(null);
+    this.filterForm.get('userPM').setValue(null);
+    
+    console.log("rest");
+    this.filter = false;
   }
 
   private buildForm(): void {
     this.filterForm = new FormGroup({
-      status: new FormControl(null),
-      stage: new FormControl(null)
+      direktorate: new FormControl(null),
+      divisi: new FormControl(null),
+      userPM: new FormControl(null),
+      userPMO: new FormControl(null)
     });
   }
 
