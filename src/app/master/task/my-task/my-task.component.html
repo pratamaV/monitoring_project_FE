@@ -54,7 +54,7 @@
 <!--  </div>-->
 <!--</div>-->
 <div class="card">
-    <h4>List Task</h4>
+    <h4>My Task</h4>
     <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>
     <div class="table-responsive">
         <table class="table" id="excel-table">
@@ -107,11 +107,7 @@
                         </form>
                     </td>
                     <td>
-<<<<<<< HEAD
-                        <button [disabled]="task.statusDone==='Ya'" (click)="onDoneTask(task, task.release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i class="fa fa-check"></i></button>
-=======
-                        <button class="btn btn-success" [disabled]="task.statusDone==='Ya' || role ==='03'" (click)="onDoneTask(task, task.release.id)">Done</button>
->>>>>>> 036ded75e614b79b0ad31ecf771d9fcd82765aed
+                        <button [disabled]="task.statusDone==='Ya'|| role ==='03'" (click)="onDoneTask(task, task.release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i class="fa fa-check"></i></button>
                     </td>
                 </tr>
             </tbody>
