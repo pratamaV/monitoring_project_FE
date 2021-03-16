@@ -4,6 +4,7 @@ import {TaskModel} from "../task/task.model";
 import {HttpClient} from "@angular/common/http";
 import {ReleaseModel, ReleaseModel2} from "../release/release.model";
 import {ProjectModel} from "../project/project.model";
+import {UserModel} from "../user/user.model";
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,17 @@ export class HomeService {
     return new Observable((observer: Observer<ReleaseModel2[]>) => {
       this.http.get(`api/releases?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: ReleaseModel2[]) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
+  getAllUserByPerformance(): Observable<UserModel[]> {
+    return new Observable((observer: Observer<UserModel[]>) => {
+      this.http.get(`api/userByPerformance?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+        .subscribe((data: UserModel[]) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Chart} from 'node_modules/chart.js';
 import {HomeService} from './home.service';
 import {ProjectServiceService} from '../project/project-service.service';
+import {UserModel} from '../user/user.model';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,8 @@ import {ProjectServiceService} from '../project/project-service.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  user: UserModel[] = [];
+
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService) {
     this.onGetAllRelases();
@@ -18,10 +21,11 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.onGetUserByPerformance();
     const productCanvas = document.getElementById('releaseByStage');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
-    const productData = {
+    const releaseData = {
       labels: [
         'Delivery Barang',
         'Development',
@@ -63,7 +67,7 @@ export class HomeComponent implements OnInit {
 
     const pieChart = new Chart(productCanvas, {
       type: 'pie',
-      data: productData
+      data: releaseData
     });
 
 
@@ -270,6 +274,18 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('Teknik', Teknik.toString());
         localStorage.setItem('Utama', Utama.toString());
         localStorage.setItem('allDirectorate', allDirectorate.toString());
+      }, error => {
+        alert(error);
+      });
+  }
+
+  onGetUserByPerformance() {
+    this.user = [];
+    this.homeService.getAllUserByPerformance()
+      .subscribe(data => {
+        for (let i = 0; i < 5; i++) {
+          this.user.push(data[i]);
+        }
       }, error => {
         alert(error);
       });

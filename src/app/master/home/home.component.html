@@ -5,11 +5,25 @@
     <div class="col-sm-12 col-md-12 well" id="content">
       <h1 style="text-align: center; margin-bottom: 30px">Dashboard</h1>
 
-      <div id="divChart" class="row">
-        <h4 style="text-align: center">Prosentase Release per Stage</h4>
-        <canvas id="releaseByStage"
-                width="600" height="200"></canvas>
-      </div> <br>
+      <div class="row">
+        <div id="divChart" class="col-6">
+          <h4 style="text-align: center">Prosentase Release per Stage</h4>
+          <canvas id="releaseByStage"
+                  width="600" height="400"></canvas>
+        </div>
+        <div class="col-6">
+          <div class="container-fluid">
+            <h4 style="text-align: center">Best Performance</h4>
+            <table class="table table-striped ">
+              <tr *ngFor="let user of user; let i = index">
+                <th>{{i+1}}</th>
+                <td>{{user.username}}</td>
+                <td>{{user.totalPerformance*100}}%</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
 
       <div class="row">
         <div id="divChart3" class="col-6">
