@@ -34,7 +34,7 @@
         <td>{{task.weight}}</td>
         <td>{{task.statusDone}}</td>
         <td>{{task.taskProsentase * 100}}%</td>
-        <td>{{task.finalTarget | date}}</td>
+        <td>{{task.estEndDate | date}}</td>
         <td>
           <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                   data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
