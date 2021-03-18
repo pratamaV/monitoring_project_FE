@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import {User} from './user.model';
+import {parseLazyRoute} from "@angular/compiler/src/aot/lazy_routes";
 
 @Injectable({
   providedIn: 'root'
@@ -59,12 +60,26 @@ export class AuthService {
   }
 
   save(payload: User): Observable<User> {
+
     return new Observable((observer: Observer<User>) => {
-      const header = {
-        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token)
-      };
-      this.http.post('/api/userChangePassword', payload, header)
+      this.http.post('/api/userChangePassword', payload)
         .subscribe((response: User) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  // tslint:disable-next-line:ban-types
+  forgotPass(payload): Observable<Object> {
+    // tslint:disable-next-line:prefer-const
+    const formData = new FormData();
+    formData.append('email', payload.email);
+    formData.append('newPassword', payload.pass);
+    return new Observable((observer) => {
+      this.http.put(`/api/userChangePassword`, formData)
+        .subscribe((response) => {
           observer.next(response);
         }, (error) => {
           observer.error(error);
