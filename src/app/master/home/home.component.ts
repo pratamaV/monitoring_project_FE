@@ -24,10 +24,12 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.onGetAllRelases();
-    this.onGetListProject();
-    this.onGetUserByPerformance();
-    this.onGetTaskDeadline();
+    setInterval(() => {
+      this.onGetAllRelases();
+      this.onGetListProject();
+      this.onGetUserByPerformance();
+      this.onGetTaskDeadline();
+    }, 3600000);
     const productCanvas = document.getElementById('releaseByStage');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;

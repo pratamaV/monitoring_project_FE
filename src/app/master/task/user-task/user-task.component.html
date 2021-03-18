@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div *ngIf="loadedTask!==[]">
+  <div [hidden]="loadedTask.length===0">
     <table class="table mt-3" id="excel-table">
       <thead>
       <tr>
@@ -47,9 +47,9 @@
     </table>
   </div>
 
-  <div *ngIf="loadedProject!==[]">
+  <div [hidden]="loadedProject.length===0">
     <table class="table mt-3" id="excel-table">
-      <thead *ngIf="loadedProject!==[]">
+      <thead>
       <tr>
         <th scope="col">Project Code</th>
         <th scope="col">Project Name</th>

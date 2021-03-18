@@ -22,7 +22,7 @@
     </table>
   </div>
 
-  <div class="card-body">
+  <div class="card-body" [hidden]="releaseModel.length===0">
     <table class="table">
       <thead>
       </thead>
@@ -45,9 +45,9 @@
     </table>
   </div>
 
-  <div class="card-footer" >
+  <div class="card-footer" [hidden]="taskModel.length===0">
   <table class="table">
-    <tbody *ngIf="taskModel!==[]">
+    <tbody>
     <tr>
       <th>Task Code</th>
       <th>Task Name</th>
