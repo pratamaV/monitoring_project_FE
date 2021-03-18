@@ -63,10 +63,9 @@ export class MyTaskComponent implements OnInit {
         id: task.release.id
       }
     };
-    console.log(this.task);
     this.taskService.onDoneTask(this.task, idRelease)
       .subscribe(data => {
-        alert('success');
+        Swal.fire( 'Success', 'Your task successfully updated' , 'success'  );
         window.location.reload();
       }, error => {
         alert(error.message);

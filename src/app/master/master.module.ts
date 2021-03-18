@@ -8,9 +8,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListTaskComponent } from './task/list-task/list-task.component';
 import { FormTaskComponent } from './task/form-task/form-task.component';
 import {SidebarComponent} from '../layout/sidebar/sidebar.component';
+import { FitHomeComponent } from './home/fit-home/fit-home.component';
 
 @NgModule({
-  declarations: [MasterComponent, FormReleaseComponent, ListTaskComponent, FormTaskComponent],
+  declarations: [MasterComponent, FormReleaseComponent, ListTaskComponent, FormTaskComponent, FitHomeComponent],
     imports: [
         CommonModule,
         MasterRoutingModule,

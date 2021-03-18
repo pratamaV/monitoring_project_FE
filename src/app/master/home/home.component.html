@@ -3,7 +3,7 @@
   <!-- Page Heading -->
   <div class="row" id="main">
     <div class="col-sm-12 col-md-12 well" id="content">
-      <h1 style="text-align: center; margin-bottom: 30px">Dashboard</h1>
+      <h1 style="text-align: center; margin-bottom: 30px">Dashboard <i class="fa fa-search-plus float-start" aria-hidden="true" routerLink="/fit-home"></i></h1>
 
       <div class="row">
         <div id="divChart" class="col-6">
@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div class="row mb-2 mt-2">
+      <div class="row mb-2 mt-2" [hidden]="taskDeadline.length===0">
         <h4 style="text-align: center">Task Out of The Date</h4>
         <table class="table table-striped ">
           <tr *ngFor="let task of taskDeadline; let i = index">

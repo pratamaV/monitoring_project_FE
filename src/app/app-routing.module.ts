@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './master/home/home.component';
 import { AuthGuardService } from './auth-guard.service';
+import {FitHomeComponent} from './master/home/fit-home/fit-home.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,11 @@ const routes: Routes = [
     path: '',
     canActivate: [AuthGuardService],
     component: HomeComponent
+  },
+  {
+    path: 'fit-home',
+    canActivate: [AuthGuardService],
+    component: FitHomeComponent
   },
   {
     path: 'dashboard',

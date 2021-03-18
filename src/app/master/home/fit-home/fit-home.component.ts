@@ -1,24 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {UserModel} from '../../user/user.model';
+import {TaskModel2} from '../../task/task.model';
+import {HomeService} from '../home.service';
+import {ProjectServiceService} from '../../project/project-service.service';
+import {TaskService} from '../../task/task.service';
 import {Chart} from 'node_modules/chart.js';
-import {HomeService} from './home.service';
-import {ProjectServiceService} from '../project/project-service.service';
-import {UserModel} from '../user/user.model';
-import {TaskService} from '../task/task.service';
-import {TaskModel, TaskModel2} from '../task/task.model';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-fit-home',
+  templateUrl: './fit-home.component.html',
+  styleUrls: ['./fit-home.component.css']
 })
-export class HomeComponent implements OnInit {
-  user: UserModel[] = [];
-  taskDeadline: TaskModel2[] = [];
+export class FitHomeComponent implements OnInit {
 
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
               private taskService: TaskService) {
+    this.getScreenSize();
+  }
 
+  scrHeight: any;
+  scrWidth: any;
+
+  user: UserModel[] = [];
+  taskDeadline: TaskModel2[] = [];
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+    this.scrHeight = window.innerHeight;
+    this.scrWidth = window.innerWidth;
+    console.log(this.scrHeight, this.scrWidth);
   }
 
   ngOnInit(): void {
@@ -99,15 +110,15 @@ export class HomeComponent implements OnInit {
         datasets: [{
           label: '',
           data: [localStorage.getItem('deliveryStage'),
-          localStorage.getItem('development'),
-          localStorage.getItem('implementation'),
-          localStorage.getItem('live'),
-          localStorage.getItem('migration'),
-          localStorage.getItem('notStarted'),
-          localStorage.getItem('procurement'),
-          localStorage.getItem('PTR'),
-          localStorage.getItem('requirementGathering'),
-          localStorage.getItem('uat')],
+            localStorage.getItem('development'),
+            localStorage.getItem('implementation'),
+            localStorage.getItem('live'),
+            localStorage.getItem('migration'),
+            localStorage.getItem('notStarted'),
+            localStorage.getItem('procurement'),
+            localStorage.getItem('PTR'),
+            localStorage.getItem('requirementGathering'),
+            localStorage.getItem('uat')],
           backgroundColor: [
             '#f9e0ae',
             '#fc8621',
@@ -307,14 +318,9 @@ export class HomeComponent implements OnInit {
     this.taskService.getAllTaskDeadline()
       .subscribe(data => {
         this.taskDeadline = data;
-        console.log(this.taskDeadline);
       }, error => {
         alert(error);
       });
   }
-
-
-
-
 
 }
