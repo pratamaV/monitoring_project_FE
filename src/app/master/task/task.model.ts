@@ -10,7 +10,10 @@ export interface TaskModel{
   weight: number ;
   statusDone: string ;
   taskProsentase: number ;
-  finalTarget: Date ;
+  estStartDate: Date;
+  estEndDate: Date;
+  actStartDate: Date;
+  actEndDate: Date;
   taskDoc: File;
   release: string ;
 }
@@ -24,7 +27,10 @@ export interface TaskModel2{
   weight: number ;
   statusDone: string ;
   taskProsentase: number ;
-  finalTarget: Date ;
+  estStartDate: Date;
+  estEndDate: Date;
+  actStartDate: Date;
+  actEndDate: Date;
   taskDocument: string;
   release: ReleaseModel ;
 }
@@ -38,6 +44,26 @@ export interface TaskModel3{
   weight: number ;
   statusDone: string ;
   taskProsentase: number ;
-  finalTarget: Date ;
+  estStartDate: Date;
+  estEndDate: Date;
+  actStartDate: Date;
+  actEndDate: Date;
+  release: { id: string } ;
+}
+
+export interface TaskModel4{
+  id: string;
+  taskName: string ;
+  taskCode: string ;
+  assignedTo: { id: string } ;
+  score: number ;
+  weight: number ;
+  statusDone: string ;
+  taskProsentase: number ;
+  estStartDate: Date;
+  estEndDate: Date;
+  actStartDate: Date;
+  actEndDate: Date;
+  taskDocument: string;
   release: { id: string } ;
 }

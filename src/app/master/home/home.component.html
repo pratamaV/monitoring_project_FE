@@ -25,6 +25,20 @@
         </div>
       </div>
 
+      <div class="row mb-2 mt-2">
+        <h4 style="text-align: center">Task Out of The Date</h4>
+        <table class="table table-striped ">
+          <tr *ngFor="let task of taskDeadline; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{task.taskCode}}</td>
+            <td>{{task.taskName}}</td>
+            <td>{{task.assignedTo.username}}</td>
+            <td>{{task.estEndDate}}</td>
+            <td>{{task.statusDone}}</td>
+          </tr>
+        </table>
+      </div>
+
       <div class="row">
         <div id="divChart3" class="col-6">
           <h4>Progress Release per Stage</h4>

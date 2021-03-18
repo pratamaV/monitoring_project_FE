@@ -37,4 +37,8 @@ export class ListUserComponent implements OnInit {
     this.router.navigate(['/dashboard/user/form-user']);
   }
 
+  detailTask(id: string) {
+    localStorage.setItem('userIdTask', id);
+    this.router.navigate(['/dashboard/task/user-task']);
+  }
 }

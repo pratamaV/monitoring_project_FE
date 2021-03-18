@@ -12,7 +12,6 @@ export class AuthService {
   // tslint:disable-next-line:typedef
   isLoggedIn(){
     const loggedIn = localStorage.getItem('STATE');
-    console.log("loggedInnya adalah: " + loggedIn);
     if ( loggedIn === 'true'){
       this.isLogin = true;
     } else {
@@ -22,7 +21,6 @@ export class AuthService {
   }
   // tslint:disable-next-line:typedef
   getRole(){
-    console.log("getrole nya disini");
     this.roleAs = localStorage.getItem('role');
     return this.roleAs;
   }

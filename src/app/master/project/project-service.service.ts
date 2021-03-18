@@ -1,30 +1,31 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   HttpClient,
   HttpClientModule,
   HttpHeaders
 } from '@angular/common/http';
-import { Observable, Observer } from 'rxjs';
+import {Observable, Observer} from 'rxjs';
 import {
   DivisionModel,
   ProjectModel,
   ProjectModel2,
   UserModel
 } from './project.model';
-import { TaskModel } from '../task/task.model';
+import {TaskModel} from '../task/task.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectServiceService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getAllProject(): Observable<ProjectModel[]> {
     return new Observable((observer: Observer<ProjectModel[]>) => {
       this.http
         .get(
           '/api/projects?access_token=' +
-            JSON.parse(window.sessionStorage.getItem('token')).access_token
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
         )
         .subscribe(
           (data: ProjectModel[]) => {
@@ -38,7 +39,7 @@ export class ProjectServiceService {
   }
 
   getResultProject(param) {
-    var divisi =  param.divisi;
+    var divisi = param.divisi;
     var direktorate = param.direktorate;
     console.log("encode2: ", divisi.replace("&", "%26"));
     console.log(`/api/project?divisiUser=${param.divisi}&directorateUser=${param.direktorate}&pm=${param.userPM}&pmo=${param.userPMO}`);
@@ -77,10 +78,65 @@ export class ProjectServiceService {
       this.http
         .get(
           `api/project/${id}?access_token=` +
-            JSON.parse(window.sessionStorage.getItem('token')).access_token
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
         )
         .subscribe(
           (data: ProjectModel) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+          }
+        );
+    });
+  }
+
+
+  getProjectByPMId(id): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http
+        .get(
+          `api/projectByPM/${id}?access_token=` +
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
+        )
+        .subscribe(
+          (data: ProjectModel[]) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+          }
+        );
+    });
+  }
+
+  getProjectByPMOId(id): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http
+        .get(
+          `api/projectByPMO/${id}?access_token=` +
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
+        )
+        .subscribe(
+          (data: ProjectModel[]) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+          }
+        );
+    });
+  }
+
+  getProjectBycoPMId(id): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http
+        .get(
+          `api/projectBycoPM/${id}?access_token=` +
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
+        )
+        .subscribe(
+          (data: ProjectModel[]) => {
             observer.next(data);
           },
           error => {
@@ -95,7 +151,7 @@ export class ProjectServiceService {
       headers: new HttpHeaders().set(
         'Authorization',
         'Bearer ' +
-          JSON.parse(window.sessionStorage.getItem('token')).access_token
+        JSON.parse(window.sessionStorage.getItem('token')).access_token
       )
     };
     let url = ``;
@@ -126,7 +182,7 @@ export class ProjectServiceService {
         this.http
           .put(
             '/api/project?access_token=' +
-              JSON.parse(window.sessionStorage.getItem('token')).access_token,
+            JSON.parse(window.sessionStorage.getItem('token')).access_token,
             postData
           )
           .subscribe(
@@ -141,7 +197,7 @@ export class ProjectServiceService {
         this.http
           .post(
             '/api/project?access_token=' +
-              JSON.parse(window.sessionStorage.getItem('token')).access_token,
+            JSON.parse(window.sessionStorage.getItem('token')).access_token,
             postData
           )
           .subscribe(
@@ -161,7 +217,7 @@ export class ProjectServiceService {
       this.http
         .get(
           '/api/users?access_token=' +
-            JSON.parse(window.sessionStorage.getItem('token')).access_token
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
         )
         .subscribe(
           (data: UserModel[]) => {
@@ -179,7 +235,7 @@ export class ProjectServiceService {
       this.http
         .get(
           '/api/divisions?access_token=' +
-            JSON.parse(window.sessionStorage.getItem('token')).access_token
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
         )
         .subscribe(
           (data: DivisionModel[]) => {
@@ -197,7 +253,7 @@ export class ProjectServiceService {
       this.http
         .put(
           `/api/project/${id}?access_token=` +
-            JSON.parse(window.sessionStorage.getItem('token')).access_token,
+          JSON.parse(window.sessionStorage.getItem('token')).access_token,
           id
         )
         .subscribe(
@@ -216,7 +272,7 @@ export class ProjectServiceService {
       this.http
         .get(
           `api/taskByReleaseId/${id}?access_token=` +
-            JSON.parse(window.sessionStorage.getItem('token')).access_token
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
         )
         .subscribe(
           (data: TaskModel[]) => {

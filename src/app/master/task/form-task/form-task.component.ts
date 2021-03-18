@@ -41,8 +41,10 @@ export class FormTaskComponent implements OnInit {
       weight: new FormControl(0),
       statusDone: new FormControl('Tidak'),
       taskProsentase: new FormControl(0),
-      finalTarget: new FormControl(null, [Validators.required]),
-      // taskDoc: new FormControl(null),
+      estStartDate: new FormControl(null, [Validators.required]),
+      estEndDate: new FormControl(null, [Validators.required]),
+      actStartDate: new FormControl(null),
+      actEndDate: new FormControl(null),
       release: new FormControl(localStorage.getItem('releaseId'))
     });
   }
@@ -59,7 +61,10 @@ export class FormTaskComponent implements OnInit {
       weight: postData.weight,
       statusDone: postData.statusDone,
       taskProsentase: postData.taskProsentase,
-      finalTarget: new Date(postData.finalTarget),
+      estStartDate: new Date(postData.estStartDate),
+      estEndDate: new Date(postData.estEndDate),
+      actStartDate: new Date(postData.actStartDate),
+      actEndDate: new Date(postData.actEndDate),
       release: {
         id: postData.release
       }
@@ -75,13 +80,6 @@ export class FormTaskComponent implements OnInit {
         });
     }
   }
-
-  // processFile(imageInput: any) {
-  //   if (imageInput.files.length > 0) {
-  //     const file = imageInput.files[0];
-  //     this.taskForm.get('taskDoc').setValue(file);
-  //   }
-  // }
 
   onGetAllUser() {
     this.projectService.getAllUser()

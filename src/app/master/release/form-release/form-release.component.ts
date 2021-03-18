@@ -48,10 +48,10 @@ export class FormReleaseComponent implements OnInit {
       status: new FormControl(null, [Validators.required]),
       stage: new FormControl(null, [Validators.required]),
       prosentaseRelease: new FormControl(0),
-      estStartdate: new FormControl(null, [Validators.required]),
-      estEnddate: new FormControl(null, [Validators.required]),
-      actStartdate: new FormControl(null, [Validators.required]),
-      actEnddate: new FormControl(null, [Validators.required]),
+      estStartdate: new FormControl(null),
+      estEnddate: new FormControl(null),
+      actStartdate: new FormControl(null),
+      actEnddate: new FormControl(null),
       statusRelease: new FormControl('aktif'),
       project: new FormControl(localStorage.getItem('projectId'))
     });

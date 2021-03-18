@@ -46,12 +46,10 @@ export class AuthGuardService implements CanActivate, CanDeactivate<unknown>, Ca
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.authService.isLoggedIn()) {
       const userRole = this.authService.getRole();
-      console.log("rolenya adalah: ", route.data);
-      console.log("use Role: ", userRole);
-      if(route.data.role != undefined){
-        console.log("isi datanya adalah: ", route.data.role.indexOf("1"));
-        if(route.data.role.indexOf(userRole) < 0){
-          console.log("masuk sini dong", route.data.role.indexOf(userRole));
+      if (route.data.role != undefined){
+        // console.log("isi datanya adalah: ", route.data.role.indexOf("1"));
+        if (route.data.role.indexOf(userRole) < 0){
+          // console.log("masuk sini dong", route.data.role.indexOf(userRole));
           Swal.fire( 'Failed', 'You haven not right access' , 'error'  );
 
           this.router.navigate(['']);
@@ -69,7 +67,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<unknown>, Ca
     return false;
   }
   data(){
-    console.log("ini data");
+    console.log('ini data');
   }
 }
 

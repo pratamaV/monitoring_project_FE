@@ -65,97 +65,101 @@
             Project</button></div>
         </div>
     </div>
+
+  <br>
+
+  <table *ngIf="filter" class="table" id="excel-table">
+    <thead>
+    <tr>
+
+      <th scope="col">Project Codeeee</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">PMO</th>
+      <th scope="col">PM</th>
+      <th scope="col">Benefit</th>
+      <th scope="col">Description</th>
+      <th scope="col">User</th>
+      <th scope="col">Divisi User</th>
+      <th scope="col">Project Precentage</th>
+      <th scope="col">Status Project</th>
+      <th scope="col">Detail Project</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of loadedProjectResult; let i = index">
+      <th scope="row">{{project.projectCode}}</th>
+      <td>{{project.projectName}}</td>
+      <td>{{project.pmo.username}}</td>
+      <td>{{project.pm.username}}</td>
+      <td>{{project.benefit}}</td>
+      <td>{{project.description}}</td>
+      <td>{{project.coPM.username}}</td>
+      <td>{{project.divisiUser.divisionName}}</td>
+      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.statusProject}}</td>
+      <td style="width: 200px;">
+        <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm"
+                data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+          class="fa fa-eye"></i></button>&nbsp;
+        <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm"
+                data-toggle="tooltip" data-placement="bottom" title="Release"><i
+          class="fa fa-bars"></i></button>&nbsp;
+        <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
+                data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
+        <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-info btn-sm"
+                data-toggle="tooltip" data-placement="bottom" title="Change Status"><i
+          class="fa fa-exchange"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="!filter" class="table" id="excel-table">
+    <thead>
+    <tr>
+      <th scope="col">Project Code</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">PMO</th>
+      <th scope="col">PM</th>
+      <th scope="col">Benefit</th>
+      <th scope="col">Description</th>
+      <th scope="col">User</th>
+      <th scope="col">Divisi User</th>
+      <th scope="col">Project Weight</th>
+      <th scope="col">Project Precentage</th>
+      <th scope="col">Status Project</th>
+      <th scope="col">Detail Project</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of loadedProject; let i = index">
+      <th scope="row">{{project.projectCode}}</th>
+      <td>{{project.projectName}}</td>
+      <td>{{project.pmo.username}}</td>
+      <td>{{project.pm.username}}</td>
+      <td>{{project.benefit}}</td>
+      <td>{{project.description}}</td>
+      <td>{{project.coPM.username}}</td>
+      <td>{{project.divisiUser.divisionName}}</td>
+      <td>{{project.weight*100}}%</td>
+      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.statusProject}}</td>
+      <td style="width: 200px;">
+        <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+          class="fa fa-eye"></i></button>&nbsp;
+        <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Release"><i
+          class="fa fa-bars"></i></button>&nbsp;
+        <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
+        <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Change Status"><i
+          class="fa fa-exchange"></i></button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 
-    <br>
 
-    <table *ngIf="filter" class="table" id="excel-table">
-        <thead>
-            <tr>
-
-                <th scope="col">Project Codeeee</th>
-                <th scope="col">Project Name</th>
-                <th scope="col">PMO</th>
-                <th scope="col">PM</th>
-                <th scope="col">Benefit</th>
-                <th scope="col">Description</th>
-                <th scope="col">User</th>
-                <th scope="col">Divisi User</th>
-                <th scope="col">Project Precentage</th>
-                <th scope="col">Status Project</th>
-                <th scope="col">Detail Project</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let project of loadedProjectResult; let i = index">
-                <th scope="row">{{project.projectCode}}</th>
-                <td>{{project.projectName}}</td>
-                <td>{{project.pmo.username}}</td>
-                <td>{{project.pm.username}}</td>
-                <td>{{project.benefit}}</td>
-                <td>{{project.description}}</td>
-                <td>{{project.coPM.username}}</td>
-                <td>{{project.divisiUser.divisionName}}</td>
-                <td>{{project.prosentaseProject*100}}%</td>
-                <td>{{project.statusProject}}</td>
-                <td style="width: 200px;">
-                    <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm"
-                        data-toggle="tooltip" data-placement="bottom" title="Detail"><i
-                            class="fa fa-eye"></i></button>&nbsp;
-                    <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm"
-                        data-toggle="tooltip" data-placement="bottom" title="Release"><i
-                            class="fa fa-bars"></i></button>&nbsp;
-                    <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
-                        data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
-                    <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-info btn-sm"
-                        data-toggle="tooltip" data-placement="bottom" title="Change Status"><i
-                            class="fa fa-exchange"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table *ngIf="!filter" class="table" id="excel-table">
-        <thead>
-            <tr>
-                <th scope="col">Project Code</th>
-                <th scope="col">Project Name</th>
-                <th scope="col">PMO</th>
-                <th scope="col">PM</th>
-                <th scope="col">Benefit</th>
-                <th scope="col">Description</th>
-                <th scope="col">User</th>
-                <th scope="col">Divisi User</th>
-                <th scope="col">Project Precentage</th>
-                <th scope="col">Status Project</th>
-                <th scope="col">Detail Project</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let project of loadedProject; let i = index">
-                <th scope="row">{{project.projectCode}}</th>
-                <td>{{project.projectName}}</td>
-                <td>{{project.pmo.username}}</td>
-                <td>{{project.pm.username}}</td>
-                <td>{{project.benefit}}</td>
-                <td>{{project.description}}</td>
-                <td>{{project.coPM.username}}</td>
-                <td>{{project.divisiUser.divisionName}}</td>
-                <td>{{project.prosentaseProject*100}}%</td>
-                <td>{{project.statusProject}}</td>
-                <td style="width: 200px;">
-                    <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
-                            class="fa fa-eye"></i></button>&nbsp;
-                    <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Release"><i
-                            class="fa fa-bars"></i></button>&nbsp;
-                    <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
-                    <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Change Status"><i
-                            class="fa fa-exchange"></i></button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 
 

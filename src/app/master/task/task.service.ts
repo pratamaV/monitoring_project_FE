@@ -23,6 +23,17 @@ export class TaskService {
     });
   }
 
+  getAllTaskDeadline(): Observable<TaskModel2[]> {
+    return new Observable((observer: Observer<TaskModel2[]>) => {
+      this.http.get('/api/taskDeadline?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+        .subscribe((data: TaskModel2[]) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
   addTask(postData: TaskModel3, id: string) {
     return new Observable((observer: Observer<TaskModel3>) => {
       if (id) {
@@ -56,7 +67,6 @@ export class TaskService {
   }
 
   getTaskByReleaseId(id, param): Observable<TaskModel2> {
-    console.log(param);
     let url = ``;
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
@@ -76,8 +86,6 @@ export class TaskService {
     return new Observable((observer: Observer<TaskModel2>) => {
       this.http.get(url, header)
         .subscribe((data: TaskModel2) => {
-          console.log(data);
-
           observer.next(data);
         }, error => {
           observer.error(error.message);
@@ -122,12 +130,8 @@ export class TaskService {
   }
 
   onDoneTask(loadData, id): Observable<TaskModel2> {
-    const formData = new FormData();
-    for (const key in loadData){
-      formData.append(key, loadData[key]);
-    }
     return new Observable((observer) => {
-      this.http.put(`api/task/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, { responseType: 'text'})
+      this.http.put(`api/doneTask/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, loadData)
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {

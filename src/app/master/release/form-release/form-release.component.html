@@ -87,55 +87,11 @@
       </small>
     </div>
 
-
     <div class="form-group">
-      <label for="estStartdate">Est. Start Date</label>
-      <input type="date" class="form-control" formControlName="estStartdate" id="estStartdate">
-      <small class="form-text text-danger "
-             *ngIf="form('estStartdate').invalid && form('estStartdate').dirty || form('estStartdate').touched">
-        <div *ngIf="form('estStartdate').errors?.required">
-          Bagian ini harus terisi
-        </div>
-      </small>
-    </div>
-
-    <div class="form-group">
-      <label for="estEnddate">Est. End Date</label>
-      <input type="date" class="form-control" formControlName="estEnddate" id="estEnddate">
-      <small class="form-text text-danger "
-             *ngIf="form('estEnddate').invalid && form('estEnddate').dirty || form('estEnddate').touched">
-        <div *ngIf="form('estEnddate').errors?.required">
-          Bagian ini harus terisi
-        </div>
-      </small>
-    </div>
-
-    <div class="form-group">
-      <label for="actStartdate">Act. Start Date</label>
-      <input type="date" class="form-control" formControlName="actStartdate" id="actStartdate">
-      <small class="form-text text-danger "
-             *ngIf="form('actStartdate').invalid && form('actStartdate').dirty || form('actStartdate').touched">
-        <div *ngIf="form('actStartdate').errors?.required">
-          Bagian ini harus terisi
-        </div>
-      </small>
-    </div>
-
-    <div class="form-group">
-      <label for="actEnddate">Act. End Date</label>
-      <input type="date" class="form-control" formControlName="actEnddate" id="actEnddate">
-      <small class="form-text text-danger "
-             *ngIf="form('actEnddate').invalid && form('actEnddate').dirty || form('actEnddate').touched">
-        <div *ngIf="form('actEnddate').errors?.required">
-          Bagian ini harus terisi
-        </div>
-      </small>
-    </div>
-
-
-
-
-    <div class="form-group">
+      <input type="hidden" class="form-control" formControlName="estStartdate" id="estStartdate">
+      <input type="hidden" class="form-control" formControlName="estEnddate" id="estEnddate">
+      <input type="hidden" class="form-control" formControlName="actStartdate" id="actStartdate">
+      <input type="hidden" class="form-control" formControlName="actEnddate" id="actEnddate">
       <input type="hidden" class="form-control" formControlName="prosentaseRelease" id="prosentaseRelease">
       <input type="hidden" class="form-control" formControlName="statusRelease" id="statusRelease">
       <input type="hidden" class="form-control" formControlName="project" id="project">

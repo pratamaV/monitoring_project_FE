@@ -22,13 +22,9 @@ export class AuthService {
   }
 
   showData(): Observable<any> {
-    console.log('sampai sini');
-
     return new Observable((observer: Observer<any>) => {
       this.http.get('api/users?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: any) => {
-          console.log(data);
-
           observer.next(data);
         }, error => {
           observer.error(error.message);

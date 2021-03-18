@@ -42,7 +42,6 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
       .subscribe(data => {
         this.loadedTask = data;
-        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
@@ -98,7 +97,10 @@ export class ListTaskComponent implements OnInit {
       weight: task.weight,
       statusDone: 'Ya',
       taskProsentase: task.taskProsentase,
-      finalTarget: new Date(task.finalTarget),
+      estStartDate: new Date(task.estStartdate),
+      estEndDate: new Date(task.estEndDate),
+      actStartDate: new Date(task.actStartDate),
+      actEndDate: new Date(task.actEndDate),
       taskDoc: task.taskDoc,
       release: JSON.stringify({
         id: task.release.id

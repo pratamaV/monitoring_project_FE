@@ -1,116 +1,73 @@
 <app-sidebar></app-sidebar>
-<!--<div class="card">-->
-<!--<<<<<<< HEAD-->
-<!--  <h1>List Task</h1>-->
-<!--  <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()">Export to excel</button>-->
-<!--  <div class="table-responsive">-->
-<!--    <table class="table" id="excel-table">-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th scope="col">Task Code</th>-->
-<!--        <th scope="col">Task Name</th>-->
-<!--&lt;!&ndash;        <th scope="col">Assigned To</th>&ndash;&gt;-->
-<!--        <th scope="col">Score</th>-->
-<!--        <th scope="col">Weight</th>-->
-<!--        <th scope="col">Status Done</th>-->
-<!--        <th scope="col">Prosentase Task</th>-->
-<!--        <th scope="col">Final Target</th>-->
-<!--        <th scope="col">Task Document</th>-->
-<!--        <th scope="col">Upload Document</th>-->
-<!--        <th scope="col">Action</th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let task of loadedTask; let i = index">-->
-<!--        <th scope="row">{{task.taskCode}}</th>-->
-<!--        <td>{{task.taskName}}</td>-->
-<!--&lt;!&ndash;        <td>{{task.assignedTo.username}}</td>&ndash;&gt;-->
-<!--        <td>{{task.score}}</td>-->
-<!--        <td>{{task.weight}}</td>-->
-<!--        <td>{{task.statusDone}}</td>-->
-<!--        <td>{{task.taskProsentase}}</td>-->
-<!--        <td>{{task.finalTarget | date}}</td>-->
-<!--        <td>-->
-<!--          <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-dark">Download</button>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <form style="padding: 10px" [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">-->
-<!--              <label class="image-upload-container btn btn-bwm" style="text-align: left">-->
-<!--                <span style="color: red">Select Image *max file 10MB</span>-->
-<!--                <input #imageInput-->
-<!--                       type="file"-->
-<!--                       accept="image/*"-->
-<!--                       (change)="processFile(imageInput)" class="form-control">-->
-<!--              </label>-->
-<!--          <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-primary mt-2">Upload</button>-->
-<!--          </form>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--          <button class="btn btn-success" [disabled]="task.statusDone==='Ya' || role==='03'" (click)="onDoneTask(task, task.release.id)">Done</button>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
-<!--</div>-->
 <div class="card">
-    <h4>My Task</h4>
-    <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()"><i class="fa fa-file"></i> Export to excel</button>
-    <div class="table-responsive">
-        <table class="table" id="excel-table">
-            <thead>
-                <tr>
-                    <th scope="col">Task Code</th>
-                    <th scope="col">Task Name</th>
-                    <!--        <th scope="col">Assigned To</th>-->
-                    <th scope="col">Score</th>
-                    <th scope="col">Weight</th>
-                    <th scope="col">Status Done</th>
-                    <th scope="col">Prosentase Task</th>
-                    <th scope="col">Final Target</th>
-                    <th scope="col">Task Document</th>
-                    <th scope="col">Upload Document</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let task of loadedTask; let i = index">
-                    <th scope="row">{{task.taskCode}}</th>
-                    <td>{{task.taskName}}</td>
-                    <!--        <td>{{task.assignedTo.username}}</td>-->
-                    <td>{{task.score}}</td>
-                    <td>{{task.weight}}</td>
-                    <td>{{task.statusDone}}</td>
-                    <td>{{task.taskProsentase*100}}%</td>
-                    <td>{{task.finalTarget | date}}</td>
-                    <td>
-                        <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
-                    </td>
-                    <td>
-                        <form [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
+  <h4>My Task</h4>
+  <button class="btn btn-warning mt-2 mb-2" style="width: 300px; align-self: flex-end" (click)="exportexcel()"><i
+    class="fa fa-file"></i> Export to excel
+  </button>
+  <div class="table-responsive">
+    <table class="table" id="excel-table">
+      <thead>
+      <tr>
+        <th scope="col">Task Code</th>
+        <th scope="col">Task Name</th>
+        <!--        <th scope="col">Assigned To</th>-->
+        <th scope="col">Score</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Status Done</th>
+        <th scope="col">Prosentase Task</th>
+        <th scope="col">Est. End Date</th>
+        <th scope="col">Act. End Date</th>
+        <th scope="col">Task Document</th>
+        <th scope="col">Upload Document</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let task of loadedTask; let i = index">
+        <th scope="row">{{task.taskCode}}</th>
+        <td>{{task.taskName}}</td>
+        <!--        <td>{{task.assignedTo.username}}</td>-->
+        <td>{{task.score}}</td>
+        <td>{{task.weight}}</td>
+        <td>{{task.statusDone}}</td>
+        <td>{{task.taskProsentase * 100}}%</td>
+        <td>{{task.estEndDate | date}}</td>
+        <td>{{task.actEndDate | date}}</td>
+        <td>
+          <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
+                  data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
+        </td>
+        <td>
+          <form [formGroup]="taskForm" method="post"
+                (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
 
-                            <!-- <label class="image-upload-container btn btn-bwm btn-sm" style="text-align: left"> -->
-                            <!-- <small style="color: red">Select Image *max file 10MB</small> -->
-                            <div class="col-12 col-xs-6">
-                                <div class="row">
-                                    <div class="input-group-sm col">
-                                        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" class="form-control">
-                                    </div>
-                                    <div class="input-group-append col-2" style="margin-left: -20px;">
-                                        <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- <label class="image-upload-container btn btn-bwm btn-sm" style="text-align: left"> -->
+            <!-- <small style="color: red">Select Image *max file 10MB</small> -->
+            <div class="col-12 col-xs-6">
+              <div class="row">
+                <div class="input-group-sm col">
+                  <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
+                         class="form-control">
+                </div>
+                <div class="input-group-append col-2" style="margin-left: -20px;">
+                  <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit"
+                          class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="Upload"><i class="fa fa-upload"></i></button>
+                </div>
+              </div>
+            </div>
 
-                            <!-- </label> -->
-                            <small style="color: red">*max file 10MB</small>
-                        </form>
-                    </td>
-                    <td>
-                        <button [disabled]="task.statusDone==='Ya'|| role ==='03'" (click)="onDoneTask(task, task.release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i class="fa fa-check"></i></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+            <!-- </label> -->
+            <small style="color: red">*max file 10MB</small>
+          </form>
+        </td>
+        <td>
+          <button [disabled]="task.statusDone==='Ya'|| role ==='03'" (click)="onDoneTask(task, task.release.id)"
+                  class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i
+            class="fa fa-check"></i></button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

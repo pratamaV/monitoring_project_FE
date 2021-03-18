@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TaskModel, TaskModel2} from '../task.model';
+import {TaskModel, TaskModel2, TaskModel3, TaskModel4} from '../task.model';
 import {FormControl, FormGroup} from "@angular/forms";
 import * as XLSX from "xlsx";
 import Swal from "sweetalert2";
@@ -14,7 +14,7 @@ import Swal from "sweetalert2";
 export class MyTaskComponent implements OnInit {
   taskForm: FormGroup;
   loadedTask: TaskModel2[] = [];
-  task: TaskModel;
+  task: TaskModel4;
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   constructor(private taskService: TaskService,
@@ -47,19 +47,23 @@ export class MyTaskComponent implements OnInit {
       id: task.id,
       taskName: task.taskName,
       taskCode: task.taskCode,
-      assignedTo: JSON.stringify({
+      assignedTo: {
         id: task.assignedTo.id
-      }) ,
+      },
       score: task.score,
       weight: task.weight,
       statusDone: 'Ya',
       taskProsentase: task.taskProsentase,
-      finalTarget: new Date(task.finalTarget),
-      taskDoc: task.taskDoc,
-      release: JSON.stringify({
+      estStartDate: new Date(task.estStartDate),
+      estEndDate: new Date(task.estEndDate),
+      actStartDate: new Date(task.actStartDate),
+      actEndDate: new Date(task.actEndDate),
+      taskDocument: task.taskDocument,
+      release: {
         id: task.release.id
-      })
+      }
     };
+    console.log(this.task);
     this.taskService.onDoneTask(this.task, idRelease)
       .subscribe(data => {
         alert('success');

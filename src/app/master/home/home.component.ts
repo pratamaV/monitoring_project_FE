@@ -3,6 +3,8 @@ import {Chart} from 'node_modules/chart.js';
 import {HomeService} from './home.service';
 import {ProjectServiceService} from '../project/project-service.service';
 import {UserModel} from '../user/user.model';
+import {TaskService} from '../task/task.service';
+import {TaskModel, TaskModel2} from "../task/task.model";
 
 @Component({
   selector: 'app-home',
@@ -11,17 +13,21 @@ import {UserModel} from '../user/user.model';
 })
 export class HomeComponent implements OnInit {
   user: UserModel[] = [];
+  taskDeadline: TaskModel2[] = [];
 
   constructor(private homeService: HomeService,
-              private projectService: ProjectServiceService) {
-    this.onGetAllRelases();
-    this.onGetListProject();
+              private projectService: ProjectServiceService,
+              private taskService: TaskService) {
+
   }
 
 
 
   ngOnInit(): void {
+    this.onGetAllRelases();
+    this.onGetListProject();
     this.onGetUserByPerformance();
+    this.onGetTaskDeadline();
     const productCanvas = document.getElementById('releaseByStage');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
@@ -291,6 +297,16 @@ export class HomeComponent implements OnInit {
       });
   }
 
+
+  onGetTaskDeadline() {
+    this.taskService.getAllTaskDeadline()
+      .subscribe(data => {
+        this.taskDeadline = data;
+        console.log(this.taskDeadline);
+      }, error => {
+        alert(error);
+      });
+  }
 
 
 
