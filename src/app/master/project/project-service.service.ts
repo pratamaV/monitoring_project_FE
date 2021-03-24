@@ -248,11 +248,11 @@ export class ProjectServiceService {
     });
   }
 
-  changeStatusProject(id): Observable<ProjectModel> {
+  changeStatusProject(id, projectStatus): Observable<ProjectModel> {
     return new Observable((observer: Observer<ProjectModel>) => {
       this.http
         .put(
-          `/api/project/${id}?access_token=` +
+          `/api/project/${id}?projectStatus=${projectStatus}&access_token=` +
           JSON.parse(window.sessionStorage.getItem('token')).access_token,
           id
         )

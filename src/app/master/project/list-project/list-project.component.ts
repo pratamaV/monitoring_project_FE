@@ -24,6 +24,7 @@ export class ListProjectComponent implements OnInit {
   divitions: any[] = [];
   users: any[] = [];
   newData: any[] = [];
+  projectStatus: string;
 
   constructor(
     private projectService: ProjectServiceService,
@@ -31,7 +32,6 @@ export class ListProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('OKASFADSF AS');
     this.buildForm();
     this.onGetListProject();
     this.getAllDivisi();
@@ -42,7 +42,6 @@ export class ListProjectComponent implements OnInit {
     this.projectService.getAllDivisi().subscribe(
       response => {
         this.divitions = response;
-        console.log('divisinya adalh: ', this.divitions);
       },
       error => {
         alert(error);
@@ -95,7 +94,7 @@ export class ListProjectComponent implements OnInit {
     this.filterForm.get('divisi').setValue(null);
     this.filterForm.get('userPMO').setValue(null);
     this.filterForm.get('userPM').setValue(null);
-    
+
     console.log("rest");
     this.filter = false;
   }
@@ -147,8 +146,11 @@ export class ListProjectComponent implements OnInit {
     this.router.navigate(['/dashboard/release']);
   }
 
-  onChangeStatusProject(id) {
-    this.projectService.changeStatusProject(id).subscribe(
+  onChangeStatusProject(id, projectStatus) {
+    // console.log(projectStatus)
+    this.projectStatus = projectStatus.target.value;
+    this.projectService.changeStatusProject(id, this.projectStatus)
+      .subscribe(
       data => {
         window.location.reload();
         this.router.navigate(['/dashboard/project']);
