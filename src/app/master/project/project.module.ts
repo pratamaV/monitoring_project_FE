@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ListProjectUserComponent } from './list-project-user/list-project-user.component';
 import { DetailProjectUserComponent } from './detail-project-user/detail-project-user.component';
 import {SidebarModule} from "../../layout/sidebar/sidebar.module";
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -18,7 +19,8 @@ import {SidebarModule} from "../../layout/sidebar/sidebar.module";
         ProjectRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        SidebarModule
+        SidebarModule,
+        SharedModule
     ]
 })
 export class ProjectModule { }

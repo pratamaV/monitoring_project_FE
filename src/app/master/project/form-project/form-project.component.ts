@@ -14,6 +14,9 @@ export class FormProjectComponent implements OnInit {
   projectForm: FormGroup;
   project: ProjectModel2;
   loadedUser: UserModel[] = [];
+  userPMO: UserModel[] = [];
+  userPM: UserModel[] = [];
+  userCoPM: UserModel[] = [];
   loadedDivision: DivisionModel[] = [];
   id: string;
   pmId: '';
@@ -60,10 +63,12 @@ export class FormProjectComponent implements OnInit {
       status: new FormControl(null, [Validators.required]),
       targetLive: new FormControl(null, [Validators.required]),
       prosentaseProject: new FormControl(0),
-      budget: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
-      contracted_value: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
-      paymentRealization: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
-      score: new FormControl(null, [Validators.required]),
+      budget: new FormControl(0),
+      contracted_value: new FormControl(0),
+      keyword : new FormControl(null),
+      bagian : new FormControl(null),
+      paymentRealization: new FormControl(0),
+      score: new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|0[1-9]|10)$')]),
       weight: new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
       categoryInitiative: new FormControl(null, [Validators.required]),
@@ -119,6 +124,16 @@ export class FormProjectComponent implements OnInit {
     this.projectService.getAllUser()
       .subscribe(data => {
         this.loadedUser = data;
+        for (const user of this.loadedUser) {
+          if (user.userRole == '01') {
+            this.userPMO.push(user)
+          } if (user.userRole == '02'){
+            this.userPM.push(user)
+          } if (user.userRole == '03') {
+            this.userCoPM.push(user)
+          }
+        }
+        
       }, error => {
         alert(error);
       });
@@ -152,6 +167,8 @@ export class FormProjectComponent implements OnInit {
       this.projectForm.get('budget').setValue(this.project.budget);
       this.projectForm.get('contracted_value').setValue(this.project.contracted_value);
       this.projectForm.get('paymentRealization').setValue(this.project.paymentRealization);
+      // this.projectForm.get('keyword').setValue(this.project.keyword)
+      // this.projectForm.get('bagian').setValue(this.project.bagian)
       this.projectForm.get('score').setValue(this.project.score);
       this.projectForm.get('weight').setValue(this.project.weight);
       this.projectForm.get('categoryActivity').setValue(this.project.categoryActivity);

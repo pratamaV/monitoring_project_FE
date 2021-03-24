@@ -1,16 +1,22 @@
 .container {
-  padding-top: 30px;
-  margin: 30px 30px 30px 30px;
-  align-content: center;
-  text-align: center;
-  background-color: #e7e7de;
-  border-radius: 30px;
+    align-content: center;
+    text-align: center;
+    padding: 30px;
+    /*margin: 30px;*/
+    text-align: center;
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: all 0.4s;
 }
 
-h1{
-  align-self: center;
+h4 {
+    text-align: left;
 }
 
-.container-fluid{
-  text-align: left;
+.container-fluid {
+    text-align: left;
+}
+
+label {
+    font-size: 10pt;
 }
