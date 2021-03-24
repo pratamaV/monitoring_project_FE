@@ -99,7 +99,7 @@
                                 <td>{{task.actStartDate | date}}</td>
                                 <td>{{task.actEndDate | date}}</td>
                                 <td>
-                                  <button (click)="downloadTaskDoc(task.taskDocument)"
+                                  <button [disabled]="task.taskDocument===null" (click)="downloadTaskDoc(task.taskDocument)"
                                           class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                                           data-placement="bottom" title="Download"><i class="fa fa-download"></i>
                                   </button>

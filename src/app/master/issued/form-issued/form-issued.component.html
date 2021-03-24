@@ -1,5 +1,5 @@
 <div class="container">
-<h1>Form Pembuatan Issued</h1>
+<h1>Form Pembuatan Issue</h1>
 
 <div class="container-fluid" style="padding: 15px; margin: 20px">
   <form style="padding: 10px" [formGroup]="issuedForm" method="post" (ngSubmit)="onSaveIssued(issuedForm.value, issuedForm.valid)">
@@ -8,7 +8,7 @@
     </div>
 
     <div class="Form-group">
-      <label for="issuedDescription">Issued Description</label>
+      <label for="issuedDescription">Issue Description</label>
       <input type="text" class="form-control" formControlName="issuedDescription" id="issuedDescription" placeholder="Description">
       <small class="form-text text-danger "
              *ngIf="form('issuedDescription').invalid && form('issuedDescription').dirty || form('issuedDescription').touched">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="Form-group">
-      <label for="issuedPlan">Issued Plan</label>
+      <label for="issuedPlan">Action Plan</label>
       <input type="text" class="form-control" formControlName="issuedPlan" id="issuedPlan" placeholder="Issued Plan">
       <small class="form-text text-danger "
              *ngIf="form('issuedPlan').invalid && form('issuedPlan').dirty || form('issuedPlan').touched">

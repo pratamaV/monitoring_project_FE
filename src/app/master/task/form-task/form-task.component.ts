@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {TaskModel, TaskModel3} from '../task.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from '../task.service';
 import {UserModel} from '../../project/project.model';
 import {ProjectServiceService} from '../../project/project-service.service';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-task',
@@ -37,7 +37,7 @@ export class FormTaskComponent implements OnInit {
       taskName: new FormControl(null, [Validators.required]),
       taskCode: new FormControl(null),
       assignedTo: new FormControl(null, [Validators.required]),
-      score: new FormControl(null, [Validators.required]),
+      score: new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|0[1-9]|10)$')]),
       weight: new FormControl(0),
       statusDone: new FormControl('Tidak'),
       taskProsentase: new FormControl(0),
@@ -47,6 +47,10 @@ export class FormTaskComponent implements OnInit {
       actEndDate: new FormControl(null),
       release: new FormControl(localStorage.getItem('releaseId'))
     });
+  }
+
+  form(property): AbstractControl {
+    return this.taskForm.get(property);
   }
 
   onSaveTask(postData, valid: boolean){
@@ -82,9 +86,14 @@ export class FormTaskComponent implements OnInit {
   }
 
   onGetAllUser() {
+    this.loadedUser = [];
     this.projectService.getAllUser()
       .subscribe(data => {
-        this.loadedUser = data;
+        for (const user of data) {
+          if (user.userRole === '04'){
+            this.loadedUser.push(user);
+          }
+        }
       }, error => {
         alert(error);
       });

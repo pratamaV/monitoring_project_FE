@@ -10,6 +10,8 @@
       <tr>
         <th scope="col">Task Code</th>
         <th scope="col">Task Name</th>
+        <th scope="col">Release Name</th>
+        <th scope="col">Project Name</th>
         <!--        <th scope="col">Assigned To</th>-->
         <th scope="col">Score</th>
         <th scope="col">Weight</th>
@@ -26,6 +28,8 @@
       <tr *ngFor="let task of loadedTask; let i = index">
         <th scope="row">{{task.taskCode}}</th>
         <td>{{task.taskName}}</td>
+        <td>{{task.release.releaseName}}</td>
+        <td>{{task.release.project.projectName}}</td>
         <!--        <td>{{task.assignedTo.username}}</td>-->
         <td>{{task.score}}</td>
         <td>{{task.weight}}</td>
@@ -34,7 +38,7 @@
         <td>{{task.estEndDate | date}}</td>
         <td>{{task.actEndDate | date}}</td>
         <td>
-          <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
+          <button [disabled]="task.taskDocument===null" (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                   data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
         </td>
         <td>
