@@ -147,7 +147,6 @@ export class ListProjectComponent implements OnInit {
   }
 
   onChangeStatusProject(id, projectStatus) {
-    // console.log(projectStatus)
     this.projectStatus = projectStatus.target.value;
     this.projectService.changeStatusProject(id, this.projectStatus)
       .subscribe(

@@ -251,7 +251,7 @@ export class HomeComponent implements OnInit {
         let delay = 0;
         let allDirectorate = 0;
         for (const project of data) {
-          if (project.statusProject === 'aktif') {
+          if (project.statusProject === 'Active') {
             if (project.directorateUser === 'Kepatuhan & SDM') {
               KepatuhanandSDM = KepatuhanandSDM + 1;
             } else if (project.directorateUser === 'Keuangan') {
