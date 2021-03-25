@@ -18,6 +18,14 @@
         <th scope="col">CoPM</th>
         <td>{{projectModel.coPM.username}}</td>
       </tr>
+      <tr>
+        <th scope="col">Prosentase Project</th>
+        <td>{{projectModel.prosentaseProject}}</td>
+      </tr>
+      <tr>
+        <th scope="col">Status Project</th>
+        <td>{{projectModel.statusProject}}</td>
+      </tr>
       </thead>
     </table>
   </div>
@@ -30,12 +38,16 @@
       <tr>
         <th>Release Code</th>
         <th>Release Name</th>
+        <th>Status</th>
+        <th>Stage</th>
         <th>Prosentase Release</th>
         <th>Detail</th>
       </tr>
       <tr *ngFor="let release of releaseModel; let i = index">
         <td>{{release.releaseCode}}</td>
         <td>{{release.releaseName}}</td>
+        <td>{{release.status}}</td>
+        <td>{{release.stage}}</td>
         <td>{{release.prosentaseRelease*100}}%</td>
         <td>
           <button (click)="getTaskByReleaseId(release.id)" class="btn btn-warning">Detail</button>

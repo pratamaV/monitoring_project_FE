@@ -47,49 +47,31 @@ export class FitHomeComponent implements OnInit {
     const productCanvas = document.getElementById('releaseByStage');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
-    const releaseData = {
+    const projectData = {
       labels: [
-        'Delivery Barang',
-        'Development',
-        'Implementation',
-        'Live',
-        'Migration',
         'Not Started',
-        'Procurement',
-        'PTR',
-        'Requirement Gathering',
-        'UAT'
+        'On Schedule',
+        'PTR/ Live',
+        'Delay'
       ],
       datasets: [
         {
-          data: [localStorage.getItem('deliveryStage'),
-            localStorage.getItem('development'),
-            localStorage.getItem('implementation'),
-            localStorage.getItem('live'),
-            localStorage.getItem('migration'),
-            localStorage.getItem('notStarted'),
-            localStorage.getItem('procurement'),
-            localStorage.getItem('PTR'),
-            localStorage.getItem('requirementGathering'),
-            localStorage.getItem('uat')],
+          data: [localStorage.getItem('notStartedProject'),
+            localStorage.getItem('onScheduleProject'),
+            localStorage.getItem('ptrProject'),
+            localStorage.getItem('delayProject')],
           backgroundColor: [
             '#f9e0ae',
             '#fc8621',
             '#682c0e',
-            '#b3a30c',
-            '#c6c36e',
-            '#26b186',
-            '#428ec1',
-            '#680e4f',
-            '#4d0651',
-            '#8c0b6c'
+            '#b3a30c'
           ]
         }]
     };
 
     const pieChart = new Chart(productCanvas, {
       type: 'pie',
-      data: releaseData
+      data: projectData
     });
 
 
@@ -179,7 +161,7 @@ export class FitHomeComponent implements OnInit {
         ]
       },
       options: {
-        legend: { display: false },
+        legend: {display: false},
         title: {
           display: true,
           text: 'Number of projects per directorate'
@@ -214,37 +196,38 @@ export class FitHomeComponent implements OnInit {
         let PTR = 0;
         let requirementGathering = 0;
         let uat = 0;
-        let onSchedule = 0;
-        let ptrLive = 0;
-        let notStart = 0;
+        // let onSchedule = 0;
+        // let ptrLive = 0;
+        // let notStart = 0;
         for (const release of data) {
-          if (release.stage === 'Delivery Barang'){
+          if (release.stage === 'Delivery Barang') {
             deliveryStage = deliveryStage + 1;
-          } else if (release.stage === 'Development'){
+          } else if (release.stage === 'Development') {
             development = development + 1;
-          } else if (release.stage === 'Implementation'){
+          } else if (release.stage === 'Implementation') {
             implementation = implementation + 1;
-          } else if (release.stage === 'Live'){
+          } else if (release.stage === 'Live') {
             live = live + 1;
-          } else if (release.stage === 'Migration'){
+          } else if (release.stage === 'Migration') {
             migration = migration + 1;
-          } else if (release.stage === 'Not Started'){
+          } else if (release.stage === 'Not Started') {
             notStarted = notStarted + 1;
-          } else if (release.stage === 'Procurement'){
+          } else if (release.stage === 'Procurement') {
             procurement = procurement + 1;
-          } else if (release.stage === 'PTR'){
+          } else if (release.stage === 'PTR') {
             PTR = PTR + 1;
-          } else if (release.stage === 'Requirement Gathering'){
+          } else if (release.stage === 'Requirement Gathering') {
             requirementGathering = requirementGathering + 1;
-          } else if (release.stage === 'UAT'){
+          } else if (release.stage === 'UAT') {
             uat = uat + 1;
-          } else if (release.status === 'On Schedule'){
-            onSchedule = onSchedule + 1;
-          } else if (release.status === 'PTR/ Live'){
-            ptrLive = ptrLive + 1;
-          } else if (release.status === 'Not Started'){
-            notStart = notStart + 1;
           }
+          // } else if (release.status === 'On Schedule'){
+          //   onSchedule = onSchedule + 1;
+          // } else if (release.status === 'PTR/ Live'){
+          //   ptrLive = ptrLive + 1;
+          // } else if (release.status === 'Not Started'){
+          //   notStart = notStart + 1;
+          // }
         }
         localStorage.setItem('deliveryStage', deliveryStage.toString());
         localStorage.setItem('development', development.toString());
@@ -256,15 +239,13 @@ export class FitHomeComponent implements OnInit {
         localStorage.setItem('PTR', PTR.toString());
         localStorage.setItem('requirementGathering', requirementGathering.toString());
         localStorage.setItem('uat', uat.toString());
-        localStorage.setItem('onSchedule', onSchedule.toString());
-        localStorage.setItem('ptrLive', ptrLive.toString());
-        localStorage.setItem('notStart', notStart.toString());
+        // localStorage.setItem('onSchedule', onSchedule.toString());
+        // localStorage.setItem('ptrLive', ptrLive.toString());
+        // localStorage.setItem('notStart', notStart.toString());
       }, error => {
         alert(error);
       });
   }
-
-
 
   onGetListProject() {
     this.projectService.getAllProject()
@@ -274,20 +255,36 @@ export class FitHomeComponent implements OnInit {
         let OperationalRetail = 0;
         let Teknik = 0;
         let Utama = 0;
+        let notStarted = 0;
+        let onSchedule = 0;
+        let ptr = 0;
+        let delay = 0;
         let allDirectorate = 0;
         for (const project of data) {
-          if (project.directorateUser === 'Kepatuhan & SDM'){
-            KepatuhanandSDM = KepatuhanandSDM + 1;
-          } else if (project.directorateUser === 'Keuangan'){
-            Keuangan = Keuangan + 1;
-          } else if (project.directorateUser === 'Operational Retail'){
-            OperationalRetail = OperationalRetail + 1;
-          } else if (project.directorateUser === 'Teknik'){
-            Teknik = Teknik + 1;
-          } else if (project.directorateUser === 'Utama'){
-            Utama = Utama + 1;
-          } else {
-            allDirectorate = allDirectorate + 1;
+          if (project.statusProject === 'aktif') {
+            if (project.directorateUser === 'Kepatuhan & SDM') {
+              KepatuhanandSDM = KepatuhanandSDM + 1;
+            } else if (project.directorateUser === 'Keuangan') {
+              Keuangan = Keuangan + 1;
+            } else if (project.directorateUser === 'Operational Retail') {
+              OperationalRetail = OperationalRetail + 1;
+            } else if (project.directorateUser === 'Teknik') {
+              Teknik = Teknik + 1;
+            } else if (project.directorateUser === 'Utama') {
+              Utama = Utama + 1;
+            } else {
+              allDirectorate = allDirectorate + 1;
+            }
+
+            if (project.status === 'Not Started') {
+              notStarted = notStarted + 1;
+            } else if (project.status === 'On Schedule') {
+              onSchedule = onSchedule + 1;
+            } else if (project.status === 'PTR/ Live') {
+              ptr = ptr + 1;
+            } else if (project.status === 'Delay') {
+              delay = delay + 1;
+            }
           }
         }
         localStorage.setItem('KepatuhanandSDM', KepatuhanandSDM.toString());
@@ -296,6 +293,10 @@ export class FitHomeComponent implements OnInit {
         localStorage.setItem('Teknik', Teknik.toString());
         localStorage.setItem('Utama', Utama.toString());
         localStorage.setItem('allDirectorate', allDirectorate.toString());
+        localStorage.setItem('notStartedProject', notStarted.toString());
+        localStorage.setItem('onScheduleProject', onSchedule.toString());
+        localStorage.setItem('ptrProject', ptr.toString());
+        localStorage.setItem('delayProject', delay.toString());
       }, error => {
         alert(error);
       });

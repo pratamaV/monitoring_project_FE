@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {ReleaseModel, ReleaseModel2} from '../release/release.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -10,7 +10,8 @@ import {ProjectModel, ProjectModel2} from '../project/project.model';
 })
 export class TaskService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllTask(): Observable<TaskModel2[]> {
     return new Observable((observer: Observer<TaskModel2[]>) => {
@@ -71,16 +72,13 @@ export class TaskService {
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
-    if (param.assignTo == null && param.statusDone == null){
+    if (param.assignTo == null && param.statusDone == null) {
       url = `api/taskByReleaseId/${id}`;
-    }
-    else if (param.statusDone == null){
+    } else if (param.statusDone == null) {
       url = `api/taskByReleaseId/${id}?assignTo=${param.assignTo}`;
-    }
-    else if (param.assignTo == null){
+    } else if (param.assignTo == null) {
       url = `api/taskByReleaseId/${id}?statusDone=${param.statusDone}`;
-    }
-    else if (!(param.assignTo == null && param.statusDone == null)){
+    } else if (!(param.assignTo == null && param.statusDone == null)) {
       url = `api/taskByReleaseId/${id}?assignTo=${param.assignTo}&statusDone=${param.statusDone}`;
     }
     return new Observable((observer: Observer<TaskModel2>) => {
@@ -94,33 +92,13 @@ export class TaskService {
   }
 
 
-  saveTask(postData: TaskModel, id: string) {
-    return new Observable((observer: Observer<TaskModel>) => {
-      if (id) {
-        this.http.put('/api/task?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
-          .subscribe((response: TaskModel) => {
-            observer.next(response);
-          }, (error) => {
-            observer.error(error);
-          });
-      } else {
-        this.http.post('/api/task?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
-          .subscribe((response: TaskModel) => {
-            observer.next(response);
-          }, (error) => {
-            observer.error(error);
-          });
-      }
-    });
-  }
-
   createTask(loadData: TaskModel) {
     const formData = new FormData();
-    for (const key in loadData){
+    for (const key in loadData) {
       formData.append(key, loadData[key]);
     }
     return new Observable((observer) => {
-      this.http.post(`api/task?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, { responseType: 'text'})
+      this.http.post(`api/task?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, {responseType: 'text'})
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {
@@ -143,7 +121,7 @@ export class TaskService {
 
   getTaskDocument(taskCode): Observable<any> {
     return new Observable((observer: Observer<any>) => {
-      this.http.get(`api/document-task/${taskCode}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, { responseType: 'blob' as 'json'})
+      this.http.get(`api/document-task/${taskCode}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, {responseType: 'blob' as 'json'})
         .subscribe((response: any) => {
           const dataType = response.type;
           const binaryData = [];
@@ -160,9 +138,74 @@ export class TaskService {
     });
   }
 
-  getTaskByUserId(id): Observable<TaskModel2[]> {
+  getTaskByUserId(id, param): Observable<TaskModel2[]> {
+    let estStartDateString = param.estStartDate;
+    let estEndDateString = param.estEndDate;
+    // if (param.estStartDate != null) {
+    //   estStartDateString = this.datepipe.transform(param.estStartDate, 'yyyy-MM-dd');
+    // }
+    // if (param.estEndDate != null) {
+    //   estEndDateString = this.datepipe.transform(param.estEndDate, 'yyyy-MM-dd');
+    // }
+    let url = ``;
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+
+    // tslint:disable-next-line:max-line-length
+    if (param.statusDone == null && param.releaseName == null && param.projectName == null && param.estStartDate == null && param.estEndDate == null) {
+      url = `api/taskByUserId/${id}`;
+    } else if (param.statusDone != null && param.releaseName != null && param.projectName != null
+      && param.estStartDate != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDate=${estStartDateString}&estEndDate=${estEndDateString}&statusDone=${param.statusDone}`;
+    } else if (param.releaseName != null && param.projectName != null && param.estStartDate != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDate=${estStartDateString}&estEndDate=${estEndDateString}`;
+    } else if (param.statusDone != null && param.releaseName != null && param.projectName != null
+      && param.estStartDate != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDate=${estStartDateString}&statusDone=${param.statusDone}`;
+    } else if (param.releaseName != null && param.projectName != null && param.estStartDate != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDate=${estStartDateString}`;
+    } else if (param.releaseName != null && param.projectName != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&projectName=${param.projectName}&estEndDate=${estEndDateString}`;
+    } else if (param.projectName != null && param.estStartDate != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?projectName=${param.projectName}&estStartDate=${estStartDateString}&estEndDate=${estEndDateString}`;
+    } else if (param.statusDone != null && param.projectName != null && param.estStartDate != null) {
+      url = `api/taskByUserId/${id}?projectName=${param.projectName}&estStartDate=${estStartDateString}&statusDone=${param.statusDone}`;
+    } else if (param.statusDone != null && param.estStartDate != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?estStartDate=${estStartDateString}&estEndDate=${estEndDateString}&statusDone=${param.statusDone}`;
+    } else if (param.releaseName != null && param.projectName != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&projectName=${param.projectName}`;
+    } else if (param.releaseName != null && param.estStartDate != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&estStartDate=${estStartDateString}`;
+    } else if (param.releaseName != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&estEndDate=${estEndDateString}`;
+    } else if (param.statusDone != null && param.releaseName != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}&statusDone=${param.statusDone}`;
+    } else if (param.projectName != null && param.estStartDate != null) {
+      url = `api/taskByUserId/${id}?projectName=${param.projectName}&estStartDate=${estStartDateString}`;
+    } else if (param.projectName != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?projectName=${param.projectName}&estEndDate=${estEndDateString}`;
+    } else if (param.statusDone != null &&  param.projectName != null) {
+      url = `api/taskByUserId/${id}?projectName=${param.projectName}&statusDone=${param.statusDone}`;
+    } else if (param.estStartDate != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?estStartDate=${estStartDateString}&estEndDate=${estEndDateString}`;
+    } else if (param.statusDone != null && param.estStartDate != null) {
+      url = `api/taskByUserId/${id}?estStartDate=${estStartDateString}&statusDone=${param.statusDone}`;
+    } else if (param.statusDone != null && param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?estEndDate=${estEndDateString}&statusDone=${param.statusDone}`;
+    } else if (param.releaseName != null) {
+      url = `api/taskByUserId/${id}?releaseName=${param.releaseName}`;
+    } else if ( param.projectName != null) {
+      url = `api/taskByUserId/${id}?projectName=${param.projectName}`;
+    } else if (param.estStartDate != null) {
+      url = `api/taskByUserId/${id}?estStartDate=${estStartDateString}`;
+    }else if (param.estEndDate != null) {
+      url = `api/taskByUserId/${id}?estEndDate=${estEndDateString}`;
+    }else if (param.statusDone != null ) {
+      url = `api/taskByUserId/${id}?statusDone=${param.statusDone}`;
+    }
     return new Observable((observer: Observer<TaskModel2[]>) => {
-      this.http.get(`api/taskByUserId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      this.http.get(url, header)
         .subscribe((data: TaskModel2[]) => {
           observer.next(data);
         }, error => {
@@ -171,13 +214,14 @@ export class TaskService {
     });
   }
 
+  // tslint:disable-next-line:typedef
   uploadDocumentTask(postData, id: string) {
     const formData = new FormData();
-    for (const key in postData){
+    for (const key in postData) {
       formData.append(key, postData[key]);
     }
     return new Observable((observer) => {
-      this.http.put(`api/uploadTaskDoc/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, { responseType: 'text'})
+      this.http.put(`api/uploadTaskDoc/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, {responseType: 'text'})
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {
@@ -186,15 +230,17 @@ export class TaskService {
     });
   }
 
+
   doneTask(id: string, postData) {
     console.log('masuk yuk');
     return new Observable((observer: Observer<TaskModel2>) => {
-        this.http.put(`/api/doneTask/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
-          .subscribe((response: TaskModel2) => {
-            observer.next(response);
-          }, (error) => {
-            observer.error(error);
-          });
+      this.http.put(`/api/doneTask/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
+        .subscribe((response: TaskModel2) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
     });
   }
+
 }

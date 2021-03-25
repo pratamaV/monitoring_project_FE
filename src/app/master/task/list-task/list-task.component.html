@@ -82,7 +82,7 @@
                                 <th scope="col">Act. Start Date</th>
                                 <th scope="col">Act. End Date</th>
                                 <th scope="col">Task Document</th>
-                                <!--      <th scope="col">Action</th>-->
+                                <th scope="col">Action</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -99,14 +99,17 @@
                                 <td>{{task.actStartDate | date}}</td>
                                 <td>{{task.actEndDate | date}}</td>
                                 <td>
-                                  <button (click)="downloadTaskDoc(task.taskDocument)"
+                                  <button [disabled]="task.taskDocument===null"
+                                          (click)="downloadTaskDoc(task.taskDocument)"
                                           class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                                           data-placement="bottom" title="Download"><i class="fa fa-download"></i>
                                   </button>
                                 </td>
-                                <!--      <td>-->
-                                <!--        <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button>-->
-                                <!--      </td>-->
+                                <td>
+                                  <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm"
+                                          data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                    class="fa fa-edit"></i></button>&nbsp;
+                                </td>
                               </tr>
                               </tbody>
                             </table>

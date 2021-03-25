@@ -20,6 +20,13 @@ export class UserTaskComponent implements OnInit {
   loadedTask: TaskModel2[] = [];
   loadedProject: ProjectModel[] = [];
   fileName = 'List-Task-' + new Date().toDateString() + '.xlsx';
+  paramNull = {
+    taskDoc: null,
+    statusDone: null,
+    releaseName: null,
+    projectName: null,
+    estStartDate: null
+  };
 
   constructor(private taskService: TaskService,
               private router: Router,
@@ -36,7 +43,7 @@ export class UserTaskComponent implements OnInit {
       .subscribe(data => {
         this.user = data;
         if (this.user.userRole === '04') {
-          this.taskService.getTaskByUserId(localStorage.getItem('userIdTask'))
+          this.taskService.getTaskByUserId(localStorage.getItem('userIdTask'), this.paramNull)
             .subscribe(data2 => {
               this.loadedTask = data2;
             }, error => {

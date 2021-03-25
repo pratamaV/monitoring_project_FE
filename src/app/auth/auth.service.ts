@@ -1,21 +1,24 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
+import {User} from './user.model';
+import {parseLazyRoute} from "@angular/compiler/src/aot/lazy_routes";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
+  // tslint:disable-next-line:typedef
   login(value) {
     const loginValue = 'imo' + ':' + 'imo-secret-key';
     // const header = {
     //   headers: new HttpHeaders().set('Authorization', `Basic ${btoa(loginValue)}`)
     // };
     const headers = {
-      'Authorization': 'Basic ' + btoa(loginValue),
+      Authorization: 'Basic ' + btoa(loginValue),
       'Content-type': 'application/x-www-form-urlencoded'
     };
     return this.http.post(`api/oauth/token`, value, {headers});
@@ -43,6 +46,7 @@ export class AuthService {
   //   });
   // }
 
+  // tslint:disable-next-line:typedef
   getRoleByUsername(data) {
     const tempData = data.email + ':' + data.password;
     const header = {
@@ -50,6 +54,35 @@ export class AuthService {
     };
     return this.http.get('/api/getUserByRole', header);
   }
+
+  save(payload: User): Observable<User> {
+
+    return new Observable((observer: Observer<User>) => {
+      this.http.post('/api/userChangePassword', payload)
+        .subscribe((response: User) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  // tslint:disable-next-line:ban-types
+  forgotPass(payload): Observable<Object> {
+    // tslint:disable-next-line:prefer-const
+    const formData = new FormData();
+    formData.append('email', payload.email);
+    formData.append('newPassword', payload.pass);
+    return new Observable((observer) => {
+      this.http.put(`/api/userChangePassword`, formData)
+        .subscribe((response) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
+
 
 
   // logout() {

@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ReleaseService} from '../release.service';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReleaseModel} from '../release.model';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-release',
@@ -42,9 +42,9 @@ export class FormReleaseComponent implements OnInit {
       id: new FormControl(null),
       releaseCode: new FormControl(null),
       releaseName: new FormControl(null, [Validators.required]),
-      score: new FormControl(null, [Validators.required]),
+      score: new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|0[1-9]|10)$')]),
       weight: new FormControl(null),
-      description: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, ),
       status: new FormControl(null, [Validators.required]),
       stage: new FormControl(null, [Validators.required]),
       prosentaseRelease: new FormControl(0),
