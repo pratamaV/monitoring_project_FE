@@ -76,8 +76,8 @@ export class ListReleaseComponent implements OnInit {
     this.router.navigate(['/dashboard/task']);
   }
 
-  onChangeStatusProject(id){
-    this.releaseService.changeStatusRelease(id)
+  onChangeStatusRelease(id, releaseStatus){
+    this.releaseService.changeStatusRelease(id, releaseStatus.target.value)
       .subscribe(data => {
         window.location.reload();
         this.router.navigate(['/dashboard/release']);

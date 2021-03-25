@@ -87,9 +87,9 @@ export class ReleaseService {
     });
   }
 
-  changeStatusRelease(id): Observable<ReleaseModel> {
+  changeStatusRelease(id, releaseStatus): Observable<ReleaseModel> {
     return new Observable((observer: Observer<ReleaseModel>) => {
-      this.http.put(`/api/releaseUpdate/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, id)
+      this.http.put(`/api/releaseUpdate/${id}?releaseStatus=${releaseStatus}&access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, id)
         .subscribe((response: ReleaseModel) => {
           observer.next(response);
         }, (error) => {
