@@ -22,6 +22,7 @@ export interface ProjectModel{
     categoryActivity: string;
     categoryInitiative: string;
     statusProject: string;
+    keyword: string;
     releaseList?: ReleaseModel[];
 
 }

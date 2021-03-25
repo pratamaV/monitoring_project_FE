@@ -54,6 +54,15 @@
         </form>
         <button class="btn btn-success btn-sm m-lg-2" style="float: right; margin-left: 10px;"
             (click)="onGetListRelease()">Reset Filter</button>&nbsp;
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input [(ngModel)]="searchByKeyword" name="searchByKeyword"
+                   type="text" class="form-control" placeholder="Cari berdasarkan Keyword"  (keyup)="searchLive()">
+          </div>
+        </div>
+      </form>
 
     </div>
         <div id="button-atas" class="col-5 col-xs-8">
@@ -82,6 +91,8 @@
       <th scope="col">Divisi User</th>
       <th scope="col">Project Precentage</th>
       <th scope="col">Status Project</th>
+      <th scope="col">Update Status Project</th>
+      <th scope="col">Keyword</th>
       <th scope="col">Detail Project</th>
 
     </tr>
@@ -98,6 +109,15 @@
       <td>{{project.divisiUser.divisionName}}</td>
       <td>{{project.prosentaseProject*100}}%</td>
       <td>{{project.statusProject}}</td>
+      <td>
+        <select class="form-select" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
+          <option disabled="disabled" selected="selected">Select an option.</option>
+          <option value="Active">Active</option>
+          <option value="Not Active">Not Active</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </td>
+      <td>{{project.keyword}}</td>
       <td style="width: 200px;">
         <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm"
                 data-toggle="tooltip" data-placement="bottom" title="Detail"><i
@@ -107,9 +127,6 @@
           class="fa fa-bars"></i></button>&nbsp;
         <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                 data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
-        <button (click)="onChangeStatusProject(project.id)" class="btn btn-outline-info btn-sm"
-                data-toggle="tooltip" data-placement="bottom" title="Change Status"><i
-          class="fa fa-exchange"></i></button>
       </td>
     </tr>
     </tbody>
@@ -130,6 +147,7 @@
       <th scope="col">Project Precentage</th>
       <th scope="col">Status Project</th>
       <th scope="col">Update Status Project</th>
+      <th scope="col">Keyword</th>
       <th scope="col">Detail Project</th>
 
     </tr>
@@ -155,6 +173,7 @@
           <option value="Completed">Completed</option>
         </select>
       </td>
+      <td>{{project.keyword}}</td>
       <td style="width: 200px;">
         <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
           class="fa fa-eye"></i></button>&nbsp;
