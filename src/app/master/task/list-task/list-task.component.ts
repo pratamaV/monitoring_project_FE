@@ -141,4 +141,8 @@ export class ListTaskComponent implements OnInit {
   goToListRelease() {
     this.router.navigate(['/dashboard/release']);
   }
+
+  updateTask(task: TaskModel) {
+    this.router.navigateByUrl('/dashboard/task/form-task/' + task.id, {state: task});
+  }
 }

@@ -13,6 +13,7 @@ const routes: Routes = [
     data: {
       role: [
         '01',
+        '05'
       ]
     },
     component: ListUserComponent
@@ -23,6 +24,7 @@ const routes: Routes = [
     data: {
       role: [
         '01',
+        '05'
       ]
     },
     component: FormUserComponent
@@ -33,6 +35,7 @@ const routes: Routes = [
     data: {
       role: [
         '01',
+        '05'
       ]
     },
     component: FormUserComponent

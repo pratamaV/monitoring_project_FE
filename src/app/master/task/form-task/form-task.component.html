@@ -1,5 +1,5 @@
 <div class="container">
-<h1>Form Pembuatan Task</h1>
+<h1><i class="fa fa-chevron-circle-left" (click)="onGolistTask()"></i> Form Pembuatan Task</h1>
 
 <div class="container-fluid" style="padding: 15px; margin: 20px">
   <form style="padding: 10px" [formGroup]="taskForm" method="post" (ngSubmit)="onSaveTask(taskForm.value, taskForm.valid)">
@@ -21,8 +21,10 @@
 
     <div class="form-group">
       <label for="assignedTo">Assign To</label>
-      <select class="form-select" formControlName="assignedTo" id="assignedTo" aria-label="Default select example">
-        <option *ngFor="let user of loadedUser"  [value]="user.id" [selected]="assignedToId===user.id" >{{user.username}}</option>
+      <select class="form-select" name="assignedTo" formControlName="assignedTo" id="assignedTo" [compareWith]="compareAssignedTo">
+        <option *ngFor="let user of loadedUser"  [ngValue]="user">
+          {{user.username}}
+        </option>
       </select>
       <small class="form-text text-danger "
              *ngIf="form('assignedTo').invalid && form('assignedTo').dirty || form('assignedTo').touched">
@@ -78,9 +80,21 @@
     </div>
 
     <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="actStartDate" id="actStartDate">
-      <input type="hidden" class="form-control" formControlName="actEndDate" id="actEndDate">
-      <input type="hidden" class="form-control" formControlName="taskProsentase" id="taskProsentase">
+      <label for="taskProsentase">Prosentase Task</label>
+      <input type="text" class="form-control" formControlName="taskProsentase" id="taskProsentase">
+    </div>
+
+    <div class="form-group">
+      <label for="actStartDate">Actual Start Date</label>
+      <input type="date" class="form-control" formControlName="actStartDate" id="actStartDate">
+    </div>
+
+    <div class="form-group">
+      <label for="actEndDate">Actual End Date</label>
+      <input type="date" class="form-control" formControlName="actEndDate" id="actEndDate">
+    </div>
+
+    <div class="form-group">
       <input type="hidden" class="form-control" formControlName="release" id="release">
     </div>
     <button [disabled]="!taskForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
-import {TaskModel, TaskModel3} from '../task.model';
+import {TaskModel, TaskModel3,  TaskModel2} from '../task.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskService} from '../task.service';
 import {UserModel} from '../../project/project.model';
@@ -15,10 +15,13 @@ import Swal from 'sweetalert2';
 export class FormTaskComponent implements OnInit {
 
   taskForm: FormGroup;
-  task: TaskModel3;
+  task: TaskModel2;
+  task3: TaskModel3;
   id: string;
+  username: string;
   loadedUser: UserModel[] = [];
-  assignedToId: '';
+  assignedTo;
+  users: UserModel;
 
   constructor(private route: ActivatedRoute,
               private taskService: TaskService,
@@ -28,6 +31,20 @@ export class FormTaskComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.onGetAllUser();
+    this.route.params.subscribe(params => {
+      if (params && params.id) {
+        const id: string = params.id;
+        this.taskService.getTaskById(id)
+          .subscribe((response) => {
+              this.id = id;
+              this.username = response.assignedTo.username;
+              this.setDataToForm(response);
+            }, error => {
+              alert(error.message);
+            }
+          );
+      }
+    });
   }
 
 
@@ -49,17 +66,42 @@ export class FormTaskComponent implements OnInit {
     });
   }
 
+  private setDataToForm(taskForm): void {
+    this.task = taskForm;
+    if (this.task) {
+      this.assignedTo = this.task.assignedTo.username;
+      this.taskForm.get('id').setValue(this.task.id);
+      this.taskForm.get('taskName').setValue(this.task.taskName);
+      this.taskForm.get('taskCode').setValue(this.task.taskCode);
+      this.taskForm.get('assignedTo').setValue(this.task.assignedTo);
+      this.taskForm.get('score').setValue(this.task.score);
+      this.taskForm.get('weight').setValue(this.task.weight);
+      this.taskForm.get('statusDone').setValue(this.task.statusDone);
+      this.taskForm.get('taskProsentase').setValue(this.task.taskProsentase);
+      this.taskForm.get('estStartDate').setValue(this.task.estStartDate);
+      this.taskForm.get('estEndDate').setValue(this.task.estEndDate);
+      this.taskForm.get('actStartDate').setValue(this.task.actStartDate);
+      this.taskForm.get('actEndDate').setValue(this.task.actEndDate);
+      this.taskForm.get('release').setValue(this.task.release.id);
+    }
+  }
+
+  compareAssignedTo(c1: UserModel, c2: UserModel): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
   form(property): AbstractControl {
     return this.taskForm.get(property);
   }
 
+  // tslint:disable-next-line:typedef
   onSaveTask(postData, valid: boolean){
-    this.task = {
+    this.task3 = {
       id: postData.id,
       taskName: postData.taskName,
       taskCode: postData.taskCode,
       assignedTo: {
-        id: postData.assignedTo
+        id: postData.assignedTo.id
       },
       score: postData.score,
       weight: postData.weight,
@@ -73,9 +115,8 @@ export class FormTaskComponent implements OnInit {
         id: postData.release
       }
     };
-    console.log(this.task);
     if (valid) {
-      this.taskService.addTask(this.task, this.task.id)
+      this.taskService.addTask(this.task3, this.task3.id)
         .subscribe(response => {
           Swal.fire( 'Success', 'Task that you input was successfully saved' , 'success'  );
           this.router.navigate(['/dashboard/task']);
@@ -85,17 +126,17 @@ export class FormTaskComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   onGetAllUser() {
-    this.loadedUser = [];
     this.projectService.getAllUser()
       .subscribe(data => {
-        for (const user of data) {
-          if (user.userRole === '04'){
-            this.loadedUser.push(user);
-          }
-        }
+        this.loadedUser = data;
       }, error => {
         alert(error);
       });
+  }
+
+  onGolistTask() {
+    this.router.navigate(['/dashboard/task']);
   }
 }
