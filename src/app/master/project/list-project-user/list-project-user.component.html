@@ -1,0 +1,39 @@
+<app-sidebar></app-sidebar>
+<div class="card">
+  <h1>Daftar Project</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Project Code</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">PMO</th>
+      <th scope="col">PM</th>
+      <th scope="col">Benefit</th>
+      <th scope="col">Description</th>
+      <th scope="col">User</th>
+      <th scope="col">Divisi User</th>
+      <th scope="col">Prosentase Project</th>
+      <th scope="col">
+        Detail Project
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of loadedProject; let i = index">
+      <th scope="row">{{project.projectCode}}</th>
+      <td>{{project.projectName}}</td>
+      <td>{{project.pmo.username}}</td>
+      <td>{{project.pm.username}}</td>
+      <td>{{project.benefit}}</td>
+      <td>{{project.description}}</td>
+      <td>{{project.coPM.username}}</td>
+      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.statusProject}}</td>
+      <td>
+        <button (click)="getDetail(project)" class="btn btn-warning"><i class="fa fa-info"></i> Detail</button>&nbsp;
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

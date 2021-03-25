@@ -1,0 +1,97 @@
+<div class="container">
+<h1><i class="fa fa-chevron-circle-left" (click)="onGolistRelease()"></i> Form Pembuatan Release</h1>
+
+<div class="container-fluid" style="padding: 15px; margin: 20px">
+  <form style="padding: 10px" [formGroup]="releaseForm" method="post" (ngSubmit)="onSaveRelease(releaseForm.value, releaseForm.valid)">
+    <div class="Form-group">
+      <input type="hidden" class="form-control" formControlName="id" id="id">
+      <input type="hidden" class="form-control" formControlName="releaseCode" id="releaseCode">
+    </div>
+
+    <div class="Form-group">
+      <label for="releaseName">Release Name</label>
+      <input type="text" class="form-control" formControlName="releaseName" id="releaseName" placeholder="Release Name">
+      <small class="form-text text-danger "
+             *ngIf="form('releaseName').invalid && form('releaseName').dirty || form('releaseName').touched">
+        <div *ngIf="form('releaseName').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="score">Score</label>
+      <input type="text" class="form-control" formControlName="score" id="score" placeholder="Score">
+      <small class="form-text text-danger "
+             *ngIf="form('score').invalid && form('score').dirty || form('score').touched">
+        <div *ngIf="form('score').errors?.required">
+          Bagian ini harus terisi
+        </div>
+        <div *ngIf="form('score').errors?.pattern">
+          Harus berisi angka 1 sampai dengan 10
+        </div>
+      </small>
+    </div>
+
+    <div class="Form-group">
+      <input type="hidden" class="form-control" formControlName="weight" id="weight">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" class="form-control" formControlName="description" id="description" placeholder="Description">
+    </div>
+
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+<!--        <option selected>{{release.status}}</option>-->
+        <option value="Not Started">Not Started</option>
+        <option value="On Schedule">On Schedule</option>
+        <option value="PTR/ Live">PTR/ Live</option>
+        <option value="Delay">Delay</option>
+      </select>
+      <small class="form-text text-danger "
+             *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
+        <div *ngIf="form('status').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="stage">Stage</label>
+      <select class="form-select" formControlName="stage" id="stage" aria-label="Default select example">
+<!--        <option selected disabled>{{release.stage}}</option>-->
+        <option value="Delivery Barang">Delivery Barang</option>
+        <option value="Development">Development</option>
+        <option value="Implementation">Implementation</option>
+        <option value="Live">Live</option>
+        <option value="Migration">Migration</option>
+        <option value="Not Started">Not Started</option>
+        <option value="Procurement">Procurement</option>
+        <option value="PTR">PTR</option>
+        <option value="Requirement Gathering">Requirement Gathering</option>
+        <option value="UAT">UAT</option>
+      </select>
+      <small class="form-text text-danger "
+             *ngIf="form('stage').invalid && form('stage').dirty || form('stage').touched">
+        <div *ngIf="form('stage').errors?.required">
+          Bagian ini harus terisi
+        </div>
+      </small>
+    </div>
+
+    <div class="form-group">
+      <input type="hidden" class="form-control" formControlName="estStartdate" id="estStartdate">
+      <input type="hidden" class="form-control" formControlName="estEnddate" id="estEnddate">
+      <input type="hidden" class="form-control" formControlName="actStartdate" id="actStartdate">
+      <input type="hidden" class="form-control" formControlName="actEnddate" id="actEnddate">
+      <input type="hidden" class="form-control" formControlName="prosentaseRelease" id="prosentaseRelease">
+      <input type="hidden" class="form-control" formControlName="statusRelease" id="statusRelease">
+      <input type="hidden" class="form-control" formControlName="project" id="project">
+    </div>
+    <button [disabled]="!releaseForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>
+  </form>
+</div>
+</div>

@@ -1,0 +1,37 @@
+<app-sidebar></app-sidebar>
+<div class="card">
+  <h4><i class="fa fa-chevron-circle-left" (click)="onGolistRelease()"></i> List Issue</h4>
+    <br>
+    <div id="button-atas">
+        <button id="export-excel" class="btn btn-dark" (click)="exportexcel()"><i class="fa fa-file"></i> Export to excel</button>&nbsp;
+        <button id="add-project" class="btn btn-warning" (click)="onAddIssued()"><i class="fa fa-plus"></i> Add New Issue</button>
+    </div>
+    <div class="table-responsive">
+        <table class="table" id="excel-table">
+            <thead>
+                <tr>
+                    <th scope="col">Issue Description</th>
+                    <th scope="col">Issue Date</th>
+                    <th scope="col">Action Plan</th>
+                    <th scope="col">Est. End Date</th>
+                    <th scope="col">PIC</th>
+                    <th scope="col">Release Code</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let issued of loadedIssued; let i = index">
+                    <th scope="row">{{issued.issuedDescription}}</th>
+                    <td>{{issued.issuedDate}}</td>
+                    <td>{{issued.issuedPlan}}</td>
+                    <td>{{issued.estEnddate}}</td>
+                    <td>{{issued.pic}}</td>
+                    <td>{{issued.release.releaseCode}}</td>
+                    <td>
+                        <button (click)="updateIssued(issued)">Update</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

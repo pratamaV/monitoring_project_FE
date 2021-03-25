@@ -1,1 +1,191 @@
-<p>list-project works!</p>
+<app-sidebar></app-sidebar>
+<div class="card">
+
+    <h4>Daftar Project</h4>
+  <div class="row">
+    <div class="col-7 col-xs-8">
+        <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
+            <div class="row">
+                <div class="form-group col">
+                    <label for="divisi" style="float: left;">Divisi</label>
+                    <select class="custom-select" formControlName="divisi" id="divisi"
+                        aria-label="Default select example">
+                        <option *ngFor="let divisi of divitions; let i = index" [ngValue]="divisi.divisionName">
+                            {{ divisi.divisionName }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="direktorate" style="float: left;">Direktorate User</label>
+                    <select class="form-select" formControlName="direktorate" id="direktorate"
+                        aria-label="Default select example">
+                        <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
+                        <option value="Keuangan">Keuangan</option>
+                        <option value="Operational Retail">Operational Retail</option>
+                        <option value="Teknik">Teknik</option>
+                        <option value="Utama">Utama</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <label for="userPM" style="float: left;">User PM</label>
+                    <select class="custom-select" formControlName="userPM" id="userPM"
+                        aria-label="Default select example">
+                        <option *ngFor="let user of users; let i = index" [ngValue]="user.id">
+                            {{ user.username }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group col">
+                    <label for="userPMO" style="float: left;">User PMO</label>
+                    <select class="custom-select" formControlName="userPMO" id="userPMO"
+                        aria-label="Default select example">
+                        <option *ngFor="let user of users; let i = index" [ngValue]="user.id">
+                            {{ user.username }}
+                        </option>
+                    </select>
+                    </div>
+                </div>
+
+
+            <div id="button-filter">
+                <button type="submit" class="btn btn-info btn-sm m-lg-2" style="float: right;">Apply Filter</button>
+            </div>
+        </form>
+        <button class="btn btn-success btn-sm m-lg-2" style="float: right; margin-left: 10px;"
+            (click)="onGetListRelease()">Reset Filter</button>&nbsp;
+      <form>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+            <input [(ngModel)]="searchByKeyword" name="searchByKeyword"
+                   type="text" class="form-control" placeholder="Cari berdasarkan Keyword"  (keyup)="searchLive()">
+          </div>
+        </div>
+      </form>
+
+    </div>
+        <div id="button-atas" class="col-5 col-xs-8">
+          <div class="row-cols-1 mb-1">
+            <button id="export-excel" class="btn btn-dark" (click)="exportexcel()"><i class="fa fa-file"></i> Export to
+            excel</button></div>
+          <div class="row-cols-1">
+          <button id="add-project" class="btn btn-warning" (click)="onAddProject()"><i class="fa fa-plus"></i> Add New
+            Project</button></div>
+        </div>
+    </div>
+
+  <br>
+
+  <table *ngIf="filter" class="table" id="excel-table">
+    <thead>
+    <tr>
+
+      <th scope="col">Project Codeeee</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">PMO</th>
+      <th scope="col">PM</th>
+      <th scope="col">Benefit</th>
+      <th scope="col">Description</th>
+      <th scope="col">User</th>
+      <th scope="col">Divisi User</th>
+      <th scope="col">Project Precentage</th>
+      <th scope="col">Status Project</th>
+      <th scope="col">Update Status Project</th>
+      <th scope="col">Keyword</th>
+      <th scope="col">Detail Project</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of loadedProjectResult; let i = index">
+      <th scope="row">{{project.projectCode}}</th>
+      <td>{{project.projectName}}</td>
+      <td>{{project.pmo.username}}</td>
+      <td>{{project.pm.username}}</td>
+      <td>{{project.benefit}}</td>
+      <td>{{project.description}}</td>
+      <td>{{project.coPM.username}}</td>
+      <td>{{project.divisiUser.divisionName}}</td>
+      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.statusProject}}</td>
+      <td>
+        <select class="form-select" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
+          <option disabled="disabled" selected="selected">Select an option.</option>
+          <option value="Active">Active</option>
+          <option value="Not Active">Not Active</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </td>
+      <td>{{project.keyword}}</td>
+      <td style="width: 200px;">
+        <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm"
+                data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+          class="fa fa-eye"></i></button>&nbsp;
+        <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm"
+                data-toggle="tooltip" data-placement="bottom" title="Release"><i
+          class="fa fa-bars"></i></button>&nbsp;
+        <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
+                data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table *ngIf="!filter" class="table" id="excel-table">
+    <thead>
+    <tr>
+      <th scope="col">Project Code</th>
+      <th scope="col">Project Name</th>
+      <th scope="col">PMO</th>
+      <th scope="col">PM</th>
+      <th scope="col">Benefit</th>
+      <th scope="col">Description</th>
+      <th scope="col">User</th>
+      <th scope="col">Divisi User</th>
+      <th scope="col">Project Weight</th>
+      <th scope="col">Project Precentage</th>
+      <th scope="col">Status Project</th>
+      <th scope="col">Update Status Project</th>
+      <th scope="col">Keyword</th>
+      <th scope="col">Detail Project</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of loadedProject; let i = index">
+      <th scope="row">{{project.projectCode}}</th>
+      <td>{{project.projectName}}</td>
+      <td>{{project.pmo.username}}</td>
+      <td>{{project.pm.username}}</td>
+      <td>{{project.benefit}}</td>
+      <td>{{project.description}}</td>
+      <td>{{project.coPM.username}}</td>
+      <td>{{project.divisiUser.divisionName}}</td>
+      <td>{{project.weight*100}}%</td>
+      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.statusProject}}</td>
+      <td>
+        <select class="form-select" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
+          <option disabled="disabled" selected="selected">Select an option.</option>
+          <option value="Active">Active</option>
+          <option value="Not Active">Not Active</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </td>
+      <td>{{project.keyword}}</td>
+      <td style="width: 200px;">
+        <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+          class="fa fa-eye"></i></button>&nbsp;
+        <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Release"><i
+          class="fa fa-bars"></i></button>&nbsp;
+        <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+

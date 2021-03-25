@@ -1,0 +1,38 @@
+.container-sm {
+    padding: 30px;
+    /*margin: 30px;*/
+    text-align: center;
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: all 0.4s;
+}
+
+h4 {
+    text-align: left;
+}
+
+th,
+td {
+    font-size: 10pt;
+}
+
+#button-atas {
+    align-self: flex-end;
+    /* align-items: flex-end; */
+    /* justify-content: flex-end; */
+}
+
+#button-filter {
+    align-self: flex-end;
+}
+
+#export-excel {
+    width: 200px;
+    /* float: right; */
+    margin-bottom: 10px;
+}
+
+#add-project {
+    width: 200px;
+    /* float: right; */
+}
