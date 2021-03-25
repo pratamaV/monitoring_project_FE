@@ -107,7 +107,7 @@
       <td>{{project.description}}</td>
       <td>{{project.coPM.username}}</td>
       <td>{{project.divisiUser.divisionName}}</td>
-      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
       <td>{{project.statusProject}}</td>
       <td>
         <select class="form-select" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
@@ -162,8 +162,8 @@
       <td>{{project.description}}</td>
       <td>{{project.coPM.username}}</td>
       <td>{{project.divisiUser.divisionName}}</td>
-      <td>{{project.weight*100}}%</td>
-      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.weight | number : '1.2-2'}}</td>
+      <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
       <td>{{project.statusProject}}</td>
       <td>
         <select class="form-select" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">

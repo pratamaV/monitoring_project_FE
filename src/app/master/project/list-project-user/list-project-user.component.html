@@ -27,7 +27,7 @@
       <td>{{project.benefit}}</td>
       <td>{{project.description}}</td>
       <td>{{project.coPM.username}}</td>
-      <td>{{project.prosentaseProject*100}}%</td>
+      <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
       <td>{{project.statusProject}}</td>
       <td>
         <button (click)="getDetail(project)" class="btn btn-warning"><i class="fa fa-info"></i> Detail</button>&nbsp;

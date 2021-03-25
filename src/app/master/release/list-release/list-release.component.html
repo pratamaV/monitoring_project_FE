@@ -94,11 +94,11 @@
                                 <th scope="row">{{release.releaseCode}}</th>
                                 <td>{{release.releaseName}}</td>
                                 <td>{{release.score}}</td>
-                                <td>{{release.weight}}</td>
+                                <td>{{release.weight | number : '1.2-2'}}</td>
                                 <td>{{release.description}}</td>
                                 <td>{{release.status}}</td>
                                 <td>{{release.stage}}</td>
-                                <td>{{release.prosentaseRelease * 100}}%</td>
+                                <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
                                 <td>{{release.statusRelease}}</td>
                                 <td>
                                   <select class="form-select" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">

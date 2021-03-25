@@ -47,8 +47,8 @@
                 <td>{{user.divisiUser.divisionName}}</td>
                 <td>{{user.directorateUser}}</td>
                 <td>{{user.statusUser}}</td>
-                <td>{{user.totalWeight*100}}%</td>
-                <td>{{user.totalPerformance*100}}%</td>
+                <td>{{user.totalWeight*100 | number : '1.2-2'}}%</td>
+                <td>{{user.totalPerformance*100 | number : '1.2-2'}}%</td>
                 <!--              <td>-->
                 <!--                <button (click)="updateUser(user)" class="btn btn-dark">Detail Task</button>-->
                 <!--              </td>-->

@@ -85,8 +85,16 @@
     </div>
 
     <div class="form-group">
-      <input type="hidden" class="form-control" formControlName="actStartDate" id="actStartDate">
-      <input type="hidden" class="form-control" formControlName="actEndDate" id="actEndDate">
+      <label for="actStartDate">Actual Start Date</label>
+      <input type="date" class="form-control" formControlName="actStartDate" id="actStartDate">
+    </div>
+
+    <div class="form-group">
+      <label for="actEndDate">Actual End Date</label>
+      <input type="date" class="form-control" formControlName="actEndDate" id="actEndDate">
+    </div>
+
+    <div class="form-group">
       <input type="hidden" class="form-control" formControlName="release" id="release">
     </div>
     <button [disabled]="!taskForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>

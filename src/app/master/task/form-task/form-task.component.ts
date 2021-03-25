@@ -82,7 +82,7 @@ export class FormTaskComponent implements OnInit {
       this.taskForm.get('estEndDate').setValue(this.task.estEndDate);
       this.taskForm.get('actStartDate').setValue(this.task.actStartDate);
       this.taskForm.get('actEndDate').setValue(this.task.actEndDate);
-      this.taskForm.get('release').setValue(this.task.release);
+      this.taskForm.get('release').setValue(this.task.release.id);
     }
   }
 
