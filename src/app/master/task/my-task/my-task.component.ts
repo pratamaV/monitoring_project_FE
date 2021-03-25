@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2, TaskModel3, TaskModel4} from '../task.model';
-import {FormControl, FormGroup} from "@angular/forms";
-import * as XLSX from "xlsx";
-import Swal from "sweetalert2";
+import {FormControl, FormGroup} from '@angular/forms';
+import * as XLSX from 'xlsx';
+import Swal from 'sweetalert2';
+import {ProjectServiceService} from '../../project/project-service.service';
+import {UserModel} from '../../project/project.model';
+
 
 @Component({
   selector: 'app-my-task',
@@ -15,26 +18,47 @@ export class MyTaskComponent implements OnInit {
   taskForm: FormGroup;
   loadedTask: TaskModel2[] = [];
   task: TaskModel4;
+  paramNull = {
+    taskDoc: null,
+    statusDone: null,
+    releaseName: null,
+    projectName: null,
+    estStartDate: null
+  };
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   constructor(private taskService: TaskService,
+              private projectService: ProjectServiceService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.buildForm();
     this.role = localStorage.getItem('role');
     this.onGetTaskByUserId();
-    this.buildForm();
+
   }
 
   private buildForm(): void {
     this.taskForm  = new FormGroup({
-      taskDoc: new FormControl(null)
+      taskDoc: new FormControl(null),
+      statusDone: new FormControl(null),
+      releaseName: new FormControl(null),
+      projectName: new FormControl(null),
+      estStartDate: new FormControl(null),
+      estEndDate: new FormControl(null)
     });
   }
 
+  // tslint:disable-next-line:typedef
   onGetTaskByUserId() {
-    this.taskService.getTaskByUserId(localStorage.getItem('idUser'))
+    this.taskForm.get('taskDoc').setValue(null);
+    this.taskForm.get('statusDone').setValue(null);
+    this.taskForm.get('releaseName').setValue(null);
+    this.taskForm.get('projectName').setValue(null);
+    this.taskForm.get('estStartDate').setValue(null);
+    this.taskForm.get('estEndDate').setValue(null);
+    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
         this.loadedTask = data;
       }, error => {
@@ -42,6 +66,17 @@ export class MyTaskComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
+  onGetTaskByUserIdFilter(param) {
+    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
+      .subscribe(data => {
+        this.loadedTask = data;
+      }, error => {
+        alert(error);
+      });
+  }
+
+  // tslint:disable-next-line:typedef
   onDoneTask(task, idRelease){
     this.task = {
       id: task.id,
@@ -72,6 +107,7 @@ export class MyTaskComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
   onUploadDocument(postData, valid: boolean, id){
     if (valid) {
       this.taskService.uploadDocumentTask(postData, id)
@@ -84,6 +120,7 @@ export class MyTaskComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   processFile(imageInput: any) {
     if (imageInput.files.length > 0) {
       const file = imageInput.files[0];
@@ -91,6 +128,7 @@ export class MyTaskComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   downloadTaskDoc(taskCode){
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
       Swal.fire( 'Success', 'Document successfully downloaded' , 'success'  );
@@ -99,6 +137,7 @@ export class MyTaskComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   exportexcel() {
     /* table id is passed over here */
     const element = document.getElementById('excel-table');
