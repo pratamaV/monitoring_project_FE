@@ -94,26 +94,6 @@ export class TaskService {
   }
 
 
-  saveTask(postData: TaskModel, id: string) {
-    return new Observable((observer: Observer<TaskModel>) => {
-      if (id) {
-        this.http.put('/api/task?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
-          .subscribe((response: TaskModel) => {
-            observer.next(response);
-          }, (error) => {
-            observer.error(error);
-          });
-      } else {
-        this.http.post('/api/task?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
-          .subscribe((response: TaskModel) => {
-            observer.next(response);
-          }, (error) => {
-            observer.error(error);
-          });
-      }
-    });
-  }
-
   createTask(loadData: TaskModel) {
     const formData = new FormData();
     for (const key in loadData){
@@ -186,15 +166,4 @@ export class TaskService {
     });
   }
 
-  doneTask(id: string, postData) {
-    console.log('masuk yuk');
-    return new Observable((observer: Observer<TaskModel2>) => {
-        this.http.put(`/api/doneTask/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
-          .subscribe((response: TaskModel2) => {
-            observer.next(response);
-          }, (error) => {
-            observer.error(error);
-          });
-    });
-  }
 }

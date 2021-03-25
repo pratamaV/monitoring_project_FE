@@ -21,8 +21,10 @@
 
     <div class="form-group">
       <label for="assignedTo">Assign To</label>
-      <select class="form-select" formControlName="assignedTo" id="assignedTo" aria-label="Default select example">
-        <option *ngFor="let user of loadedUser"  [value]="user.id" [selected]="assignedToId===user.id" >{{user.username}}</option>
+      <select class="form-select" name="assignedTo" formControlName="assignedTo" id="assignedTo" [compareWith]="compareAssignedTo">
+        <option *ngFor="let user of loadedUser"  [ngValue]="user.id" [selected]="user.username === assignedTo">
+          {{user.username}}
+        </option>
       </select>
       <small class="form-text text-danger "
              *ngIf="form('assignedTo').invalid && form('assignedTo').dirty || form('assignedTo').touched">
