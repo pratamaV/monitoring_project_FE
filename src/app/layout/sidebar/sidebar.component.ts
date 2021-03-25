@@ -15,6 +15,13 @@ export class SidebarComponent implements OnInit {
   token = window.sessionStorage.getItem('token');
   tokenParse = JSON.parse(this.token);
   user = this.tokenParse.user;
+  paramNull = {
+    taskDoc: null,
+    statusDone: null,
+    releaseName: null,
+    projectName: null,
+    estStartDate: null
+  };
   constructor(private taskService: TaskService,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -24,7 +31,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onGetTaskByUserId() {
-    this.taskService.getTaskByUserId(localStorage.getItem('idUser'))
+    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe((data)  => {
         for (const task of data) {
           if (task.statusDone === 'Tidak'){

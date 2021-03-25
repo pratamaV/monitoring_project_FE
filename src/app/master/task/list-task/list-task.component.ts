@@ -8,6 +8,7 @@ import {ProjectServiceService} from '../../project/project-service.service';
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 
+
 @Component({
   selector: 'app-list-task',
   templateUrl: './list-task.component.html',
@@ -70,7 +71,6 @@ export class ListTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetFilterTask(param) {
-    console.log(param);
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
       .subscribe(data => {
         this.loadedTask = data;
