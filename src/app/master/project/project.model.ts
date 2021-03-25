@@ -24,6 +24,8 @@ export interface ProjectModel{
     statusProject: string;
     keyword: string;
     releaseList?: ReleaseModel[];
+    keyword: string;
+    departmentHead: UserModel;
 
 }
 
@@ -57,6 +59,10 @@ export interface ProjectModel2{
   categoryActivity: string;
   categoryInitiative: string;
   statusProject: string;
+  keyword: string;
+  departmentHead: {
+    id: string;
+  }
 
 }
 

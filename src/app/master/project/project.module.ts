@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ListProjectComponent } from './list-project/list-project.component';
 import { FormProjectComponent } from './form-project/form-project.component';
 import { DetailProjectComponent } from './detail-project/detail-project.component';
@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ListProjectUserComponent } from './list-project-user/list-project-user.component';
 import { DetailProjectUserComponent } from './detail-project-user/detail-project-user.component';
 import {SidebarModule} from "../../layout/sidebar/sidebar.module";
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -18,7 +19,9 @@ import {SidebarModule} from "../../layout/sidebar/sidebar.module";
         ProjectRoutingModule,
         FormsModule,
         ReactiveFormsModule,
-        SidebarModule
-    ]
+        SidebarModule,
+        SharedModule
+    ],
+    providers: [CurrencyPipe]
 })
 export class ProjectModule { }

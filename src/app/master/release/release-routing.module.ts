@@ -18,6 +18,7 @@ const routes: Routes = [
       role: [
         '01',
         '02',
+        '05'
       ]
     },
     component: FormReleaseComponent
@@ -29,6 +30,7 @@ const routes: Routes = [
       role: [
         '01',
         '02',
+        '05'
       ]
     },
     component: FormReleaseComponent

@@ -11,6 +11,7 @@ import {AuthService} from './AuthService';
 import {AuthGuardService} from './auth-guard.service';
 import {SidebarModule} from './layout/sidebar/sidebar.module';
 import {HomeComponent} from './master/home/home.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -26,7 +27,7 @@ import {HomeComponent} from './master/home/home.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    SidebarModule
+    SidebarModule,
   ],
   providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
