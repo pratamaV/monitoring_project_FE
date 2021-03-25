@@ -46,7 +46,8 @@ export class MyTaskComponent implements OnInit {
       releaseName: new FormControl(null),
       projectName: new FormControl(null),
       estStartDate: new FormControl(null),
-      estEndDate: new FormControl(null)
+      estEndDate: new FormControl(null),
+      prosentase: new FormControl(null)
     });
   }
 
@@ -151,4 +152,16 @@ export class MyTaskComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+  // tslint:disable-next-line:typedef
+  updateStatusDoneTask(id: string, param: any) {
+    this.taskService.updateStatusDoneTask(id, param).subscribe((response) => {
+      Swal.fire( 'Success', 'Update Status Task successfully' , 'success'  );
+    }, error => {
+      Swal.fire( 'Failed', 'Update Status Task failed' , 'error'  );
+    });
+  }
+
+  processText(param) {
+    this.taskForm.get('prosentase').setValue(param.prosentase);
+  }
 }
