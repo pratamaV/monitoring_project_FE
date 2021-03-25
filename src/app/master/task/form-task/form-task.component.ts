@@ -82,13 +82,11 @@ export class FormTaskComponent implements OnInit {
       this.taskForm.get('estEndDate').setValue(this.task.estEndDate);
       this.taskForm.get('actStartDate').setValue(this.task.actStartDate);
       this.taskForm.get('actEndDate').setValue(this.task.actEndDate);
-      this.taskForm.get('release').setValue(this.task.release);
+      this.taskForm.get('release').setValue(this.task.release.id);
     }
   }
 
   compareAssignedTo(c1: UserModel, c2: UserModel): boolean {
-    console.log('ini c1', c1);
-    console.log('ini c2', c2);
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
@@ -103,7 +101,7 @@ export class FormTaskComponent implements OnInit {
       taskName: postData.taskName,
       taskCode: postData.taskCode,
       assignedTo: {
-        id: postData.assignedTo
+        id: postData.assignedTo.id
       },
       score: postData.score,
       weight: postData.weight,
@@ -130,16 +128,15 @@ export class FormTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetAllUser() {
-    this.loadedUser = [];
     this.projectService.getAllUser()
       .subscribe(data => {
-        for (const user of data) {
-          if (user.userRole === '04'){
-            this.loadedUser.push(user);
-          }
-        }
+        this.loadedUser = data;
       }, error => {
         alert(error);
       });
+  }
+
+  onGolistTask() {
+    this.router.navigate(['/dashboard/task']);
   }
 }

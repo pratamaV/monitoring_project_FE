@@ -11,6 +11,11 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./list-project.component.css']
 })
 export class ListProjectComponent implements OnInit {
+
+  constructor(
+    private projectService: ProjectServiceService,
+    private router: Router
+  ) {}
   loadedProject: ProjectModel[] = [];
   loadedProjectResult: ProjectModel[] = [];
   filterForm: FormGroup;
@@ -26,10 +31,8 @@ export class ListProjectComponent implements OnInit {
   newData: any[] = [];
   projectStatus: string;
 
-  constructor(
-    private projectService: ProjectServiceService,
-    private router: Router
-  ) {}
+  searchByKeyword: string;
+
 
   ngOnInit(): void {
     this.buildForm();
@@ -87,8 +90,6 @@ export class ListProjectComponent implements OnInit {
       }
     );
   }
-
-  // tslint:disable-next-line:typedef
   onGetListRelease() {
     this.filterForm.get('direktorate').setValue(null);
     this.filterForm.get('divisi').setValue(null);
@@ -171,5 +172,27 @@ export class ListProjectComponent implements OnInit {
 
     /* save to file */
     XLSX.writeFile(wb, this.fileName);
+  }
+
+  searchLive() {
+    if (this.searchByKeyword === ''){
+      this.projectService.getAllProject().subscribe(
+        data => {
+          this.loadedProject = data;
+        },
+        error => {
+          alert(error);
+        }
+      );
+    } else {
+      this.projectService.getProjectByKeyword(this.searchByKeyword).subscribe(
+        data => {
+          this.loadedProject = data;
+        },
+        error => {
+          alert(error);
+        }
+      );
+    }
   }
 }

@@ -20,7 +20,7 @@
       </tr>
       <tr>
         <th scope="col">Prosentase Project</th>
-        <td>{{projectModel.prosentaseProject}}</td>
+        <td>{{projectModel.prosentaseProject*100 | number : '1.2-2'}}%</td>
       </tr>
       <tr>
         <th scope="col">Status Project</th>
@@ -48,7 +48,7 @@
         <td>{{release.releaseName}}</td>
         <td>{{release.status}}</td>
         <td>{{release.stage}}</td>
-        <td>{{release.prosentaseRelease*100}}%</td>
+        <td>{{release.prosentaseRelease*100 | number : '1.2-2'}}%</td>
         <td>
           <button (click)="getTaskByReleaseId(release.id)" class="btn btn-warning">Detail</button>
         </td>
@@ -69,7 +69,7 @@
     <tr *ngFor="let task of taskModel; let i = index">
       <td>{{task.taskCode}}</td>
       <td>{{task.taskName}}</td>
-      <td>{{task.taskProsentase*100}}%</td>
+      <td>{{task.taskProsentase*100 | number : '1.2-2'}}%</td>
       <td>{{task.assignedTo.username}}</td>
     </tr>
     </tbody>

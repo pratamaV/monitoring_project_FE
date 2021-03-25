@@ -91,9 +91,9 @@
                                 <td>{{task.taskName}}</td>
                                 <td>{{task.assignedTo.username}}</td>
                                 <td>{{task.score}}</td>
-                                <td>{{task.weight}}</td>
+                                <td>{{task.weight | number : '1.2-2'}}</td>
                                 <td>{{task.statusDone}}</td>
-                                <td>{{task.taskProsentase * 100}}%</td>
+                                <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
                                 <td>{{task.estStartDate | date}}</td>
                                 <td>{{task.estEndDate | date}}</td>
                                 <td>{{task.actStartDate | date}}</td>

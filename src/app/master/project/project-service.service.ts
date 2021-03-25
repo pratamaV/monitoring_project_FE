@@ -284,4 +284,22 @@ export class ProjectServiceService {
         );
     });
   }
+
+  getProjectByKeyword(keyword): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http
+        .get(
+          `api/projectByKeyword/${keyword}?access_token=` +
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
+        )
+        .subscribe(
+          (data: ProjectModel[]) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+          }
+        );
+    });
+  }
 }

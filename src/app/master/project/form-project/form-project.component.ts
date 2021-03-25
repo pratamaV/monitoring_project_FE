@@ -3,9 +3,8 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {ProjectServiceService} from '../project-service.service';
 import {DivisionModel, ProjectModel, ProjectModel2, UserModel} from '../project.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import Swal from "sweetalert2";
-import { CurrencyPipe } from '@angular/common';
-// import { CustomCurrencyRpPipe } from '../../../shared/pipes/custom-currency.pipe' 
+import Swal from 'sweetalert2';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-form-project',
@@ -85,7 +84,7 @@ export class FormProjectComponent implements OnInit {
       weight: new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
       categoryInitiative: new FormControl(null, [Validators.required]),
-      statusProject: new FormControl('aktif')
+      statusProject: new FormControl('Active')
     });
   }
 
@@ -109,6 +108,13 @@ export class FormProjectComponent implements OnInit {
     })
   }
 
+  compareDivision(c1: DivisionModel, c2: DivisionModel): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  compareUser(c1: UserModel, c2: UserModel): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
 
   onSaveProject(postData, valid: boolean) {
     
@@ -139,18 +145,18 @@ export class FormProjectComponent implements OnInit {
       projectCode: postData.projectCode,
       projectName: postData.projectName,
       pmo: {
-        id: postData.pmo
+        id: postData.pmo.id
       },
       pm: {
-        id: postData.pm
+        id: postData.pm.id
       },
       benefit: postData.benefit,
       description: postData.description,
       coPM: {
-        id: postData.coPM
+        id: postData.coPM.id
       },
       divisiUser: {
-        id: postData.divisiUser
+        id: postData.divisiUser.id
       },
       directorateUser: postData.directorateUser,
       status: postData.status,
@@ -162,20 +168,20 @@ export class FormProjectComponent implements OnInit {
       score: postData.score,
       weight: postData.weight,
       categoryActivity: postData.categoryActivity,
-      categoryInitiative: postData.categoryActivity,
+      categoryInitiative: postData.categoryInitiative,
       statusProject: postData.statusProject,
       keyword: postData.keyword,
       departmentHead: {
-        id: postData.departmentHead
+        id: postData.departmentHead.id
       }
     };
     if (valid) {
       this.projectService.saveProject(this.project, this.id)
         .subscribe(response => {
-          Swal.fire( 'Success', 'Project that you input was successfully saved' , 'success'  );
+          Swal.fire('Success', 'Project that you input was successfully saved', 'success');
           this.router.navigate(['/dashboard/project']);
         }, error => {
-          Swal.fire( 'Failed', 'Failed to save project' , 'error'  );
+          Swal.fire('Failed', 'Failed to save project', 'error');
         });
     }
   }
@@ -185,17 +191,20 @@ export class FormProjectComponent implements OnInit {
       .subscribe(data => {
         this.loadedUser = data;
         for (const user of this.loadedUser) {
-          if (user.userRole == '01') {
-            this.userPMO.push(user)
-          } if (user.userRole == '02'){
-            this.userPM.push(user)
-          } if (user.userRole == '03') {
-            this.userCoPM.push(user)
-          } if (user.userRole == '05') {
-            this.userDepartmentHead.push(user)
+          if (user.userRole === '01') {
+            this.userPMO.push(user);
+          }
+          if (user.userRole === '02') {
+            this.userPM.push(user);
+          }
+          if (user.userRole === '03') {
+            this.userCoPM.push(user);
+          }
+          if (user.userRole === '05') {
+            this.userDepartmentHead.push(user);
           }
         }
-        
+
       }, error => {
         alert(error);
       });
@@ -229,8 +238,8 @@ export class FormProjectComponent implements OnInit {
       this.projectForm.get('budget').setValue(this.project.budget);
       this.projectForm.get('contracted_value').setValue(this.project.contracted_value);
       this.projectForm.get('paymentRealization').setValue(this.project.paymentRealization);
-      this.projectForm.get('keyword').setValue(this.project.keyword)
-      this.projectForm.get('departmentHead').setValue(this.project.departmentHead)
+      this.projectForm.get('keyword').setValue(this.project.keyword);
+      this.projectForm.get('departmentHead').setValue(this.project.departmentHead);
       this.projectForm.get('score').setValue(this.project.score);
       this.projectForm.get('weight').setValue(this.project.weight);
       this.projectForm.get('categoryActivity').setValue(this.project.categoryActivity);
@@ -244,6 +253,6 @@ export class FormProjectComponent implements OnInit {
   }
 
   onGolistProject() {
-    this.router.navigate(['/dashboard/project'])
+    this.router.navigate(['/dashboard/project']);
   }
 }
