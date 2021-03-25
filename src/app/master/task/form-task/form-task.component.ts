@@ -135,4 +135,8 @@ export class FormTaskComponent implements OnInit {
         alert(error);
       });
   }
+
+  onGolistTask() {
+    this.router.navigate(['/dashboard/task']);
+  }
 }
