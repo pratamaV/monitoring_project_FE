@@ -24,9 +24,7 @@ export interface ProjectModel{
     statusProject: string;
     keyword: string;
     releaseList?: ReleaseModel[];
-    keyword: string;
     departmentHead: UserModel;
-
 }
 
 export interface ProjectModel2{
@@ -62,7 +60,7 @@ export interface ProjectModel2{
   keyword: string;
   departmentHead: {
     id: string;
-  }
+  };
 
 }
 
