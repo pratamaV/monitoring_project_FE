@@ -17,6 +17,7 @@ const routes: Routes = [
         '02',
         '03',
         '04',
+        '05'
       ]
     },
     component: ListProjectComponent
@@ -28,6 +29,7 @@ const routes: Routes = [
       role: [
         '01',
         '02',
+        '05'
       ]
     },
     component: FormProjectComponent
@@ -39,6 +41,7 @@ const routes: Routes = [
       role: [
         '01',
         '02',
+        '05'
       ]
     },
     component: FormProjectComponent

@@ -4,6 +4,7 @@ import {ProjectServiceService} from '../project-service.service';
 import {DivisionModel, ProjectModel, ProjectModel2, UserModel} from '../project.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from "sweetalert2";
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-project',
@@ -17,6 +18,7 @@ export class FormProjectComponent implements OnInit {
   userPMO: UserModel[] = [];
   userPM: UserModel[] = [];
   userCoPM: UserModel[] = [];
+  userDepartmentHead: UserModel[] = [];
   loadedDivision: DivisionModel[] = [];
   id: string;
   pmId: '';
@@ -26,11 +28,13 @@ export class FormProjectComponent implements OnInit {
 
   constructor(private projectService: ProjectServiceService,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private currencyPipe : CurrencyPipe) {
   }
 
   ngOnInit(): void {
     this.buildForm();
+    // this.currencyPipes();
     this.onGetAllUser();
     this.onGetAllDivision();
     this.route.params.subscribe(params => {
@@ -63,11 +67,11 @@ export class FormProjectComponent implements OnInit {
       status: new FormControl(null, [Validators.required]),
       targetLive: new FormControl(null, [Validators.required]),
       prosentaseProject: new FormControl(0),
-      budget: new FormControl(0),
-      contracted_value: new FormControl(0),
+      budget: new FormControl(null, [Validators.pattern('^[0-9]*$')]),
+      contracted_value: new FormControl(null, [Validators.pattern('^[0-9]*$')]),
+      paymentRealization: new FormControl(null, [Validators.pattern('^[0-9]*$')]),
       keyword : new FormControl(null),
-      bagian : new FormControl(null),
-      paymentRealization: new FormControl(0),
+      departmentHead : new FormControl(null),
       score: new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|0[1-9]|10)$')]),
       weight: new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
@@ -75,6 +79,16 @@ export class FormProjectComponent implements OnInit {
       statusProject: new FormControl('aktif')
     });
   }
+
+  // currencyPipes(){
+  //   this.projectForm.valueChanges.subscribe( form => {
+  //     if(form.budget){
+  //       this.projectForm.patchValue({
+  //         budget : this.currencyPipe.transform(form.budget.replace('/\D\g', '').replace('/^0+/', ''), 'USD', 'symbol', '1.0-0')
+  //       }, {emitEvent: false})
+  //     }
+  //   })
+  // }
 
 
   onSaveProject(postData, valid: boolean) {
@@ -107,7 +121,11 @@ export class FormProjectComponent implements OnInit {
       weight: postData.weight,
       categoryActivity: postData.categoryActivity,
       categoryInitiative: postData.categoryActivity,
-      statusProject: postData.statusProject
+      statusProject: postData.statusProject,
+      keyword: postData.keyword,
+      departmentHead: {
+        id: postData.departmentHead
+      }
     };
     if (valid) {
       this.projectService.saveProject(this.project, this.id)
@@ -131,6 +149,8 @@ export class FormProjectComponent implements OnInit {
             this.userPM.push(user)
           } if (user.userRole == '03') {
             this.userCoPM.push(user)
+          } if (user.userRole == '05') {
+            this.userDepartmentHead.push(user)
           }
         }
         
@@ -167,8 +187,8 @@ export class FormProjectComponent implements OnInit {
       this.projectForm.get('budget').setValue(this.project.budget);
       this.projectForm.get('contracted_value').setValue(this.project.contracted_value);
       this.projectForm.get('paymentRealization').setValue(this.project.paymentRealization);
-      // this.projectForm.get('keyword').setValue(this.project.keyword)
-      // this.projectForm.get('bagian').setValue(this.project.bagian)
+      this.projectForm.get('keyword').setValue(this.project.keyword)
+      this.projectForm.get('departmentHead').setValue(this.project.departmentHead)
       this.projectForm.get('score').setValue(this.project.score);
       this.projectForm.get('weight').setValue(this.project.weight);
       this.projectForm.get('categoryActivity').setValue(this.project.categoryActivity);

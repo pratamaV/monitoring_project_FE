@@ -17,6 +17,7 @@ const routes: Routes = [
         '01',
         '02',
         '03',
+        '05'
       ]
     },
     component: ListTaskComponent
@@ -28,6 +29,7 @@ const routes: Routes = [
       role: [
         '01',
         '02',
+        '05'
       ]
     },
     component: FormTaskComponent
@@ -39,6 +41,7 @@ const routes: Routes = [
       role: [
         '01',
         '02',
+        '05'
       ]
     },
     component: FormTaskComponent
@@ -51,6 +54,7 @@ const routes: Routes = [
         '01',
         '02',
         '03',
+        '05'
       ]
     },
     component: DetailTaskComponent
@@ -63,6 +67,7 @@ const routes: Routes = [
         '01',
         '02',
         '03',
+        '05'
       ]
     },
     component: UserTaskComponent

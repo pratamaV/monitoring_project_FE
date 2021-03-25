@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ListProjectComponent } from './list-project/list-project.component';
 import { FormProjectComponent } from './form-project/form-project.component';
 import { DetailProjectComponent } from './detail-project/detail-project.component';
@@ -21,6 +21,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
         ReactiveFormsModule,
         SidebarModule,
         SharedModule
-    ]
+    ],
+    providers: [CurrencyPipe]
 })
 export class ProjectModule { }
