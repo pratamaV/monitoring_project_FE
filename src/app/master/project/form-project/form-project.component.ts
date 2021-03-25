@@ -3,7 +3,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {ProjectServiceService} from '../project-service.service';
 import {DivisionModel, ProjectModel, ProjectModel2, UserModel} from '../project.model';
 import {ActivatedRoute, Router} from '@angular/router';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 import {CurrencyPipe} from '@angular/common';
 
 @Component({
@@ -196,8 +196,8 @@ export class FormProjectComponent implements OnInit {
       this.projectForm.get('budget').setValue(this.project.budget);
       this.projectForm.get('contracted_value').setValue(this.project.contracted_value);
       this.projectForm.get('paymentRealization').setValue(this.project.paymentRealization);
-      this.projectForm.get('keyword').setValue(this.project.keyword)
-      this.projectForm.get('departmentHead').setValue(this.project.departmentHead)
+      this.projectForm.get('keyword').setValue(this.project.keyword);
+      this.projectForm.get('departmentHead').setValue(this.project.departmentHead);
       this.projectForm.get('score').setValue(this.project.score);
       this.projectForm.get('weight').setValue(this.project.weight);
       this.projectForm.get('categoryActivity').setValue(this.project.categoryActivity);
@@ -211,6 +211,6 @@ export class FormProjectComponent implements OnInit {
   }
 
   onGolistProject() {
-    this.router.navigate(['/dashboard/project'])
+    this.router.navigate(['/dashboard/project']);
   }
 }

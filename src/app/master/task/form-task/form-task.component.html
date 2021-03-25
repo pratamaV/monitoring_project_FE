@@ -80,9 +80,13 @@
     </div>
 
     <div class="form-group">
+      <label for="taskProsentase">Prosentase Task</label>
+      <input type="text" class="form-control" formControlName="taskProsentase" id="taskProsentase">
+    </div>
+
+    <div class="form-group">
       <input type="hidden" class="form-control" formControlName="actStartDate" id="actStartDate">
       <input type="hidden" class="form-control" formControlName="actEndDate" id="actEndDate">
-      <input type="hidden" class="form-control" formControlName="taskProsentase" id="taskProsentase">
       <input type="hidden" class="form-control" formControlName="release" id="release">
     </div>
     <button [disabled]="!taskForm.valid" type="submit" class="btn btn-primary mt-2">Submit</button>
