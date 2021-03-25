@@ -26,8 +26,8 @@
 
                     <div class="form-group">
                         <label for="pmo">PMO <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="pmo" id="pmo" aria-label="Default select example">
-                        <option *ngFor="let user of userPMO"  [value]="user.id" [selected]="pmoId===user.id" >{{user.username}}</option>
+                        <select class="form-select" formControlName="pmo" id="pmo" name="pmo" [compareWith]="compareUser" aria-label="Default select example">
+                        <option *ngFor="let user of userPMO"  [ngValue]="user" [selected]="pmoId===user.id" >{{user.username}}</option>
                       </select>
                         <small class="form-text text-danger " *ngIf="form('pmo').invalid && form('pmo').dirty || form('pmo').touched">
                         <div *ngIf="form('pmo').errors?.required">
@@ -38,8 +38,8 @@
 
                     <div class="form-group">
                         <label for="pm">PM <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="pm" id="pm" aria-label="Default select example">
-                      <option *ngFor="let user of userPM"  [value]="user.id" [selected]="pmId===user.id" >{{user.username}}</option>
+                        <select class="form-select" formControlName="pm" id="pm" [compareWith]="compareUser" aria-label="Default select example">
+                      <option *ngFor="let user of userPM"  [ngValue]="user" >{{user.username}}</option>
                     </select>
                         <small class="form-text text-danger " *ngIf="form('pm').invalid && form('pm').dirty || form('pm').touched">
                       <div *ngIf="form('pm').errors?.required">
@@ -50,8 +50,8 @@
 
                     <div class="form-group">
                         <label for="coPM">CoPM <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="coPM" id="coPM" aria-label="Default select example">
-                        <option *ngFor="let user of userCoPM"  [value]="user.id" [selected]="coPMId===user.id" >{{user.username}}</option>
+                        <select class="form-select" formControlName="coPM" id="coPM" [compareWith]="compareUser" aria-label="Default select example">
+                        <option *ngFor="let user of userCoPM"  [ngValue]="user" [selected]="coPMId===user.id" >{{user.username}}</option>
                       </select>
                         <small class="form-text text-danger " *ngIf="form('coPM').invalid && form('coPM').dirty || form('coPM').touched">
                         <div *ngIf="form('coPM').errors?.required">
@@ -62,8 +62,8 @@
 
                     <div class="form-group">
                         <label for="departmentHead">Department Head <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="departmentHead" id="departmentHead" aria-label="Default select example">
-                      <option *ngFor="let user of userDepartmentHead"  [value]="user.id" >{{user.username}}</option>
+                        <select class="form-select" formControlName="departmentHead" id="departmentHead" [compareWith]="compareUser" aria-label="Default select example">
+                      <option *ngFor="let user of userDepartmentHead"  [ngValue]="user" >{{user.username}}</option>
                       </select>
                         <small class="form-text text-danger " *ngIf="form('departmentHead').invalid && form('departmentHead').dirty || form('departmentHead').touched">
                       <div *ngIf="form('departmentHead').errors?.required">
@@ -74,8 +74,8 @@
 
                     <div class="form-group">
                         <label for="divisiUser">Divisi Owner <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="divisiUser" id="divisiUser" aria-label="Default select example">
-                          <option *ngFor="let division of loadedDivision" [value]="division.id" [selected]="divisionId===division.id" >{{division.divisionName}}</option>
+                        <select class="form-select" formControlName="divisiUser" id="divisiUser" [compareWith]="compareDivision" aria-label="Default select example">
+                          <option *ngFor="let division of loadedDivision" [ngValue]="division" [selected]="divisionId===division.id" >{{division.divisionName}}</option>
                         </select>
                         <small class="form-text text-danger " *ngIf="form('divisiUser').invalid && form('divisiUser').dirty || form('divisiUser').touched">
                           <div *ngIf="form('divisiUser').errors?.required">

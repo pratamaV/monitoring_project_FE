@@ -4,6 +4,7 @@ import {ReleaseService} from '../release.service';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReleaseModel} from '../release.model';
 import Swal from 'sweetalert2';
+import {UserModel} from '../../project/project.model';
 
 @Component({
   selector: 'app-form-release',
@@ -52,7 +53,7 @@ export class FormReleaseComponent implements OnInit {
       estEnddate: new FormControl(null),
       actStartdate: new FormControl(null),
       actEnddate: new FormControl(null),
-      statusRelease: new FormControl('aktif'),
+      statusRelease: new FormControl('Active'),
       project: new FormControl(localStorage.getItem('projectId'))
     });
   }

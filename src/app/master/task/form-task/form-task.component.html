@@ -22,7 +22,7 @@
     <div class="form-group">
       <label for="assignedTo">Assign To</label>
       <select class="form-select" name="assignedTo" formControlName="assignedTo" id="assignedTo" [compareWith]="compareAssignedTo">
-        <option *ngFor="let user of loadedUser"  [ngValue]="user.id" [selected]="user.username === assignedTo">
+        <option *ngFor="let user of loadedUser"  [ngValue]="user">
           {{user.username}}
         </option>
       </select>
