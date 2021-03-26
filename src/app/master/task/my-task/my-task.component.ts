@@ -164,4 +164,8 @@ export class MyTaskComponent implements OnInit {
   processText(param) {
     this.taskForm.get('prosentase').setValue(param.prosentase);
   }
+
+  onGoDetailTask(id: string) {
+    this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
+  }
 }
