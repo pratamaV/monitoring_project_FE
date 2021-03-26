@@ -25,16 +25,24 @@ export class FormProjectComponent implements OnInit {
   pmoId: '';
   coPMId: '';
   divisionId: '';
+  split: any;
+  join1: any;
+  match : any;
+  join2: any;
+  fixBudget: number;
+  fixContractedValue: number;
+  fixPaymentRealization: number;
 
   constructor(private projectService: ProjectServiceService,
               private router: Router,
               private route: ActivatedRoute,
-              private currencyPipe: CurrencyPipe) {
+              private currencyPipe : CurrencyPipe              
+              ) {
   }
 
   ngOnInit(): void {
     this.buildForm();
-    // this.currencyPipes();
+    this.currencyPipes();
     this.onGetAllUser();
     this.onGetAllDivision();
     this.route.params.subscribe(params => {
@@ -67,11 +75,11 @@ export class FormProjectComponent implements OnInit {
       status: new FormControl(null, [Validators.required]),
       targetLive: new FormControl(null, [Validators.required]),
       prosentaseProject: new FormControl(0),
-      budget: new FormControl(null, [Validators.pattern('^[0-9]*$')]),
-      contracted_value: new FormControl(null, [Validators.pattern('^[0-9]*$')]),
-      paymentRealization: new FormControl(null, [Validators.pattern('^[0-9]*$')]),
-      keyword: new FormControl(null),
-      departmentHead: new FormControl(null),
+      budget: new FormControl(null),
+      contracted_value: new FormControl(null),
+      paymentRealization: new FormControl(null),
+      keyword : new FormControl(null),
+      departmentHead : new FormControl(null),
       score: new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|0[1-9]|10)$')]),
       weight: new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
@@ -80,15 +88,26 @@ export class FormProjectComponent implements OnInit {
     });
   }
 
-  // currencyPipes(){
-  //   this.projectForm.valueChanges.subscribe( form => {
-  //     if(form.budget){
-  //       this.projectForm.patchValue({
-  //         budget : this.currencyPipe.transform(form.budget.replace('/\D\g', '').replace('/^0+/', ''), 'USD', 'symbol', '1.0-0')
-  //       }, {emitEvent: false})
-  //     }
-  //   })
-  // }
+  currencyPipes(){
+    this.projectForm.valueChanges.subscribe( form => {
+      if(form.budget){
+        this.projectForm.patchValue({
+          budget : this.currencyPipe.transform(form.budget.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
+        }, {emitEvent: false})
+      } 
+      if(form.contracted_value){
+        this.projectForm.patchValue({
+          contracted_value : this.currencyPipe.transform(form.contracted_value.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
+        }, {emitEvent: false})
+      }
+      if(form.paymentRealization){
+        this.projectForm.patchValue({
+          paymentRealization : this.currencyPipe.transform(form.paymentRealization.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
+        }, {emitEvent: false})
+      }
+    })
+  }
+
   compareDivision(c1: DivisionModel, c2: DivisionModel): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
@@ -98,6 +117,29 @@ export class FormProjectComponent implements OnInit {
   }
 
   onSaveProject(postData, valid: boolean) {
+    
+    if(postData.budget){
+      this.split = postData.budget.split(',')
+      this.join1 = this.split.join('')
+      this.match = this.join1.match(/\d/g)
+      this.join2 = this.match.join('')
+      this.fixBudget = parseInt(this.join2)
+    } 
+    if(postData.contracted_value){
+      this.split = postData.contracted_value.split(',')
+      this.join1 = this.split.join('')
+      this.match = this.join1.match(/\d/g)
+      this.join2 = this.match.join('')
+      this.fixContractedValue = parseInt(this.join2)
+    }
+    if(postData.paymentRealization){
+      this.split = postData.paymentRealization.split(',')
+      this.join1 = this.split.join('')
+      this.match = this.join1.match(/\d/g)
+      this.join2 = this.match.join('')
+      this.fixPaymentRealization = parseInt(this.join2)
+    }
+
     this.project = {
       id: postData.id,
       projectCode: postData.projectCode,
@@ -120,9 +162,9 @@ export class FormProjectComponent implements OnInit {
       status: postData.status,
       targetLive: postData.targetLive,
       prosentaseProject: postData.prosentaseProject,
-      budget: postData.budget,
-      contracted_value: postData.contracted_value,
-      paymentRealization: postData.paymentRealization,
+      budget: this.fixBudget,
+      contracted_value: this.fixContractedValue,
+      paymentRealization: this.fixPaymentRealization,
       score: postData.score,
       weight: postData.weight,
       categoryActivity: postData.categoryActivity,

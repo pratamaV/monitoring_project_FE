@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
-import {ReleaseModel, ReleaseModel2} from '../release/release.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {TaskModel, TaskModel2, TaskModel3} from './task.model';
-import {ProjectModel, ProjectModel2} from '../project/project.model';
 
 @Injectable({
   providedIn: 'root'
@@ -139,8 +137,8 @@ export class TaskService {
   }
 
   getTaskByUserId(id, param): Observable<TaskModel2[]> {
-    let estStartDateString = param.estStartDate;
-    let estEndDateString = param.estEndDate;
+    const estStartDateString = param.estStartDate;
+    const estEndDateString = param.estEndDate;
     // if (param.estStartDate != null) {
     //   estStartDateString = this.datepipe.transform(param.estStartDate, 'yyyy-MM-dd');
     // }
@@ -243,4 +241,23 @@ export class TaskService {
     });
   }
 
+  updateStatusDoneTask(id: string, param: any) {
+    const prosentase = param.prosentase / 100;
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    console.log(prosentase);
+    const formData = new FormData();
+    // @ts-ignore
+    formData.append('prosentase', prosentase);
+    const url = `/api/doneTaskNew/${id}`;
+    return new Observable((observer: Observer<TaskModel2>) => {
+      this.http.put(url, formData, header)
+        .subscribe((response: TaskModel2) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
 }

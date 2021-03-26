@@ -151,12 +151,12 @@
                     <div class="form-group">
                         <label for="budget">Budget</label>
                         <input type="text" class="form-control" formControlName="budget" id="budget">
-                        <!-- <input type="text" class="form-control" formControlName="budget" id="budget" [value]="projectForm.get('budget').value | currency"> -->
-                        <small class="form-text text-danger" *ngIf="form('budget').invalid && form('budget').dirty || form('budget').touched">
+                        <!-- <input type="text" class="form-control" formControlName="budget" id="budget" [value]="projectForm.get('budget').value | customCurrencyRp"> -->
+                        <!-- <small class="form-text text-danger" *ngIf="form('budget').invalid && form('budget').dirty || form('budget').touched">
                           <div *ngIf="form('budget').errors?.pattern">
                             Harus menggunakan angka
                           </div>
-                        </small>
+                        </small> -->
                     </div>
 
                     <div class="form-group">

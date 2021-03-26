@@ -63,7 +63,7 @@
         <th scope="col">Est. End Date</th>
         <th scope="col">Act. End Date</th>
         <th scope="col">Task Document</th>
-        <th scope="col">Upload Document</th>
+<!--        <th scope="col">Upload Document</th>-->
         <th scope="col">Action</th>
       </tr>
       </thead>
@@ -88,11 +88,9 @@
         <td>
           <form [formGroup]="taskForm" method="post"
                        (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
-
-          <!-- <label class="image-upload-container btn btn-bwm btn-sm" style="text-align: left"> -->
-          <!-- <small style="color: red">Select Image *max file 10MB</small> -->
           <div class="col-12 col-xs-6">
             <div class="row">
+              <h7>Upload Document</h7>
               <div class="input-group-sm col">
                 <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)"
                        class="form-control">
@@ -108,13 +106,29 @@
           <!-- </label> -->
           <small style="color: red">*max file 10MB</small>
         </form>
+          <form [formGroup]="taskForm" method="POST"
+                (ngSubmit)="updateStatusDoneTask(task.id,taskForm.value)">
+            <div class="col-12 col-xs-6">
+              <div class="row">
+                <div class="input-group-sm col">
+                  <input formControlName="prosentase" type="text" (change)="processText(taskForm.value)"
+                         class="form-control">
+                </div>
+                <div class="input-group-append col-2" style="margin-left: -20px;">
+                  <button [disabled]="task.statusDone==='Ya'|| role ==='03'"  type="submit"
+                          class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="Upload"><i class="fa fa-check"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
 
         </td>
-        <td>
-          <button [disabled]="task.statusDone==='Ya'|| role ==='03'" (click)="onDoneTask(task, task.release.id)"
-                  class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i
-            class="fa fa-check"></i></button>
-        </td>
+<!--        <td>-->
+<!--          <button [disabled]="task.statusDone==='Ya'|| role ==='03'" (click)="onDoneTask(task, task.release.id)"-->
+<!--                  class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i-->
+<!--            class="fa fa-check"></i></button>-->
+<!--        </td>-->
       </tr>
       </tbody>
     </table>
