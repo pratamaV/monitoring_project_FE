@@ -17,17 +17,30 @@ td {
 }
 
 #button-atas {
-    align-self: flex-end;
-    justify-content: space-around;
+    float: right;
+    /* align-self: flex-end;
+    justify-content: space-around; */
 }
 
 #export-excel {
-    width: 200px;
+    /* width: 200px; */
     /* float: right; */
     /* margin-right: 10px; */
 }
 
 #add-project {
-    width: 200px;
+    /* width: 200px; */
     /* float: right; */
+}
+
+#search {
+    margin-top: 30px;
+}
+
+.table-responsive {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
