@@ -82,10 +82,10 @@ export class FormReleaseComponent implements OnInit {
     if (valid) {
       this.releaseService.saveRelease(this.release, this.id)
         .subscribe(response => {
-          Swal.fire( 'Success', 'Release that you input was successfully saved' , 'success'  );
+          Swal.fire( 'Success', 'Release berhasil disimpan' , 'success'  );
           this.router.navigate(['/dashboard/release']);
         }, error => {
-          Swal.fire( 'Failed', 'Failed to save release' , 'error'  );
+          Swal.fire( 'Failed', 'Gagal menyimpan release' , 'error'  );
         });
     }
   }
