@@ -57,7 +57,7 @@ export class FormUserComponent implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       divisiUser: new FormControl(null, [Validators.required]),
       directorateUser: new FormControl(null, [Validators.required]),
-      password: new FormControl(null, [Validators.required]),
+      password: new FormControl(null, [Validators.required, Validators.pattern(/(?=.*?[0-9]).{8,}/)]),
       confirmPassword: new FormControl(null, [Validators.required]),
       statusUser: new FormControl('aktif'),
       totalWeight: new FormControl(0),
@@ -65,11 +65,15 @@ export class FormUserComponent implements OnInit {
     });
   }
 
+  compareDivision(c1: DivisionModel, c2: DivisionModel): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
   passwordMatch() {
     console.log(this.passwordFirst);
     console.log(this.passwordSecond);
     if (this.passwordSecond !== this.passwordFirst) {
-      this.errorPassword = 'Password does not match';
+      this.errorPassword = 'Password tidak sesuai';
       this.isErrorValidation = true;
     } else {
       this.isErrorValidation = false;
@@ -83,7 +87,7 @@ export class FormUserComponent implements OnInit {
       userRole: postData.userRole,
       email: postData.email,
       divisiUser: {
-        id: postData.divisiUser
+        id: postData.divisiUser.id
       },
       directorateUser: postData.directorateUser,
       password: postData.password,
@@ -94,10 +98,10 @@ export class FormUserComponent implements OnInit {
     if (valid) {
       this.userService.saveUser(this.user, this.user.id)
         .subscribe(response => {
-          Swal.fire( 'Success', 'User that you input was successfully saved' , 'success'  );
+          Swal.fire( 'Success', 'User berhasil ditambahkan' , 'success'  );
           this.router.navigate(['/dashboard/user']);
         }, error => {
-          Swal.fire( 'Failed', 'Failed to save user' , 'error'  );
+          Swal.fire( 'Failed', 'Gagal menambahkan user' , 'error'  );
         });
     }
   }
