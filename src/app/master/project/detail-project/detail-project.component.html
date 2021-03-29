@@ -2,141 +2,131 @@
 <div class="card">
 
     <div class="container-sm">
-        <div class="row">
-            <div class="col-md-12 col-md-offset-1">
-                <div class="panel panel-default panel-table">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-md-12 col-md-offset-1">
-                                <div class="panel panel-default panel-table">
-                                    <div class="panel-heading">
-                                        <div class="row">
-
-                                            <div class="col col-xs-6 mt-3 mb-3 text-right">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <!-- <div class= "col col-lg-12">   -->
-                                        <div class="panel panel-default panel-table col-lg-12">
-                                            <div class="panel-heading">
-                                                <div class="col col-xs-12">
-                                                    <div class="col col-xs-6 mt-3 mb-3 text-left">
-                                                        <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Detail Project {{project.projectName}}</h4>
-                                                    </div>
-                                                </div>
-                                                <br>
-                                                <div class="row">
-                                                    <div class="col col-xs-6 mt-3 mb-3">
-                                                        <div class="panel-body" style="overflow-x:auto;">
-                                                            <table class="table table-striped ">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Project Code</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.projectCode}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Project Name</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.projectName}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>PMO</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.pmo.username}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>PM</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.pm.username}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Benefit</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.benefit}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Description</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.description}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Category Initiative</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.categoryInitiative}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Category Activity</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.categoryActivity}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Status Project</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.statusProject}}</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col col-xs-6 mt-3 mb-3">
-                                                        <div class="panel-body" style="overflow-x:auto;">
-                                                            <table class="table table-striped ">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Directorate User</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.directorateUser}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Target Live</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.targetLive | date}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Prosentase Project</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.prosentaseProject*100}}%</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Budget</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.budget | currency:'Rp.'}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Contracted Value</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.contracted_value | currency:'Rp.'}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Payment Realization</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.paymentRealization | currency:'Rp.'}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Weight</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.weight}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>User</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.coPM.username}}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Divisi User</td>
-                                                                        <td>:</td>
-                                                                        <td>{{project.divisiUser.divisionName}}</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="panel panel-default panel-table col-lg-12">
+            <div class="panel-heading">
+                <div class="col col-xs-6 mt-4 mb-3 text-left">
+                    <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Detail Project {{project.projectName}}</h4>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col col-xs-6 mt-3 mb-3">
+                        <div class="panel-body" style="overflow-x:auto;">
+                            <table class="table table-striped ">
+                                <tbody class="text-left">
+                                    <tr>
+                                        <td>Project Code</td>
+                                        <td>:</td>
+                                        <td>{{project.projectCode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Project Name</td>
+                                        <td>:</td>
+                                        <td>{{project.projectName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PMO</td>
+                                        <td>:</td>
+                                        <td>{{project.pmo.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PM</td>
+                                        <td>:</td>
+                                        <td>{{project.pm.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Department Head</td>
+                                        <td>:</td>
+                                        <td>{{project.departmentHead.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Benefit</td>
+                                        <td>:</td>
+                                        <td>{{project.benefit}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description</td>
+                                        <td>:</td>
+                                        <td>{{project.description}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category Initiative</td>
+                                        <td>:</td>
+                                        <td>{{project.categoryInitiative}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category Activity</td>
+                                        <td>:</td>
+                                        <td>{{project.categoryActivity}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status Project</td>
+                                        <td>:</td>
+                                        <td>{{project.statusProject}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
+                    <div class="col col-xs-6 mt-3 mb-3">
+                        <div class="panel-body" style="overflow-x:auto;">
+                            <table class="table table-striped ">
+                                <tbody class="text-left">
+                                    <tr>
+                                        <td>Directorate User</td>
+                                        <td>:</td>
+                                        <td>{{project.directorateUser}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Target Live</td>
+                                        <td>:</td>
+                                        <td>{{project.targetLive | date}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prosentase Project</td>
+                                        <td>:</td>
+                                        <td>{{project.prosentaseProject*100}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Budget</td>
+                                        <td>:</td>
+                                        <td>{{project.budget | currency:'Rp.'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contracted Value</td>
+                                        <td>:</td>
+                                        <td>{{project.contracted_value | currency:'Rp.'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment Realization</td>
+                                        <td>:</td>
+                                        <td>{{project.paymentRealization | currency:'Rp.'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Keyword</td>
+                                        <td>:</td>
+                                        <td>{{project.keyword}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight</td>
+                                        <td>:</td>
+                                        <td>{{project.weight}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>User</td>
+                                        <td>:</td>
+                                        <td>{{project.coPM.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Divisi User</td>
+                                        <td>:</td>
+                                        <td>{{project.divisiUser.divisionName}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

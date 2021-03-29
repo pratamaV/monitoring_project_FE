@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
         if (this.x.user.statusUser === 'aktif') {
           this.auth.login(this.x.user.userRole);
           Swal.fire('Success', 'Success Login', 'success');
-          this.router.navigate(['/']);
+          this.router.navigate(['/home']);
         } else {
           Swal.fire(
             'Failed',

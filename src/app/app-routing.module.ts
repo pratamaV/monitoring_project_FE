@@ -8,12 +8,12 @@ import {FitHomeComponent} from './master/home/fit-home/fit-home.component';
 
 const routes: Routes = [
   {
-    path: 'auth',
+    path: '',
     // canActivate: [AuthGuardService],
     loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule)
   },
   {
-    path: '',
+    path: 'home',
     canActivate: [AuthGuardService],
     component: HomeComponent
   },
