@@ -44,3 +44,7 @@ td {
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+label {
+    font-size: 11pt;
+}
