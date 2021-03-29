@@ -30,6 +30,12 @@ export class HomeComponent implements OnInit {
     const productCanvas = document.getElementById('releaseByStage');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
+
+    let updateDataProject;
+    const colorPieChart = ['#f9e0ae',
+      '#fc8621',
+      '#682c0e',
+      '#b3a30c'];
     const projectData = {
       labels: [
         'Not Started',
@@ -52,12 +58,33 @@ export class HomeComponent implements OnInit {
         }]
     };
 
-    // tslint:disable-next-line:prefer-const
-    var pieChart = new Chart(productCanvas, {
+    const pieChart = new Chart(productCanvas, {
       type: 'pie',
       data: projectData
     });
 
+    // tslint:disable-next-line:typedef
+    function updatePieChart(chart, data, color) {
+      chart.data.datasets.pop();
+      chart.data.datasets.push({
+        data,
+        backgroundColor: color
+      });
+      chart.update();
+    }
+
+
+    let updateDataRelease;
+    const colorBarChart = ['#f9e0ae',
+      '#fc8621',
+      '#682c0e',
+      '#b3a30c',
+      '#c6c36e',
+      '#26b186',
+      '#428ec1',
+      '#680e4f',
+      '#4d0651',
+      '#8c0b6c'];
 
     const ctx = document.getElementById('barChart');
     const myChart = new Chart('barChart', {
@@ -130,6 +157,19 @@ export class HomeComponent implements OnInit {
       }
     });
 
+
+    function updateBarChart(chart, data, color) {
+      chart.data.datasets.pop();
+      chart.data.datasets.push({
+        data,
+        backgroundColor: color
+      });
+      chart.update();
+    }
+
+    let updateDataProject2;
+    const colorHorBarChart = ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'];
+
     const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
       type: 'horizontalBar',
       data: {
@@ -166,13 +206,43 @@ export class HomeComponent implements OnInit {
       }
     });
 
+    function updateHorBarChart(chart, data, color) {
+      chart.data.datasets.pop();
+      chart.data.datasets.push({
+        data,
+        backgroundColor: color
+      });
+      chart.update();
+    }
+
     setInterval(() => {
       this.onGetAllRelases();
       this.onGetListProject();
       this.onGetUserByPerformance();
       this.onGetTaskDeadline();
-      pieChart.update();
-    }, 5000);
+      updateDataProject = [localStorage.getItem('notStartedProject'),
+        localStorage.getItem('onScheduleProject'),
+        localStorage.getItem('ptrProject'),
+        localStorage.getItem('delayProject')];
+      updatePieChart(pieChart, updateDataProject, colorPieChart);
+
+      updateDataRelease = [localStorage.getItem('deliveryStage'),
+        localStorage.getItem('development'),
+        localStorage.getItem('implementation'),
+        localStorage.getItem('live'),
+        localStorage.getItem('migration'),
+        localStorage.getItem('notStarted'),
+        localStorage.getItem('procurement'),
+        localStorage.getItem('PTR'),
+        localStorage.getItem('requirementGathering'),
+        localStorage.getItem('uat')];
+      updateBarChart(myChart, updateDataRelease, colorBarChart);
+
+      updateDataProject2 = [localStorage.getItem('KepatuhanandSDM'), localStorage.getItem('Keuangan'),
+        localStorage.getItem('OperationalRetail'), localStorage.getItem('Teknik'),
+        localStorage.getItem('Utama'), localStorage.getItem('allDirectorate')];
+      updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
+    }, 36000);
   }
 
   onGetAllRelases() {
@@ -188,9 +258,6 @@ export class HomeComponent implements OnInit {
         let PTR = 0;
         let requirementGathering = 0;
         let uat = 0;
-        // let onSchedule = 0;
-        // let ptrLive = 0;
-        // let notStart = 0;
         for (const release of data) {
           if (release.stage === 'Delivery Barang') {
             deliveryStage = deliveryStage + 1;
@@ -213,13 +280,6 @@ export class HomeComponent implements OnInit {
           } else if (release.stage === 'UAT') {
             uat = uat + 1;
           }
-          // } else if (release.status === 'On Schedule'){
-          //   onSchedule = onSchedule + 1;
-          // } else if (release.status === 'PTR/ Live'){
-          //   ptrLive = ptrLive + 1;
-          // } else if (release.status === 'Not Started'){
-          //   notStart = notStart + 1;
-          // }
         }
         localStorage.setItem('deliveryStage', deliveryStage.toString());
         localStorage.setItem('development', development.toString());
@@ -231,9 +291,6 @@ export class HomeComponent implements OnInit {
         localStorage.setItem('PTR', PTR.toString());
         localStorage.setItem('requirementGathering', requirementGathering.toString());
         localStorage.setItem('uat', uat.toString());
-        // localStorage.setItem('onSchedule', onSchedule.toString());
-        // localStorage.setItem('ptrLive', ptrLive.toString());
-        // localStorage.setItem('notStart', notStart.toString());
       }, error => {
         alert(error);
       });
@@ -309,9 +366,12 @@ export class HomeComponent implements OnInit {
 
 
   onGetTaskDeadline() {
+    this.taskDeadline = [];
     this.taskService.getAllTaskDeadline()
       .subscribe(data => {
-        this.taskDeadline = data;
+        for (let i = 0; i < data.length; i++) {
+          this.taskDeadline.push(data[i]);
+        }
       }, error => {
         alert(error);
       });
