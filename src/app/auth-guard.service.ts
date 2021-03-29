@@ -52,7 +52,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<unknown>, Ca
           // console.log("masuk sini dong", route.data.role.indexOf(userRole));
           Swal.fire( 'Failed', 'You haven not right access' , 'error'  );
 
-          this.router.navigate(['']);
+          this.router.navigate(['/home']);
       // this._location.back();
         }
       }

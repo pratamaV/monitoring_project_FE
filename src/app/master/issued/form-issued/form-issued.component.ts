@@ -89,4 +89,8 @@ export class FormIssuedComponent implements OnInit {
     return this.issuedForm.get(property);
   }
 
+  onGolistIssue(){
+    this.router.navigate(['/dashboard/issued'])
+  }
+
 }

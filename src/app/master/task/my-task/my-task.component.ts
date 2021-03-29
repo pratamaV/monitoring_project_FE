@@ -19,11 +19,13 @@ export class MyTaskComponent implements OnInit {
   loadedTask: TaskModel2[] = [];
   task: TaskModel4;
   paramNull = {
-    taskDoc: null,
-    statusDone: null,
+    // taskDoc: null,
+    // statusDone: null,
     releaseName: null,
     projectName: null,
-    estStartDate: null
+    estStartDate: null,
+    estEndDate: null,
+    prosentase: null
   };
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
@@ -41,8 +43,8 @@ export class MyTaskComponent implements OnInit {
 
   private buildForm(): void {
     this.taskForm  = new FormGroup({
-      taskDoc: new FormControl(null),
-      statusDone: new FormControl(null),
+      // taskDoc: new FormControl(null),
+      // statusDone: new FormControl(null),
       releaseName: new FormControl(null),
       projectName: new FormControl(null),
       estStartDate: new FormControl(null),
@@ -53,8 +55,8 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskByUserId() {
-    this.taskForm.get('taskDoc').setValue(null);
-    this.taskForm.get('statusDone').setValue(null);
+    // this.taskForm.get('taskDoc').setValue(null);
+    // this.taskForm.get('statusDone').setValue(null);
     this.taskForm.get('releaseName').setValue(null);
     this.taskForm.get('projectName').setValue(null);
     this.taskForm.get('estStartDate').setValue(null);
@@ -109,36 +111,6 @@ export class MyTaskComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onUploadDocument(postData, valid: boolean, id){
-    if (valid) {
-      this.taskService.uploadDocumentTask(postData, id)
-        .subscribe(response => {
-          Swal.fire( 'Success', 'Dokumen berhasil di unggah' , 'success'  );
-          window.location.reload();
-        }, error => {
-          Swal.fire( 'Failed', 'Gagal mengunggah dokumen, cek ukuran dokumen' , 'error'  );
-        });
-    }
-  }
-
-  // tslint:disable-next-line:typedef
-  processFile(imageInput: any) {
-    if (imageInput.files.length > 0) {
-      const file = imageInput.files[0];
-      this.taskForm.get('taskDoc').setValue(file);
-    }
-  }
-
-  // tslint:disable-next-line:typedef
-  downloadTaskDoc(taskCode){
-    this.taskService.getTaskDocument(taskCode).subscribe((response) => {
-      Swal.fire( 'Success', 'Dokumen berhasil di unduh' , 'success'  );
-    }, error => {
-      Swal.fire( 'Failed', 'Dokumen tidak tersedia' , 'error'  );
-    });
-  }
-
-  // tslint:disable-next-line:typedef
   exportexcel() {
     /* table id is passed over here */
     const element = document.getElementById('excel-table');
@@ -152,20 +124,11 @@ export class MyTaskComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
-  // tslint:disable-next-line:typedef
-  updateStatusDoneTask(id: string, param: any) {
-    this.taskService.updateStatusDoneTask(id, param).subscribe((response) => {
-      Swal.fire( 'Success', 'Berhasil mengubah progress task' , 'success'  );
-    }, error => {
-      Swal.fire( 'Failed', 'Gagal mengubah progress task' , 'error'  );
-    });
-  }
 
-  processText(param) {
-    this.taskForm.get('prosentase').setValue(param.prosentase);
-  }
+
 
   onGoDetailTask(id: string) {
+    localStorage.setItem('taskId', id);
     this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
   }
 }

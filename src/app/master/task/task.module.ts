@@ -6,10 +6,11 @@ import { MyTaskComponent } from './my-task/my-task.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SidebarModule} from '../../layout/sidebar/sidebar.module';
 import { UserTaskComponent } from './user-task/user-task.component';
+import {DetailTaskComponent} from './detail-task/detail-task.component';
 
 
 @NgModule({
-  declarations: [MyTaskComponent, UserTaskComponent],
+  declarations: [MyTaskComponent, UserTaskComponent, DetailTaskComponent],
     imports: [
         CommonModule,
         TaskRoutingModule,
