@@ -27,12 +27,6 @@ export class HomeComponent implements OnInit {
     this.onGetUserByPerformance();
     this.onGetTaskDeadline();
 
-    setInterval(() => {
-      this.onGetAllRelases();
-      this.onGetListProject();
-      this.onGetUserByPerformance();
-      this.onGetTaskDeadline();
-    }, 3600000);
     const productCanvas = document.getElementById('releaseByStage');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
@@ -58,7 +52,8 @@ export class HomeComponent implements OnInit {
         }]
     };
 
-    const pieChart = new Chart(productCanvas, {
+    // tslint:disable-next-line:prefer-const
+    var pieChart = new Chart(productCanvas, {
       type: 'pie',
       data: projectData
     });
@@ -170,6 +165,14 @@ export class HomeComponent implements OnInit {
         }
       }
     });
+
+    setInterval(() => {
+      this.onGetAllRelases();
+      this.onGetListProject();
+      this.onGetUserByPerformance();
+      this.onGetTaskDeadline();
+      pieChart.update();
+    }, 5000);
   }
 
   onGetAllRelases() {
