@@ -43,4 +43,14 @@ export class SidebarComponent implements OnInit {
       });
   }
 
+  logout(){
+    localStorage.removeItem('idUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('STATE');
+    localStorage.clear();
+    sessionStorage.clear();
+    this.router.navigate(['']);
+  }
+
 }

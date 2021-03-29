@@ -1,135 +1,145 @@
-<app-sidebar></app-sidebar>
-<div class="container-sm">
-    <div class="row">
-        <div class="col-md-12 col-md-offset-1">
-            <div class="panel panel-default panel-table">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-md-12 col-md-offset-1">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-                            <div class="panel panel-default panel-table">
-                                <div>
-                                    <div class="panel panel-default panel-table">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col col-xs-6 mb-3">
-                                                    <h4 class="panel-title"><i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i> Release List</h4>
-                                                    <br>
-                                                    <div class="panel-body" style="overflow-x:auto;">
-                                                        <div class="row col-xs-12">
-                                                            <div class="col-9 col-xs-8">
-                                                                <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
-                                                                    <div class="row">
-                                                                        <div class="form-group col">
-                                                                            <label for="status" style="float: left;">Status</label>
-                                                                            <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
-                                        <option value="Not Started">Not Started</option>
-                                        <option value="On Schedule">On Schedule</option>
-                                        <option value="PTR/ Live">PTR/ Live</option>
-                                      </select>
-                                                                        </div>
-                                                                        <div class="form-group col">
-                                                                            <label for="stage" style="float: left;">Stage</label>
-                                                                            <select class="form-select" formControlName="stage" id="stage" aria-label="Default select example">
-                                        <option value="Delivery Barang">Delivery Barang</option>
-                                        <option value="Development">Development</option>
-                                        <option value="Implementation">Implementation</option>
-                                        <option value="Live">Live</option>
-                                        <option value="Migration">Migration</option>
-                                        <option value="Not Started">Not Started</option>
-                                        <option value="Procurement">Procurement</option>
-                                        <option value="PTR">PTR</option>
-                                        <option value="Requirement Gathering">Requirement Gathering</option>
-                                        <option value="UAT">UAT</option>
-                                      </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div id="button-filter">
-                                                                        <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetListRelease()">Reset Filter
-                                    </button>&nbsp;
-                                                                        <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
-                                      Filter
-                                    </button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
+<head>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+</head>
 
-                                                            <div id="button-atas" class="col col-xs">
-                                                                <button id="export-excel" class="btn btn-dark" (click)="exportexcel()"><i
-                                  class="fa fa-file"></i> Export to excel
-                                </button>
-                                                                <button id="add-project" class="btn btn-warning" (click)="onAddRelease()"><i
-                                  class="fa fa-plus"></i> Add New Release
-                                </button>
-                                                            </div>
-                                                        </div>
+<body>
+    <div class="main-content">
+        <app-sidebar></app-sidebar>
+        <div class="container">
+            <!-- Table -->
+            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i> List Release</h4>
+            <div class="row">
 
-                                                        <table class="table mt-3" id="excel-table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th scope="col">Release Code</th>
-                                                                    <th scope="col">Release Name</th>
-                                                                    <th scope="col">Score</th>
-                                                                    <th scope="col">Weight</th>
-                                                                    <th scope="col">Description</th>
-                                                                    <th scope="col">Status</th>
-                                                                    <th scope="col">Stage</th>
-                                                                    <th scope="col">Release Precentage</th>
-                                                                    <th scope="col">Status Release</th>
-                                                                    <th scope="col">Update Status Release</th>
-                                                                    <th scope="col">Est. StartDate</th>
-                                                                    <th scope="col">Act. StartDate</th>
-                                                                    <th scope="col">Est. End Date</th>
-                                                                    <th scope="col">Act. End Date</th>
-                                                                    <th scope="col" style="width: 100px;">Action</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr *ngFor="let release of loadedRelease; let i = index">
-                                                                    <th scope="row">{{release.releaseCode}}</th>
-                                                                    <td>{{release.releaseName}}</td>
-                                                                    <td>{{release.score}}</td>
-                                                                    <td>{{release.weight | number : '1.2-2'}}</td>
-                                                                    <td>{{release.description}}</td>
-                                                                    <td>{{release.status}}</td>
-                                                                    <td>{{release.stage}}</td>
-                                                                    <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
-                                                                    <td>{{release.statusRelease}}</td>
-                                                                    <td>
-                                                                        <select class="form-select" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">
-                                    <option disabled="disabled" selected="selected">Select an option.</option>
-                                    <option value="Active">Active</option>
-                                    <option value="Not Active">Not Active</option>
-                                    <option value="Completed">Completed</option>
-                                  </select>
-                                                                    </td>
-                                                                    <td>{{release.estStartdate | date}}</td>
-                                                                    <td>{{release.actStartdate | date}}</td>
-                                                                    <td>{{release.estEnddate | date}}</td>
-                                                                    <td>{{release.actEnddate | date}}</td>
-                                                                    <td style="width: 200px;">
-                                                                        <button (click)="updateRelease(release)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
-                                    class="fa fa-edit"></i></button>&nbsp;
-                                                                        <button (click)="onGoTask(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i
-                                    class="fa fa-tasks"></i></button>&nbsp;
-                                                                        <button (click)="onAddIssued(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Issue"><i
-                                    class="fa fa-folder"></i></button>&nbsp;
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="row col-xs-12">
+                                <div class="col-9 col-xs-8">
+                                    <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="status" style="float: left;">Status</label>
+                                                <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+                                                    <option value="Not Started">Not Started</option>
+                                                    <option value="On Schedule">On Schedule</option>
+                                                    <option value="PTR/ Live">PTR/ Live</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col">
+                                                <label for="stage" style="float: left;">Stage</label>
+                                                <select class="form-select" formControlName="stage" id="stage" aria-label="Default select example">
+                                                    <option value="Delivery Barang">Delivery Barang</option>
+                                                    <option value="Development">Development</option>
+                                                    <option value="Implementation">Implementation</option>
+                                                    <option value="Live">Live</option>
+                                                    <option value="Migration">Migration</option>
+                                                    <option value="Not Started">Not Started</option>
+                                                    <option value="Procurement">Procurement</option>
+                                                    <option value="PTR">PTR</option>
+                                                    <option value="Requirement Gathering">Requirement Gathering</option>
+                                                    <option value="UAT">UAT</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div id="button-filter">
+                                            <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetListRelease()">Reset Filter
+                                            </button>&nbsp;
+                                            <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
+                                            Filter
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="button-atas" class="col col-xs">
+                                    <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
+                                    class="fa fa-file"></i> Export to excel
+                                    </button>
+                                    <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddRelease()"><i
+                                    class="fa fa-plus"></i> Add New Release
+                                    </button>
                                 </div>
                             </div>
                         </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Release Code</th>
+                                        <th scope="col">Release Name</th>
+                                        <th scope="col">Score</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Stage</th>
+                                        <th scope="col">Release Precentage</th>
+                                        <th scope="col">Status Release</th>
+                                        <th scope="col">Update Status Release</th>
+                                        <th scope="col">Est. StartDate</th>
+                                        <th scope="col">Act. StartDate</th>
+                                        <th scope="col">Est. End Date</th>
+                                        <th scope="col">Act. End Date</th>
+                                        <th scope="col" style="width: 100px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let release of loadedRelease; let i = index">
+                                        <th scope="row">{{release.releaseCode}}</th>
+                                        <td>{{release.releaseName}}</td>
+                                        <td>{{release.score}}</td>
+                                        <td>{{release.weight | number : '1.2-2'}}</td>
+                                        <td>{{release.description}}</td>
+                                        <td>{{release.status}}</td>
+                                        <td>{{release.stage}}</td>
+                                        <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
+                                        <td>{{release.statusRelease}}</td>
+                                        <td>
+                                            <select class="form-select" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">
+                                                <option disabled="disabled" selected="selected">Select an option.</option>
+                                                <option value="Active">Active</option>
+                                                <option value="Not Active">Not Active</option>
+                                                <option value="Completed">Completed</option>
+                                            </select>
+                                        </td>
+                                        <td>{{release.estStartdate | date}}</td>
+                                        <td>{{release.actStartdate | date}}</td>
+                                        <td>{{release.estEnddate | date}}</td>
+                                        <td>{{release.actEnddate | date}}</td>
+                                        <td style="width: 200px;">
+                                            <button (click)="updateRelease(release)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                            class="fa fa-edit"></i></button>&nbsp;
+                                            <button (click)="onGoTask(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i
+                                            class="fa fa-tasks"></i></button>&nbsp;
+                                            <button (click)="onAddIssued(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Issue"><i
+                                            class="fa fa-folder"></i></button>&nbsp;
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--&gt;>>>>>> 32b607d1068064697c6ddc860157d68607bd3a3f-->
-</div>
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6 m-auto text-center">
+                <div class="copyright">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>

@@ -1,4 +1,4 @@
-<app-sidebar></app-sidebar>
+<!-- <app-sidebar></app-sidebar>
 <div class="card">
   <h4><i class="fa fa-chevron-circle-left" (click)="onGolistRelease()"></i> List Issue</h4>
     <br>
@@ -34,4 +34,79 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-content">
+        <app-sidebar></app-sidebar>
+        <div class="container">
+            <!-- Table -->
+            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="onGolistRelease()"></i> List Issue</h4>
+            <div class="row">
+
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div id="button-atas">
+                                <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i class="fa fa-file"></i> Export to excel</button>&nbsp;
+                                <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddIssued()"><i class="fa fa-plus"></i> Add New Issue</button>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Issue Description</th>
+                                        <th scope="col">Issue Date</th>
+                                        <th scope="col">Action Plan</th>
+                                        <th scope="col">Est. End Date</th>
+                                        <th scope="col">PIC</th>
+                                        <th scope="col">Release Code</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let issued of loadedIssued; let i = index">
+                                        <th scope="row">{{issued.issuedDescription}}</th>
+                                        <td>{{issued.issuedDate}}</td>
+                                        <td>{{issued.issuedPlan}}</td>
+                                        <td>{{issued.estEnddate}}</td>
+                                        <td>{{issued.pic}}</td>
+                                        <td>{{issued.release.releaseCode}}</td>
+                                        <td>
+                                            <button (click)="updateIssued(issued)">Update</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6 m-auto text-center">
+                <div class="copyright">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
