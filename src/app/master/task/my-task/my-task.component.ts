@@ -101,7 +101,7 @@ export class MyTaskComponent implements OnInit {
     };
     this.taskService.onDoneTask(this.task, idRelease)
       .subscribe(data => {
-        Swal.fire( 'Success', 'Your task successfully updated' , 'success'  );
+        Swal.fire( 'Success', 'Task berhasil di update' , 'success'  );
         window.location.reload();
       }, error => {
         alert(error.message);
@@ -113,10 +113,10 @@ export class MyTaskComponent implements OnInit {
     if (valid) {
       this.taskService.uploadDocumentTask(postData, id)
         .subscribe(response => {
-          Swal.fire( 'Success', 'Document successfully uploaded' , 'success'  );
+          Swal.fire( 'Success', 'Dokumen berhasil di unggah' , 'success'  );
           window.location.reload();
         }, error => {
-          Swal.fire( 'Failed', 'Failed to upload document, please check your size document' , 'error'  );
+          Swal.fire( 'Failed', 'Gagal mengunggah dokumen, cek ukuran dokumen' , 'error'  );
         });
     }
   }
@@ -132,9 +132,9 @@ export class MyTaskComponent implements OnInit {
   // tslint:disable-next-line:typedef
   downloadTaskDoc(taskCode){
     this.taskService.getTaskDocument(taskCode).subscribe((response) => {
-      Swal.fire( 'Success', 'Document successfully downloaded' , 'success'  );
+      Swal.fire( 'Success', 'Dokumen berhasil di unduh' , 'success'  );
     }, error => {
-      Swal.fire( 'Failed', 'Document not available' , 'error'  );
+      Swal.fire( 'Failed', 'Dokumen tidak tersedia' , 'error'  );
     });
   }
 
@@ -155,13 +155,17 @@ export class MyTaskComponent implements OnInit {
   // tslint:disable-next-line:typedef
   updateStatusDoneTask(id: string, param: any) {
     this.taskService.updateStatusDoneTask(id, param).subscribe((response) => {
-      Swal.fire( 'Success', 'Update Status Task successfully' , 'success'  );
+      Swal.fire( 'Success', 'Berhasil mengubah progress task' , 'success'  );
     }, error => {
-      Swal.fire( 'Failed', 'Update Status Task failed' , 'error'  );
+      Swal.fire( 'Failed', 'Gagal mengubah progress task' , 'error'  );
     });
   }
 
   processText(param) {
     this.taskForm.get('prosentase').setValue(param.prosentase);
+  }
+
+  onGoDetailTask(id: string) {
+    this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
   }
 }

@@ -5,7 +5,7 @@ import {FormTaskComponent} from './form-task/form-task.component';
 import {DetailTaskComponent} from './detail-task/detail-task.component';
 import {MyTaskComponent} from './my-task/my-task.component';
 import { AuthGuardService } from 'src/app/auth-guard.service';
-import {UserTaskComponent} from "./user-task/user-task.component";
+import {UserTaskComponent} from './user-task/user-task.component';
 
 const routes: Routes = [
 
@@ -47,7 +47,7 @@ const routes: Routes = [
     component: FormTaskComponent
   },
   {
-    path: 'detail-task',
+    path: 'detail-task/:id',
     canActivate: [AuthGuardService],
     data: {
       role: [

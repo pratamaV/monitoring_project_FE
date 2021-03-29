@@ -64,10 +64,10 @@ export class FormIssuedComponent implements OnInit {
     if (valid) {
       this.issuedService.saveIssued(this.issued, this.issued.id)
         .subscribe(response => {
-          Swal.fire( 'Success', 'Issued that you input was successfully saved' , 'success'  );
+          Swal.fire( 'Success', 'Isu berhasil di simpan' , 'success'  );
           this.router.navigate(['/dashboard/issued']);
         }, error => {
-          Swal.fire( 'Failed', 'Failed to save issued' , 'error'  );
+          Swal.fire( 'Failed', 'Gagal menyimpan isu' , 'error'  );
         });
     }
   }

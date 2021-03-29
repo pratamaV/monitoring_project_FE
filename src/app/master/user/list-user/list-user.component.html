@@ -36,6 +36,7 @@
                 <th scope="col">Status User</th>
                 <th scope="col">Total Weight</th>
                 <th scope="col">Total Performance</th>
+<!--                <th scope="col">Tindakan</th>-->
                 <th scope="col">Detail Task</th>
               </tr>
               </thead>
@@ -47,13 +48,16 @@
                 <td>{{user.divisiUser.divisionName}}</td>
                 <td>{{user.directorateUser}}</td>
                 <td>{{user.statusUser}}</td>
-                <td>{{user.totalWeight*100 | number : '1.2-2'}}%</td>
-                <td>{{user.totalPerformance*100 | number : '1.2-2'}}%</td>
-                <!--              <td>-->
-                <!--                <button (click)="updateUser(user)" class="btn btn-dark">Detail Task</button>-->
-                <!--              </td>-->
+                <td>{{user.totalWeight * 100 | number : '1.2-2'}}%</td>
+                <td>{{user.totalPerformance * 100 | number : '1.2-2'}}%</td>
+<!--                <td>-->
+<!--                  <button (click)="updateUser(user)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"-->
+<!--                          data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;-->
+<!--                </td>-->
                 <td>
-                  <button (click)="detailTask(user.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i class="fa fa-tasks"></i> Task</button>
+                  <button (click)="detailTask(user.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
+                          data-placement="bottom" title="Task"><i class="fa fa-tasks"></i> Task
+                  </button>
                 </td>
               </tr>
               </tbody>

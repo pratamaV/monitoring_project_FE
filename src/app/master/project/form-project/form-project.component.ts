@@ -36,7 +36,7 @@ export class FormProjectComponent implements OnInit {
   constructor(private projectService: ProjectServiceService,
               private router: Router,
               private route: ActivatedRoute,
-              private currencyPipe : CurrencyPipe              
+              private currencyPipe : CurrencyPipe
               ) {
   }
 
@@ -94,7 +94,7 @@ export class FormProjectComponent implements OnInit {
         this.projectForm.patchValue({
           budget : this.currencyPipe.transform(form.budget.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
         }, {emitEvent: false})
-      } 
+      }
       if(form.contracted_value){
         this.projectForm.patchValue({
           contracted_value : this.currencyPipe.transform(form.contracted_value.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
@@ -117,14 +117,14 @@ export class FormProjectComponent implements OnInit {
   }
 
   onSaveProject(postData, valid: boolean) {
-    
+
     if(postData.budget){
       this.split = postData.budget.split(',')
       this.join1 = this.split.join('')
       this.match = this.join1.match(/\d/g)
       this.join2 = this.match.join('')
       this.fixBudget = parseInt(this.join2)
-    } 
+    }
     if(postData.contracted_value){
       this.split = postData.contracted_value.split(',')
       this.join1 = this.split.join('')
@@ -178,10 +178,10 @@ export class FormProjectComponent implements OnInit {
     if (valid) {
       this.projectService.saveProject(this.project, this.id)
         .subscribe(response => {
-          Swal.fire('Success', 'Project that you input was successfully saved', 'success');
+          Swal.fire('Success', 'Project berhasil ditambahkan', 'success');
           this.router.navigate(['/dashboard/project']);
         }, error => {
-          Swal.fire('Failed', 'Failed to save project', 'error');
+          Swal.fire('Failed', 'Gagal menambahkan project', 'error');
         });
     }
   }

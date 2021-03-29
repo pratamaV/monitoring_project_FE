@@ -118,10 +118,10 @@ export class FormTaskComponent implements OnInit {
     if (valid) {
       this.taskService.addTask(this.task3, this.task3.id)
         .subscribe(response => {
-          Swal.fire( 'Success', 'Task that you input was successfully saved' , 'success'  );
+          Swal.fire( 'Success', 'Berhasil menyimpan task' , 'success'  );
           this.router.navigate(['/dashboard/task']);
         }, error => {
-          Swal.fire( 'Failed', 'Failed to save task' , 'error'  );
+          Swal.fire( 'Failed', 'Gagal menyimpan task' , 'error'  );
         });
     }
   }

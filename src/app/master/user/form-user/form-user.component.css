@@ -1,14 +1,18 @@
+.option {
+  height: 32px;
+}
 
-.red{
-    color:red;
-    }
-.form-area
-{
+
+.red {
+  color: red;
+}
+
+.form-area {
   background-color: #FAFAFA;
-	padding: 10px 40px 60px;
-	margin: 10px 0px 60px;
-	border: 1px solid GREY;
+  padding: 10px 40px 60px;
+  margin: 10px 0px 60px;
+  border: 1px solid GREY;
   border-radius: 2px;
   width: 500px;
   margin-left: 300px;
-	}
+}

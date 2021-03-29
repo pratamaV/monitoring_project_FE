@@ -7,18 +7,31 @@
 
       <div class="row">
         <div id="divChart" class="col-6">
-          <h4 style="text-align: center">Prosentase Release per Stage</h4>
+          <h4 style="text-align: center">Prosentase Project by Status</h4>
           <canvas id="releaseByStage"
                   width="600" height="400"></canvas>
         </div>
         <div class="col-6">
           <div class="container-fluid">
+<!--            <div class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 mt-4">-->
+<!--              <div class="inforide">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideone">-->
+<!--                    <img src="https://vignette.wikia.nocookie.net/nationstates/images/2/29/WS_Logo.png/revision/latest?cb=20080507063620">-->
+<!--                  </div>-->
+<!--                  <div class="col-lg-9 col-md-8 col-sm-8 col-8 fontsty">-->
+<!--                    <h4>Employee</h4>-->
+<!--                    <h2>20</h2>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
             <h4 style="text-align: center">Best Performance</h4>
             <table class="table table-striped ">
               <tr *ngFor="let user of user; let i = index">
                 <th>{{i+1}}</th>
                 <td>{{user.username}}</td>
-                <td>{{user.totalPerformance*100}}%</td>
+                <td>{{user.totalPerformance*100 | number}}%</td>
               </tr>
             </table>
           </div>
@@ -41,7 +54,7 @@
 
       <div class="row">
         <div id="divChart3" class="col-6">
-          <h4>Progress Release per Stage</h4>
+          <h4>Progress Release by Stage</h4>
           <canvas id="barChart"
                   width="600" height="500"></canvas>
         </div>
