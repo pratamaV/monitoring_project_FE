@@ -59,8 +59,8 @@
                     <th scope="col">Est. End Date</th>
                     <th scope="col">Act. End Date</th>
                     <th scope="col">Detail</th>
-                    <th scope="col">Task Document</th>
-                    <th scope="col">Action</th>
+<!--                    <th scope="col">Task Document</th>-->
+<!--                    <th scope="col">Action</th>-->
                 </tr>
             </thead>
             <tbody>
@@ -81,40 +81,40 @@
                         <button (click)="onGoDetailTask(task.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
             class="fa fa-eye"></i></button>&nbsp;
                     </td>
-                    <td>
-                        <button [disabled]="task.taskDocument===null" (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
-                    </td>
-                    <td>
-                        <form [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">
-                            <div class="col-12 col-xs-6">
-                                <div class="row">
-                                    <small>Upload Document</small>
-                                    <div class="input-group-sm col">
-                                        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" class="form-control">
-                                    </div>
-                                    <div class="input-group-append col-2" style="margin-left: -20px;">
-                                        <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
-                                    </div>
-                                </div>
-                            </div>
+<!--                    <td>-->
+<!--                        <button [disabled]="task.taskDocument===null" (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <form [formGroup]="taskForm" method="post" (ngSubmit)="onUploadDocument(taskForm.value, taskForm.valid, task.id)">-->
+<!--                            <div class="col-12 col-xs-6">-->
+<!--                                <div class="row">-->
+<!--                                    <small>Upload Document</small>-->
+<!--                                    <div class="input-group-sm col">-->
+<!--                                        <input #imageInput type="file" accept="image/*" (change)="processFile(imageInput)" class="form-control">-->
+<!--                                    </div>-->
+<!--                                    <div class="input-group-append col-2" style="margin-left: -20px;">-->
+<!--                                        <button [disabled]="!taskForm.valid || task.taskDocument!==null" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
 
-                            <!-- </label> -->
-                            <small style="color: red">*max file 10MB</small>
-                        </form>
-                        <form [formGroup]="taskForm" method="POST" (ngSubmit)="updateStatusDoneTask(task.id,taskForm.value)">
-                            <div class="col-12 col-xs-6">
-                                <div class="row">
-                                    <div class="input-group-sm col">
-                                        <input formControlName="prosentase" type="text" (change)="processText(taskForm.value)" class="form-control">
-                                    </div>
-                                    <div class="input-group-append col-2" style="margin-left: -20px;">
-                                        <button [disabled]="task.statusDone==='Ya'|| role ==='03'" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-check"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+<!--                            &lt;!&ndash; </label> &ndash;&gt;-->
+<!--                            <small style="color: red">*max file 10MB</small>-->
+<!--                        </form>-->
+<!--                        <form [formGroup]="taskForm" method="POST" (ngSubmit)="updateStatusDoneTask(task.id,taskForm.value)">-->
+<!--                            <div class="col-12 col-xs-6">-->
+<!--                                <div class="row">-->
+<!--                                    <div class="input-group-sm col">-->
+<!--                                        <input formControlName="prosentase" type="text" (change)="processText(taskForm.value)" class="form-control">-->
+<!--                                    </div>-->
+<!--                                    <div class="input-group-append col-2" style="margin-left: -20px;">-->
+<!--                                        <button [disabled]="task.statusDone==='Ya'|| role ==='03'" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-check"></i></button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
 
-                    </td>
+<!--                    </td>-->
                     <!--        <td>-->
                     <!--          <button [disabled]="task.statusDone==='Ya'|| role ==='03'" (click)="onDoneTask(task, task.release.id)"-->
                     <!--                  class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Done"><i-->
