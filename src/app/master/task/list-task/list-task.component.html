@@ -1,4 +1,4 @@
-<app-sidebar></app-sidebar>
+<!-- <app-sidebar></app-sidebar>
 <div class="container-sm">
   <div class="row">
     <div class="col-md-12 col-md-offset-1">
@@ -126,4 +126,136 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-content">
+        <app-sidebar></app-sidebar>
+        <div class="container">
+            <!-- Table -->
+            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListRelease()"></i> List Task</h4>
+            <div class="row">
+
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="row col col-xs-12">
+
+                                <div class="col-9 col-xs-6 float-right">
+                                    <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetFilterTask(filterForm.value)">
+                                        <div class="row">
+                                            <div class="form-group col">
+                                                <label for="assignTo" style="float: left;">Assign To</label>
+                                                <select class="form-select" formControlName="assignTo" id="assignTo" aria-label="Default select example">
+                                      <option *ngFor="let user of loadedUser" [value]="user.id"
+                                              [selected]="assigntoId===user.id">{{user.username}}</option>
+                                    </select>
+                                                <small class="form-text text-danger " *ngIf="form('assignTo').invalid && form('assignTo').dirty || form('assignTo').touched">
+                                      <div *ngIf="form('assignTo').errors?.required">
+                                        Bagian ini harus terisi
+                                      </div>
+                                    </small>
+                                            </div>
+
+                                            <div class="form-group col">
+                                                <label for="statusDone" style="float: left;">Status Done</label>
+                                                <select class="form-select" formControlName="statusDone" id="statusDone" aria-label="Default select example">
+                                      <option value="Ya">Ya</option>
+                                      <option value="Tidak">Tidak</option>
+                                    </select>
+                                            </div>
+                                        </div>
+                                        <div id="button-filter">
+                                            <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetAllTask()">Reset Filter
+                                  </button>&nbsp;
+                                            <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
+                                    Filter
+                                  </button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div id="button-atas" class="col col-xs-6">
+                                    <button id="export-excel" class="btn btn-warning btn-sm" (click)="exportexcel()"><i
+                                class="fa fa-file"></i> Export to excel
+                              </button>
+                                    <button id="add-project" class="btn btn-dark btn-sm" (click)="onSaveTaskByReleaseId()"><i
+                                class="fa fa-plus"></i> Add New Task
+                              </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Task Code</th>
+                                        <th scope="col">Task Name</th>
+                                        <th scope="col">Assigned To</th>
+                                        <th scope="col">Score</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Status Done</th>
+                                        <th scope="col">Prosentase Task</th>
+                                        <th scope="col">Est. Start Date</th>
+                                        <th scope="col">Est. End Date</th>
+                                        <th scope="col">Act. Start Date</th>
+                                        <th scope="col">Act. End Date</th>
+                                        <th scope="col">Task Document</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let task of loadedTask; let i = index">
+                                        <th scope="row">{{task.taskCode}}</th>
+                                        <td>{{task.taskName}}</td>
+                                        <td>{{task.assignedTo.username}}</td>
+                                        <td>{{task.score}}</td>
+                                        <td>{{task.weight | number : '1.2-2'}}</td>
+                                        <td>{{task.statusDone}}</td>
+                                        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
+                                        <td>{{task.estStartDate | date}}</td>
+                                        <td>{{task.estEndDate | date}}</td>
+                                        <td>{{task.actStartDate | date}}</td>
+                                        <td>{{task.actEndDate | date}}</td>
+                                        <td style="text-align: center;">
+                                            <button [disabled]="task.taskDocument===null" (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i>
+                                      </button>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                        class="fa fa-edit"></i></button>&nbsp;
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6 m-auto text-center">
+                <div class="copyright">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
