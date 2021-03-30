@@ -67,7 +67,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', resultBody.access_token);
         localStorage.setItem('role', resultBody.user.userRole);
         localStorage.setItem('idUser', resultBody.user.id);
-        console.log('datanya adalah: ', localStorage.getItem('idUser'));
 
         window.sessionStorage.setItem('token', JSON.stringify(data));
         this.token = window.sessionStorage.getItem('token');
