@@ -20,13 +20,14 @@ export class ProjectServiceService {
   constructor(private http: HttpClient) {
   }
 
-  getAllProject(): Observable<ProjectModel[]> {
+  getAllProject(param): Observable<ProjectModel[]> {
     return new Observable((observer: Observer<ProjectModel[]>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
       this.http
-        .get(
-          '/api/projects?access_token=' +
-          JSON.parse(window.sessionStorage.getItem('token')).access_token
-        )
+        .get(url, header)
         .subscribe(
           (data: ProjectModel[]) => {
             observer.next(data);

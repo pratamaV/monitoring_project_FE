@@ -56,7 +56,7 @@ export class FormTaskComponent implements OnInit {
       assignedTo: new FormControl(null, [Validators.required]),
       score: new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|0[1-9]|10)$')]),
       weight: new FormControl(0),
-      statusDone: new FormControl('Tidak'),
+      statusDone: new FormControl('NOT STARTED'),
       taskProsentase: new FormControl(0, [Validators.pattern(/^(0(\.[0-9]{1,4})?|1(\.0{1,4})?)$/g)]),
       estStartDate: new FormControl(null, [Validators.required]),
       estEndDate: new FormControl(null, [Validators.required]),

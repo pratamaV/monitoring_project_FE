@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TaskService} from '../task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TaskModel, TaskModel2, TaskModel3, TaskModel4} from '../task.model';
@@ -7,6 +7,7 @@ import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import {ProjectServiceService} from '../../project/project-service.service';
 import {UserModel} from '../../project/project.model';
+import {formatDate} from '@angular/common';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class MyTaskComponent implements OnInit {
   taskForm: FormGroup;
   loadedTask: TaskModel2[] = [];
   task: TaskModel4;
+  currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
   paramNull = {
     // taskDoc: null,
     // statusDone: null,
@@ -29,20 +31,23 @@ export class MyTaskComponent implements OnInit {
   };
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
+
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     this.buildForm();
     this.role = localStorage.getItem('role');
     this.onGetTaskByUserId();
+    console.log('ini current date', this.currentDate);
 
   }
 
   private buildForm(): void {
-    this.taskForm  = new FormGroup({
+    this.taskForm = new FormGroup({
       // taskDoc: new FormControl(null),
       // statusDone: new FormControl(null),
       releaseName: new FormControl(null),
@@ -80,7 +85,7 @@ export class MyTaskComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onDoneTask(task, idRelease){
+  onDoneTask(task, idRelease) {
     this.task = {
       id: task.id,
       taskName: task.taskName,
@@ -103,7 +108,7 @@ export class MyTaskComponent implements OnInit {
     };
     this.taskService.onDoneTask(this.task, idRelease)
       .subscribe(data => {
-        Swal.fire( 'Success', 'Task berhasil di update' , 'success'  );
+        Swal.fire('Success', 'Task berhasil di update', 'success');
         window.location.reload();
       }, error => {
         alert(error.message);
@@ -125,10 +130,22 @@ export class MyTaskComponent implements OnInit {
   }
 
 
-
-
   onGoDetailTask(id: string) {
     localStorage.setItem('taskId', id);
     this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
+  }
+
+  getStyle(estEndDate, statusDone): any {
+    if ((estEndDate < this.currentDate) && statusDone === 'NOT STARTED') {
+      return {
+        'background-color': 'red',
+        color : 'white'
+      };
+    } else if ((estEndDate < this.currentDate) && statusDone === 'ON_PROGRESS'){
+      return {
+        'background-color': 'orange',
+        color : 'black'
+      };
+    }
   }
 }

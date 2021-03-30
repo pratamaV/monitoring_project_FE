@@ -90,7 +90,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let release of loadedRelease; let i = index">
+                                    <tr *ngFor="let release of loadedRelease; let i = index" [class.changecolor]="release.statusRelease==='Not Active'">
                                         <th scope="row">{{release.releaseCode}}</th>
                                         <td>{{release.releaseName}}</td>
                                         <td>{{release.score}}</td>

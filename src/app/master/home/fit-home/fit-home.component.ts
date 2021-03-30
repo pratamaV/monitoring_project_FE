@@ -20,6 +20,13 @@ export class FitHomeComponent implements OnInit {
 
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
+  paramNull = {
+    divisi: '',
+    userPM: '',
+    userPMO: '',
+    direktorate: '',
+    status: ''
+  };
 
   ngOnInit(): void {
     this.onGetAllRelases();
@@ -297,7 +304,7 @@ export class FitHomeComponent implements OnInit {
   }
 
   onGetListProject() {
-    this.projectService.getAllProject()
+    this.projectService.getAllProject(this.paramNull)
       .subscribe(data => {
         let KepatuhanandSDM = 0;
         let Keuangan = 0;

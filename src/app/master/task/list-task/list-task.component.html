@@ -211,12 +211,12 @@
                                         <th scope="col">Est. End Date</th>
                                         <th scope="col">Act. Start Date</th>
                                         <th scope="col">Act. End Date</th>
-                                        <th scope="col">Task Document</th>
+                                        <th scope="col">Detail</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let task of loadedTask; let i = index">
+                                    <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
                                         <td>{{task.assignedTo.username}}</td>
@@ -229,8 +229,9 @@
                                         <td>{{task.actStartDate | date}}</td>
                                         <td>{{task.actEndDate | date}}</td>
                                         <td style="text-align: center;">
-                                            <button [disabled]="task.taskDocument===null" (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i class="fa fa-download"></i>
-                                      </button>
+                                          <button (click)="onGoDetailTask(task.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
+                                                  data-placement="bottom" title="Detail"><i
+                                            class="fa fa-eye"></i></button>&nbsp;
                                         </td>
                                         <td style="text-align: center;">
                                             <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i

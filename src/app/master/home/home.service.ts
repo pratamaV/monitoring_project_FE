@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Observable, Observer} from "rxjs";
-import {TaskModel} from "../task/task.model";
-import {HttpClient} from "@angular/common/http";
-import {ReleaseModel, ReleaseModel2} from "../release/release.model";
-import {ProjectModel} from "../project/project.model";
-import {UserModel} from "../user/user.model";
+import {Observable, Observer} from 'rxjs';
+import {TaskModel} from '../task/task.model';
+import {HttpClient} from '@angular/common/http';
+import {ReleaseModel, ReleaseModel2} from '../release/release.model';
+import {ProjectModel} from '../project/project.model';
+import {UserModel} from '../user/user.model';
 
 @Injectable({
   providedIn: 'root'

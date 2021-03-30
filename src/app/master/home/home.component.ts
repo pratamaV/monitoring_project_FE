@@ -22,7 +22,13 @@ export class HomeComponent implements OnInit {
 
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
-
+  paramNull = {
+    divisi: '',
+    userPM: '',
+    userPMO: '',
+    direktorate: '',
+    status: ''
+  };
   notStarted = 0;
   onSchedule = 0;
   ptr = 0;
@@ -318,7 +324,7 @@ export class HomeComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListProject() {
-    this.projectService.getAllProject()
+    this.projectService.getAllProject(this.paramNull)
       .subscribe(data => {
         let KepatuhanandSDM = 0;
         let Keuangan = 0;
