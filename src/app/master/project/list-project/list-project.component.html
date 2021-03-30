@@ -21,7 +21,7 @@
                     <div class="card shadow">
                         <div class="card-header border-0">
                             <div class="row">
-                                <div class="col-7 col-xs-8">
+                                <div class="col-12 col-xs-8">
                                     <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListProjectFilter(filterForm.value)">
                                         <div class="row">
                                             <div class="form-group col">
@@ -59,24 +59,40 @@
                                                 </option>
                                             </select>
                                             </div>
-                                          <div class="form-group col">
-                                            <label for="status">Status <small style="color: red;">*</small></label>
-                                            <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="status">Status <small style="color: red;">*</small></label>
+                                                <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
                                               <option value="Not Started">Not Started</option>
                                               <option value="On Schedule">On Schedule</option>
                                               <option value="PTR/ Live">PTR/ Live</option>
                                               <option value="PTR/ Live">Delay</option>
                                             </select>
-                                          </div>
+                                            </div>
                                         </div>
-                                        <div id="button-filter">
-                                            <button type="submit" class="btn btn-info btn-sm" style="float: right; margin-left: 10px;">Apply Filter</button>&nbsp;
-                                            <button class="btn btn-success btn-sm" style="float: right; " (click)="onGetListProject()">Reset Filter</button>
+
+                                        <div class="row">
+                                            <div class="col-6" id="search">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                                                            <input [(ngModel)]="searchByKeyword" name="searchByKeyword" type="text" class="form-control" placeholder="Cari berdasarkan Keyword" (keyup)="searchLive()">
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+                                            <div class="col-6" id="button-filter">
+                                                <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i class="fa fa-file"></i> Export to excel</button>&nbsp;
+                                                <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()"><i class="fa fa-plus"></i> Add New Project</button>&nbsp;
+                                                <button class="btn btn-success btn-sm" (click)="onGetListProject()">Reset Filter</button>&nbsp;
+                                                <button type="submit" class="btn btn-info btn-sm">Apply Filter</button>
+                                            </div>
                                         </div>
                                     </form>
 
                                 </div>
-                                <div class="col-5 col-xs-8">
+                                <!-- <div class="col-4 col-xs-8">
                                     <div id="search">
                                         <form>
                                             <div class="form-group">
@@ -91,11 +107,11 @@
                                         <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i class="fa fa-file"></i> Export to excel</button>&nbsp;
                                         <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()"><i class="fa fa-plus"></i> Add New Project</button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush"  class="table" id="excel-table">
+                            <table class="table align-items-center table-flush" class="table" id="excel-table">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Project Code</th>
@@ -129,7 +145,7 @@
                                         <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
                                         <td [ngClass]="project.statusProject === 'aktif' ? 'color-red' : 'color-green'">{{project.statusProject}}</td>
                                         <td>
-                                            <select class="form-select" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
+                                            <select class="form-select-sm" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
                                             <option disabled="disabled" selected="selected">Select an option.</option>
                                             <option value="Active">Active</option>
                                             <option value="Not Active">Not Active</option>
