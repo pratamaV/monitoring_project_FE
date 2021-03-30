@@ -1,88 +1,3 @@
-<!-- <app-sidebar></app-sidebar>
-<div class="card">
-    <h4>My Task</h4>
-    <br>
-    <form [formGroup]="taskForm" method="POST" (ngSubmit)="onGetTaskByUserIdFilter(taskForm.value)">
-        <div class="row">
-            <div class="form-group col">
-                <label for="releaseName">Release Name</label>
-                <input type="text" class="form-control" formControlName="releaseName" id="releaseName" placeholder="Release Name">
-            </div>
-
-            <div class="form-group col">
-                <label for="projectName">Project Name</label>
-                <input type="text" class="form-control" formControlName="projectName" id="projectName" placeholder="Project Name">
-            </div>
-
-            <div class="form-group col">
-                <label for="estStartDate">Estimasi Start Date</label>
-                <input type="date" class="form-control" formControlName="estStartDate" id="estStartDate">
-            </div>
-
-            <div class="form-group col">
-                <label for="estEndDate">Estimasi End Date</label>
-                <input type="date" class="form-control" formControlName="estEndDate" id="estEndDate">
-            </div>
-
-            <div class="form-group col">
-                <label for="statusDone" style="float: left;">Status Done</label>
-                <select class="form-select" formControlName="statusDone" id="statusDone" aria-label="Default select example">
-          <option value="Ya">Ya</option>
-          <option value="Tidak">Tidak</option>
-        </select>
-            </div>
-        </div>
-        <div id="button-filter">
-            <button class="btn btn-warning btn-sm" style="float: right; margin-left: 10px;" (click)="exportexcel()"><i
-            class="fa fa-file"></i> Export to excel</button>
-            <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetTaskByUserId()">Reset Filter
-      </button>&nbsp;
-            <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply Filter</button>
-        </div>
-    </form>
-    <br>
-
-    <div class="table-responsive">
-        <table class="table" id="excel-table">
-            <thead>
-                <tr>
-                    <th scope="col">Task Code</th>
-                    <th scope="col">Task Name</th>
-                    <th scope="col">Release Name</th>
-                    <th scope="col">Project Name</th>
-                    <th scope="col">Score</th>
-                    <th scope="col">Weight</th>
-                    <th scope="col">Status Done</th>
-                    <th scope="col">Prosentase Task</th>
-                    <th scope="col">Est. Start Date</th>
-                    <th scope="col">Est. End Date</th>
-                    <th scope="col">Act. End Date</th>
-                    <th scope="col">Detail</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let task of loadedTask; let i = index">
-                    <th scope="row">{{task.taskCode}}</th>
-                    <td>{{task.taskName}}</td>
-                    <td>{{task.release.releaseName}}</td>
-                    <td>{{task.release.project.projectName}}</td>
-                    <td>{{task.score}}</td>
-                    <td>{{task.weight | number : '1.2-2'}}</td>
-                    <td>{{task.statusDone}}</td>
-                    <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
-                    <td>{{task.estStartDate | date}}</td>
-                    <td>{{task.estEndDate | date}}</td>
-                    <td>{{task.actEndDate | date}}</td>
-                    <td>
-                        <button (click)="onGoDetailTask(task.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
-            class="fa fa-eye"></i></button>&nbsp;
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div> -->
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -166,7 +81,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let task of loadedTask; let i = index">
+                                    <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
                                         <td>{{task.release.releaseName}}</td>

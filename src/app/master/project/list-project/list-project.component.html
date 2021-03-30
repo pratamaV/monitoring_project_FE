@@ -107,7 +107,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let project of loadedProject; let i = index">
+                                    <tr *ngFor="let project of loadedProject; let i = index" [class.changecolor]="project.statusProject==='Not Active'">
                                         <th scope="row">{{project.projectCode}}</th>
                                         <td>{{project.projectName}}</td>
                                         <td>{{project.pmo.username}}</td>

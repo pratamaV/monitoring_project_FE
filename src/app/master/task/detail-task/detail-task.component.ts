@@ -4,7 +4,7 @@ import {TaskService} from '../task.service';
 import {TaskModel2} from '../task.model';
 import Swal from 'sweetalert2';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
-import {FileModel} from "../file.model";
+import {FileModel} from '../file.model';
 
 @Component({
   selector: 'app-detail-task',
