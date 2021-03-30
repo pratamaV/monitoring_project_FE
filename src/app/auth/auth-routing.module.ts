@@ -10,7 +10,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'logout2',
+    path: 'logout',
     component: LogoutComponent
   },
   {
