@@ -162,4 +162,9 @@ export class ListTaskComponent implements OnInit {
       };
     }
   }
+
+  onGoDetailTask(id) {
+    localStorage.setItem('taskId', id);
+    this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
+  }
 }
