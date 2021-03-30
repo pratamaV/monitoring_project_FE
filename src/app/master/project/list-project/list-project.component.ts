@@ -44,6 +44,7 @@ export class ListProjectComponent implements OnInit {
     this.onGetListProject();
     this.getAllDivisi();
     this.getAllUser();
+    this.getColor();
   }
 
   // tslint:disable-next-line:typedef
@@ -225,6 +226,16 @@ export class ListProjectComponent implements OnInit {
           alert(error);
         }
       );
+    }
+  }
+
+  getColor(){
+    for (const iterator of this.loadedProject) {
+      console.log(iterator.statusProject);
+      
+      if(iterator.statusProject === 'aktif'){
+        return 'red';
+      }
     }
   }
 }

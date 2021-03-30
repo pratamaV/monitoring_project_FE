@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {Chart} from 'node_modules/chart.js';
 import {HomeService} from './home.service';
 import {ProjectServiceService} from '../project/project-service.service';
@@ -12,6 +12,14 @@ import {TaskModel, TaskModel2} from '../task/task.model';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('barCanvas') barCanvas: ElementRef;
+  @ViewChild('verticalCanvas') verticalCanvas: ElementRef;
+  @ViewChild('horizontalCanvas') horizontalCanvas: ElementRef;
+
+  private pieChart: Chart;
+  private verticalChart: Chart;
+  private horizontalChart: Chart;
+
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
   paramNull = {
@@ -21,10 +29,14 @@ export class HomeComponent implements OnInit {
     direktorate: '',
     status: ''
   };
+  notStarted = 0;
+  onSchedule = 0;
+  ptr = 0;
+  delay = 0;
+
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
               private taskService: TaskService) {
-
   }
 
   ngOnInit(): void {
@@ -33,7 +45,7 @@ export class HomeComponent implements OnInit {
     this.onGetUserByPerformance();
     this.onGetTaskDeadline();
 
-    const productCanvas = document.getElementById('releaseByStage');
+    const productCanvas = document.getElementById('projectByStatus');
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
 
@@ -64,7 +76,10 @@ export class HomeComponent implements OnInit {
         }]
     };
 
-    const pieChart = new Chart(productCanvas, {
+    console.log(this.notStarted.toString());
+
+
+    const pieChart = new Chart('projectByStatus', {
       type: 'pie',
       data: projectData
     });
@@ -164,6 +179,7 @@ export class HomeComponent implements OnInit {
     });
 
 
+    // tslint:disable-next-line:typedef
     function updateBarChart(chart, data, color) {
       chart.data.datasets.pop();
       chart.data.datasets.push({
@@ -212,6 +228,7 @@ export class HomeComponent implements OnInit {
       }
     });
 
+    // tslint:disable-next-line:typedef
     function updateHorBarChart(chart, data, color) {
       chart.data.datasets.pop();
       chart.data.datasets.push({
@@ -248,9 +265,11 @@ export class HomeComponent implements OnInit {
         localStorage.getItem('OperationalRetail'), localStorage.getItem('Teknik'),
         localStorage.getItem('Utama'), localStorage.getItem('allDirectorate')];
       updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
-    }, 36000);
+    }, 50000);
   }
 
+
+  // tslint:disable-next-line:typedef
   onGetAllRelases() {
     this.homeService.getAllRelease()
       .subscribe(data => {
@@ -303,6 +322,7 @@ export class HomeComponent implements OnInit {
   }
 
 
+  // tslint:disable-next-line:typedef
   onGetListProject() {
     this.projectService.getAllProject(this.paramNull)
       .subscribe(data => {
@@ -358,6 +378,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  // tslint:disable-next-line:typedef
   onGetUserByPerformance() {
     this.user = [];
     this.homeService.getAllUserByPerformance()
@@ -371,10 +392,12 @@ export class HomeComponent implements OnInit {
   }
 
 
+  // tslint:disable-next-line:typedef
   onGetTaskDeadline() {
     this.taskDeadline = [];
     this.taskService.getAllTaskDeadline()
       .subscribe(data => {
+        // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < data.length; i++) {
           this.taskDeadline.push(data[i]);
         }

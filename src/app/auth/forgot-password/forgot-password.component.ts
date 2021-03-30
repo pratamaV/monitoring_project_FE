@@ -49,7 +49,7 @@ export class ForgotPasswordComponent implements OnInit {
             }
           });
         // console.log('halo', data);
-        this.router.navigate(['/auth']);
+        this.router.navigate(['/']);
       }, (error) => {
         this.setDataForm();
         Swal.fire({

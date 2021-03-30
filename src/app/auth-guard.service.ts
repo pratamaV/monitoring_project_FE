@@ -63,7 +63,7 @@ export class AuthGuardService implements CanActivate, CanDeactivate<unknown>, Ca
       // }
       return true;
     }
-    this.router.navigate(['/auth']);
+    this.router.navigate(['/']);
     return false;
   }
   data(){
