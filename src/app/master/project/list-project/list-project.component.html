@@ -22,18 +22,18 @@
                         <div class="card-header border-0">
                             <div class="row">
                                 <div class="col-7 col-xs-8">
-                                    <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
+                                    <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListProjectFilter(filterForm.value)">
                                         <div class="row">
                                             <div class="form-group col">
-                                                <label for="divisi" style="float: left;">Divisi</label>
+                                                <label for="divisi" style="float: left;">Divisi Owner</label>
                                                 <select class="custom-select" formControlName="divisi" id="divisi" aria-label="Default select example">
-                                                <option *ngFor="let divisi of divitions; let i = index" [ngValue]="divisi.divisionName">
+                                                <option *ngFor="let divisi of divitions; let i = index" [ngValue]="divisi.id">
                                                     {{ divisi.divisionName }}
                                                 </option>
                                             </select>
                                             </div>
                                             <div class="form-group col">
-                                                <label for="direktorate" style="float: left;">Direktorate User</label>
+                                                <label for="direktorate" style="float: left;">Direktorate Owner</label>
                                                 <select class="form-select" formControlName="direktorate" id="direktorate" aria-label="Default select example">
                                                 <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
                                                 <option value="Keuangan">Keuangan</option>
@@ -45,7 +45,7 @@
                                             <div class="form-group col">
                                                 <label for="userPM" style="float: left;">User PM</label>
                                                 <select class="custom-select" formControlName="userPM" id="userPM" aria-label="Default select example">
-                                                <option *ngFor="let user of users; let i = index" [ngValue]="user.id">
+                                                <option *ngFor="let user of usersPm; let i = index" [ngValue]="user.id">
                                                     {{ user.username }}
                                                 </option>
                                             </select>
@@ -54,15 +54,24 @@
                                             <div class="form-group col">
                                                 <label for="userPMO" style="float: left;">User PMO</label>
                                                 <select class="custom-select" formControlName="userPMO" id="userPMO" aria-label="Default select example">
-                                                <option *ngFor="let user of users; let i = index" [ngValue]="user.id">
+                                                <option *ngFor="let user of usersPmo; let i = index" [ngValue]="user.id">
                                                     {{ user.username }}
                                                 </option>
                                             </select>
                                             </div>
+                                          <div class="form-group col">
+                                            <label for="status">Status <small style="color: red;">*</small></label>
+                                            <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+                                              <option value="Not Started">Not Started</option>
+                                              <option value="On Schedule">On Schedule</option>
+                                              <option value="PTR/ Live">PTR/ Live</option>
+                                              <option value="PTR/ Live">Delay</option>
+                                            </select>
+                                          </div>
                                         </div>
                                         <div id="button-filter">
                                             <button type="submit" class="btn btn-info btn-sm" style="float: right; margin-left: 10px;">Apply Filter</button>&nbsp;
-                                            <button class="btn btn-success btn-sm" style="float: right; " (click)="onGetListRelease()">Reset Filter</button>
+                                            <button class="btn btn-success btn-sm" style="float: right; " (click)="onGetListProject()">Reset Filter</button>
                                         </div>
                                     </form>
 
@@ -86,7 +95,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table align-items-center table-flush" *ngIf="!filter" class="table" id="excel-table">
+                            <table class="table align-items-center table-flush"  class="table" id="excel-table">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Project Code</th>

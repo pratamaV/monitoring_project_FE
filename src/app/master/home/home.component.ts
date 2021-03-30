@@ -14,7 +14,13 @@ import {TaskModel, TaskModel2} from '../task/task.model';
 export class HomeComponent implements OnInit {
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
-
+  paramNull = {
+    divisi: '',
+    userPM: '',
+    userPMO: '',
+    direktorate: '',
+    status: ''
+  };
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
               private taskService: TaskService) {
@@ -298,7 +304,7 @@ export class HomeComponent implements OnInit {
 
 
   onGetListProject() {
-    this.projectService.getAllProject()
+    this.projectService.getAllProject(this.paramNull)
       .subscribe(data => {
         let KepatuhanandSDM = 0;
         let Keuangan = 0;

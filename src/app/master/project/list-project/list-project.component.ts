@@ -4,6 +4,7 @@ import { ProjectServiceService } from '../project-service.service';
 import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
 import { FormControl, FormGroup } from '@angular/forms';
+import {UserModel} from "../../user/user.model";
 
 @Component({
   selector: 'app-list-project',
@@ -22,13 +23,17 @@ export class ListProjectComponent implements OnInit {
   loadedRelease: any;
   filter: boolean = false;
   paramNull = {
-    status: null,
-    stage: null
+    divisi: '',
+    userPM: '',
+    userPMO: '',
+    direktorate: '',
+    status: ''
   };
   fileName = 'List-Project-' + new Date().toDateString() + '.xlsx';
   divitions: any[] = [];
   users: any[] = [];
-  newData: any[] = [];
+  usersPm: any[] = [];
+  usersPmo: any[] = [];
   projectStatus: string;
 
   searchByKeyword: string;
@@ -41,6 +46,7 @@ export class ListProjectComponent implements OnInit {
     this.getAllUser();
   }
 
+  // tslint:disable-next-line:typedef
   getAllDivisi() {
     this.projectService.getAllDivisi().subscribe(
       response => {
@@ -52,10 +58,18 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:typedef
   getAllUser() {
     this.projectService.getAllUser().subscribe(
       response => {
         this.users = response;
+        for (const user of this.users) {
+          if (user.userRole == '01') {
+            this.usersPmo.push(user);
+          } else if (user.userRole == '02') {
+            this.usersPm.push(user);
+          }
+        }
       },
       error => {
         alert(error);
@@ -63,8 +77,10 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
-  onGetListReleaseFilter(param) {
-    this.filter = true;
+
+  // tslint:disable-next-line:typedef
+  onGetListProjectFilter(param) {
+    // this.filter = true;
     if (param.direktorate === null) {
       param.direktorate = '';
     }
@@ -77,26 +93,28 @@ export class ListProjectComponent implements OnInit {
     if (param.userPMO === null) {
       param.userPMO = '';
     }
+    if (param.status === null) {
+      param.status = '';
+    }
 
-    this.projectService.getResultProject(param).subscribe(
+    // this.projectService.getResultProject(param).subscribe(
+    this.projectService.getAllProject(param).subscribe(
       data => {
-        console.log('datanya adalah:', data);
-        this.newData = data;
-        console.log('newData adalah:', this.newData);
-        this.loadedProjectResult = data;
-      },
+        this.loadedProject = data;
+   },
       error => {
         alert(error);
       }
     );
   }
+  // tslint:disable-next-line:typedef
   onGetListRelease() {
-    this.filterForm.get('direktorate').setValue(null);
     this.filterForm.get('divisi').setValue(null);
-    this.filterForm.get('userPMO').setValue(null);
     this.filterForm.get('userPM').setValue(null);
-
-    console.log("rest");
+    this.filterForm.get('userPMO').setValue(null);
+    this.filterForm.get('direktorate').setValue(null);
+    this.filterForm.get('status').setValue(null);
+    console.log('rest');
     this.filter = false;
   }
 
@@ -105,12 +123,19 @@ export class ListProjectComponent implements OnInit {
       direktorate: new FormControl(null),
       divisi: new FormControl(null),
       userPM: new FormControl(null),
-      userPMO: new FormControl(null)
+      userPMO: new FormControl(null),
+      status: new FormControl(null)
     });
   }
 
+  // tslint:disable-next-line:typedef
   onGetListProject() {
-    this.projectService.getAllProject().subscribe(
+    this.filterForm.get('direktorate').setValue(null);
+    this.filterForm.get('divisi').setValue(null);
+    this.filterForm.get('userPMO').setValue(null);
+    this.filterForm.get('userPM').setValue(null);
+    this.filterForm.get('status').setValue(null);
+    this.projectService.getAllProject(this.paramNull).subscribe(
       data => {
         this.loadedProject = data;
       },
@@ -120,6 +145,7 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:typedef
   onGetProjectById(id) {
     localStorage.setItem('projectId', id);
     this.projectService.getProjectById(id).subscribe(
@@ -132,21 +158,25 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:typedef
   onAddProject() {
     this.router.navigate(['/dashboard/project/form-project']);
   }
 
+  // tslint:disable-next-line:typedef
   updateProject(project: ProjectModel2) {
     this.router.navigateByUrl('/dashboard/project/form-project/' + project.id, {
       state: project
     });
   }
 
+  // tslint:disable-next-line:typedef
   onGetReleaseByProjectId(projectId) {
     localStorage.setItem('projectId', projectId);
     this.router.navigate(['/dashboard/release']);
   }
 
+  // tslint:disable-next-line:typedef
   onChangeStatusProject(id, projectStatus) {
     this.projectStatus = projectStatus.target.value;
     this.projectService.changeStatusProject(id, this.projectStatus)
@@ -161,6 +191,7 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:typedef
   exportexcel() {
     /* table id is passed over here */
     const element = document.getElementById('excel-table');
@@ -174,9 +205,10 @@ export class ListProjectComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+  // tslint:disable-next-line:typedef
   searchLive() {
     if (this.searchByKeyword === ''){
-      this.projectService.getAllProject().subscribe(
+      this.projectService.getAllProject(this.paramNull).subscribe(
         data => {
           this.loadedProject = data;
         },
