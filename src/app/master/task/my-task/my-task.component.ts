@@ -24,8 +24,8 @@ export class MyTaskComponent implements OnInit {
     releaseName: null,
     projectName: null,
     estStartDate: null,
-    estEndDate: null,
-    prosentase: null
+    estEndDate: null
+    // prosentase: null
   };
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
@@ -48,8 +48,8 @@ export class MyTaskComponent implements OnInit {
       releaseName: new FormControl(null),
       projectName: new FormControl(null),
       estStartDate: new FormControl(null),
-      estEndDate: new FormControl(null),
-      prosentase: new FormControl(null)
+      estEndDate: new FormControl(null)
+      // prosentase: new FormControl(null)
     });
   }
 

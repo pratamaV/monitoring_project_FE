@@ -183,7 +183,7 @@ export class TaskService {
       url = `api/taskByUserId/${id}?projectName=${param.projectName}&estStartDate=${estStartDateString}`;
     } else if (param.projectName != null && param.estEndDate != null) {
       url = `api/taskByUserId/${id}?projectName=${param.projectName}&estEndDate=${estEndDateString}`;
-    } else if (param.statusDone != null &&  param.projectName != null) {
+    } else if (param.statusDone != null && param.projectName != null) {
       url = `api/taskByUserId/${id}?projectName=${param.projectName}&statusDone=${param.statusDone}`;
     } else if (param.estStartDate != null && param.estEndDate != null) {
       url = `api/taskByUserId/${id}?estStartDate=${estStartDateString}&estEndDate=${estEndDateString}`;
@@ -193,13 +193,13 @@ export class TaskService {
       url = `api/taskByUserId/${id}?estEndDate=${estEndDateString}&statusDone=${param.statusDone}`;
     } else if (param.releaseName != null) {
       url = `api/taskByUserId/${id}?releaseName=${param.releaseName}`;
-    } else if ( param.projectName != null) {
+    } else if (param.projectName != null) {
       url = `api/taskByUserId/${id}?projectName=${param.projectName}`;
     } else if (param.estStartDate != null) {
       url = `api/taskByUserId/${id}?estStartDate=${estStartDateString}`;
-    }else if (param.estEndDate != null) {
+    } else if (param.estEndDate != null) {
       url = `api/taskByUserId/${id}?estEndDate=${estEndDateString}`;
-    }else if (param.statusDone != null ) {
+    } else if (param.statusDone != null) {
       url = `api/taskByUserId/${id}?statusDone=${param.statusDone}`;
     }
     return new Observable((observer: Observer<TaskModel2[]>) => {
@@ -215,11 +215,13 @@ export class TaskService {
   // tslint:disable-next-line:typedef
   uploadDocumentTask(postData, id: string) {
     const formData = new FormData();
-    for (const key in postData) {
-      formData.append(key, postData[key]);
-    }
+    const data = {documentDescription: postData.filedesc}
+    formData.append('taskDoc', postData.taskDoc);
+    // @ts-ignore
+    formData.append('data', JSON.stringify(data));
+    console.log('masuk sini');
     return new Observable((observer) => {
-      this.http.put(`api/uploadTaskDoc/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, {responseType: 'text'})
+      this.http.post(`api/uploadTaskDoc/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, {responseType: 'text'})
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {
