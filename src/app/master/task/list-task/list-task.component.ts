@@ -7,6 +7,7 @@ import {UserModel} from '../../project/project.model';
 import {ProjectServiceService} from '../../project/project-service.service';
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
+import {formatDate} from "@angular/common";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ListTaskComponent implements OnInit {
     statusDone: null
   };
   fileName = 'List-Task-' + new Date().toDateString() + '.xlsx';
+  currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
               private router: Router,
@@ -145,5 +147,19 @@ export class ListTaskComponent implements OnInit {
 
   updateTask(task: TaskModel) {
     this.router.navigateByUrl('/dashboard/task/form-task/' + task.id, {state: task});
+  }
+
+  getStyle(estEndDate, statusDone): any {
+    if ((estEndDate < this.currentDate) && statusDone === 'NOT STARTED') {
+      return {
+        'background-color': 'red',
+        color : 'white'
+      };
+    } else if ((estEndDate < this.currentDate) && statusDone === 'ON_PROGRESS'){
+      return {
+        'background-color': 'orange',
+        color : 'black'
+      };
+    }
   }
 }

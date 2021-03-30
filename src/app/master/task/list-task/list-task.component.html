@@ -216,7 +216,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let task of loadedTask; let i = index">
+                                    <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
                                         <td>{{task.assignedTo.username}}</td>

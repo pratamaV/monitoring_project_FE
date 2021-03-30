@@ -141,10 +141,10 @@ export class MyTaskComponent implements OnInit {
         'background-color': 'red',
         color : 'white'
       };
-    } else if ((estEndDate < this.currentDate) && statusDone === 'ON PROGRESS'){
+    } else if ((estEndDate < this.currentDate) && statusDone === 'ON_PROGRESS'){
       return {
-        'background-color': 'yellow',
-        color : 'white'
+        'background-color': 'orange',
+        color : 'black'
       };
     }
   }
