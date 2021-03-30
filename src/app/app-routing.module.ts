@@ -27,10 +27,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./master/master.module').then(m => m.MasterModule)
   },
-  {
-    path: 'logout',
-    loadChildren: () => import('./auth/auth.module').then(a => a.AuthModule)
-  },
+  // {
+  //   path: 'logout',
+  //   loadChildren: () => import('./auth/auth.module').then(a => a.AuthModule)
+  // },
   {
     path: '**',
     component: NotFoundComponent

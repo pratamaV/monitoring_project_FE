@@ -72,9 +72,9 @@ export class AuthService {
     // tslint:disable-next-line:prefer-const
     const formData = new FormData();
     formData.append('email', payload.email);
-    formData.append('newPassword', payload.pass);
+    // formData.append('newPassword', payload.pass);
     return new Observable((observer) => {
-      this.http.put(`/api/userChangePassword`, formData)
+      this.http.put(`/api/userForgotPassword`, formData)
         .subscribe((response) => {
           observer.next(response);
         }, (error) => {
