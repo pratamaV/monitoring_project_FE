@@ -118,7 +118,7 @@
                                         <td>{{project.divisiUser.divisionName}}</td>
                                         <td>{{project.weight | number : '1.2-2'}}</td>
                                         <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
-                                        <td>{{project.statusProject}}</td>
+                                        <td [ngClass]="project.statusProject === 'aktif' ? 'color-red' : 'color-green'">{{project.statusProject}}</td>
                                         <td>
                                             <select class="form-select" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
                                             <option disabled="disabled" selected="selected">Select an option.</option>
