@@ -10,6 +10,13 @@ import {Router} from "@angular/router";
 })
 export class ListProjectUserComponent implements OnInit {
   loadedProject: ProjectModel[] = [];
+  paramNull = {
+    divisi: '',
+    userPM: '',
+    userPMO: '',
+    direktorate: '',
+    status: ''
+  };
 
   constructor(private projectService: ProjectServiceService,
               private router: Router) { }
@@ -19,7 +26,7 @@ export class ListProjectUserComponent implements OnInit {
   }
 
   onGetListProject() {
-    this.projectService.getAllProject()
+    this.projectService.getAllProject(this.paramNull)
       .subscribe(data => {
         this.loadedProject = data;
       }, error => {
