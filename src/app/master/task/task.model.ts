@@ -1,5 +1,6 @@
 import {UserModel} from '../project/project.model';
 import {ReleaseModel} from '../release/release.model';
+import {FileModel} from './file.model';
 
 export interface TaskModel{
   id: string;
@@ -33,6 +34,7 @@ export interface TaskModel2{
   actEndDate: Date;
   taskDocument: string;
   release: ReleaseModel ;
+  fileList: FileModel[];
 }
 
 export interface TaskModel3{
