@@ -1,115 +1,249 @@
+<!-- <app-sidebar></app-sidebar>
+
 <div class="card">
-  <button class="btn-outline-dark float-lg-start" style="height: 50px; width: 50px" (click)="onGolistProject()">
-    <i class="fa fa-chevron-circle-left"></i>
-  </button><br>
-  <div class="card-header">
-    <h2>Project {{projectModel.projectName}}</h2>
-    <table class="table">
-      <thead>
-      <tr>
-        <th scope="col">PMO</th>
-        <td>{{projectModel.pmo.username}}</td>
-      </tr>
-      <tr>
-        <th scope="col">PM</th>
-        <td>{{projectModel.pm.username}}</td>
-      </tr>
-      <tr>
-        <th scope="col">CoPM</th>
-        <td>{{projectModel.coPM.username}}</td>
-      </tr>
-      <tr>
-        <th scope="col">Prosentase Project</th>
-        <td>{{projectModel.prosentaseProject*100 | number : '1.2-2'}}%</td>
-      </tr>
-      <tr>
-        <th scope="col">Status Project</th>
-        <td>{{projectModel.statusProject}}</td>
-      </tr>
-      </thead>
-    </table>
-  </div>
+    <div class="col col-xs-6 mt-4 mb-3 text-left">
+        <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Detail Project {{projectModel.projectName}}</h4>
+    </div>
+    <br>
+    <div class="container">
+        <div class="col col-xs-6 mt-3 mb-3">
+            <div class="panel-body" style="overflow-x:auto;">
+                <table class="table table-striped">
+                    <thead class="text-left">
+                        <tr>
+                            <th scope="col">PMO</th>
+                            <td>:</td>
+                            <td>{{projectModel.pmo.username}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">PM</th>
+                            <td>:</td>
+                            <td>{{projectModel.pm.username}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">CoPM</th>
+                            <td>:</td>
+                            <td>{{projectModel.coPM.username}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Prosentase Project</th>
+                            <td>:</td>
+                            <td>{{projectModel.prosentaseProject*100 | number : '1.2-2'}}%</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Status Project</th>
+                            <td>:</td>
+                            <td>{{projectModel.statusProject}}</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
 
-  <div class="card-body" [hidden]="releaseModel.length===0">
-    <table class="table">
-      <thead>
-      </thead>
-      <tbody>
-      <tr>
-        <th>Release Code</th>
-        <th>Release Name</th>
-        <th>Status</th>
-        <th>Stage</th>
-        <th>Prosentase Release</th>
-        <th>Detail</th>
-      </tr>
-      <tr *ngFor="let release of releaseModel; let i = index">
-        <td>{{release.releaseCode}}</td>
-        <td>{{release.releaseName}}</td>
-        <td>{{release.status}}</td>
-        <td>{{release.stage}}</td>
-        <td>{{release.prosentaseRelease*100 | number : '1.2-2'}}%</td>
-        <td>
-          <button (click)="getTaskByReleaseId(release.id)" class="btn btn-warning">Detail</button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="card-body" [hidden]="releaseModel.length===0">
+        <table class="table">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Release Code</th>
+                    <th>Release Name</th>
+                    <th>Status</th>
+                    <th>Stage</th>
+                    <th>Prosentase Release</th>
+                    <th>Detail</th>
+                </tr>
+                <tr *ngFor="let release of releaseModel; let i = index">
+                    <td>{{release.releaseCode}}</td>
+                    <td>{{release.releaseName}}</td>
+                    <td>{{release.status}}</td>
+                    <td>{{release.stage}}</td>
+                    <td>{{release.prosentaseRelease*100 | number : '1.2-2'}}%</td>
+                    <td>
+                        <button (click)="getTaskByReleaseId(release.id)" class="btn btn-warning">Detail</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-  <div class="card-footer" [hidden]="taskModel.length===0">
-  <table class="table">
-    <tbody>
-    <tr>
-      <th>Task Code</th>
-      <th>Task Name</th>
-      <th>Prosentase Task</th>
-      <th>Assign to</th>
-    </tr>
-    <tr *ngFor="let task of taskModel; let i = index">
-      <td>{{task.taskCode}}</td>
-      <td>{{task.taskName}}</td>
-      <td>{{task.taskProsentase*100 | number : '1.2-2'}}%</td>
-      <td>{{task.assignedTo.username}}</td>
-    </tr>
-    </tbody>
-  </table>
-  </div>
-  <!--  <div *ngFor="let release of releaseModel; index as i">-->
-  <!--    <table class="table">-->
-  <!--      <thead>-->
-  <!--      </thead>-->
-  <!--      <tbody>-->
-  <!--      <tr>-->
-  <!--        <th>Release Code</th>-->
-  <!--        <th>Release Name</th>-->
-  <!--        <th>Prosentase Release</th>-->
-  <!--      </tr>-->
-  <!--      <tr>-->
-  <!--        <td>{{release.releaseCode}}</td>-->
-  <!--        <td>{{release.releaseName}}</td>-->
-  <!--        <td>{{release.prosentaseRelease}}</td>-->
-  <!--      </tr>-->
-  <!--      </tbody>-->
-  <!--    </table>-->
-  <!--  <table class="table">-->
-  <!--    <thead>-->
-  <!--    <tr>-->
-  <!--      <th scope="col">TaskCode</th>-->
-  <!--      <th scope="col">Task Name</th>-->
-  <!--      <th scope="col">Assignto</th>-->
-  <!--      <th scope="col">Prosentase Task</th>-->
-  <!--    </tr>-->
-  <!--    </thead>-->
-  <!--    <tbody>-->
-  <!--    <tr *ngFor="let task of release.taskList ; index as i">-->
-  <!--      <td>{{task.taskCode}}</td>-->
-  <!--      <td>{{task.taskName}}</td>-->
-  <!--      <td>{{task.assignedTo.username}}</td>-->
-  <!--      <td>{{task.taskProsentase}}</td>-->
-  <!--    </tr>-->
-  <!--    </tbody>-->
-  <!--  </table>-->
-  <!--  </div>-->
+    <div class="card-footer" [hidden]="taskModel.length===0">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Task Code</th>
+                    <th>Task Name</th>
+                    <th>Prosentase Task</th>
+                    <th>Assign to</th>
+                </tr>
+                <tr *ngFor="let task of taskModel; let i = index">
+                    <td>{{task.taskCode}}</td>
+                    <td>{{task.taskName}}</td>
+                    <td>{{task.taskProsentase*100 | number : '1.2-2'}}%</td>
+                    <td>{{task.assignedTo.username}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--  <div *ngFor="let release of releaseModel; index as i">-->
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr>-->
+<!--        <th>Release Code</th>-->
+<!--        <th>Release Name</th>-->
+<!--        <th>Prosentase Release</th>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>{{release.releaseCode}}</td>-->
+<!--        <td>{{release.releaseName}}</td>-->
+<!--        <td>{{release.prosentaseRelease}}</td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  <table class="table">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">TaskCode</th>-->
+<!--      <th scope="col">Task Name</th>-->
+<!--      <th scope="col">Assignto</th>-->
+<!--      <th scope="col">Prosentase Task</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let task of release.taskList ; index as i">-->
+<!--      <td>{{task.taskCode}}</td>-->
+<!--      <td>{{task.taskName}}</td>-->
+<!--      <td>{{task.assignedTo.username}}</td>-->
+<!--      <td>{{task.taskProsentase}}</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+<!--  </div>-->
 
-</div>
+<!-- </div> -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-content">
+        <app-sidebar></app-sidebar>
+        <div class="container">
+            <!-- Table -->
+            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Detail Project {{projectModel.projectName}}</h4>
+            <div class="row">
+
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="panel-body" style="overflow-x:auto;">
+                                <table class="table table-striped">
+                                    <thead class="text-left">
+                                        <tr>
+                                            <th scope="col">PMO</th>
+                                            <td>:</td>
+                                            <td>{{projectModel.pmo.username}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">PM</th>
+                                            <td>:</td>
+                                            <td>{{projectModel.pm.username}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">CoPM</th>
+                                            <td>:</td>
+                                            <td>{{projectModel.coPM.username}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Prosentase Project</th>
+                                            <td>:</td>
+                                            <td>{{projectModel.prosentaseProject*100 | number : '1.2-2'}}%</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="col">Status Project</th>
+                                            <td>:</td>
+                                            <td>{{projectModel.statusProject}}</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="table-responsive" [hidden]="releaseModel.length===0">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Release Code</th>
+                                        <th>Release Name</th>
+                                        <th>Status</th>
+                                        <th>Stage</th>
+                                        <th>Prosentase Release</th>
+                                        <th>Detail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let release of releaseModel; let i = index">
+                                        <td>{{release.releaseCode}}</td>
+                                        <td>{{release.releaseName}}</td>
+                                        <td>{{release.status}}</td>
+                                        <td>{{release.stage}}</td>
+                                        <td>{{release.prosentaseRelease*100 | number : '1.2-2'}}%</td>
+                                        <td>
+                                            <button (click)="getTaskByReleaseId(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+                                              class="fa fa-eye"></i></button>&nbsp;
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="table-responsive" [hidden]="taskModel.length===0">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Task Code</th>
+                                        <th>Task Name</th>
+                                        <th>Prosentase Task</th>
+                                        <th>Assign to</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let task of taskModel; let i = index">
+                                        <td>{{task.taskCode}}</td>
+                                        <td>{{task.taskName}}</td>
+                                        <td>{{task.taskProsentase*100 | number : '1.2-2'}}%</td>
+                                        <td>{{task.assignedTo.username}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6 m-auto text-center">
+                <div class="copyright">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
