@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {UserModel, UserModel2} from './user.model';
+import {formatDate} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -52,9 +53,11 @@ export class UserService {
     });
   }
 
-  changeStatusUser(id): Observable<UserModel2> {
+  changeStatusUser(id, status): Observable<UserModel2> {
+    const formData = new FormData();
+    formData.append('status', status);
     return new Observable((observer: Observer<UserModel2>) => {
-      this.http.put(`/api/user/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, id)
+      this.http.put(`/api/user/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData)
         .subscribe((response: UserModel2) => {
           observer.next(response);
         }, (error) => {
@@ -62,4 +65,6 @@ export class UserService {
         });
     });
   }
+
+
 }

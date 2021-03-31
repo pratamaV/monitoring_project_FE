@@ -265,7 +265,7 @@ export class HomeComponent implements OnInit {
         localStorage.getItem('OperationalRetail'), localStorage.getItem('Teknik'),
         localStorage.getItem('Utama'), localStorage.getItem('allDirectorate')];
       updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
-    }, 50000);
+    }, 10000);
   }
 
 

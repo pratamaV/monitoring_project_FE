@@ -56,7 +56,12 @@ export class DetailTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGolistMyTask() {
-    this.router.navigate(['/dashboard/task/my-task']);
+    const param = localStorage.getItem('paramnavigatetask');
+    if (param === 'mylisttask') {
+      this.router.navigate(['/dashboard/task/my-task']);
+    } else if (param === 'listtask') {
+      this.router.navigate(['/dashboard/task']);
+    }
   }
 
   // tslint:disable-next-line:typedef
@@ -107,6 +112,4 @@ export class DetailTaskComponent implements OnInit {
       Swal.fire('Failed', 'Gagal mengunggah dokumen, cek ukuran dokumen', 'error');
     }
   }
-
-
 }

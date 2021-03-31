@@ -1,82 +1,82 @@
 <div class="card">
 
-    <!-- Page Heading -->
-    <div class="row" id="main">
-        <div class="col-sm-12 col-md-12 well" id="content">
-            <button class="btn btn-outline-dark float-start" routerLink="/home">
+  <!-- Page Heading -->
+  <div class="row" id="main">
+    <div class="col-sm-12 col-md-12 well" id="content">
+      <button class="btn btn-outline-dark float-start" routerLink="/home">
         <i class="fa fa-window-minimize" aria-hidden="true"></i>
       </button>
-            <h1 style="text-align: center; margin-bottom: 30px">Dashboard</h1>
+      <h1 style="text-align: center; margin-bottom: 30px">Dashboard</h1>
 
-            <div class="row mb-2">
-                <div id="divChart" class="col-4">
-                    <h4 style="text-align: center">Prosentase Project by Status</h4>
-                    <canvas id="releaseByStage" width="600" height="430"></canvas>
-                </div>
-                <div class="col-4">
-                    <h4>Progress Release by Stage</h4>
-                    <canvas id="barChart" width="600" height="430"></canvas>
-                </div>
-
-                <div class="col-4">
-                    <canvas id="bar-chart-horizontal" width="600" height="430">
-          </canvas>
-                </div>
-            </div>
-
-            <div class="row">
-                <div id="divChart3" class="col-6">
-                    <div class="container-fluid">
-                        <h4 style="text-align: center">Best Performance</h4>
-                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <table class="table table-bordered table-striped mb-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Total Performance</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let user of user; let i = index">
-                                        <th scope="row">{{i + 1}}</th>
-                                        <td>{{user.username}}</td>
-                                        <td>{{user.totalPerformance * 100 | number : '1.2-2'}} %</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <h4 style="text-align: center">Task Out of The Date</h4>
-                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                        <table class="table table-bordered table-striped mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Task Code</th>
-                                    <th scope="col">Task Name</th>
-                                    <th scope="col">Assign To</th>
-                                    <th scope="col">Est. End Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let task of taskDeadline; let i = index">
-                                    <th scope="row">{{i + 1}}</th>
-                                    <td>{{task.taskCode}}</td>
-                                    <td>{{task.taskName}}</td>
-                                    <td>{{task.assignedTo.username}}</td>
-                                    <td>{{task.estEndDate | date}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-
+      <div class="row">
+        <div id="divChart" class="col-4">
+          <h4 style="text-align: center">Prosentase Project by Status</h4>
+          <canvas id="releaseByStage" width="600" height="430"></canvas>
         </div>
+        <div class="col-4">
+          <h4>Progress Release by Stage</h4>
+          <canvas id="barChart" width="600" height="430"></canvas>
+        </div>
+
+        <div class="col-4">
+          <canvas id="bar-chart-horizontal" width="600" height="430">
+          </canvas>
+        </div>
+      </div>
+
+      <div class="row">
+        <div id="divChart3" class="col-6">
+          <div class="container-fluid">
+            <h4 style="text-align: center">Best Performance</h4>
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+              <table class="table table-bordered table-striped mb-0">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Total Performance</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of user; let i = index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td>{{user.username}}</td>
+                  <td>{{user.totalPerformance * 100 | number : '1.2-2'}} %</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <h4 style="text-align: center">Task Out of The Date</h4>
+          <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+              <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task Name</th>
+                <th scope="col">Assign To</th>
+                <th scope="col">Est. End Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let task of taskDeadline; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td>{{task.taskCode}}</td>
+                <td>{{task.taskName}}</td>
+                <td>{{task.assignedTo.username}}</td>
+                <td>{{task.estEndDate | date}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
     </div>
+  </div>
 </div>
