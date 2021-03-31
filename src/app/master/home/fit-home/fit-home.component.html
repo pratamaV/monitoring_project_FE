@@ -6,12 +6,12 @@
       <button class="btn btn-outline-dark float-start" routerLink="/home">
         <i class="fa fa-window-minimize" aria-hidden="true"></i>
       </button>
-      <h1 style="text-align: center; margin-bottom: 30px">Dashboard</h1>
+      <h1 style="text-align: center; margin-bottom: 10px">Dashboard</h1>
 
       <div class="row">
         <div id="divChart" class="col-4">
           <h4 style="text-align: center">Prosentase Project by Status</h4>
-          <canvas id="releaseByStage" width="600" height="430"></canvas>
+          <canvas id="projectByStatus" width="600" height="430"></canvas>
         </div>
         <div class="col-4">
           <h4>Progress Release by Stage</h4>
@@ -34,6 +34,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
+                  <th scope="col">Total Weight</th>
                   <th scope="col">Total Performance</th>
                 </tr>
                 </thead>
@@ -41,6 +42,7 @@
                 <tr *ngFor="let user of user; let i = index">
                   <th scope="row">{{i + 1}}</th>
                   <td>{{user.username}}</td>
+                  <td>{{user.totalWeight | number : '1.2-2'}}</td>
                   <td>{{user.totalPerformance * 100 | number : '1.2-2'}} %</td>
                 </tr>
                 </tbody>
