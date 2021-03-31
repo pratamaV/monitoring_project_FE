@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
         window.sessionStorage.setItem('token', JSON.stringify(data));
         this.token = window.sessionStorage.getItem('token');
         this.x = JSON.parse(this.token);
-        if (this.x.user.statusUser === 'aktif') {
+        if (this.x.user.statusUser === 'Active') {
           this.auth.login(this.x.user.userRole);
           Swal.fire('Success', 'Success Login', 'success');
           this.router.navigate(['/home']);
