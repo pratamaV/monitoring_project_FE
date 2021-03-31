@@ -28,9 +28,18 @@ export class MyTaskComponent implements OnInit {
     estStartDate: null,
     estEndDate: null
     // prosentase: null
+  }; 
+
+  paramNull2 = {
+    divisi: '',
+    userPM: '',
+    userPMO: '',
+    direktorate: '',
+    status: ''
   };
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
+  projectName: any[] = [];
 
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
@@ -43,13 +52,13 @@ export class MyTaskComponent implements OnInit {
     this.role = localStorage.getItem('role');
     this.onGetTaskByUserId();
     console.log('ini current date', this.currentDate);
-
+    this.getAllProjectName();
   }
 
   private buildForm(): void {
     this.taskForm = new FormGroup({
       // taskDoc: new FormControl(null),
-      // statusDone: new FormControl(null),
+      statusDone: new FormControl(null),
       releaseName: new FormControl(null),
       projectName: new FormControl(null),
       estStartDate: new FormControl(null),
@@ -148,4 +157,14 @@ export class MyTaskComponent implements OnInit {
       };
     }
   }
-}
+
+  getAllProjectName(){
+    this.projectService.getAllProject(this.paramNull2)
+    .subscribe(data => {
+      this.projectName = data
+    }, error => {
+      alert(error);     
+    })
+  }
+
+  }
