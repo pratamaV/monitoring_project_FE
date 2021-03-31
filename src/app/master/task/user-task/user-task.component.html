@@ -20,9 +20,6 @@
                 <div class="col">
                     <div class="card shadow">
                         <div class="card-header border-0">
-                            <div class="col-8">
-                                <h4 style="text-align: left"><i class="fa fa-chevron-circle-left" (click)="goToListUser()"></i> List Task/Project {{user.username}}</h4>
-                            </div>
                             <div class="col-4">
                                 <button class="btn btn-warning mt-2 mb-2" style="width: 200px; align-self: flex-end" (click)="exportexcel()"><i
                         class="fa fa-file"></i> Export to excel
@@ -47,9 +44,9 @@
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
                                         <td>{{task.score}}</td>
-                                        <td>{{task.weight}}</td>
+                                        <td>{{task.weight | number : '1.2-2'}}</td>
                                         <td>{{task.statusDone}}</td>
-                                        <td>{{task.taskProsentase * 100}}%</td>
+                                        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
                                         <td>{{task.estEndDate | date}}</td>
                                     </tr>
                                 </tbody>
@@ -65,6 +62,7 @@
                                         <th scope="col">Score</th>
                                         <th scope="col">Weight</th>
                                         <th scope="col">Prosentase Project</th>
+                                      <th scope="col">Target Live</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,8 +70,9 @@
                                         <th scope="row">{{project.projectCode}}</th>
                                         <td>{{project.projectName}}</td>
                                         <td>{{project.score}}</td>
-                                        <td>{{project.weight}}</td>
-                                        <td>{{project.prosentaseProject * 100}}%</td>
+                                        <td>{{project.weight | number : '1.2-2'}}</td>
+                                        <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
+                                      <td>{{project.targetLive | date}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -97,3 +96,4 @@
     <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+

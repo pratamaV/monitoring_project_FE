@@ -42,28 +42,29 @@ export class UserTaskComponent implements OnInit {
     this.userService.getUserById(localStorage.getItem('userIdTask'))
       .subscribe(data => {
         this.user = data;
-        if (this.user.userRole === '04') {
-          this.taskService.getTaskByUserId(localStorage.getItem('userIdTask'), this.paramNull)
-            .subscribe(data2 => {
-              this.loadedTask = data2;
-            }, error => {
-              alert(error);
-            });
-        } else if(this.user.userRole === '03') {
+        this.taskService.getTaskByUserId(localStorage.getItem('userIdTask'), this.paramNull)
+          .subscribe(data2 => {
+            this.loadedTask = data2;
+          }, error => {
+            alert(error);
+          });
+
+
+        if (this.user.userRole === '03') {
           this.projectService.getProjectBycoPMId(localStorage.getItem('userIdTask'))
             .subscribe(data3 => {
               this.loadedProject = data3;
             }, error => {
               alert(error);
             });
-        } else if(this.user.userRole === '02') {
+        } else if (this.user.userRole === '02') {
           this.projectService.getProjectByPMId(localStorage.getItem('userIdTask'))
             .subscribe(data4 => {
               this.loadedProject = data4;
             }, error => {
               alert(error);
             });
-        } else if(this.user.userRole === '01') {
+        } else if (this.user.userRole === '01') {
           this.projectService.getProjectByPMOId(localStorage.getItem('userIdTask'))
             .subscribe(data5 => {
               this.loadedProject = data5;
