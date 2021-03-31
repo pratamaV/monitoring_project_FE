@@ -23,7 +23,6 @@
         <th scope="col">Prosentase Task</th>
         <th scope="col">Final Target</th>
         <th scope="col">Task Document</th>
-        <!--      <th scope="col">Action</th>-->
       </tr>
       </thead>
       <tbody>
@@ -31,17 +30,14 @@
         <th scope="row">{{task.taskCode}}</th>
         <td>{{task.taskName}}</td>
         <td>{{task.score}}</td>
-        <td>{{task.weight}}</td>
+        <td>{{task.weight | number : '1.2-2'}}</td>
         <td>{{task.statusDone}}</td>
-        <td>{{task.taskProsentase * 100}}%</td>
+        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
         <td>{{task.estEndDate | date}}</td>
         <td>
           <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                   data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
         </td>
-        <!--      <td>-->
-        <!--        <button class="btn btn-success" (click)="onDoneTask(task, task.release.id)">Done</button>-->
-        <!--      </td>-->
       </tr>
       </tbody>
     </table>
@@ -63,8 +59,8 @@
         <th scope="row">{{project.projectCode}}</th>
         <td>{{project.projectName}}</td>
         <td>{{project.score}}</td>
-        <td>{{project.weight}}</td>
-        <td>{{project.prosentaseProject * 100}}%</td>
+        <td>{{project.weight | number : '1.2-2'}}</td>
+        <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
       </tr>
       </tbody>
     </table>

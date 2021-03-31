@@ -158,7 +158,7 @@
                                                 class="fa fa-eye"></i></button>&nbsp;
                                             <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Release"><i
                                                 class="fa fa-bars"></i></button>&nbsp;
-                                            <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;
+                                            <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update" [disabled]="project.statusProject==='Completed'"><i class="fa fa-edit"></i></button>&nbsp;
                                         </td>
                                     </tr>
                                 </tbody>

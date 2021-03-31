@@ -68,7 +68,7 @@ export class FormProjectComponent implements OnInit {
       pmo: new FormControl(null, [Validators.required]),
       pm: new FormControl(null, [Validators.required]),
       benefit: new FormControl(null, [Validators.required]),
-      description: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required, Validators.maxLength(255)]),
       coPM: new FormControl(null, [Validators.required]),
       divisiUser: new FormControl(null, [Validators.required]),
       directorateUser: new FormControl(null, [Validators.required]),

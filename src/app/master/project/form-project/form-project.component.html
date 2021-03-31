@@ -3,229 +3,258 @@
 <!-- <div class="card"> -->
 
 <div class="container">
-    <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Form Pembuatan Project</h4>
-    <br>
-    <div class="container-fluid col-12">
-        <form style="padding: 10px" [formGroup]="projectForm" method="post" (ngSubmit)="onSaveProject(projectForm.value, projectForm.valid)">
-            <div class="row">
-                <div class="col-6">
-                    <div class="Form-group">
-                        <input type="hidden" class="form-control" formControlName="id" id="id">
-                        <input type="hidden" class="form-control" formControlName="projectCode" id="projectCode">
-                    </div>
+  <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Form Pembuatan Project</h4>
+  <br>
+  <div class="container-fluid col-12">
+    <form style="padding: 10px" [formGroup]="projectForm" method="post"
+          (ngSubmit)="onSaveProject(projectForm.value, projectForm.valid)">
+      <div class="row">
+        <div class="col-6">
+          <div class="Form-group">
+            <input type="hidden" class="form-control" formControlName="id" id="id">
+            <input type="hidden" class="form-control" formControlName="projectCode" id="projectCode">
+          </div>
 
-                    <div class="form-group">
-                        <label for="projectName">Project Name <small style="color: red;">*</small></label>
-                        <input type="text" class="form-control" formControlName="projectName" id="projectName">
-                        <small class="form-text text-danger " *ngIf="form('projectName').invalid && form('projectName').dirty || form('projectName').touched">
-                        <div *ngIf="form('projectName').errors?.required">
-                          Bagian ini harus terisi
-                        </div>
-                        </small>
-                    </div>
+          <div class="form-group">
+            <label for="projectName">Project Name <small style="color: red;">*</small></label>
+            <input type="text" class="form-control" formControlName="projectName" id="projectName">
+            <small class="form-text text-danger "
+                   *ngIf="form('projectName').invalid && form('projectName').dirty || form('projectName').touched">
+              <div *ngIf="form('projectName').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="pmo">PMO <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="pmo" id="pmo" name="pmo" [compareWith]="compareUser" aria-label="Default select example">
-                        <option *ngFor="let user of userPMO"  [ngValue]="user" [selected]="pmoId===user.id" >{{user.username}}</option>
-                      </select>
-                        <small class="form-text text-danger " *ngIf="form('pmo').invalid && form('pmo').dirty || form('pmo').touched">
-                        <div *ngIf="form('pmo').errors?.required">
-                          Bagian ini harus terisi
-                        </div>
-                      </small>
-                    </div>
+          <div class="form-group">
+            <label for="pmo">PMO <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="pmo" id="pmo" name="pmo" [compareWith]="compareUser"
+                    aria-label="Default select example">
+              <option *ngFor="let user of userPMO" [ngValue]="user"
+                      [selected]="pmoId===user.id">{{user.username}}</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('pmo').invalid && form('pmo').dirty || form('pmo').touched">
+              <div *ngIf="form('pmo').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="pm">PM <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="pm" id="pm" [compareWith]="compareUser" aria-label="Default select example">
-                      <option *ngFor="let user of userPM"  [ngValue]="user" >{{user.username}}</option>
-                    </select>
-                        <small class="form-text text-danger " *ngIf="form('pm').invalid && form('pm').dirty || form('pm').touched">
-                      <div *ngIf="form('pm').errors?.required">
-                        Bagian ini harus terisi
-                      </div>
-                    </small>
-                    </div>
+          <div class="form-group">
+            <label for="pm">PM <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="pm" id="pm" [compareWith]="compareUser"
+                    aria-label="Default select example">
+              <option *ngFor="let user of userPM" [ngValue]="user">{{user.username}}</option>
+            </select>
+            <small class="form-text text-danger " *ngIf="form('pm').invalid && form('pm').dirty || form('pm').touched">
+              <div *ngIf="form('pm').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="coPM">CoPM <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="coPM" id="coPM" [compareWith]="compareUser" aria-label="Default select example">
-                        <option *ngFor="let user of userCoPM"  [ngValue]="user" [selected]="coPMId===user.id" >{{user.username}}</option>
-                      </select>
-                        <small class="form-text text-danger " *ngIf="form('coPM').invalid && form('coPM').dirty || form('coPM').touched">
-                        <div *ngIf="form('coPM').errors?.required">
-                          Bagian ini harus terisi
-                        </div>
-                      </small>
-                    </div>
+          <div class="form-group">
+            <label for="coPM">CoPM <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="coPM" id="coPM" [compareWith]="compareUser"
+                    aria-label="Default select example">
+              <option *ngFor="let user of userCoPM" [ngValue]="user"
+                      [selected]="coPMId===user.id">{{user.username}}</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('coPM').invalid && form('coPM').dirty || form('coPM').touched">
+              <div *ngIf="form('coPM').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="departmentHead">Department Head <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="departmentHead" id="departmentHead" [compareWith]="compareUser" aria-label="Default select example">
-                      <option *ngFor="let user of userDepartmentHead"  [ngValue]="user" >{{user.username}}</option>
-                      </select>
-                        <small class="form-text text-danger " *ngIf="form('departmentHead').invalid && form('departmentHead').dirty || form('departmentHead').touched">
-                      <div *ngIf="form('departmentHead').errors?.required">
-                        Bagian ini harus terisi
-                      </div>
-                    </small>
-                    </div>
+          <div class="form-group">
+            <label for="departmentHead">Department Head <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="departmentHead" id="departmentHead" [compareWith]="compareUser"
+                    aria-label="Default select example">
+              <option *ngFor="let user of userDepartmentHead" [ngValue]="user">{{user.username}}</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('departmentHead').invalid && form('departmentHead').dirty || form('departmentHead').touched">
+              <div *ngIf="form('departmentHead').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="divisiUser">Divisi Owner <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="divisiUser" id="divisiUser" [compareWith]="compareDivision" aria-label="Default select example">
-                          <option *ngFor="let division of loadedDivision" [ngValue]="division" [selected]="divisionId===division.id" >{{division.divisionName}}</option>
-                        </select>
-                        <small class="form-text text-danger " *ngIf="form('divisiUser').invalid && form('divisiUser').dirty || form('divisiUser').touched">
-                          <div *ngIf="form('divisiUser').errors?.required">
-                            Bagian ini harus terisi
-                          </div>
-                        </small>
-                    </div>
+          <div class="form-group">
+            <label for="divisiUser">Divisi Owner <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="divisiUser" id="divisiUser" [compareWith]="compareDivision"
+                    aria-label="Default select example">
+              <option *ngFor="let division of loadedDivision" [ngValue]="division"
+                      [selected]="divisionId===division.id">{{division.divisionName}}</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('divisiUser').invalid && form('divisiUser').dirty || form('divisiUser').touched">
+              <div *ngIf="form('divisiUser').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="directorateUser">Directorate Owner <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="directorateUser" id="directorateUser" aria-label="Default select example">
-                          <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
-                          <option value="Keuangan">Keuangan</option>
-                          <option value="Operational Retail">Operational Retail</option>
-                          <option value="Teknik">Teknik</option>
-                          <option value="Utama">Utama</option>
-                        </select>
-                        <small class="form-text text-danger " *ngIf="form('directorateUser').invalid && form('directorateUser').dirty || form('directorateUser').touched">
-                          <div *ngIf="form('directorateUser').errors?.required">
-                            Bagian ini harus terisi
-                          </div>
-                        </small>
-                    </div>
+          <div class="form-group">
+            <label for="directorateUser">Directorate Owner <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="directorateUser" id="directorateUser"
+                    aria-label="Default select example">
+              <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
+              <option value="Keuangan">Keuangan</option>
+              <option value="Operational Retail">Operational Retail</option>
+              <option value="Teknik">Teknik</option>
+              <option value="Utama">Utama</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('directorateUser').invalid && form('directorateUser').dirty || form('directorateUser').touched">
+              <div *ngIf="form('directorateUser').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="benefit">Benefit <small style="color: red;">*</small></label>
-                        <input type="text" class="form-control" formControlName="benefit" id="benefit">
-                        <small class="form-text text-danger " *ngIf="form('benefit').invalid && form('benefit').dirty || form('benefit').touched">
-                        <div *ngIf="form('benefit').errors?.required">
-                          Bagian ini harus terisi
-                        </div>
-                      </small>
-                    </div>
+          <div class="form-group">
+            <label for="benefit">Benefit <small style="color: red;">*</small></label>
+            <input type="text" class="form-control" formControlName="benefit" id="benefit">
+            <small class="form-text text-danger "
+                   *ngIf="form('benefit').invalid && form('benefit').dirty || form('benefit').touched">
+              <div *ngIf="form('benefit').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="description">Description <small style="color: red;">*</small></label>
-                        <textarea type="text" class="form-control" formControlName="description" id="description"></textarea>
-                        <small class="form-text text-danger " *ngIf="form('description').invalid && form('description').dirty || form('description').touched">
-                        <div *ngIf="form('description').errors?.required">
-                          Bagian ini harus terisi
-                        </div>
-                      </small>
-                    </div>
-                </div>
+          <div class="form-group">
+            <label for="description">Description <small style="color: red;">*</small></label>
+            <textarea type="text" class="form-control" formControlName="description" id="description"></textarea>
+            <small class="form-text text-danger "
+                   *ngIf="form('description').invalid && form('description').dirty || form('description').touched">
+              <div *ngIf="form('description').errors?.required">
+                Bagian ini harus terisi
+              </div>
+              <div *ngIf="form('description').errors?.maxlength">
+                Maksimal deskripsi 255 karakter
+              </div>
+            </small>
+          </div>
+        </div>
 
-                <div class="col-6">
+        <div class="col-6">
 
-                    <div class="form-group">
-                        <label for="status">Status <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
-                          <option value="Not Started">Not Started</option>
-                          <option value="On Schedule">On Schedule</option>
-                          <option value="PTR/ Live">PTR/ Live</option>
-                          <option value="PTR/ Live">Delay</option>
-                        </select>
-                        <small class="form-text text-danger " *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
-                          <div *ngIf="form('status').errors?.required">
-                            Bagian ini harus terisi
-                          </div>
-                        </small>
-                    </div>
+          <div class="form-group">
+            <label for="status">Status <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+              <option value="Not Started">Not Started</option>
+              <option value="On Schedule">On Schedule</option>
+              <option value="PTR/ Live">PTR/ Live</option>
+              <option value="PTR/ Live">Delay</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
+              <div *ngIf="form('status').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="targetLive">Target Live <small style="color: red;">*</small></label>
-                        <input type="date" class="form-control" formControlName="targetLive" id="targetLive">
-                        <small class="form-text text-danger " *ngIf="form('targetLive').invalid && form('targetLive').dirty || form('targetLive').touched">
-                          <div *ngIf="form('targetLive').errors?.required">
-                            Bagian ini harus terisi
-                          </div>
-                        </small>
-                    </div>
+          <div class="form-group">
+            <label for="targetLive">Target Live <small style="color: red;">*</small></label>
+            <input type="date" class="form-control" formControlName="targetLive" id="targetLive">
+            <small class="form-text text-danger "
+                   *ngIf="form('targetLive').invalid && form('targetLive').dirty || form('targetLive').touched">
+              <div *ngIf="form('targetLive').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="budget">Budget</label>
-                        <input type="text" class="form-control" formControlName="budget" id="budget">
-                        <!-- <input type="text" class="form-control" formControlName="budget" id="budget" [value]="projectForm.get('budget').value | customCurrencyRp"> -->
-                        <!-- <small class="form-text text-danger" *ngIf="form('budget').invalid && form('budget').dirty || form('budget').touched">
-                          <div *ngIf="form('budget').errors?.pattern">
-                            Harus menggunakan angka
-                          </div>
-                        </small> -->
-                    </div>
+          <div class="form-group">
+            <label for="budget">Budget</label>
+            <input type="text" class="form-control" formControlName="budget" id="budget">
+            <!-- <input type="text" class="form-control" formControlName="budget" id="budget" [value]="projectForm.get('budget').value | customCurrencyRp"> -->
+            <!-- <small class="form-text text-danger" *ngIf="form('budget').invalid && form('budget').dirty || form('budget').touched">
+              <div *ngIf="form('budget').errors?.pattern">
+                Harus menggunakan angka
+              </div>
+            </small> -->
+          </div>
 
-                    <div class="form-group">
-                        <label for="contracted_value">Contracted Value</label>
-                        <input type="text" class="form-control" formControlName="contracted_value" id="contracted_value">
+          <div class="form-group">
+            <label for="contracted_value">Contracted Value</label>
+            <input type="text" class="form-control" formControlName="contracted_value" id="contracted_value">
 
-                    </div>
+          </div>
 
-                    <div class="form-group">
-                        <label for="paymentRealization">Payment Realization</label>
-                        <input type="text" class="form-control" formControlName="paymentRealization" id="paymentRealization">
+          <div class="form-group">
+            <label for="paymentRealization">Payment Realization</label>
+            <input type="text" class="form-control" formControlName="paymentRealization" id="paymentRealization">
 
-                    </div>
+          </div>
 
-                    <div class="form-group">
-                        <label for="keyword">Keyword</label>
-                        <input type="text" class="form-control" formControlName="keyword" id="keyword">
-                    </div>
+          <div class="form-group">
+            <label for="keyword">Keyword</label>
+            <input type="text" class="form-control" formControlName="keyword" id="keyword">
+          </div>
 
-                    <div class="form-group">
-                        <label for="score">Score <small style="color: red;">*</small></label>
-                        <input type="text" class="form-control" formControlName="score" id="score" />
+          <div class="form-group">
+            <label for="score">Score <small style="color: red;">*</small></label>
+            <input type="text" class="form-control" formControlName="score" id="score"/>
 
-                        <small class="form-text text-danger" *ngIf="form('score').invalid && form('score').dirty || form('score').touched">
-                          <div *ngIf="form('score').errors?.required">
-                            Bagian ini harus terisi
-                          </div>
-                          <div *ngIf="form('score').errors?.pattern">
-                            Harus menggunakan angka 1-10
-                          </div>
-                        </small>
-                    </div>
+            <small class="form-text text-danger"
+                   *ngIf="form('score').invalid && form('score').dirty || form('score').touched">
+              <div *ngIf="form('score').errors?.required">
+                Bagian ini harus terisi
+              </div>
+              <div *ngIf="form('score').errors?.pattern">
+                Harus menggunakan angka 1-10
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="categoryActivity">Category Activity <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="categoryActivity" id="categoryActivity" aria-label="Default select example">
-                          <option value="Carry Over">Carry Over</option>
-                          <option value="New">New</option>
-                        </select>
-                        <small class="form-text text-danger " *ngIf="form('categoryActivity').invalid && form('categoryActivity').dirty || form('categoryActivity').touched">
-                          <div *ngIf="form('categoryActivity').errors?.required">
-                            Bagian ini harus terisi
-                          </div>
-                        </small>
-                    </div>
+          <div class="form-group">
+            <label for="categoryActivity">Category Activity <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="categoryActivity" id="categoryActivity"
+                    aria-label="Default select example">
+              <option value="Carry Over">Carry Over</option>
+              <option value="New">New</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('categoryActivity').invalid && form('categoryActivity').dirty || form('categoryActivity').touched">
+              <div *ngIf="form('categoryActivity').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
 
-                    <div class="form-group">
-                        <label for="categoryInitiative">Category Initiative <small style="color: red;">*</small></label>
-                        <select class="form-select" formControlName="categoryInitiative" id="categoryInitiative" aria-label="Default select example">
-                          <option value="Project">Project</option>
-                          <option value="Enhancement">Enhancement</option>
-                        </select>
-                        <small class="form-text text-danger " *ngIf="form('categoryInitiative').invalid && form('categoryInitiative').dirty || form('categoryInitiative').touched">
-                          <div *ngIf="form('categoryInitiative').errors?.required">
-                            Bagian ini harus terisi
-                          </div>
-                        </small>
-                    </div>
-                    <div>
-                        <small style="text-align: right; "><small style="color: red;">*</small> Harus diisi</small>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="hidden" class="form-control" formControlName="statusProject" id="statusProject">
-            </div>
-            <button [disabled]="!projectForm.valid" type="submit" class="btn btn-primary mt-3" style="width: 100%">Submit</button>
+          <div class="form-group">
+            <label for="categoryInitiative">Category Initiative <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="categoryInitiative" id="categoryInitiative"
+                    aria-label="Default select example">
+              <option value="Project">Project</option>
+              <option value="Enhancement">Enhancement</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('categoryInitiative').invalid && form('categoryInitiative').dirty || form('categoryInitiative').touched">
+              <div *ngIf="form('categoryInitiative').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
+          <div>
+            <small style="text-align: right; "><small style="color: red;">*</small> Harus diisi</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="hidden" class="form-control" formControlName="statusProject" id="statusProject">
+      </div>
+      <button [disabled]="!projectForm.valid" type="submit" class="btn btn-primary mt-3" style="width: 100%">Submit
+      </button>
 
-        </form>
+    </form>
 
-    </div>
+  </div>
 </div>
