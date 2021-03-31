@@ -78,14 +78,15 @@ export class LoginComponent implements OnInit {
         } else {
           Swal.fire(
             'Failed',
-            'Your account still inactive, please check your email to verified your account',
+            'Your account still inactive',
             'error'
           );
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         }
       },
       error => {
         Swal.fire('Failed', 'Email or password incorrect', 'error');
+        this.router.navigate(['/']);
       }
     );
   }

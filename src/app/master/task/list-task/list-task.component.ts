@@ -152,7 +152,7 @@ export class ListTaskComponent implements OnInit {
   getStyle(estEndDate, statusDone): any {
     if ((estEndDate < this.currentDate) && statusDone === 'NOT STARTED') {
       return {
-        'background-color': 'red',
+        'background-color': 'rgb(255, 82, 82)',
         color : 'white'
       };
     } else if ((estEndDate < this.currentDate) && statusDone === 'ON_PROGRESS'){

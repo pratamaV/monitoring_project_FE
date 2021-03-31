@@ -13,6 +13,7 @@ const routes: Routes = [
     data: {
       role: [
         '01',
+        '02',
         '05'
       ]
     },
@@ -24,6 +25,7 @@ const routes: Routes = [
     data: {
       role: [
         '01',
+        '02',
         '05'
       ]
     },
@@ -35,6 +37,7 @@ const routes: Routes = [
     data: {
       role: [
         '01',
+        '02',
         '05'
       ]
     },
