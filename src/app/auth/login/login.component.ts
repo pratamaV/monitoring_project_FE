@@ -71,21 +71,22 @@ export class LoginComponent implements OnInit {
         window.sessionStorage.setItem('token', JSON.stringify(data));
         this.token = window.sessionStorage.getItem('token');
         this.x = JSON.parse(this.token);
-        if (this.x.user.statusUser === 'aktif') {
+        if (this.x.user.statusUser === 'Active') {
           this.auth.login(this.x.user.userRole);
           Swal.fire('Success', 'Success Login', 'success');
           this.router.navigate(['/home']);
         } else {
           Swal.fire(
             'Failed',
-            'Your account still inactive, please check your email to verified your account',
+            'Your account still inactive',
             'error'
           );
-          this.router.navigate(['/login']);
+          this.router.navigate(['/']);
         }
       },
       error => {
         Swal.fire('Failed', 'Email or password incorrect', 'error');
+        this.router.navigate(['/']);
       }
     );
   }

@@ -1,25 +1,25 @@
-.card{
-  padding: 30px;
-  /*margin: 30px;*/
-  text-align: center;
-  width: calc(100% - 17rem);
-  margin-left: 17rem;
-  transition: all 0.4s;
+.card {
+    padding: 30px;
+    /*margin: 30px;*/
+    text-align: center;
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: all 0.4s;
 }
 
 .container {
-  padding: 10px;
-  margin-bottom: 20px;
-  margin-top: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .my-custom-scrollbar {
-  position: relative;
-  height: 280px;
-  overflow: auto;
-}
-.table-wrapper-scroll-y {
-  display: block;
-  font-size: 14px;
+    position: relative;
+    height: 280px;
+    overflow: auto;
 }
 
+.table-wrapper-scroll-y {
+    display: block;
+    font-size: 14px;
+}

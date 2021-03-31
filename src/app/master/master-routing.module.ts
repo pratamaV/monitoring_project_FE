@@ -12,6 +12,7 @@ const routes: Routes = [
         '01',
         '02',
         '03',
+        '05',
       ]
     },
     loadChildren: () => import('./user/user.module').then(u => u.UserModule)
@@ -24,6 +25,7 @@ const routes: Routes = [
         '01',
         '02',
         '03',
+        '05',
       ]
     },
     loadChildren: () =>
@@ -37,6 +39,7 @@ const routes: Routes = [
         '01',
         '02',
         '03',
+        '05',
       ]
     },
     loadChildren: () =>
@@ -51,6 +54,7 @@ const routes: Routes = [
         '02',
         '03',
         '04',
+        '05',
       ]
     },
     loadChildren: () => import('./task/task.module').then(p => p.TaskModule)
@@ -63,6 +67,7 @@ const routes: Routes = [
         '01',
         '02',
         '03',
+        '05',
       ]
     },
     loadChildren: () =>
