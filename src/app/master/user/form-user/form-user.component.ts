@@ -59,7 +59,7 @@ export class FormUserComponent implements OnInit {
       directorateUser: new FormControl(null, [Validators.required]),
       password: new FormControl(null, [Validators.required, Validators.pattern(/(?=.*?[0-9]).{8,}/)]),
       confirmPassword: new FormControl(null, [Validators.required]),
-      statusUser: new FormControl('aktif'),
+      statusUser: new FormControl('Active'),
       totalWeight: new FormControl(0),
       totalPerformance: new FormControl(0)
     });
