@@ -84,7 +84,7 @@
                                     <tr>
                                         <td>Prosentase Project</td>
                                         <td>:</td>
-                                        <td>{{project.prosentaseProject*100}}%</td>
+                                        <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
                                     </tr>
                                     <tr>
                                         <td>Budget</td>
@@ -109,7 +109,7 @@
                                     <tr>
                                         <td>Weight</td>
                                         <td>:</td>
-                                        <td>{{project.weight}}</td>
+                                        <td>{{project.weight | number : '1.2-2'}}</td>
                                     </tr>
                                     <tr>
                                         <td>User</td>

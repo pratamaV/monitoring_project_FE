@@ -101,7 +101,7 @@
                                         <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
                                         <td>{{release.statusRelease}}</td>
                                         <td>
-                                            <select class="form-select" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">
+                                            <select class="form-select-sm" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">
                                                 <option disabled="disabled" selected="selected">Select an option.</option>
                                                 <option value="Active">Active</option>
                                                 <option value="Not Active">Not Active</option>
@@ -113,7 +113,7 @@
                                         <td>{{release.estEnddate | date}}</td>
                                         <td>{{release.actEnddate | date}}</td>
                                         <td style="width: 200px;">
-                                            <button (click)="updateRelease(release)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                            <button [disabled]="release.statusRelease === 'Completed'" (click)="updateRelease(release)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
                                             class="fa fa-edit"></i></button>&nbsp;
                                             <button (click)="onGoTask(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i
                                             class="fa fa-tasks"></i></button>&nbsp;
