@@ -163,8 +163,9 @@ export class ListTaskComponent implements OnInit {
     }
   }
 
-  onGoDetailTask(id) {
+  onGoDetailTask(id, param) {
     localStorage.setItem('taskId', id);
+    localStorage.setItem('paramnavigatetask', param);
     this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
   }
 }

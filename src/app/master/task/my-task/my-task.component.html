@@ -58,48 +58,48 @@
                 </button>
                                     <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetTaskByUserId()">Reset Filter
                 </button>&nbsp;
-                                    <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply Filter</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="excel-table">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Task Code</th>
-                                        <th scope="col">Task Name</th>
-                                        <th scope="col">Release Name</th>
-                                        <th scope="col">Project Name</th>
-                                        <!--        <th scope="col">Assigned To</th>-->
-                                        <th scope="col">Score</th>
-                                        <th scope="col">Weight</th>
-                                        <th scope="col">Status Done</th>
-                                        <th scope="col">Prosentase Task</th>
-                                        <th scope="col">Est. Start Date</th>
-                                        <th scope="col">Est. End Date</th>
-                                        <th scope="col">Act. End Date</th>
-                                        <th scope="col">Detail</th>
-                                        <!--                    <th scope="col">Task Document</th>-->
-                                        <!--                    <th scope="col">Action</th>-->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
-                                        <th scope="row">{{task.taskCode}}</th>
-                                        <td>{{task.taskName}}</td>
-                                        <td>{{task.release.releaseName}}</td>
-                                        <td>{{task.release.project.projectName}}</td>
-                                        <!--        <td>{{task.assignedTo.username}}</td>-->
-                                        <td>{{task.score}}</td>
-                                        <td>{{task.weight | number : '1.2-2'}}</td>
-                                        <td>{{task.statusDone}}</td>
-                                        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
-                                        <td>{{task.estStartDate | date}}</td>
-                                        <td>{{task.estEndDate | date}}</td>
-                                        <td>{{task.actEndDate | date}}</td>
-                                        <td style="text-align: center;">
-                                            <button (click)="onGoDetailTask(task.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
-                    class="fa fa-eye"></i></button>&nbsp;
+                <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply Filter</button>
+              </div>
+            </form>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush" id="excel-table">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Task Code</th>
+                <th scope="col">Task Name</th>
+                <th scope="col">Release Name</th>
+                <th scope="col">Project Name</th>
+                <!--        <th scope="col">Assigned To</th>-->
+                <th scope="col">Score</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Status Done</th>
+                <th scope="col">Prosentase Task</th>
+                <th scope="col">Est. Start Date</th>
+                <th scope="col">Est. End Date</th>
+                <th scope="col">Act. End Date</th>
+                <th scope="col">Detail</th>
+                <!--                    <th scope="col">Task Document</th>-->
+                <!--                    <th scope="col">Action</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
+                <th scope="row">{{task.taskCode}}</th>
+                <td>{{task.taskName}}</td>
+                <td>{{task.release.releaseName}}</td>
+                <td>{{task.release.project.projectName}}</td>
+                <!--        <td>{{task.assignedTo.username}}</td>-->
+                <td>{{task.score}}</td>
+                <td>{{task.weight | number : '1.2-2'}}</td>
+                <td>{{task.statusDone}}</td>
+                <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
+                <td>{{task.estStartDate | date}}</td>
+                <td>{{task.estEndDate | date}}</td>
+                <td>{{task.actEndDate | date}}</td>
+                <td style="text-align: center;">
+                  <button (click)="onGoDetailTask(task.id,'mylisttask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
+                          data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
                                         </td>
                                     </tr>
                                 </tbody>
