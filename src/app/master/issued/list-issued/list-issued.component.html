@@ -46,8 +46,9 @@
                                         <td>{{issued.estEnddate}}</td>
                                         <td>{{issued.pic}}</td>
                                         <td>{{issued.release.releaseCode}}</td>
-                                        <td>
-                                            <button (click)="updateIssued(issued)">Update</button>
+                                        <td style="text-align: center;">
+                                            <button (click)="updateIssued(issued)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                                class="fa fa-edit"></i></button>&nbsp;
                                         </td>
                                     </tr>
                                 </tbody>

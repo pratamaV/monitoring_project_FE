@@ -9,37 +9,37 @@
                 <input type="hidden" class="form-control" formControlName="id" id="id">
             </div>
 
-            <div class="Form-group">
+            <div class="form-group">
                 <label for="issuedDescription">Issue Description</label>
-                <input type="text" class="form-control" formControlName="issuedDescription" id="issuedDescription" placeholder="Description">
+                <textarea type="text" class="form-control" formControlName="issuedDescription" id="issuedDescription" placeholder="Issue Description"></textarea>
                 <small class="form-text text-danger " *ngIf="form('issuedDescription').invalid && form('issuedDescription').dirty || form('issuedDescription').touched">
-        <div *ngIf="form('issuedDescription').errors?.required">
-          Bagian ini harus terisi
-        </div>
-      </small>
+              <div *ngIf="form('issuedDescription').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
             </div>
 
-            <div class="Form-group">
+            <div class="form-group">
                 <label for="issuedPlan">Action Plan</label>
-                <textarea type="text" class="form-control" formControlName="issuedPlan" id="issuedPlan" placeholder="Issued Plan"></textarea>
+                <textarea type="text" class="form-control" formControlName="issuedPlan" id="issuedPlan" placeholder="Action Plan"></textarea>
                 <small class="form-text text-danger " *ngIf="form('issuedPlan').invalid && form('issuedPlan').dirty || form('issuedPlan').touched">
-        <div *ngIf="form('issuedPlan').errors?.required">
-          Bagian ini harus terisi
-        </div>
-      </small>
+            <div *ngIf="form('issuedPlan').errors?.required">
+              Bagian ini harus terisi
+            </div>
+          </small>
             </div>
 
-            <div class="Form-group">
+            <div class="form-group">
                 <label for="estEnddate">Est. End Date</label>
                 <input type="date" class="form-control" formControlName="estEnddate" id="estEnddate" placeholder="Est. End Date">
                 <small class="form-text text-danger " *ngIf="form('estEnddate').invalid && form('estEnddate').dirty || form('estEnddate').touched">
-        <div *ngIf="form('estEnddate').errors?.required">
-          Bagian ini harus terisi
-        </div>
-      </small>
+          <div *ngIf="form('estEnddate').errors?.required">
+            Bagian ini harus terisi
+          </div>
+        </small>
             </div>
 
-            <div class="Form-group">
+            <div class="form-group">
                 <label for="pic">PIC</label>
                 <input type="text" class="form-control" formControlName="pic" id="pic" placeholder="PIC">
                 <small class="form-text text-danger " *ngIf="form('pic').invalid && form('pic').dirty || form('pic').touched">
@@ -48,7 +48,6 @@
         </div>
       </small>
             </div>
-
 
             <div class="form-group">
                 <input type="hidden" class="form-control" formControlName="release" id="issuedDate">

@@ -1,68 +1,99 @@
-<app-sidebar></app-sidebar>
-<div class="container-sm">
-  <div class="row">
-    <div class="col-8">
-      <h4 style="text-align: left"><i class="fa fa-chevron-circle-left" (click)="goToListUser()"></i> List
-        Task/Project {{user.username}}</h4></div>
-    <div class="col-4">
-      <button class="btn btn-warning mt-2 mb-2" style="width: 200px; align-self: flex-end" (click)="exportexcel()"><i
-        class="fa fa-file"></i> Export to excel
-      </button>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-content">
+        <app-sidebar></app-sidebar>
+        <div class="container">
+            <!-- Table -->
+            <h4 style="text-align: left"><i class="fa fa-chevron-circle-left" (click)="goToListUser()"></i> List Task/Project {{user.username}}</h4>
+            <div class="row">
+
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="col-4">
+                                <button class="btn btn-warning mt-2 mb-2" style="width: 200px; align-self: flex-end" (click)="exportexcel()"><i
+                        class="fa fa-file"></i> Export to excel
+                      </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive" [hidden]="loadedTask.length===0">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Task Code</th>
+                                        <th scope="col">Task Name</th>
+                                        <th scope="col">Score</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Status Done</th>
+                                        <th scope="col">Prosentase Task</th>
+                                        <th scope="col">Final Target</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let task of loadedTask; let i = index">
+                                        <th scope="row">{{task.taskCode}}</th>
+                                        <td>{{task.taskName}}</td>
+                                        <td>{{task.score}}</td>
+                                        <td>{{task.weight | number : '1.2-2'}}</td>
+                                        <td>{{task.statusDone}}</td>
+                                        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
+                                        <td>{{task.estEndDate | date}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="table-responsive" [hidden]="loadedProject.length===0">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Project Code</th>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Score</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Prosentase Project</th>
+                                      <th scope="col">Target Live</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let project of loadedProject; let i = index">
+                                        <th scope="row">{{project.projectCode}}</th>
+                                        <td>{{project.projectName}}</td>
+                                        <td>{{project.score}}</td>
+                                        <td>{{project.weight | number : '1.2-2'}}</td>
+                                        <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
+                                      <td>{{project.targetLive | date}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6 m-auto text-center">
+                <div class="copyright">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-  <div [hidden]="loadedTask.length===0">
-    <table class="table mt-3" id="excel-table">
-      <thead>
-      <tr>
-        <th scope="col">Task Code</th>
-        <th scope="col">Task Name</th>
-        <th scope="col">Score</th>
-        <th scope="col">Weight</th>
-        <th scope="col">Status Done</th>
-        <th scope="col">Prosentase Task</th>
-        <th scope="col">Final Target</th>
-        <th scope="col">Task Document</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let task of loadedTask; let i = index">
-        <th scope="row">{{task.taskCode}}</th>
-        <td>{{task.taskName}}</td>
-        <td>{{task.score}}</td>
-        <td>{{task.weight | number : '1.2-2'}}</td>
-        <td>{{task.statusDone}}</td>
-        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
-        <td>{{task.estEndDate | date}}</td>
-        <td>
-          <button (click)="downloadTaskDoc(task.taskDocument)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
-                  data-placement="bottom" title="Download"><i class="fa fa-download"></i></button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+</body>
 
-  <div [hidden]="loadedProject.length===0">
-    <table class="table mt-3" id="excel-table">
-      <thead>
-      <tr>
-        <th scope="col">Project Code</th>
-        <th scope="col">Project Name</th>
-        <th scope="col">Score</th>
-        <th scope="col">Weight</th>
-        <th scope="col">Prosentase Project</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let project of loadedProject; let i = index">
-        <th scope="row">{{project.projectCode}}</th>
-        <td>{{project.projectName}}</td>
-        <td>{{project.score}}</td>
-        <td>{{project.weight | number : '1.2-2'}}</td>
-        <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>

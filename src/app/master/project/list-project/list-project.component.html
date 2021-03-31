@@ -118,10 +118,12 @@
                                         <th scope="col">Project Name</th>
                                         <th scope="col">PMO</th>
                                         <th scope="col">PM</th>
-                                        <th scope="col">Benefit</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">User</th>
-                                        <th scope="col">Divisi User</th>
+                                        <th scope="col">Directorate Owner</th>
+                                        <!-- <th scope="col">Benefit</th> -->
+                                        <!-- <th scope="col">Description</th> -->
+                                        <th scope="col">CO-PM</th>
+                                        <th scope="col">Divisi Owner</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Project Weight</th>
                                         <th scope="col">Project Precentage</th>
                                         <th scope="col">Status Project</th>
@@ -137,10 +139,12 @@
                                         <td>{{project.projectName}}</td>
                                         <td>{{project.pmo.username}}</td>
                                         <td>{{project.pm.username}}</td>
-                                        <td>{{project.benefit}}</td>
-                                        <td>{{project.description}}</td>
+                                        <td>{{project.directorateUser}}</td>
+                                        <!-- <td>{{project.benefit}}</td> -->
+                                        <!-- <td>{{project.description}}</td> -->
                                         <td>{{project.coPM.username}}</td>
                                         <td>{{project.divisiUser.divisionName}}</td>
+                                        <td>{{project.status}}</td>
                                         <td>{{project.weight | number : '1.2-2'}}</td>
                                         <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
                                         <td [ngClass]="project.statusProject === 'aktif' ? 'color-red' : 'color-green'">{{project.statusProject}}</td>
