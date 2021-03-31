@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {UserService} from "../user.service";
 import {UserModel, UserModel2} from "../user.model";
 import {ProjectModel2} from "../../project/project.model";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-list-user',
@@ -40,5 +41,14 @@ export class ListUserComponent implements OnInit {
   detailTask(id: string) {
     localStorage.setItem('userIdTask', id);
     this.router.navigate(['/dashboard/task/user-task']);
+  }
+
+  updateActiveInactive(id: string, status) {
+    this.userService.changeStatusUser(id, status).subscribe((response) => {
+      Swal.fire('Success', 'Berhasil mengubah status user', 'success');
+      this.onGetListUser();
+    }, error => {
+      Swal.fire('Failed', 'Gagal mengubah status user', 'error');
+    });
   }
 }

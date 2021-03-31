@@ -130,8 +130,9 @@ export class MyTaskComponent implements OnInit {
   }
 
 
-  onGoDetailTask(id: string) {
+  onGoDetailTask(id: string, param) {
     localStorage.setItem('taskId', id);
+    localStorage.setItem('paramnavigatetask', param);
     this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
   }
 
