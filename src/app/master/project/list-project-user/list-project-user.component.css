@@ -1444,3 +1444,8 @@ p {
         margin-bottom: 10px;
     }
 }
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}

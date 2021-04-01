@@ -8,7 +8,7 @@
 <body>
 
 
-    <div class="vertical-nav bg-white" id="sidebar">
+    <div class="vertical-nav bg-white" id="sidebar" [ngStyle]="getStyle()">
         <div class="py-4 px-3 mb-4 bg-light">
             <div class="media d-flex align-items-center">
                 <img loading="lazy" src="../../../assets/img/profil.png" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
@@ -20,7 +20,7 @@
         </div>
 
         <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
-
+        <!-- <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a> -->
         <ul class="nav flex-column bg-white mb-0">
             <li class="nav-item">
                 <a [routerLink]="['/home']" routerLinkActive="router-link-active" class="nav-link text-dark">
@@ -142,26 +142,31 @@
 </body>
 
 <!-- ================================================================================================== -->
-
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- 
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
+<body>
 
-<div class="container">
+
+    <div class="container">
     <div class="row">
         <div class="wrapper">
             <div class="side-bar">
                 <ul>
                     <li class="menu-head">
-                        CLASH OF CLANS <a [routerLink]="['/home']" routerLinkActive="router-link-active" class="push_menu"><span class="glyphicon glyphicon-align-justify pull-right"></span></a>
+                        CLASH OF CLANS
+                        <a [routerLink]="['/dashboard/project/project-user']" routerLinkActive="router-link-active" class="push_menu"><span class="glyphicon glyphicon-align-justify pull-right"></span></a>
+                        <button class="btn push_menu">   <span class="glyphicon glyphicon-align-justify pull-right"></span></button>
+
                     </li>
                     <div class="menu">
                         <li>
-                            <a href="#">Dashboard <span class="glyphicon glyphicon-dashboard pull-right"></span></a>
+                            <a [routerLink]="['/dashboard/project/project-user']" routerLinkActive="router-link-active">Dashboard <span class="glyphicon glyphicon-dashboard pull-right"></span></a>
                         </li>
                         <li>
-                            <a href="#" class="active">Love snippet<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                            <a [routerLink]="['/dashboard/project']" routerLinkActive="router-link-active" class="active">Project<span class="glyphicon glyphicon-heart pull-right"></span></a>
                         </li>
                         <li>
                             <a href="#">Like it? <span class="glyphicon glyphicon-star pull-right"></span></a>
@@ -185,4 +190,13 @@
             </div>
         </div>
     </div>
+    </div>
+</body> -->
+
+<!-- <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
 </div> -->

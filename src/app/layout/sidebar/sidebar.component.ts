@@ -64,4 +64,36 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+ openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+ closeNav() {
+  this.getStyle()
+  console.log('kena ga');
+  
+  
+}
+
+getStyle(){
+  console.log('yg ini')
+  return {
+    'width': '0px;'
+  }
+  // if ((estEndDate < this.currentDate) && statusDone === 'NOT STARTED') {
+  //   return {
+  //     'background-color': 'rgb(255, 82, 82)',
+  //     color : 'white'
+  //   };
+  // } else if ((estEndDate < this.currentDate) && statusDone === 'ON_PROGRESS'){
+  //   return {
+  //     'background-color': 'orange',
+  //     color : 'black'
+  //   };
+  // }
+}
+
 }

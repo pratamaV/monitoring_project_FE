@@ -86,12 +86,19 @@
     }
 }
 
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
 
 /* ======================================================================================================== */
 
 
-/* 
-@import url(http://fonts.googleapis.com/css?family=Lato);
+/* @import url(http://fonts.googleapis.com/css?family=Lato);
 .container {
     width: 800px;
     overflow: hidden;
@@ -177,3 +184,6 @@
     padding-left: 50px;
     transition: padding-left 0.5s;
 } */
+
+
+/* The side navigation menu */
