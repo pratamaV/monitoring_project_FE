@@ -84,22 +84,15 @@
       </div>
 
       <div class="form-group">
-        <label for="taskProsentase">Prosentase Task</label>
-        <input type="text" class="form-control" formControlName="taskProsentase" id="taskProsentase">
-        <small class="form-text text-danger "
-               *ngIf="form('taskProsentase').invalid && form('taskProsentase').dirty || form('taskProsentase').touched">
-          <div *ngIf="form('taskProsentase').errors?.pattern">
-            Harus berisi angka 0 sampai dengan 1
-          </div>
-        </small>
+        <input type="hidden"  class="form-control" formControlName="taskProsentase" id="taskProsentase">
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [hidden]="!task">
         <label for="actStartDate">Actual Start Date</label>
         <input type="date" class="form-control" formControlName="actStartDate" id="actStartDate">
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [hidden]="!task">
         <label for="actEndDate">Actual End Date</label>
         <input type="date" class="form-control" formControlName="actEndDate" id="actEndDate">
       </div>
