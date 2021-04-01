@@ -3,17 +3,19 @@
     <!-- Page Heading -->
     <div class="row" id="main">
         <div class="col-sm-12 col-md-12 well" id="content">
-            <h1 style="text-align: center; margin-bottom: 30px">Dashboard <i class="fa fa-search-plus float-start" aria-hidden="true" routerLink="/fit-home"></i>
-            </h1>
+            <div class="row">
+                <h4 style="text-align: left; margin-bottom: 30px"><i class="fa fa-search-plus float-start" style="margin-right: 10px;" aria-hidden="true" routerLink="/fit-home"></i>Dashboard</h4>
+
+            </div>
 
             <div class="row">
                 <div id="divChart" class="col-6">
-                    <h4 style="text-align: center">Prosentase Project by Status</h4>
+                    <h5 style="text-align: center">Precentage Project by Status</h5>
                     <canvas id="projectByStatus" width="600" height="400"></canvas>
                 </div>
                 <div class="col-6">
                     <div class="container-fluid">
-                        <h4 style="text-align: center">Best Performance</h4>
+                        <h5 style="text-align: center">Best Performance</h5>
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <table class="table table-bordered table-striped mb-0">
                                 <thead>
@@ -36,9 +38,11 @@
                 </div>
             </div>
 
+            <br><br>
+
 
             <div class="container" [hidden]="taskDeadline.length===0">
-                <h4 style="text-align: center">Task Out of The Date</h4>
+                <h5 style="text-align: center">Task Out of The Date</h5>
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
                     <table class="table table-bordered table-striped mb-0">
                         <thead>
@@ -65,7 +69,7 @@
 
             <div class="row">
                 <div id="divChart3" class="col-6">
-                    <h4>Progress Release by Stage</h4>
+                    <h5>Progress Release by Stage</h5>
                     <canvas id="barChart" width="600" height="500"></canvas>
                 </div>
 

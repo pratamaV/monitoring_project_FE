@@ -148,12 +148,12 @@ export class MyTaskComponent implements OnInit {
   getStyle(estEndDate, statusDone): any {
     if ((estEndDate < this.currentDate) && statusDone === 'NOT STARTED') {
       return {
-        'background-color': 'rgb(255, 82, 82)',
+        'background-color': 'rgb(255, 130, 130)',
         color : 'white'
       };
     } else if ((estEndDate < this.currentDate) && statusDone === 'ON_PROGRESS'){
       return {
-        'background-color': 'orange',
+        'background-color': 'rgb(255, 200, 97)',
         color : 'black'
       };
     }
