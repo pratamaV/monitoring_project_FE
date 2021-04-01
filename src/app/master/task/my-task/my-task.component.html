@@ -29,22 +29,34 @@
 
                                     <div class="form-group col">
                                         <label for="projectName">Project Name</label>
-                                        <select class="form-select" formControlName="projectName" id="projectName" aria-label="Default select example">                                            
+                                        <select class="form-select" formControlName="projectName" id="projectName" aria-label="Default select example">
                                             <option *ngFor="let item of projectName" [ngValue]="item.projectName">{{item.projectName}}</option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group col">
-                                        <label for="estStartDate">Estimasi Start Date</label>
-                                        <input type="date" class="form-control" formControlName="estStartDate" id="estStartDate">
-                                    </div>
+                                  <div class="form-group col">
+                                    <label for="estStartDateFrom">Estimasi Start Date From</label>
+                                    <input type="date" class="form-control" formControlName="estStartDateFrom"
+                                           id="estStartDateFrom">
+                                  </div>
+                                  <div class="form-group col">
+                                    <label for="estStartDateTo">Estimasi Start Date To</label>
+                                    <input type="date" class="form-control" formControlName="estStartDateTo"
+                                           id="estStartDateTo">
+                                  </div>
 
-                                    <div class="form-group col">
-                                        <label for="estEndDate">Estimasi End Date</label>
-                                        <input type="date" class="form-control" formControlName="estEndDate" id="estEndDate">
-                                    </div>
+                                  <div class="form-group col">
+                                    <label for="estEndDateFrom">Estimasi End Date From</label>
+                                    <input type="date" class="form-control" formControlName="estEndDateFrom"
+                                           id="estEndDateFrom">
+                                  </div>
+                                  <div class="form-group col">
+                                    <label for="estEndDateTo">Estimasi End Date To</label>
+                                    <input type="date" class="form-control" formControlName="estEndDateTo"
+                                           id="estEndDateTo">
+                                  </div>
 
-                                    <div class="form-group col">
+                                  <div class="form-group col">
                                         <label for="statusDone" style="float: left;">Status Done</label>
                                         <select class="form-select" formControlName="statusDone" id="statusDone" aria-label="Default select example">
                           <option value="ON_PROGRESS">ON PROGRESS</option>
