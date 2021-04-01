@@ -39,6 +39,7 @@ export class MyTaskComponent implements OnInit {
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   projectName: any[] = [];
+  releaseName: any[] = [];
 
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
@@ -79,7 +80,10 @@ export class MyTaskComponent implements OnInit {
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
         this.loadedTask = data;
-        console.log(this.loadedTask);
+        for (const iterator of this.loadedTask) {
+          this.releaseName.push(iterator.release.releaseName)
+        }
+        // console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
