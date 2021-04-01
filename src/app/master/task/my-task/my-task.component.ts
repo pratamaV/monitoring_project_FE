@@ -6,7 +6,6 @@ import {FormControl, FormGroup} from '@angular/forms';
 import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import {ProjectServiceService} from '../../project/project-service.service';
-import {UserModel} from '../../project/project.model';
 import {formatDate} from '@angular/common';
 
 
@@ -21,14 +20,14 @@ export class MyTaskComponent implements OnInit {
   task: TaskModel4;
   currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
   paramNull = {
-    // taskDoc: null,
-    // statusDone: null,
-    releaseName: null,
-    projectName: null,
-    estStartDate: null,
-    estEndDate: null
-    // prosentase: null
-  }; 
+    statusDone: '',
+    releaseName: '',
+    projectName: '',
+    estStartDateFrom: '',
+    estEndDateFrom: '',
+    estStartDateTo: '',
+    estEndDateTo: ''
+  };
 
   paramNull2 = {
     divisi: '',
@@ -40,6 +39,7 @@ export class MyTaskComponent implements OnInit {
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   projectName: any[] = [];
+  releaseName: any[] = [];
 
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
@@ -57,27 +57,33 @@ export class MyTaskComponent implements OnInit {
 
   private buildForm(): void {
     this.taskForm = new FormGroup({
-      // taskDoc: new FormControl(null),
       statusDone: new FormControl(null),
       releaseName: new FormControl(null),
       projectName: new FormControl(null),
-      estStartDate: new FormControl(null),
-      estEndDate: new FormControl(null)
-      // prosentase: new FormControl(null)
+      estStartDateFrom: new FormControl(null),
+      estEndDateFrom: new FormControl(null),
+      estStartDateTo: new FormControl(null),
+      estEndDateTo: new FormControl(null)
     });
   }
 
   // tslint:disable-next-line:typedef
   onGetTaskByUserId() {
     // this.taskForm.get('taskDoc').setValue(null);
-    // this.taskForm.get('statusDone').setValue(null);
+    this.taskForm.get('statusDone').setValue(null);
     this.taskForm.get('releaseName').setValue(null);
     this.taskForm.get('projectName').setValue(null);
-    this.taskForm.get('estStartDate').setValue(null);
-    this.taskForm.get('estEndDate').setValue(null);
+    this.taskForm.get('estStartDateFrom').setValue(null);
+    this.taskForm.get('estEndDateFrom').setValue(null);
+    this.taskForm.get('estStartDateTo').setValue(null);
+    this.taskForm.get('estEndDateTo').setValue(null);
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
         this.loadedTask = data;
+        for (const iterator of this.loadedTask) {
+          this.releaseName.push(iterator.release.releaseName)
+        }
+        // console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
@@ -85,7 +91,7 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskByUserIdFilter(param) {
-    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
+        this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
       .subscribe(data => {
         this.loadedTask = data;
       }, error => {
@@ -139,6 +145,7 @@ export class MyTaskComponent implements OnInit {
   }
 
 
+  // tslint:disable-next-line:typedef
   onGoDetailTask(id: string, param) {
     localStorage.setItem('taskId', id);
     localStorage.setItem('paramnavigatetask', param);
@@ -159,13 +166,14 @@ export class MyTaskComponent implements OnInit {
     }
   }
 
-  getAllProjectName(){
+  // tslint:disable-next-line:typedef
+  getAllProjectName() {
     this.projectService.getAllProject(this.paramNull2)
-    .subscribe(data => {
-      this.projectName = data
-    }, error => {
-      alert(error);     
-    })
+      .subscribe(data => {
+        this.projectName = data;
+      }, error => {
+        alert(error);
+      });
   }
 
-  }
+}

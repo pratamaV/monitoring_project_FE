@@ -21,87 +21,98 @@
                     <div class="card shadow">
                         <div class="card-header border-0">
                             <form [formGroup]="taskForm" method="POST" (ngSubmit)="onGetTaskByUserIdFilter(taskForm.value)">
-                                <div class="row">
-                                    <div class="form-group col">
-                                        <label for="releaseName">Release Name</label>
-                                        <input type="text" class="form-control" formControlName="releaseName" id="releaseName">
-                                    </div>
+                                <div>
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <label for="releaseName">Release Name</label>
+                                            <select type="text" class="form-select" formControlName="releaseName" id="releaseName">
+                                            <option *ngFor="let item of releaseName" [ngValue]="item.releaseName">{{item.releaseName}}</option>    
+                                            </select>
+                                        </div>
 
-                                    <div class="form-group col">
-                                        <label for="projectName">Project Name</label>
-                                        <select class="form-select" formControlName="projectName" id="projectName" aria-label="Default select example">                                            
+                                        <div class="form-group col">
+                                            <label for="projectName">Project Name</label>
+                                            <select class="form-select" formControlName="projectName" id="projectName" aria-label="Default select example">
                                             <option *ngFor="let item of projectName" [ngValue]="item.projectName">{{item.projectName}}</option>
                                         </select>
+                                        </div>
+
+                                        <div class="form-group col">
+                                            <label for="statusDone" style="float: left;">Status Done</label>
+                                            <select class="form-select" formControlName="statusDone" id="statusDone" aria-label="Default select example">
+                                                <option value="ON_PROGRESS">ON PROGRESS</option>
+                                                <option value="NOT STARTED">NOT STARTED</option>
+                                                <option value="DONE">DONE</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col">
+                                            <label for="estStartDateFrom">Estimasi Start Date From</label>
+                                            <input type="date" class="form-control" formControlName="estStartDateFrom" id="estStartDateFrom">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="estStartDateTo">Estimasi Start Date To</label>
+                                            <input type="date" class="form-control" formControlName="estStartDateTo" id="estStartDateTo">
+                                        </div>
+
+                                        <div class="form-group col">
+                                            <label for="estEndDateFrom">Estimasi End Date From</label>
+                                            <input type="date" class="form-control" formControlName="estEndDateFrom" id="estEndDateFrom">
+                                        </div>
+                                        <div class="form-group col">
+                                            <label for="estEndDateTo">Estimasi End Date To</label>
+                                            <input type="date" class="form-control" formControlName="estEndDateTo" id="estEndDateTo">
+                                        </div>
                                     </div>
 
-                                    <div class="form-group col">
-                                        <label for="estStartDate">Estimasi Start Date</label>
-                                        <input type="date" class="form-control" formControlName="estStartDate" id="estStartDate">
-                                    </div>
-
-                                    <div class="form-group col">
-                                        <label for="estEndDate">Estimasi End Date</label>
-                                        <input type="date" class="form-control" formControlName="estEndDate" id="estEndDate">
-                                    </div>
-
-                                    <div class="form-group col">
-                                        <label for="statusDone" style="float: left;">Status Done</label>
-                                        <select class="form-select" formControlName="statusDone" id="statusDone" aria-label="Default select example">
-                          <option value="ON_PROGRESS">ON PROGRESS</option>
-                          <option value="NOT STARTED">NOT STARTED</option>
-                          <option value="DONE">DONE</option>
-                  </select>
-                                    </div>
                                 </div>
                                 <div id="button-filter">
                                     <button class="btn btn-warning btn-sm" style="float: right; margin-left: 10px;" (click)="exportexcel()">
-                  <i
-                    class="fa fa-file"></i> Export to excel
-                </button>
-                                    <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetTaskByUserId()">Reset Filter
-                </button>&nbsp;
-                <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply Filter</button>
-              </div>
-            </form>
-          </div>
-          <div class="table-responsive">
-            <table class="table align-items-center table-flush" id="excel-table">
-              <thead class="thead-light">
-              <tr>
-                <th scope="col">Task Code</th>
-                <th scope="col">Task Name</th>
-                <th scope="col">Release Name</th>
-                <th scope="col">Project Name</th>
-                <!--        <th scope="col">Assigned To</th>-->
-                <th scope="col">Score</th>
-                <th scope="col">Weight</th>
-                <th scope="col">Status Done</th>
-                <th scope="col">Prosentase Task</th>
-                <th scope="col">Est. Start Date</th>
-                <th scope="col">Est. End Date</th>
-                <th scope="col">Act. End Date</th>
-                <th scope="col">Detail</th>
-                <!--                    <th scope="col">Task Document</th>-->
-                <!--                    <th scope="col">Action</th>-->
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
-                <th scope="row">{{task.taskCode}}</th>
-                <td>{{task.taskName}}</td>
-                <td>{{task.release.releaseName}}</td>
-                <td>{{task.release.project.projectName}}</td>
-                <!--        <td>{{task.assignedTo.username}}</td>-->
-                <td>{{task.score}}</td>
-                <td>{{task.weight | number : '1.2-2'}}</td>
-                <td>{{task.statusDone}}</td>
-                <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
-                <td>{{task.estStartDate | date}}</td>
-                <td>{{task.estEndDate | date}}</td>
-                <td>{{task.actEndDate | date}}</td>
-                <td style="text-align: center;">
-                  <button (click)="onGoDetailTask(task.id,'mylisttask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
-                          data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
+                                        <i class="fa fa-file"></i> Export to excel </button>
+                                    <button class="btn btn-success btn-sm" style="float: left; margin-left: 10px;" (click)="onGetTaskByUserId()">Reset Filter
+                                    </button>&nbsp;
+                                    <button type="submit" class="btn btn-info btn-sm" style="float: left;">Apply Filter</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Task Code</th>
+                                        <th scope="col">Task Name</th>
+                                        <th scope="col">Release Name</th>
+                                        <th scope="col">Project Name</th>
+                                        <!--        <th scope="col">Assigned To</th>-->
+                                        <th scope="col">Score</th>
+                                        <th scope="col">Weight</th>
+                                        <th scope="col">Status Done</th>
+                                        <th scope="col">Prosentase Task</th>
+                                        <th scope="col">Est. Start Date</th>
+                                        <th scope="col">Est. End Date</th>
+                                        <th scope="col">Act. End Date</th>
+                                        <th scope="col">Detail</th>
+                                        <!--                    <th scope="col">Task Document</th>-->
+                                        <!--                    <th scope="col">Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
+                                        <th scope="row">{{task.taskCode}}</th>
+                                        <td>{{task.taskName}}</td>
+                                        <td>{{task.release.releaseName}}</td>
+                                        <td>{{task.release.project.projectName}}</td>
+                                        <!--        <td>{{task.assignedTo.username}}</td>-->
+                                        <td>{{task.score}}</td>
+                                        <td>{{task.weight | number : '1.2-2'}}</td>
+                                        <td>{{task.statusDone}}</td>
+                                        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
+                                        <td>{{task.estStartDate | date}}</td>
+                                        <td>{{task.estEndDate | date}}</td>
+                                        <td>{{task.actEndDate | date}}</td>
+                                        <td style="text-align: center;">
+                                            <button (click)="onGoDetailTask(task.id,'mylisttask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
                                         </td>
                                     </tr>
                                 </tbody>
