@@ -12,6 +12,8 @@ import {Router} from '@angular/router';
 })
 export class ForgotPasswordComponent implements OnInit {
   forgotPassForm: FormGroup;
+  isLoading = false;
+
   constructor(private authService: AuthService, private router: Router) {
   }
 
@@ -33,8 +35,10 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   submit(data) {
+    this.isLoading = true
     this.authService.forgotPass(data)
       .subscribe(() => {
+        this.isLoading = false
         Swal.fire({
           title: 'Success!',
           text: 'Check your email for new Password',
@@ -52,6 +56,7 @@ export class ForgotPasswordComponent implements OnInit {
         this.router.navigate(['/']);
       }, (error) => {
         this.setDataForm();
+        this.isLoading = false
         Swal.fire({
           title: 'Failed Reset Password',
           icon: 'error',

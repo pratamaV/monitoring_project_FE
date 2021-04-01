@@ -76,7 +76,7 @@
                                         <th scope="col">Release Name</th>
                                         <th scope="col">Score</th>
                                         <th scope="col">Weight</th>
-                                        <th scope="col">Description</th>
+                                        <!-- <th scope="col">Description</th> -->
                                         <th scope="col">Status</th>
                                         <th scope="col">Stage</th>
                                         <th scope="col">Release Precentage</th>
@@ -95,7 +95,7 @@
                                         <td>{{release.releaseName}}</td>
                                         <td>{{release.score}}</td>
                                         <td>{{release.weight | number : '1.2-2'}}</td>
-                                        <td>{{release.description}}</td>
+                                        <!-- <td>{{release.description}}</td> -->
                                         <td>{{release.status}}</td>
                                         <td>{{release.stage}}</td>
                                         <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
@@ -129,6 +129,14 @@
                 </div>
             </div>
         </div>
+        <div class="container" *ngIf="isLoading == true">
+            <div id="id01" class="modal">
+                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <div class="spinner-border text-info"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">

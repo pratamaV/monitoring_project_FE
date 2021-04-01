@@ -100,8 +100,7 @@
                                         <td>{{task.actStartDate | date}}</td>
                                         <td>{{task.actEndDate | date}}</td>
                                         <td style="text-align: center;">
-                                          <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
-                                                  data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
+                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
                                         </td>
                                         <td style="text-align: center;">
                                             <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
@@ -113,6 +112,13 @@
                         </div>
 
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" *ngIf="isLoading == true">
+            <div id="id01" class="modal">
+                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <div class="spinner-border text-info"></div>
                 </div>
             </div>
         </div>

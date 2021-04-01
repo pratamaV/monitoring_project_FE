@@ -63,6 +63,13 @@
                 </div>
             </div>
         </div>
+        <div class="container" *ngIf="isLoading == true">
+            <div id="id01" class="modal">
+                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <div class="spinner-border text-info"></div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">

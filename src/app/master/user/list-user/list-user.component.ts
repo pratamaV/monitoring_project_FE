@@ -14,6 +14,8 @@ import Swal from "sweetalert2";
 export class ListUserComponent implements OnInit {
 
   loadedUser: UserModel[] = [];
+  isLoading = false
+
   constructor(private userService: UserService,
               private router: Router) { }
 
@@ -22,8 +24,10 @@ export class ListUserComponent implements OnInit {
   }
 
   onGetListUser() {
+    this.isLoading = true
     this.userService.getAllUser()
       .subscribe(data => {
+        this.isLoading = false
         this.loadedUser = data;
       }, error => {
         alert(error);

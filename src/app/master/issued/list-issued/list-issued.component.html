@@ -26,6 +26,13 @@
                             </div>
                         </div>
                         <div class="table-responsive">
+                            <div *ngIf="isLoading == true">
+                                <div id="id01" class="modal">
+                                    <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                                        <div class="spinner-border text-info"></div>
+                                    </div>
+                                </div>
+                            </div>
                             <table class="table align-items-center table-flush" id="excel-table">
                                 <thead class="thead-light">
                                     <tr>
@@ -59,6 +66,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <footer class="footer">
         <div class="row align-items-center justify-content-xl-between">

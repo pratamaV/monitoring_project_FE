@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
 export class ListIssuedComponent implements OnInit {
   fileName = 'List-Issued-' + new Date().toDateString() + '.xlsx';
   loadedIssued: IssuedModel2[] = [];
+  isLoading = false
+
   constructor(private issuedService: IssuedService,
               private router: Router) { }
 
@@ -21,8 +23,10 @@ export class ListIssuedComponent implements OnInit {
   }
 
   onGetListIssued() {
+    this.isLoading = true
     this.issuedService.getIssuedByReleaseId(localStorage.getItem('idRelease'))
       .subscribe(data => {
+        this.isLoading = false
         this.loadedIssued = data;
       }, error => {
         Swal.fire( 'Failed', 'maybe you are not logged in' , 'question'  );

@@ -13,6 +13,8 @@ import {UserModel} from "../../user/user.model";
 })
 export class ListProjectComponent implements OnInit {
 
+isLoading = false
+
   constructor(
     private projectService: ProjectServiceService,
     private router: Router
@@ -81,6 +83,7 @@ export class ListProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListProjectFilter(param) {
+    this.isLoading = true
     // this.filter = true;
     if (param.direktorate === null) {
       param.direktorate = '';
@@ -101,6 +104,7 @@ export class ListProjectComponent implements OnInit {
     // this.projectService.getResultProject(param).subscribe(
     this.projectService.getAllProject(param).subscribe(
       data => {
+        this.isLoading = false
         this.loadedProject = data;
    },
       error => {
@@ -131,6 +135,7 @@ export class ListProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListProject() {
+    this.isLoading = true
     this.filterForm.get('direktorate').setValue(null);
     this.filterForm.get('divisi').setValue(null);
     this.filterForm.get('userPMO').setValue(null);
@@ -138,6 +143,7 @@ export class ListProjectComponent implements OnInit {
     this.filterForm.get('status').setValue(null);
     this.projectService.getAllProject(this.paramNull).subscribe(
       data => {
+        this.isLoading = false
         this.loadedProject = data;
       },
       error => {

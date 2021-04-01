@@ -55,12 +55,12 @@
                                         <!--                  <button (click)="updateUser(user)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"-->
                                         <!--                          data-placement="bottom" title="Update"><i class="fa fa-edit"></i></button>&nbsp;-->
                                         <!--                </td>-->
-                                      <td *ngIf="user.statusUser === 'Active'" >
-                                        <button (click)="updateActiveInactive(user.id,'Not Active')" class="btn btn-danger btn-sm">Not Active </button>
-                                      </td>
-                                      <td *ngIf="user.statusUser === 'Not Active'" >
-                                        <button  (click)="updateActiveInactive(user.id, 'Active')" class="btn btn-danger btn-sm" > Active </button>
-                                      </td>
+                                        <td *ngIf="user.statusUser === 'Active'">
+                                            <button (click)="updateActiveInactive(user.id,'Not Active')" class="btn btn-danger btn-sm">Not Active </button>
+                                        </td>
+                                        <td *ngIf="user.statusUser === 'Not Active'">
+                                            <button (click)="updateActiveInactive(user.id, 'Active')" class="btn btn-danger btn-sm"> Active </button>
+                                        </td>
                                         <td>
                                             <button (click)="detailTask(user.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i class="fa fa-tasks"></i> Task
                   </button>
@@ -413,6 +413,14 @@
             <!--        </div>-->
             <!--      </div>-->
             <!--    </div>-->
+        </div>
+
+        <div class="container" *ngIf="isLoading == true">
+            <div id="id01" class="modal">
+                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <div class="spinner-border text-info"></div>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="footer">

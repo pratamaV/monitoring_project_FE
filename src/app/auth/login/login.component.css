@@ -1,68 +1,232 @@
-html,body {
-	height: 100%;
+html,
+body {
+    height: 100%;
 }
 
 body.my-login-page {
-	background-color: #f7f9fb;
-	font-size: 14px;
+    background-color: #f7f9fb;
+    font-size: 14px;
 }
 
 .my-login-page .brand {
-	margin: 40px auto;
+    margin: 40px auto;
 }
 
 .my-login-page .brand img {
-	width: 100%;
+    width: 100%;
 }
 
 .my-login-page .card-wrapper {
-	width: 400px;
+    width: 400px;
 }
 
 .my-login-page .card {
-	border-color: transparent;
-	box-shadow: 0 4px 8px rgba(0,0,0,.05);
+    border-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
 }
 
 .my-login-page .card.fat {
-	padding: 10px;
+    padding: 10px;
 }
 
 .my-login-page .card .card-title {
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .my-login-page .form-control {
-	border-width: 2.3px;
+    border-width: 2.3px;
 }
 
 .my-login-page .form-group label {
-	width: 100%;
+    width: 100%;
 }
 
 .my-login-page .btn.btn-block {
-	padding: 12px 10px;
+    padding: 12px 10px;
 }
 
 .my-login-page .footer {
-	margin: 40px 0;
-	color: #888;
-	text-align: center;
+    margin: 40px 0;
+    color: #888;
+    text-align: center;
 }
 
 @media screen and (max-width: 425px) {
-	.my-login-page .card-wrapper {
-		width: 90%;
-		margin: 0 auto;
-	}
+    .my-login-page .card-wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
 }
 
 @media screen and (max-width: 320px) {
-	.my-login-page .card.fat {
-		padding: 0;
-	}
+    .my-login-page .card.fat {
+        padding: 0;
+    }
+    .my-login-page .card.fat .card-body {
+        padding: 15px;
+    }
+}
 
-	.my-login-page .card.fat .card-body {
-		padding: 15px;
-	}
+
+/* ================ loading =================== */
+
+#loading {
+    background: #f4f4f2;
+    height: 100%;
+    left: 0;
+    margin: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.bokeh {
+    border: 0.01em solid rgba(150, 150, 150, 0.1);
+    border-radius: 50%;
+    font-size: 100px;
+    height: 1em;
+    list-style: outside none none;
+    margin: 0 auto;
+    position: relative;
+    top: 35%;
+    width: 1em;
+    z-index: 2147483647;
+}
+
+.bokeh li {
+    border-radius: 50%;
+    height: 0.2em;
+    position: absolute;
+    width: 0.2em;
+}
+
+.bokeh li:nth-child(1) {
+    animation: 1.13s linear 0s normal none infinite running rota, 3.67s ease-in-out 0s alternate none infinite running opa;
+    background: #00c176 none repeat scroll 0 0;
+    left: 50%;
+    margin: 0 0 0 -0.1em;
+    top: 0;
+    transform-origin: 50% 250% 0;
+}
+
+.bokeh li:nth-child(2) {
+    animation: 1.86s linear 0s normal none infinite running rota, 4.29s ease-in-out 0s alternate none infinite running opa;
+    background: #ff003c none repeat scroll 0 0;
+    margin: -0.1em 0 0;
+    right: 0;
+    top: 50%;
+    transform-origin: -150% 50% 0;
+}
+
+.bokeh li:nth-child(3) {
+    animation: 1.45s linear 0s normal none infinite running rota, 5.12s ease-in-out 0s alternate none infinite running opa;
+    background: #fabe28 none repeat scroll 0 0;
+    bottom: 0;
+    left: 50%;
+    margin: 0 0 0 -0.1em;
+    transform-origin: 50% -150% 0;
+}
+
+.bokeh li:nth-child(4) {
+    animation: 1.72s linear 0s normal none infinite running rota, 5.25s ease-in-out 0s alternate none infinite running opa;
+    background: #88c100 none repeat scroll 0 0;
+    margin: -0.1em 0 0;
+    top: 50%;
+    transform-origin: 250% 50% 0;
+}
+
+@keyframes opa {
+    12% {
+        opacity: 0.8;
+    }
+    19.5% {
+        opacity: 0.88;
+    }
+    37.2% {
+        opacity: 0.64;
+    }
+    40.5% {
+        opacity: 0.52;
+    }
+    52.7% {
+        opacity: 0.69;
+    }
+    60.2% {
+        opacity: 0.6;
+    }
+    66.6% {
+        opacity: 0.52;
+    }
+    70% {
+        opacity: 0.63;
+    }
+    79.9% {
+        opacity: 0.6;
+    }
+    84.2% {
+        opacity: 0.75;
+    }
+    91% {
+        opacity: 0.87;
+    }
+}
+
+@keyframes rota {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* ================ modal =================== */
+
+* {
+    box-sizing: border-box
+}
+
+.modal {
+    display: block;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #373b4234;
+    padding-top: 50px;
+}
+
+.close {
+    position: absolute;
+    right: 35px;
+    top: 15px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+    color: #f44336;
+    cursor: pointer;
+}
+
+
+/* Clear floats */
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#loading {
+    justify-content: center;
 }
