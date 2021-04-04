@@ -131,13 +131,15 @@ export class HomeComponent implements OnInit {
             }]
           },
           options: {
+            legend: {display: false},
             plugins: {
               datalabels: {
+                color: 'white',
                 anchor: 'end',
-                align: 'top',
+                align: 'bottom',
                 formatter: Math.round,
                 font: {
-                  color: 'white',
+                  color: 'blue',
                   weight: 'bold'
                 }
               }
@@ -248,7 +250,21 @@ export class HomeComponent implements OnInit {
 
         const pieChart = new Chart('projectByStatus', {
           type: 'pie',
-          data: projectData
+          data: projectData,
+          options: {
+            plugins: {
+              datalabels: {
+                color: 'white',
+                anchor: 'center',
+                align: 'center',
+                formatter: Math.round,
+                font: {
+                  color: 'blue',
+                  weight: 'bold'
+                }
+              }
+            }
+          }
         });
 
         // tslint:disable-next-line:typedef
@@ -278,10 +294,21 @@ export class HomeComponent implements OnInit {
           },
           options: {
             legend: {display: false},
-            title: {
-              display: true,
-              text: 'Number of projects per directorate'
+            plugins: {
+              datalabels: {
+                color: 'white',
+                anchor: 'center',
+                align: 'center',
+                formatter: Math.round,
+                font: {
+                  weight: 'bold'
+                }
+              }
             },
+            // title: {
+            //   display: true,
+            //   text: 'Number of projects per directorate'
+            // },
             scales: {
               xAxes: [{
                 ticks: {

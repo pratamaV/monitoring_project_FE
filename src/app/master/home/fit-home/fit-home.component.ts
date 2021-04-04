@@ -5,6 +5,7 @@ import {HomeService} from '../home.service';
 import {ProjectServiceService} from '../../project/project-service.service';
 import {TaskService} from '../../task/task.service';
 import {Chart} from 'node_modules/chart.js';
+import ChartDataLabels from "chartjs-plugin-datalabels";
 
 @Component({
   selector: 'app-fit-home',
@@ -34,6 +35,7 @@ export class FitHomeComponent implements OnInit {
     this.onGetTaskDeadline();
     Chart.defaults.global.defaultFontFamily = 'Lato';
     Chart.defaults.global.defaultFontSize = 14;
+    Chart.plugins.register(ChartDataLabels);
 
     this.homeService.getAllRelease()
       .subscribe(data => {
@@ -87,20 +89,20 @@ export class FitHomeComponent implements OnInit {
         const myChart = new Chart('barChart', {
           type: 'bar',
           data: {
-            labels: ['Delivery Barang',
-              'Development',
-              'Implementation',
-              'Live',
-              'Migration',
-              'Not Started',
-              'Procurement',
-              'PTR',
+            labels: [ 'Not Started',
               'Requirement Gathering',
-              'UAT'],
+              'Procurement',
+              'Development',
+              'Delivery Barang',
+              'UAT',
+              'Migration',
+              'PTR',
+              'Implementation',
+              'Live'
+            ],
             datasets: [{
               label: '',
-              data: [deliveryStage, development, implementation, live,
-                migration, notStarted, procurement, PTR, requirementGathering, uat],
+              data: [notStarted, requirementGathering, procurement, development, deliveryStage, uat, migration, PTR, implementation, live],
               backgroundColor: [
                 '#f9e0ae',
                 '#fc8621',
@@ -109,9 +111,9 @@ export class FitHomeComponent implements OnInit {
                 '#c6c36e',
                 '#26b186',
                 '#428ec1',
-                '#680e4f',
-                '#4d0651',
-                '#8c0b6c'
+                '#0ca506',
+                '#0ca506',
+                '#0ca506'
               ],
               borderColor: [
                 '#f9e0ae',
@@ -121,14 +123,27 @@ export class FitHomeComponent implements OnInit {
                 '#c6c36e',
                 '#26b186',
                 '#428ec1',
-                '#680e4f',
-                '#4d0651',
-                '#8c0b6c'
+                '#0ca506',
+                '#0ca506',
+                '#0ca506'
               ],
               borderWidth: 1
             }]
           },
           options: {
+            legend: {display: false},
+            plugins: {
+              datalabels: {
+                color: 'white',
+                anchor: 'end',
+                align: 'bottom',
+                formatter: Math.round,
+                font: {
+                  color: 'blue',
+                  weight: 'bold'
+                }
+              }
+            },
             responsive: true,
             scales: {
               xAxes: [{
@@ -158,8 +173,8 @@ export class FitHomeComponent implements OnInit {
         }
 
         setInterval(() => {
-          updateDataRelease = [deliveryStage, development, implementation, live,
-            migration, notStarted, procurement, PTR, requirementGathering, uat];
+          updateDataRelease = [notStarted, requirementGathering, procurement, development,
+            deliveryStage, uat, migration, PTR, implementation, live];
           updateBarChart(myChart, updateDataRelease, colorBarChart);
         }, 1800000);
       }, error => {
@@ -209,10 +224,10 @@ export class FitHomeComponent implements OnInit {
 
         const productCanvas = document.getElementById('projectByStatus');
         let updateDataProject;
-        const colorPieChart = ['#f9e0ae',
-          '#fc8621',
-          '#682c0e',
-          '#b3a30c'];
+        const colorPieChart = ['#43c6f3',
+          '#ea710f',
+          '#0ca506',
+          '#de0808'];
         const projectData = {
           labels: [
             'Not Started',
@@ -224,10 +239,10 @@ export class FitHomeComponent implements OnInit {
             {
               data: [notStarted, onSchedule, ptr, delay],
               backgroundColor: [
-                '#f9e0ae',
-                '#fc8621',
-                '#682c0e',
-                '#b3a30c'
+                '#43c6f3',
+                '#ea710f',
+                '#0ca506',
+                '#de0808'
               ]
             }]
         };
@@ -235,7 +250,21 @@ export class FitHomeComponent implements OnInit {
 
         const pieChart = new Chart('projectByStatus', {
           type: 'pie',
-          data: projectData
+          data: projectData,
+          options: {
+            plugins: {
+              datalabels: {
+                color: 'white',
+                anchor: 'center',
+                align: 'center',
+                formatter: Math.round,
+                font: {
+                  color: 'blue',
+                  weight: 'bold'
+                }
+              }
+            }
+          }
         });
 
         // tslint:disable-next-line:typedef
@@ -254,7 +283,7 @@ export class FitHomeComponent implements OnInit {
         const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
           type: 'horizontalBar',
           data: {
-            labels: ['Kepatuhan & SDM', 'Keuangan', 'Operational Retail', 'Teknik', 'Utama', 'Semua Direktorat'],
+            labels: ['Kepatuhan & SDM', 'Keuangan', 'Operasional', 'Teknik', 'Utama', 'Semua Direktorat'],
             datasets: [
               {
                 label: '',
@@ -265,10 +294,21 @@ export class FitHomeComponent implements OnInit {
           },
           options: {
             legend: {display: false},
-            title: {
-              display: true,
-              text: 'Number of projects per directorate'
+            plugins: {
+              datalabels: {
+                color: 'white',
+                anchor: 'center',
+                align: 'center',
+                formatter: Math.round,
+                font: {
+                  weight: 'bold'
+                }
+              }
             },
+            // title: {
+            //   display: true,
+            //   text: 'Number of projects per directorate'
+            // },
             scales: {
               xAxes: [{
                 ticks: {
