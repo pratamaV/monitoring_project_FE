@@ -27,6 +27,9 @@ export class ListTaskComponent implements OnInit {
   };
   fileName = 'List-Task-' + new Date().toDateString() + '.xlsx';
   currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
+  isLoading = true
+
+
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
               private router: Router,
@@ -40,10 +43,12 @@ export class ListTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetAllTask() {
+    this.isLoading = true
     this.filterForm.get('assignTo').setValue(null);
     this.filterForm.get('statusDone').setValue(null);
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
       .subscribe(data => {
+        this.isLoading = false
         this.loadedTask = data;
         console.log(this.loadedTask);
       }, error => {
@@ -74,8 +79,10 @@ export class ListTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetFilterTask(param) {
+    this.isLoading = true
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
       .subscribe(data => {
+        this.isLoading = false
         this.loadedTask = data;
       }, error => {
         alert(error);

@@ -16,6 +16,7 @@ export class ReleaseService {
       this.http.get('/api/releases?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: ReleaseModel2[]) => {
           observer.next(data);
+          
         }, error => {
           observer.error(error.message);
         });

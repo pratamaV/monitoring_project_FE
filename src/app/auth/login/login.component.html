@@ -8,6 +8,7 @@
                     <div class="brand">
                         <img src="../../../assets/img/logo-ask.png" alt="logo">
                     </div>
+
                     <div class="card fat">
                         <div class="card-body">
                             <h4 class="card-title">Login</h4>
@@ -55,3 +56,21 @@
             </div>
         </div>
     </section>
+
+    <div *ngIf="isLoading == true">
+        <div id="id01" class="modal">
+            <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                <!-- <div class="loader"></div> -->
+                <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+                <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+                <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+                <div id="loading">
+                    <ul class="bokeh">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>

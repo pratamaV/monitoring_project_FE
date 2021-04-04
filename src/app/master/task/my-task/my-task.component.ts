@@ -7,6 +7,8 @@ import * as XLSX from 'xlsx';
 import Swal from 'sweetalert2';
 import {ProjectServiceService} from '../../project/project-service.service';
 import {formatDate} from '@angular/common';
+import { ReleaseService } from '../../release/release.service';
+import { ReleaseModel2 } from '../../release/release.model';
 
 
 @Component({
@@ -36,13 +38,17 @@ export class MyTaskComponent implements OnInit {
     direktorate: '',
     status: ''
   };
+
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   projectName: any[] = [];
   releaseName: any[] = [];
 
+  isLoading = false
+
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
+              private releaseService: ReleaseService,
               private router: Router,
               private route: ActivatedRoute) {
   }
@@ -53,6 +59,7 @@ export class MyTaskComponent implements OnInit {
     this.onGetTaskByUserId();
     console.log('ini current date', this.currentDate);
     this.getAllProjectName();
+    this.getAllReleaseName();
   }
 
   private buildForm(): void {
@@ -69,6 +76,7 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskByUserId() {
+    this.isLoading = true
     // this.taskForm.get('taskDoc').setValue(null);
     this.taskForm.get('statusDone').setValue(null);
     this.taskForm.get('releaseName').setValue(null);
@@ -79,11 +87,12 @@ export class MyTaskComponent implements OnInit {
     this.taskForm.get('estEndDateTo').setValue(null);
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
+        this.isLoading = false
         this.loadedTask = data;
         for (const iterator of this.loadedTask) {
           this.releaseName.push(iterator.release.releaseName)
         }
-        // console.log(this.loadedTask);
+        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
@@ -91,8 +100,10 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskByUserIdFilter(param) {
+    this.isLoading = true
         this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
       .subscribe(data => {
+        this.isLoading = false
         this.loadedTask = data;
       }, error => {
         alert(error);
@@ -164,6 +175,20 @@ export class MyTaskComponent implements OnInit {
         color : 'black'
       };
     }
+  }
+
+  getAllReleaseName(){
+    this.releaseService.getAllRelease()
+    .subscribe(data => {
+      console.log(data);
+      this.releaseName = data
+      // console.log(this.releaseName);
+      
+      
+      this.releaseName = data
+    }, error => {
+      alert(error)
+    })
   }
 
   // tslint:disable-next-line:typedef

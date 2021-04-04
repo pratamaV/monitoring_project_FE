@@ -21,6 +21,8 @@ export class ListReleaseComponent implements OnInit {
     status: null,
     stage: null
   };
+  isLoading = false
+
   constructor(private releaseService: ReleaseService, private router: Router) { }
 
   ngOnInit(): void {
@@ -30,10 +32,12 @@ export class ListReleaseComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListRelease() {
+    this.isLoading = true
     this.filterForm.get('status').setValue(null);
     this.filterForm.get('stage').setValue(null);
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
       .subscribe(data => {
+        this.isLoading = false
         this.loadedRelease = data;
       }, error => {
         alert(error);
@@ -53,10 +57,12 @@ export class ListReleaseComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListReleaseFilter(param) {
+    this.isLoading = true
     console.log('masuk sini');
     console.log(param);
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), param)
       .subscribe(data => {
+      this.isLoading = false         
         this.loadedRelease = data;
       }, error => {
         alert(error);

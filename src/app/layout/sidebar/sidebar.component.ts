@@ -73,13 +73,13 @@ export class SidebarComponent implements OnInit {
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
  closeNav() {
   this.getStyle()
-  console.log('kena ga');
+  // console.log('kena ga');
   
   
 }
 
 getStyle(){
-  console.log('yg ini')
+  // console.log('yg ini')
   return {
     'width': '0px;'
   }

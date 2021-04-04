@@ -12,13 +12,15 @@ import {AuthGuardService} from './auth-guard.service';
 import {SidebarModule} from './layout/sidebar/sidebar.module';
 import {HomeComponent} from './master/home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { LoadingComponent } from './layout/loading/loading.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    LoadingComponent
   ],
   imports: [
     MasterModule,
