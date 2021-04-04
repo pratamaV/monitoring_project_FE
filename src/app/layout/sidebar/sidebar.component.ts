@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
     estStartDate: null
   };
 
-  
+
   constructor(private taskService: TaskService,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -44,7 +44,7 @@ export class SidebarComponent implements OnInit {
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe((data)  => {
         for (const task of data) {
-          if (task.statusDone === 'Tidak'){
+          if (task.statusDone === 'NOT STARTED'){
             this.numberTask = this.numberTask + 1;
           }
         }
@@ -74,8 +74,8 @@ export class SidebarComponent implements OnInit {
  closeNav() {
   this.getStyle()
   // console.log('kena ga');
-  
-  
+
+
 }
 
 getStyle(){
