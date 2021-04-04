@@ -75,15 +75,16 @@ export class FitHomeComponent implements OnInit {
 
         let updateDataRelease;
         const colorBarChart = ['#f9e0ae',
-          '#fc8621',
-          '#682c0e',
-          '#b3a30c',
-          '#c6c36e',
-          '#26b186',
-          '#428ec1',
-          '#680e4f',
-          '#4d0651',
-          '#8c0b6c'];
+          '#43c6f3',
+          '#ea710f',
+          '#ea710f',
+          '#ea710f',
+          '#ea710f',
+          '#ea710f',
+          '#ea710f',
+          '#0ca506',
+          '#0ca506',
+          '#0ca506'];
 
         const ctx = document.getElementById('barChart');
         const myChart = new Chart('barChart', {
@@ -104,25 +105,25 @@ export class FitHomeComponent implements OnInit {
               label: '',
               data: [notStarted, requirementGathering, procurement, development, deliveryStage, uat, migration, PTR, implementation, live],
               backgroundColor: [
-                '#f9e0ae',
-                '#fc8621',
-                '#682c0e',
-                '#b3a30c',
-                '#c6c36e',
-                '#26b186',
-                '#428ec1',
+                '#43c6f3',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
                 '#0ca506',
                 '#0ca506',
                 '#0ca506'
               ],
               borderColor: [
-                '#f9e0ae',
-                '#fc8621',
-                '#682c0e',
-                '#b3a30c',
-                '#c6c36e',
-                '#26b186',
-                '#428ec1',
+                '#43c6f3',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
+                '#ea710f',
                 '#0ca506',
                 '#0ca506',
                 '#0ca506'
