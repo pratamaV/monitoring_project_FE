@@ -24,6 +24,29 @@ export class HomeService {
     });
   }
 
+  getProjectByBebanUsaha(): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http.get(`api/projectByBebanUsaha?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+        .subscribe((data: ProjectModel[]) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
+
+  getProjectByBelanjaModal(): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http.get(`api/projectByBelanjaModal?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+        .subscribe((data: ProjectModel[]) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
 
   getReleaseByStage(stage): Observable<ReleaseModel2[]> {
     return new Observable((observer: Observer<ReleaseModel2[]>) => {

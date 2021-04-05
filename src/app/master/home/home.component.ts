@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.onGetUserByPerformance();
     this.onGetTaskDeadline();
-    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontFamily = 'Helvetica';
     Chart.defaults.global.defaultFontSize = 14;
     Chart.plugins.register(ChartDataLabels);
 
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
         const myChart = new Chart('barChart', {
           type: 'bar',
           data: {
-            labels: [ 'Not Started',
+            labels: ['Not Started',
               'Requirement Gathering',
               'Procurement',
               'Development',
@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
               'PTR',
               'Implementation',
               'Live'
-              ],
+            ],
             datasets: [{
               label: '',
               data: [notStarted, requirementGathering, procurement, development, deliveryStage, uat, migration, PTR, implementation, live],
@@ -195,6 +195,10 @@ export class HomeComponent implements OnInit {
         let ptr = 0;
         let delay = 0;
         let allDirectorate = 0;
+        let contractedValueBebanUsaha = 0;
+        let contractedValueBelanjaModal = 0;
+        let budgetBebanUsaha = 0;
+        let budgetBelanjaModal = 0;
         for (const project of data) {
           if (project.statusProject === 'Active') {
             if (project.directorateUser === 'Kepatuhan & SDM') {
@@ -220,10 +224,18 @@ export class HomeComponent implements OnInit {
             } else if (project.status === 'Delay') {
               delay = delay + 1;
             }
+
+            if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
+              budgetBelanjaModal = budgetBelanjaModal + project.budget;
+              contractedValueBelanjaModal = contractedValueBelanjaModal + project.contracted_value;
+            } else if (project.lineItem === 'Beban Usaha') {
+              budgetBebanUsaha = budgetBebanUsaha + project.budget;
+              contractedValueBebanUsaha = contractedValueBebanUsaha + project.contracted_value;
+            }
           }
         }
 
-        const productCanvas = document.getElementById('projectByStatus');
+        const projectCanvas = document.getElementById('projectByStatus');
         let updateDataProject;
         const colorPieChart = ['#43c6f3',
           '#ea710f',
@@ -239,12 +251,7 @@ export class HomeComponent implements OnInit {
           datasets: [
             {
               data: [notStarted, onSchedule, ptr, delay],
-              backgroundColor: [
-                '#43c6f3',
-                '#ea710f',
-                '#0ca506',
-                '#de0808'
-              ]
+              backgroundColor: colorPieChart
             }]
         };
 
@@ -306,10 +313,6 @@ export class HomeComponent implements OnInit {
                 }
               }
             },
-            // title: {
-            //   display: true,
-            //   text: 'Number of projects per directorate'
-            // },
             scales: {
               xAxes: [{
                 ticks: {
@@ -336,12 +339,123 @@ export class HomeComponent implements OnInit {
           chart.update();
         }
 
+        const projectByBebanUsahaCanvas = document.getElementById('projectByBebanUsaha');
+        let updateDataProject3;
+        const colorPieChart2 = ['#ffc1b6', '#fdffbc'];
+        const projectData2 = {
+          labels: ['Budget', 'Contracted Value'],
+          datasets: [
+            {
+              data: [budgetBebanUsaha, contractedValueBebanUsaha],
+              backgroundColor: colorPieChart2
+            }]
+        };
+
+        const pieChart2 = new Chart('projectByBebanUsaha', {
+          type: 'pie',
+          data: projectData2,
+          options: {
+            plugins: {
+              datalabels: {
+                color: 'black',
+                anchor: 'center',
+                align: 'center',
+                // tslint:disable-next-line:only-arrow-functions
+                formatter: function (value) {
+                  // tslint:disable-next-line:prefer-const
+                  var number_string = value.toString(),
+                    sisa = number_string.length % 3,
+                    rupiah = number_string.substr(0, sisa),
+                    ribuan = number_string.substr(sisa).match(/\d{3}/g);
+                  if (ribuan) {
+                    const separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                  }
+                  return 'Rp ' + rupiah;
+                },
+                font: {
+                  color: 'blue',
+                  weight: 'bold'
+                }
+              }
+            }
+          }
+        });
+
+        // tslint:disable-next-line:typedef
+        function updatePieChart2(chart, dataProject, color) {
+          chart.data.datasets.pop();
+          chart.data.datasets.push({
+            data: dataProject,
+            backgroundColor: color
+          });
+          chart.update();
+        }
+
+        const projectByBelanjaModalCanvas = document.getElementById('projectByBelanjaModal');
+        let updateDataProject4;
+        const colorPieChart3 = ['#d3e0ea', '#f6f5f5'];
+        const projectData3 = {
+          labels: ['Budget', 'Contracted Value'],
+          datasets: [
+            {
+              data: [budgetBelanjaModal, contractedValueBelanjaModal],
+              backgroundColor: colorPieChart3
+            }]
+        };
+
+        const pieChart3 = new Chart('projectByBelanjaModal', {
+          type: 'pie',
+          data: projectData3,
+          options: {
+            plugins: {
+              datalabels: {
+                color: 'black',
+                anchor: 'center',
+                align: 'center',
+                formatter: function (value) {
+                  // tslint:disable-next-line:prefer-const
+                  var number_string = value.toString(),
+                    sisa = number_string.length % 3,
+                    rupiah = number_string.substr(0, sisa),
+                    ribuan = number_string.substr(sisa).match(/\d{3}/g);
+                  if (ribuan) {
+                    const separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                  }
+                  return 'Rp ' + rupiah;
+                },
+                font: {
+                  color: 'blue',
+                  weight: 'bold'
+                }
+              }
+            }
+          }
+        });
+
+        // tslint:disable-next-line:typedef
+        function updatePieChart3(chart, dataProject, color) {
+          chart.data.datasets.pop();
+          chart.data.datasets.push({
+            data: dataProject,
+            backgroundColor: color
+          });
+          chart.update();
+        }
+
         setInterval(() => {
           updateDataProject = [notStarted, onSchedule, ptr, delay];
           updatePieChart(pieChart, updateDataProject, colorPieChart);
 
           updateDataProject2 = [KepatuhanandSDM, Keuangan, OperationalRetail, Teknik, Utama, allDirectorate];
           updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
+
+          updateDataProject3 = [budgetBebanUsaha, contractedValueBebanUsaha];
+          updatePieChart2(pieChart2, updateDataProject3, colorPieChart2);
+
+          updateDataProject4 = [budgetBelanjaModal, contractedValueBelanjaModal];
+          updatePieChart3(pieChart3, updateDataProject4, colorPieChart3);
         }, 1800000);
       }, error => {
         alert(error);
