@@ -15,10 +15,6 @@ export class ListProjectComponent implements OnInit {
 
 isLoading = false
 
-  constructor(
-    private projectService: ProjectServiceService,
-    private router: Router
-  ) {}
   loadedProject: ProjectModel[] = [];
   loadedProjectResult: ProjectModel[] = [];
   filterForm: FormGroup;
@@ -40,12 +36,21 @@ isLoading = false
 
   searchByKeyword: string;
 
+  token : any;
+  role : any;
+  userRole : any;
+
+  constructor(
+    private projectService: ProjectServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
     this.onGetListProject();
     this.getAllDivisi();
     this.getAllUser();
+    this.getUserRole();
   }
 
   // tslint:disable-next-line:typedef
@@ -143,7 +148,14 @@ isLoading = false
     this.projectService.getAllProject(this.paramNull).subscribe(
       data => {
         this.isLoading = false
-        this.loadedProject = data;
+        if(this.userRole != '01'){
+          for (const iterator of data) {
+          console.log(iterator);
+          if(iterator.statusProject === 'Active'){            
+              this.loadedProject.push(iterator)  
+        }}} else {
+          this.loadedProject = data
+        }
       },
       error => {
         alert(error);
@@ -251,5 +263,12 @@ isLoading = false
         color : 'white'
       };
     }
+  }
+
+  getUserRole(){
+    this.token = window.sessionStorage.getItem('token')
+    this.role = JSON.parse(this.token)
+    this.userRole = this.role.user.userRole
+    console.log(this.userRole);
   }
 }
