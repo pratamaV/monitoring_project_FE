@@ -98,8 +98,6 @@ export class DetailTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onUploadDocument(postData, id) {
-    console.log(postData);
-    console.log(postData.taskDoc.size)
     if (postData.taskDoc.size < 1000000) {
       this.taskService.uploadDocumentTask(postData, id)
         .subscribe(response => {
@@ -111,5 +109,42 @@ export class DetailTaskComponent implements OnInit {
     }else {
       Swal.fire('Failed', 'Gagal mengunggah dokumen, cek ukuran dokumen', 'error');
     }
+  }
+
+  onDeleteDoc(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+              title:  'Deleted!',
+              html: 'Your file has been deleted.',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1000
+          });
+          this.taskService.deleteDoc(id).subscribe((response) => {
+            this.onGetTaskById();
+          }, error => {
+          Swal.fire('Failed', 'Gagal menghapus dokumen task', 'error');
+        });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          Swal.fire({
+            title:  'Cancelled',
+            html: 'Your file cancel to delete.',
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 500
+          });
+        }
+      });
   }
 }

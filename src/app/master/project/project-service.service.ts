@@ -303,4 +303,23 @@ export class ProjectServiceService {
         );
     });
   }
+
+  getAllProjectSort(orderBy: string, sort: string) {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      const url = `/api/projects-sort?orderBy=${orderBy}&sort=${sort}`;
+      this.http
+        .get(url, header)
+        .subscribe(
+          (data: ProjectModel[]) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+          }
+        );
+    });
+  }
 }

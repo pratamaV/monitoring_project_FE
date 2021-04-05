@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReleaseService} from '../release.service';
 import {Router} from '@angular/router';
 import {ReleaseModel, ReleaseModel2} from '../release.model';
@@ -21,9 +21,11 @@ export class ListReleaseComponent implements OnInit {
     status: null,
     stage: null
   };
-  isLoading = false
+  isLoading = false;
+  asc = true;
 
-  constructor(private releaseService: ReleaseService, private router: Router) { }
+  constructor(private releaseService: ReleaseService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -32,7 +34,7 @@ export class ListReleaseComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListRelease() {
-    this.isLoading = true
+    this.isLoading = true;
     this.filterForm.get('status').setValue(null);
     this.filterForm.get('stage').setValue(null);
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
@@ -45,10 +47,10 @@ export class ListReleaseComponent implements OnInit {
   }
 
   private buildForm(): void {
-    this.filterForm  = new FormGroup({
+    this.filterForm = new FormGroup({
       status: new FormControl(null),
       stage: new FormControl(null),
-      });
+    });
   }
 
   form(property): AbstractControl {
@@ -57,32 +59,30 @@ export class ListReleaseComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListReleaseFilter(param) {
-    this.isLoading = true
-    console.log('masuk sini');
-    console.log(param);
+    this.isLoading = true;
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), param)
       .subscribe(data => {
-      this.isLoading = false
+        this.isLoading = false
         this.loadedRelease = data;
       }, error => {
         alert(error);
       });
   }
 
-  onAddRelease(){
+  onAddRelease() {
     this.router.navigate(['/dashboard/release/form-release']);
   }
 
-  updateRelease(release: ReleaseModel){
+  updateRelease(release: ReleaseModel) {
     this.router.navigateByUrl('/dashboard/release/form-release/' + release.id, {state: release});
   }
 
-  onGoTask(releaseId){
+  onGoTask(releaseId) {
     localStorage.setItem('releaseId', releaseId);
     this.router.navigate(['/dashboard/task']);
   }
 
-  onChangeStatusRelease(id, releaseStatus){
+  onChangeStatusRelease(id, releaseStatus) {
     this.releaseService.changeStatusRelease(id, releaseStatus.target.value)
       .subscribe(data => {
         window.location.reload();
@@ -114,21 +114,38 @@ export class ListReleaseComponent implements OnInit {
     this.router.navigate(['/dashboard/project']);
   }
 
+  onGetReleaseByIdSort(orderBy: string, sort: string) {
+    this.releaseService.getAllRelaseByIdSort(localStorage.getItem('projectId'), orderBy, sort).subscribe(
+      data => {
+        this.isLoading = false;
+        this.loadedRelease = data;
+        if (sort === 'ASC') {
+          this.asc = true;
+        } else if (sort === 'DESC') {
+          this.asc = false;
+        }
+      },
+      error => {
+        alert(error);
+      }
+    );
+  }
+
   getStyle(release): any {
-    if (release.statusRelease === 'Not Active'){
+    if (release.statusRelease === 'Not Active') {
       return {
         'background-color': '#bbbfca',
-        color : 'white'
+          color : 'black'
       };
-    } else if (release.statusRelease === 'Completed'){
+    } else if (release.statusRelease === 'Completed') {
       return {
         'background-color': '#e8e8e8',
-        color : 'black'
+          color: 'black'
       };
-    } else if (release.statusRelease === 'Active' && release.status === 'Delay'){
+    } else if (release.statusRelease === 'Active' && release.status === 'Delay') {
       return {
         'background-color': '#b67162',
-        color : 'white'
+        color: 'white'
       };
     }
   }

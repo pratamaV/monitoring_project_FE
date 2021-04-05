@@ -70,9 +70,10 @@
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush" id="excel-table">
                                 <thead class="thead-light">
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <th scope="col">Task Code</th>
                                         <th scope="col">Task Name</th>
+                                        <th scope="col">Action</th>
                                         <th scope="col">Assigned To</th>
                                         <th scope="col">Score</th>
                                         <th scope="col">Weight</th>
@@ -82,14 +83,19 @@
                                         <th scope="col">Est. End Date</th>
                                         <th scope="col">Act. Start Date</th>
                                         <th scope="col">Act. End Date</th>
-                                        <th scope="col">Detail</th>
-                                        <th scope="col">Action</th>
+<!--                                        <th scope="col">Detail</th>-->
+<!--                                        <th scope="col">Action</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
+                                    <tr  *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)" style="text-align: center;">
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
+                                        <td style="text-align: center;">
+                                          <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
+                                          <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                            class="fa fa-edit"></i></button>&nbsp;
+                                        </td>
                                         <td>{{task.assignedTo.username}}</td>
                                         <td>{{task.score}}</td>
                                         <td>{{task.weight | number : '1.2-2'}}</td>
@@ -99,13 +105,10 @@
                                         <td>{{task.estEndDate | date}}</td>
                                         <td>{{task.actStartDate | date}}</td>
                                         <td>{{task.actEndDate | date}}</td>
-                                        <td style="text-align: center;">
-                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
-                                        </td>
-                                        <td style="text-align: center;">
-                                            <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
-                                        class="fa fa-edit"></i></button>&nbsp;
-                                        </td>
+<!--                                        <td style="text-align: center;">-->
+<!--                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;-->
+<!--                                        </td>-->
+
                                     </tr>
                                 </tbody>
                             </table>

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ProjectModel, ProjectModel2 } from '../project.model';
-import { ProjectServiceService } from '../project-service.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ProjectModel, ProjectModel2} from '../project.model';
+import {ProjectServiceService} from '../project-service.service';
+import {Router} from '@angular/router';
 import * as XLSX from 'xlsx';
-import { FormControl, FormGroup } from '@angular/forms';
-import {UserModel} from "../../user/user.model";
+import {FormControl, FormGroup} from '@angular/forms';
+import {UserModel} from '../../user/user.model';
 
 @Component({
   selector: 'app-list-project',
@@ -13,13 +13,13 @@ import {UserModel} from "../../user/user.model";
 })
 export class ListProjectComponent implements OnInit {
 
-isLoading = false
+  isLoading = false;
 
   loadedProject: ProjectModel[] = [];
   loadedProjectResult: ProjectModel[] = [];
   filterForm: FormGroup;
   loadedRelease: any;
-  filter: boolean = false;
+  filter = false;
   paramNull = {
     divisi: '',
     userPM: '',
@@ -27,6 +27,7 @@ isLoading = false
     direktorate: '',
     status: ''
   };
+  asc = true;
   fileName = 'List-Project-' + new Date().toDateString() + '.xlsx';
   divitions: any[] = [];
   users: any[] = [];
@@ -71,8 +72,10 @@ isLoading = false
       response => {
         this.users = response;
         for (const user of this.users) {
+          // tslint:disable-next-line:triple-equals
           if (user.userRole == '01') {
             this.usersPmo.push(user);
+            // tslint:disable-next-line:triple-equals
           } else if (user.userRole == '02') {
             this.usersPm.push(user);
           }
@@ -84,10 +87,9 @@ isLoading = false
     );
   }
 
-
   // tslint:disable-next-line:typedef
   onGetListProjectFilter(param) {
-    this.isLoading = true
+    this.isLoading = true;
     // this.filter = true;
     if (param.direktorate === null) {
       param.direktorate = '';
@@ -108,14 +110,15 @@ isLoading = false
     // this.projectService.getResultProject(param).subscribe(
     this.projectService.getAllProject(param).subscribe(
       data => {
-        this.isLoading = false
+        this.isLoading = false;
         this.loadedProject = data;
-   },
+      },
       error => {
         alert(error);
       }
     );
   }
+
   // tslint:disable-next-line:typedef
   onGetListRelease() {
     this.filterForm.get('divisi').setValue(null);
@@ -139,7 +142,7 @@ isLoading = false
 
   // tslint:disable-next-line:typedef
   onGetListProject() {
-    this.isLoading = true
+    this.isLoading = true;
     this.filterForm.get('direktorate').setValue(null);
     this.filterForm.get('divisi').setValue(null);
     this.filterForm.get('userPMO').setValue(null);
@@ -177,8 +180,35 @@ isLoading = false
   }
 
   // tslint:disable-next-line:typedef
+  getColor() {
+    for (const iterator of this.loadedProject) {
+      console.log(iterator.statusProject);
+      if (iterator.statusProject === 'aktif') {
+        return 'red';
+      }
+    }
+  }
+
+  // tslint:disable-next-line:typedef
   onAddProject() {
     this.router.navigate(['/dashboard/project/form-project']);
+  }
+
+  onGetProjectBySort(orderBy: string, sort: string) {
+    this.projectService.getAllProjectSort(orderBy, sort).subscribe(
+      data => {
+        this.isLoading = false
+        this.loadedProject = data;
+        if (sort === 'ASC') {
+          this.asc = true;
+        } else if (sort === 'DESC') {
+          this.asc = false;
+        }
+      },
+      error => {
+        alert(error);
+      }
+    );
   }
 
   // tslint:disable-next-line:typedef
@@ -199,14 +229,14 @@ isLoading = false
     this.projectStatus = projectStatus.target.value;
     this.projectService.changeStatusProject(id, this.projectStatus)
       .subscribe(
-      data => {
-        window.location.reload();
-        this.router.navigate(['/dashboard/project']);
-      },
-      error => {
-        alert(error);
-      }
-    );
+        data => {
+          window.location.reload();
+          this.router.navigate(['/dashboard/project']);
+        },
+        error => {
+          alert(error);
+        }
+      );
   }
 
   // tslint:disable-next-line:typedef
@@ -225,7 +255,7 @@ isLoading = false
 
   // tslint:disable-next-line:typedef
   searchLive() {
-    if (this.searchByKeyword === ''){
+    if (this.searchByKeyword === '') {
       this.projectService.getAllProject(this.paramNull).subscribe(
         data => {
           this.loadedProject = data;
@@ -247,20 +277,20 @@ isLoading = false
   }
 
   getStyle(project): any {
-    if (project.statusProject === 'Not Active'){
+    if (project.statusProject === 'Not Active') {
       return {
         'background-color': '#bbbfca',
-        color : 'white'
-      };
-    } else if (project.statusProject === 'Completed'){
-      return {
-        'background-color': '#e8e8e8',
         color : 'black'
       };
-    } else if (project.statusProject === 'Active' && project.status === 'Delay'){
+    } else if (project.statusProject === 'Completed') {
+      return {
+        'background-color': '#e8e8e8',
+        color: 'black'
+      };
+    } else if (project.statusProject === 'Active' && project.status === 'Delay') {
       return {
         'background-color': '#b67162',
-        color : 'white'
+        color: 'white'
       };
     }
   }
