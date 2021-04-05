@@ -118,7 +118,7 @@ export class ListReleaseComponent implements OnInit {
     if (release.statusRelease === 'Not Active'){
       return {
         'background-color': '#bbbfca',
-        color : 'white'
+        color : 'black'
       };
     } else if (release.statusRelease === 'Completed'){
       return {

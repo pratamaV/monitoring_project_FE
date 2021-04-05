@@ -238,7 +238,7 @@ isLoading = false
     if (project.statusProject === 'Not Active'){
       return {
         'background-color': '#bbbfca',
-        color : 'white'
+        color : 'black'
       };
     } else if (project.statusProject === 'Completed'){
       return {
