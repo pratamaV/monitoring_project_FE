@@ -16,7 +16,7 @@ export class ReleaseService {
       this.http.get('/api/releases?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: ReleaseModel2[]) => {
           observer.next(data);
-          
+
         }, error => {
           observer.error(error.message);
         });
@@ -53,11 +53,7 @@ export class ReleaseService {
       url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
     }
     return new Observable((observer: Observer<ReleaseModel2>) => {
-// <<<<<<< HEAD
-      this.http.get(url, header)
-// =======
-//       this.http.get(`api/releaseByProjectId/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-// >>>>>>> 5c0ab1f9455636c7b71c7427e7a3b87ddf7b68fa
+     this.http.get(url, header)
         .subscribe((data: ReleaseModel2) => {
           observer.next(data);
         }, error => {
@@ -95,6 +91,22 @@ export class ReleaseService {
           observer.next(response);
         }, (error) => {
           observer.error(error);
+        });
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getAllRelaseByIdSort(idProject, orderBy, sort) {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    const url = `api/releaseByProjectId-sort/${idProject}?orderBy=${orderBy}&sort=${sort}`;
+    return new Observable((observer: Observer<ReleaseModel2>) => {
+      this.http.get(url, header)
+        .subscribe((data: ReleaseModel2) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
         });
     });
   }

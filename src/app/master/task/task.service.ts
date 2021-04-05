@@ -275,7 +275,6 @@ export class TaskService {
 
 
   doneTask(id: string, postData) {
-    console.log('masuk yuk');
     return new Observable((observer: Observer<TaskModel2>) => {
       this.http.put(`/api/doneTask/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
         .subscribe((response: TaskModel2) => {
@@ -298,6 +297,18 @@ export class TaskService {
     const url = `/api/doneTaskNew/${id}`;
     return new Observable((observer: Observer<TaskModel2>) => {
       this.http.put(url, formData, header)
+        .subscribe((response: TaskModel2) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
+
+  deleteDoc(id) {
+    return new Observable((observer: Observer<TaskModel2>) => {
+      console.log(id);
+      this.http.delete(`/api/task-file/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((response: TaskModel2) => {
           observer.next(response);
         }, (error) => {
