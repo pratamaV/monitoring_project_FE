@@ -69,8 +69,10 @@ export class ListProjectComponent implements OnInit {
       response => {
         this.users = response;
         for (const user of this.users) {
+          // tslint:disable-next-line:triple-equals
           if (user.userRole == '01') {
             this.usersPmo.push(user);
+            // tslint:disable-next-line:triple-equals
           } else if (user.userRole == '02') {
             this.usersPm.push(user);
           }
@@ -81,7 +83,6 @@ export class ListProjectComponent implements OnInit {
       }
     );
   }
-
 
   // tslint:disable-next-line:typedef
   onGetListProjectFilter(param) {
@@ -168,6 +169,7 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:typedef
   getColor() {
     for (const iterator of this.loadedProject) {
       console.log(iterator.statusProject);
@@ -268,7 +270,7 @@ export class ListProjectComponent implements OnInit {
     if (project.statusProject === 'Not Active') {
       return {
         'background-color': '#bbbfca',
-        color: 'white'
+        color : 'black'
       };
     } else if (project.statusProject === 'Completed') {
       return {
@@ -280,8 +282,6 @@ export class ListProjectComponent implements OnInit {
         'background-color': '#b67162',
         color: 'white'
       };
-
-
     }
   }
 }

@@ -34,7 +34,7 @@ export class ListReleaseComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListRelease() {
-    this.isLoading = true
+    this.isLoading = true;
     this.filterForm.get('status').setValue(null);
     this.filterForm.get('stage').setValue(null);
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
@@ -135,12 +135,12 @@ export class ListReleaseComponent implements OnInit {
     if (release.statusRelease === 'Not Active') {
       return {
         'background-color': '#bbbfca',
-        color: 'white'
+          color : 'black'
       };
     } else if (release.statusRelease === 'Completed') {
       return {
         'background-color': '#e8e8e8',
-        color: 'black'
+          color: 'black'
       };
     } else if (release.statusRelease === 'Active' && release.status === 'Delay') {
       return {
