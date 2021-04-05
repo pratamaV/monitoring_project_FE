@@ -25,6 +25,7 @@ export interface ProjectModel{
     keyword: string;
     releaseList?: ReleaseModel[];
     departmentHead: UserModel;
+    lineItem: string;
 }
 
 export interface ProjectModel2{
@@ -61,6 +62,7 @@ export interface ProjectModel2{
   departmentHead: {
     id: string;
   };
+  lineItem: string;
 
 }
 

@@ -46,7 +46,6 @@ isLoading = false
     this.onGetListProject();
     this.getAllDivisi();
     this.getAllUser();
-    this.getColor();
   }
 
   // tslint:disable-next-line:typedef
@@ -235,13 +234,22 @@ isLoading = false
     }
   }
 
-  getColor(){
-    for (const iterator of this.loadedProject) {
-      console.log(iterator.statusProject);
-      
-      if(iterator.statusProject === 'aktif'){
-        return 'red';
-      }
+  getStyle(project): any {
+    if (project.statusProject === 'Not Active'){
+      return {
+        'background-color': '#bbbfca',
+        color : 'white'
+      };
+    } else if (project.statusProject === 'Completed'){
+      return {
+        'background-color': '#e8e8e8',
+        color : 'black'
+      };
+    } else if (project.statusProject === 'Active' && project.status === 'Delay'){
+      return {
+        'background-color': '#b67162',
+        color : 'white'
+      };
     }
   }
 }

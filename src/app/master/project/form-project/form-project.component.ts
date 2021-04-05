@@ -87,7 +87,8 @@ export class FormProjectComponent implements OnInit {
       weight: new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
       categoryInitiative: new FormControl(null, [Validators.required]),
-      statusProject: new FormControl('Active')
+      statusProject: new FormControl('Active'),
+      lineItem: new FormControl(null, [Validators.required])
     });
   }
 
@@ -182,7 +183,8 @@ export class FormProjectComponent implements OnInit {
       keyword: postData.keyword,
       departmentHead: {
         id: postData.departmentHead.id
-      }
+      },
+      lineItem: postData.lineItem
     };
     if (valid) {
       this.projectService.saveProject(this.project, this.id)
@@ -254,6 +256,7 @@ export class FormProjectComponent implements OnInit {
       this.projectForm.get('categoryActivity').setValue(this.project.categoryActivity);
       this.projectForm.get('categoryInitiative').setValue(this.project.categoryInitiative);
       this.projectForm.get('statusProject').setValue(this.project.statusProject);
+      this.projectForm.get('lineItem').setValue(this.project.lineItem);
     }
   }
 

@@ -62,7 +62,7 @@ export class ListReleaseComponent implements OnInit {
     console.log(param);
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), param)
       .subscribe(data => {
-      this.isLoading = false         
+      this.isLoading = false
         this.loadedRelease = data;
       }, error => {
         alert(error);
@@ -112,5 +112,24 @@ export class ListReleaseComponent implements OnInit {
 
   goToListProject() {
     this.router.navigate(['/dashboard/project']);
+  }
+
+  getStyle(release): any {
+    if (release.statusRelease === 'Not Active'){
+      return {
+        'background-color': '#bbbfca',
+        color : 'white'
+      };
+    } else if (release.statusRelease === 'Completed'){
+      return {
+        'background-color': '#e8e8e8',
+        color : 'black'
+      };
+    } else if (release.statusRelease === 'Active' && release.status === 'Delay'){
+      return {
+        'background-color': '#b67162',
+        color : 'white'
+      };
+    }
   }
 }
