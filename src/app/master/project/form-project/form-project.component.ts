@@ -32,6 +32,9 @@ export class FormProjectComponent implements OnInit {
   fixBudget: number;
   fixContractedValue: number;
   fixPaymentRealization: number;
+  budgetString : string;
+  ContractedValueString : string;
+  PaymentRealizationString : string;
 
   constructor(private projectService: ProjectServiceService,
               private router: Router,
@@ -92,18 +95,21 @@ export class FormProjectComponent implements OnInit {
   currencyPipes(){
     this.projectForm.valueChanges.subscribe( form => {
       if(form.budget){
+        this.budgetString = form.budget + ''
         this.projectForm.patchValue({
-          budget : this.currencyPipe.transform(form.budget.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
+          budget : this.currencyPipe.transform(this.budgetString.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
         }, {emitEvent: false})
       }
       if(form.contracted_value){
+        this.ContractedValueString = form.contracted_value + ''
         this.projectForm.patchValue({
-          contracted_value : this.currencyPipe.transform(form.contracted_value.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
+          contracted_value : this.currencyPipe.transform(this.ContractedValueString.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
         }, {emitEvent: false})
       }
       if(form.paymentRealization){
+        this.PaymentRealizationString = form.paymentRealization + ''
         this.projectForm.patchValue({
-          paymentRealization : this.currencyPipe.transform(form.paymentRealization.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
+          paymentRealization : this.currencyPipe.transform(this.PaymentRealizationString.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
         }, {emitEvent: false})
       }
     })
@@ -116,25 +122,28 @@ export class FormProjectComponent implements OnInit {
   compareUser(c1: UserModel, c2: UserModel): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
-
-  onSaveProject(postData, valid: boolean) {
+ 
+  onSaveProject(postData, valid: boolean) {  
 
     if(postData.budget){
-      this.split = postData.budget.split(',')
+      this.budgetString = postData.budget + ''
+      this.split = this.budgetString.split(',')
       this.join1 = this.split.join('')
       this.match = this.join1.match(/\d/g)
       this.join2 = this.match.join('')
       this.fixBudget = parseInt(this.join2)
     }
     if(postData.contracted_value){
-      this.split = postData.contracted_value.split(',')
+      this.ContractedValueString = postData.contracted_value + ''
+      this.split = this.ContractedValueString.split(',')
       this.join1 = this.split.join('')
       this.match = this.join1.match(/\d/g)
       this.join2 = this.match.join('')
       this.fixContractedValue = parseInt(this.join2)
     }
     if(postData.paymentRealization){
-      this.split = postData.paymentRealization.split(',')
+      this.PaymentRealizationString = postData.paymentRealization + ''
+      this.split = this.PaymentRealizationString.split(',')
       this.join1 = this.split.join('')
       this.match = this.join1.match(/\d/g)
       this.join2 = this.match.join('')

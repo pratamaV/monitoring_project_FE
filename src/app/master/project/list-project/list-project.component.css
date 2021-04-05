@@ -92,6 +92,7 @@ body {
     text-align: left;
     color: #525f7f;
     background-color: #f8f9fe;
+    height: 100vh;
 }
 
 [tabindex='-1']:focus {
@@ -288,13 +289,20 @@ h3,
     font-size: 1.0625rem;
 }
 
+#cover {
+    width: calc(100% - 19rem);
+    margin-left: 18rem;
+    transition: all 0.4s;
+}
+
 .container {
     width: calc(100% - 17rem);
     margin-left: 17rem;
     transition: all 0.4s;
 }
 
-@media (min-width: 576px) {
+
+/* @media (min-width: 576px) {
     .container {
         max-width: 540px;
     }
@@ -316,7 +324,7 @@ h3,
     .container {
         max-width: 1140px;
     }
-}
+} */
 
 .row {
     display: flex;

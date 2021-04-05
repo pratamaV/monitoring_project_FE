@@ -63,6 +63,7 @@ body {
     text-align: left;
     color: #525f7f;
     background-color: #f8f9fe;
+    height: 100vh;
 }
 
 [tabindex='-1']:focus {
@@ -262,6 +263,12 @@ h3,
 .container {
     width: calc(100% - 17rem);
     margin-left: 17rem;
+    transition: all 0.4s;
+}
+
+#cover {
+    width: calc(100% - 19rem);
+    margin-left: 18rem;
     transition: all 0.4s;
 }
 
