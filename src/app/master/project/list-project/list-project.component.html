@@ -116,7 +116,7 @@
                                         <th scope="col">Project Weight</th>
                                         <th scope="col">Project Precentage</th>
                                         <th scope="col">Status Project</th>
-                                        <th scope="col">Update Status Project</th>
+                                        <th scope="col" [hidden]="userRole != '01'">Update Status Project</th>
                                         <th scope="col">Keyword</th>
                                         <th scope="col">Detail Project</th>
 
@@ -135,7 +135,7 @@
                                         <td>{{project.weight | number : '1.2-2'}}</td>
                                         <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
                                         <td>{{project.statusProject}}</td>
-                                        <td>
+                                        <td [hidden]="userRole != '01'">
                                             <select class="form-select-sm" (change)="onChangeStatusProject(project.id, $event)" aria-label="Default select example">
                                             <option disabled="disabled" selected="selected">Select an option.</option>
                                             <option value="Active">Active</option>
