@@ -39,7 +39,7 @@
               <tbody>
               <tr
                 *ngFor="let project of loadedProject | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
-                [class.changecolor]="project.statusProject==='Active' && project.status=== 'Delay'">
+                [ngStyle]="getStyle(project)">
                 <th scope="row">{{project.projectCode}}</th>
                 <td>{{project.projectName}}</td>
                 <td>{{project.pmo.username}}</td>
