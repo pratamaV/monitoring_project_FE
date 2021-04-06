@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectModel} from "../project.model";
-import {ProjectServiceService} from "../project-service.service";
+import {ProjectServiceService} from '../project-service.service';
 import {Router} from "@angular/router";
 
 @Component({
@@ -59,6 +59,25 @@ export class ListProjectUserComponent implements OnInit {
 
   getDetail(project: ProjectModel) {
     this.router.navigateByUrl('/dashboard/project/detail-project-user/ ' + project.id, {state: project});
+  }
+
+  getStyle(project): any {
+    if (project.statusProject === 'Not Active') {
+      return {
+        'background-color': '#bbbfca',
+        color: 'black'
+      };
+    } else if (project.statusProject === 'Completed') {
+      return {
+        'background-color': '#e8e8e8',
+        color: 'black'
+      };
+    } else if (project.statusProject === 'Active' && project.status === 'Delay') {
+      return {
+        'background-color': '#b67162',
+        color: 'white'
+      };
+    }
   }
 
 
