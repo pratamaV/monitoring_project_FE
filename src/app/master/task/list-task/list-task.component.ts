@@ -8,6 +8,7 @@ import {ProjectServiceService} from '../../project/project-service.service';
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import {formatDate} from "@angular/common";
+import { UserService } from '../../user/user.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class ListTaskComponent implements OnInit {
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -50,7 +52,7 @@ export class ListTaskComponent implements OnInit {
     this.filterForm.get('assignTo').setValue(null);
     this.filterForm.get('statusDone').setValue(null);
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
-      .subscribe(data => {
+      .subscribe(data => {       
         this.isLoading = false
         this.loadedTask = data.content;
         this.totalItems= data.totalElements;
@@ -67,9 +69,9 @@ export class ListTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetAllUser() {
-    this.projectService.getAllUser()
+    this.userService.getAllUser()
       .subscribe(data => {
-        this.loadedUser = data;
+        this.loadedUser = data.content;
       }, error => {
         alert(error);
       });

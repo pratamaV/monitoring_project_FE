@@ -8,10 +8,11 @@ import {SidebarModule} from '../../layout/sidebar/sidebar.module';
 import { UserTaskComponent } from './user-task/user-task.component';
 import {DetailTaskComponent} from './detail-task/detail-task.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ListTaskComponent } from './list-task/list-task.component';
 
 
 @NgModule({
-  declarations: [MyTaskComponent, UserTaskComponent, DetailTaskComponent],
+  declarations: [MyTaskComponent, UserTaskComponent, DetailTaskComponent, ListTaskComponent],
     imports: [
         CommonModule,
         TaskRoutingModule,

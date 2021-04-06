@@ -43,7 +43,7 @@ export class SidebarComponent implements OnInit {
   onGetTaskByUserId() {
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe((data)  => {
-        for (const task of data) {
+        for (const task of data.content) {
           if (task.statusDone === 'NOT STARTED'){
             this.numberTask = this.numberTask + 1;
           }

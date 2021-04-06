@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import * as XLSX from 'xlsx';
 import {FormControl, FormGroup} from '@angular/forms';
 import {UserModel} from '../../user/user.model';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-list-project',
@@ -47,6 +48,7 @@ export class ListProjectComponent implements OnInit {
 
   constructor(
     private projectService: ProjectServiceService,
+    private userServicce: UserService,
     private router: Router
   ) {}
 

@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {UserModel, UserModel2} from './user.model';
+import {ApiResponseUser, UserModel, UserModel2} from './user.model';
 import {formatDate} from "@angular/common";
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,10 +32,19 @@ export class UserService {
     });
   }
 
-  getAllUser(): Observable<UserModel[]> {
-    return new Observable((observer: Observer<UserModel[]>) => {
+  getAllUser(): Observable<ApiResponseUser> {
+    return new Observable((observer: Observer<ApiResponseUser>) => {
       this.http.get('/api/users?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-        .subscribe((data: UserModel[]) => {
+      .pipe(map((responseData : any) => {
+        const temp = {
+          content: responseData.content,
+          totalPages: responseData.totalPages,
+          totalElements: responseData.totalElements,
+          numberOfElements: responseData.numberOfElements
+        };
+        return temp;
+      }))  
+      .subscribe((data: ApiResponseUser) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);

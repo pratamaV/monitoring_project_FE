@@ -27,3 +27,10 @@ export interface UserModel2{
   totalWeight: number;
   totalPerformance: number;
 }
+
+export interface ApiResponseUser {
+  content: UserModel[];
+  totalPages: number;
+  totalElements: number;
+  numberOfElements: number;
+}
