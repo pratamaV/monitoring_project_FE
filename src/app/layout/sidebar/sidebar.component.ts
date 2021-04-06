@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../master/task/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TaskModel, TaskModel2} from '../../master/task/task.model';
+import {ApiResponseTask2, TaskModel, TaskModel2} from '../../master/task/task.model';
 declare var jQuery: any;
 
 @Component({
@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit {
 
   onGetTaskByUserId() {
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
-      .subscribe((data)  => {
+      .subscribe((data: ApiResponseTask2)  => {
         for (const task of data) {
           if (task.statusDone === 'NOT STARTED'){
             this.numberTask = this.numberTask + 1;

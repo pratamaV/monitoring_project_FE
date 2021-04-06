@@ -69,3 +69,17 @@ export interface TaskModel4{
   taskDocument: string;
   release: { id: string } ;
 }
+
+export interface ApiResponseTask {
+  content: TaskModel2;
+  totalPages: number;
+  totalElements: number;
+  numberOfElements: number;
+}
+
+export interface ApiResponseTask2 {
+  content: TaskModel2[];
+  totalPages: number;
+  totalElements: number;
+  numberOfElements: number;
+}

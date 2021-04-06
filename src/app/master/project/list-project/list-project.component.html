@@ -157,7 +157,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let project of loadedProject; let i = index" [ngStyle]="getStyle(project)">
+                                    <tr *ngFor="let project of loadedProject | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(project)">
                                         <th scope="row">{{project.projectCode}}</th>
                                         <td>{{project.projectName}}</td>
                                         <td style="width: 200px;">
@@ -190,6 +190,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <pagination-controls class="text-right" style="font-size: 10pt; margin-top: 2px;" (pageChange)="onPageChanges($event)"></pagination-controls>
 
                     </div>
                 </div>

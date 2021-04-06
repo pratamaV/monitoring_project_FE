@@ -39,3 +39,10 @@ export interface ReleaseModel2{
   project: ProjectModel;
   statusRelease: string;
 }
+
+export interface ApiResponseRelease {
+  content: ReleaseModel2;
+  totalPages: number;
+  totalElements: number;
+  numberOfElements: number;
+}

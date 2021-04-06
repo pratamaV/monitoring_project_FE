@@ -83,17 +83,17 @@
                                         <th scope="col">Est. End Date</th>
                                         <th scope="col">Act. Start Date</th>
                                         <th scope="col">Act. End Date</th>
-<!--                                        <th scope="col">Detail</th>-->
-<!--                                        <th scope="col">Action</th>-->
+                                        <!--                                        <th scope="col">Detail</th>-->
+                                        <!--                                        <th scope="col">Action</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr  *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)" style="text-align: center;">
+                                    <tr *ngFor="let task of loadedTask | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)" style="text-align: center;">
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
                                         <td style="text-align: center;">
-                                          <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
-                                          <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;
+                                            <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
                                             class="fa fa-edit"></i></button>&nbsp;
                                         </td>
                                         <td>{{task.assignedTo.username}}</td>
@@ -105,14 +105,15 @@
                                         <td>{{task.estEndDate | date}}</td>
                                         <td>{{task.actStartDate | date}}</td>
                                         <td>{{task.actEndDate | date}}</td>
-<!--                                        <td style="text-align: center;">-->
-<!--                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;-->
-<!--                                        </td>-->
+                                        <!--                                        <td style="text-align: center;">-->
+                                        <!--                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;-->
+                                        <!--                                        </td>-->
 
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
+                        <pagination-controls class="text-right" style="font-size: 10pt; margin-top: 2px;" (pageChange)="onPageChanges($event)"></pagination-controls>
 
                     </div>
                 </div>
