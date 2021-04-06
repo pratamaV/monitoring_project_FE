@@ -50,26 +50,28 @@ export class FitHomeComponent implements OnInit {
         let requirementGathering = 0;
         let uat = 0;
         for (const release of data) {
-          if (release.stage === 'Delivery Barang') {
-            deliveryStage = deliveryStage + 1;
-          } else if (release.stage === 'Development') {
-            development = development + 1;
-          } else if (release.stage === 'Implementation') {
-            implementation = implementation + 1;
-          } else if (release.stage === 'Live') {
-            live = live + 1;
-          } else if (release.stage === 'Migration') {
-            migration = migration + 1;
-          } else if (release.stage === 'Not Started') {
-            notStarted = notStarted + 1;
-          } else if (release.stage === 'Procurement') {
-            procurement = procurement + 1;
-          } else if (release.stage === 'PTR') {
-            PTR = PTR + 1;
-          } else if (release.stage === 'Requirement Gathering') {
-            requirementGathering = requirementGathering + 1;
-          } else if (release.stage === 'UAT') {
-            uat = uat + 1;
+          if (release.statusRelease === 'Active') {
+            if (release.stage === 'Delivery Barang') {
+              deliveryStage = deliveryStage + 1;
+            } else if (release.stage === 'Development') {
+              development = development + 1;
+            } else if (release.stage === 'Implementation') {
+              implementation = implementation + 1;
+            } else if (release.stage === 'Live') {
+              live = live + 1;
+            } else if (release.stage === 'Migration') {
+              migration = migration + 1;
+            } else if (release.stage === 'Not Started') {
+              notStarted = notStarted + 1;
+            } else if (release.stage === 'Procurement') {
+              procurement = procurement + 1;
+            } else if (release.stage === 'PTR') {
+              PTR = PTR + 1;
+            } else if (release.stage === 'Requirement Gathering') {
+              requirementGathering = requirementGathering + 1;
+            } else if (release.stage === 'UAT') {
+              uat = uat + 1;
+            }
           }
         }
 
@@ -443,7 +445,6 @@ export class FitHomeComponent implements OnInit {
           });
           chart.update();
         }
-
 
 
         setInterval(() => {
