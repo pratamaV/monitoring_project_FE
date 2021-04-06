@@ -30,7 +30,7 @@ export class ProjectServiceService {
       const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
       this.http
         .get(url, header)
-        .pipe(map((responseData : any) => {
+        .pipe(map((responseData: any) => {
           const temp = {
             content: responseData.content,
             totalPages: responseData.totalPages,
@@ -228,7 +228,7 @@ export class ProjectServiceService {
     return new Observable((observer: Observer<UserModel[]>) => {
       this.http
         .get(
-          '/api/users?access_token=' +
+          '/api/users-list?access_token=' +
           JSON.parse(window.sessionStorage.getItem('token')).access_token
         )
         .subscribe(

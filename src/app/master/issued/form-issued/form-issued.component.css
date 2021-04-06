@@ -19,6 +19,7 @@
     .container {
         width: 100%;
         margin: 0;
+        padding: 10px
     }
     .container.active {
         margin-left: 17rem;
