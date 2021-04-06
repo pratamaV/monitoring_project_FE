@@ -362,4 +362,27 @@ export class TaskService {
   }
 
 
+  getAllTaskByIdUserSort(idUser: string, orderBy: string, sort: string) {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    const url = `api/taskByUserId-sort/${idUser}?orderBy=${orderBy}&sort=${sort}`;
+    return new Observable((observer: Observer<ApiResponseTask2>) => {
+      this.http.get(url, header)
+        .pipe(map((responseData: ApiResponseTask2) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe((data: ApiResponseTask2) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
 }

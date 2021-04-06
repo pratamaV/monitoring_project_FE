@@ -43,10 +43,9 @@ export class MyTaskComponent implements OnInit {
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   projectName: any[] = [];
   releaseName: any[] = [];
+  asc = true;
+  isLoading = false;
 
-  isLoading = false
-
-  
   page = 1;
   pageSize = 10;
   totalItems = 0;
@@ -114,7 +113,7 @@ export class MyTaskComponent implements OnInit {
     this.isLoading = true
         this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
       .subscribe(data => {
-        this.isLoading = false
+        this.isLoading = false;
         this.loadedTask = data.content;
       }, error => {
         alert(error);
@@ -194,8 +193,8 @@ export class MyTaskComponent implements OnInit {
       console.log(data);
       this.releaseName = data
       // console.log(this.releaseName);
-      
-      
+
+
       this.releaseName = data
     }, error => {
       alert(error)
@@ -210,6 +209,23 @@ export class MyTaskComponent implements OnInit {
       }, error => {
         alert(error);
       });
+  }
+
+  onGetTaskByIdUserSort(orderBy: string, sort: string) {
+    this.taskService.getAllTaskByIdUserSort(localStorage.getItem('idUser'), orderBy, sort).subscribe(
+      data => {
+        this.isLoading = false;
+        this.loadedTask = data.content;
+        if (sort === 'ASC') {
+          this.asc = true;
+        } else if (sort === 'DESC') {
+          this.asc = false;
+        }
+      },
+      error => {
+        alert(error);
+      }
+    );
   }
 
 }
