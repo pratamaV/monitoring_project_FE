@@ -283,6 +283,30 @@ h3,
     font-size: 1.0625rem;
 }
 
+#cover {
+    width: calc(100% - 19rem);
+    margin-left: 18rem;
+    transition: all 0.4s;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -17rem;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #cover {
+        width: 100%;
+        margin: 0;
+        padding: 10px
+    }
+    #cover.active {
+        margin-left: 17rem;
+        width: calc(100% - 17rem);
+    }
+}
+
 .container {
     width: calc(100% - 17rem);
     margin-left: 17rem;
