@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import * as XLSX from 'xlsx';
 import {FormControl, FormGroup} from '@angular/forms';
 import {UserModel} from '../../user/user.model';
-import { UserService } from '../../user/user.service';
+import {UserService} from '../../user/user.service';
 
 @Component({
   selector: 'app-list-project',
@@ -38,9 +38,9 @@ export class ListProjectComponent implements OnInit {
 
   searchByKeyword: string;
 
-  token : any;
-  role : any;
-  userRole : any;
+  token: any;
+  role: any;
+  userRole: any;
 
   page = 1;
   pageSize = 10;
@@ -50,7 +50,8 @@ export class ListProjectComponent implements OnInit {
     private projectService: ProjectServiceService,
     private userServicce: UserService,
     private router: Router
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -156,13 +157,15 @@ export class ListProjectComponent implements OnInit {
     this.filterForm.get('status').setValue(null);
     this.projectService.getAllProject(this.paramNull).subscribe(
       data => {
-        this.isLoading = false
-        if(this.userRole != '01'){
+        this.isLoading = false;
+        if (this.userRole != '01') {
           for (const iterator of data.content) {
-          console.log(iterator);
-          if(iterator.statusProject === 'Active'){            
-              this.loadedProject.push(iterator)  
-        }}} else {
+            console.log(iterator);
+            if (iterator.statusProject === 'Active') {
+              this.loadedProject.push(iterator);
+            }
+          }
+        } else {
           this.loadedProject = data.content;
         }
         this.totalItems = data.totalElements;
@@ -209,7 +212,7 @@ export class ListProjectComponent implements OnInit {
   onGetProjectBySort(orderBy: string, sort: string) {
     this.projectService.getAllProjectSort(orderBy, sort).subscribe(
       data => {
-        this.isLoading = false
+        this.isLoading = false;
         this.loadedProject = data.content;
         if (sort === 'ASC') {
           this.asc = true;
@@ -292,7 +295,7 @@ export class ListProjectComponent implements OnInit {
     if (project.statusProject === 'Not Active') {
       return {
         'background-color': '#bbbfca',
-        color : 'black'
+        color: 'black'
       };
     } else if (project.statusProject === 'Completed') {
       return {
@@ -307,10 +310,10 @@ export class ListProjectComponent implements OnInit {
     }
   }
 
-  getUserRole(){
-    this.token = window.sessionStorage.getItem('token')
-    this.role = JSON.parse(this.token)
-    this.userRole = this.role.user.userRole
+  getUserRole() {
+    this.token = window.sessionStorage.getItem('token');
+    this.role = JSON.parse(this.token);
+    this.userRole = this.role.user.userRole;
     console.log(this.userRole);
   }
 }
