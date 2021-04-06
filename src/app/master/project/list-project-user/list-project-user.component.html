@@ -4,84 +4,87 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <head>
-    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+  <script
+    src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="main-content">
-        <app-sidebar></app-sidebar>
-        <div id="cover">
-            <!-- Table -->
-            <h4 class="mb-5" style="padding-top: 70px">List Project</h4>
-            <div class="row">
+<div class="main-content">
+  <app-sidebar></app-sidebar>
+  <div id="cover">
+    <!-- Table -->
+    <h4 class="mb-5" style="padding-top: 70px">List Project</h4>
+    <div class="row">
 
-                <div class="col">
-                    <div class="card shadow">
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Project Code</th>
-                                        <th scope="col">Project Name</th>
-                                        <th scope="col">PMO</th>
-                                        <th scope="col">PM</th>
-                                        <th scope="col">Directorate Owner</th>
-                                        <!-- <th scope="col">Benefit</th> -->
-                                        <!-- <th scope="col">Description</th> -->
-                                        <th scope="col">Status</th>
-                                        <th scope="col">CO-PM</th>
-                                        <th scope="col">Divisi Owner</th>
-                                        <th scope="col">Prosentase Project</th>
-                                        <th scope="col">Detail Project</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let project of loadedProject | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [class.changecolor]="project.statusProject==='Not Active'">
-                                        <th scope="row">{{project.projectCode}}</th>
-                                        <td>{{project.projectName}}</td>
-                                        <td>{{project.pmo.username}}</td>
-                                        <td>{{project.pm.username}}</td>
-                                        <td>{{project.directorateUser}}</td>
-                                        <!-- <td>{{project.benefit}}</td> -->
-                                        <!-- <td>{{project.description}}</td> -->
-                                        <td>{{project.status}}</td>
-                                        <td>{{project.coPM.username}}</td>
-                                        <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
-                                        <td>{{project.statusProject}}</td>
-                                        <td style="text-align: center;">
-                                            <button (click)="getDetail(project)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
-                                              class="fa fa-eye"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <pagination-controls class="text-right" style="font-size: 10pt; margin-top: 2px;" (pageChange)="onPageChanges($event)"></pagination-controls>
+      <div class="col">
+        <div class="card shadow">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Project Code</th>
+                <th scope="col">Project Name</th>
+                <th scope="col">PMO</th>
+                <th scope="col">PM</th>
+                <th scope="col">CO-PM</th>
+                <th scope="col">Directorate Owner</th>
+                <th scope="col">Divisi Owner</th>
+                <th scope="col">Status</th>
+                <th scope="col">Prosentase Project</th>
+                <th scope="col">Detail Project</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngFor="let project of loadedProject | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
+                [class.changecolor]="project.statusProject==='Active' && project.status=== 'Delay'">
+                <th scope="row">{{project.projectCode}}</th>
+                <td>{{project.projectName}}</td>
+                <td>{{project.pmo.username}}</td>
+                <td>{{project.pm.username}}</td>
+                <td>{{project.coPM.username}}</td>
+                <td>{{project.directorateUser}}</td>
+                <td>{{project.divisiUser.divisionName}}</td>
+                <td>{{project.status}}</td>
+                <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
+                <td style="text-align: center;">
+                  <button (click)="getDetail(project)" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
+                          data-placement="bottom" title="Detail"><i
+                    class="fa fa-eye"></i></button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <pagination-controls class="text-right" style="font-size: 10pt; margin-top: 2px;"
+                               (pageChange)="onPageChanges($event)"></pagination-controls>
 
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="container" *ngIf="isLoading == true">
-            <div id="id01" class="modal">
-                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                    <div class="spinner-border text-info"></div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <footer class="footer">
-        <div class="row align-items-center justify-content-xl-between">
-            <div class="col-xl-6 m-auto text-center">
-                <div class="copyright">
-                    <p></p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
+  <div class="container" *ngIf="isLoading == true">
+    <div id="id01" class="modal">
+      <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <div class="spinner-border text-info"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="row align-items-center justify-content-xl-between">
+    <div class="col-xl-6 m-auto text-center">
+      <div class="copyright">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script
+  src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script
+  src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

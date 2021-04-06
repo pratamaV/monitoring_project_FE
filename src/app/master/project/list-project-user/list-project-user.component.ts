@@ -21,6 +21,7 @@ export class ListProjectUserComponent implements OnInit {
   page = 1;
   pageSize = 10;
   totalItems = 0;
+  userRole = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
 
   constructor(private projectService: ProjectServiceService,
               private router: Router) { }
@@ -30,12 +31,23 @@ export class ListProjectUserComponent implements OnInit {
   }
 
   onGetListProject() {
-    this.isLoading = true
+    this.loadedProject = [];
+    this.isLoading = true;
     this.projectService.getAllProject(this.paramNull)
       .subscribe(data => {
-        this.isLoading = false
-        this.loadedProject = data.content;
-        this.totalItems = data.totalElements;
+        if (this.userRole !== '01'){
+          for (const project of data.content) {
+            if (project.statusProject === 'Active'){
+              this.isLoading = false;
+              this.loadedProject.push(project);
+              this.totalItems = data.totalElements;
+            }
+          }
+        } else {
+          this.isLoading = false;
+          this.loadedProject = data.content;
+          this.totalItems = data.totalElements;
+        }
       }, error => {
         alert(error);
       });
@@ -48,5 +60,6 @@ export class ListProjectUserComponent implements OnInit {
   getDetail(project: ProjectModel) {
     this.router.navigateByUrl('/dashboard/project/detail-project-user/ ' + project.id, {state: project});
   }
+
 
 }
