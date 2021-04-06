@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
         let requirementGathering = 0;
         let uat = 0;
         for (const release of data) {
-          console.log(release);
           if (release.statusRelease === 'Active') {
             if (release.stage === 'Delivery Barang') {
               deliveryStage = deliveryStage + 1;

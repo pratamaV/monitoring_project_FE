@@ -122,8 +122,8 @@ export class FormProjectComponent implements OnInit {
   compareUser(c1: UserModel, c2: UserModel): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
- 
-  onSaveProject(postData, valid: boolean) {  
+
+  onSaveProject(postData, valid: boolean) {
 
     if(postData.budget){
       this.budgetString = postData.budget + ''
@@ -186,6 +186,7 @@ export class FormProjectComponent implements OnInit {
       },
       lineItem: postData.lineItem
     };
+    console.log(this.project);
     if (valid) {
       this.projectService.saveProject(this.project, this.id)
         .subscribe(response => {

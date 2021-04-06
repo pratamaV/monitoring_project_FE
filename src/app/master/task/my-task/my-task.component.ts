@@ -80,7 +80,7 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskByUserId() {
-    this.isLoading = true
+    this.isLoading = true;
     // this.taskForm.get('taskDoc').setValue(null);
     this.taskForm.get('statusDone').setValue(null);
     this.taskForm.get('releaseName').setValue(null);
@@ -91,13 +91,16 @@ export class MyTaskComponent implements OnInit {
     this.taskForm.get('estEndDateTo').setValue(null);
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
-        this.isLoading = false
+        this.isLoading = false;
+        // for (const datum of data.content) {
+        //   if (datum.release.project.statusProject === 'Active')
+        // }
+        // console.log(data.content, 'ini apa')
         this.loadedTask = data.content;
         this.totalItems = data.totalElements;
         for (const iterator of this.loadedTask) {
-          this.releaseName.push(iterator.release.releaseName)
+          this.releaseName.push(iterator.release.releaseName);
         }
-        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });

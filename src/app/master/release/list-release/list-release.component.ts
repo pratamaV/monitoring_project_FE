@@ -153,8 +153,8 @@ export class ListReleaseComponent implements OnInit {
       };
     } else if (release.statusRelease === 'Active' && release.status === 'Delay') {
       return {
-        'background-color': '#b67162',
-        color: 'white'
+        'background-color': '#ffaaa7',
+        color: 'black'
       };
     }
   }
