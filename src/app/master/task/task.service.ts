@@ -257,7 +257,7 @@ export class TaskService {
     url = `api/taskByUserId/${id}?statusDone=${param.statusDone}&releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDateFrom=${param.estStartDateFrom}&estStartDateTo=${param.estStartDateTo}&estEndDateFrom=${param.estEndDateFrom}&estEndDateTo=${param.estEndDateTo}`;
     return new Observable((observer: Observer<ApiResponseTask2>) => {
       this.http.get(url, header)
-      .pipe(map((responseData : any) => {
+      .pipe(map((responseData: ApiResponseTask2) => {
         const temp = {
           content: responseData.content,
           totalPages: responseData.totalPages,

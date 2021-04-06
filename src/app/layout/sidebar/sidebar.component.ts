@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../master/task/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TaskModel, TaskModel2} from '../../master/task/task.model';
+import {ApiResponseTask2, TaskModel, TaskModel2} from '../../master/task/task.model';
 declare var jQuery: any;
 
 @Component({
