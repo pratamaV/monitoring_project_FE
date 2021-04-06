@@ -28,8 +28,8 @@ export class ListTaskComponent implements OnInit {
   };
   fileName = 'List-Task-' + new Date().toDateString() + '.xlsx';
   currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
-  isLoading = true
-
+  isLoading = true;
+  asc = true;
   page = 1;
   pageSize = 10;
   totalItems = 0;
@@ -52,7 +52,7 @@ export class ListTaskComponent implements OnInit {
     this.filterForm.get('assignTo').setValue(null);
     this.filterForm.get('statusDone').setValue(null);
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
-      .subscribe(data => {       
+      .subscribe(data => {
         this.isLoading = false
         this.loadedTask = data.content;
         this.totalItems= data.totalElements;
@@ -185,5 +185,22 @@ export class ListTaskComponent implements OnInit {
     localStorage.setItem('taskId', id);
     localStorage.setItem('paramnavigatetask', param);
     this.router.navigateByUrl(['/dashboard/task/detail-task/'] + id);
+  }
+
+  onGetTaskByIdReleaseSort(orderBy: string, sort: string) {
+    this.taskService.getAllTaskByIdReleaseSort(localStorage.getItem('releaseId'), orderBy, sort).subscribe(
+      data => {
+        this.isLoading = false;
+        this.loadedTask = data.content;
+        if (sort === 'ASC') {
+          this.asc = true;
+        } else if (sort === 'DESC') {
+          this.asc = false;
+        }
+      },
+      error => {
+        alert(error);
+      }
+    );
   }
 }

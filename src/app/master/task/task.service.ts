@@ -3,6 +3,7 @@ import {Observable, Observer} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ApiResponseTask, ApiResponseTask2, TaskModel, TaskModel2, TaskModel3} from './task.model';
 import {map} from 'rxjs/operators';
+import {ReleaseModel2} from "../release/release.model";
 
 @Injectable({
   providedIn: 'root'
@@ -274,6 +275,30 @@ export class TaskService {
     });
   }
 
+  getAllTaskByIdReleaseSort(idRelease: string, orderBy: string, sort: string) {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    const url = `api/taskByReleaseId-sort/${idRelease}?orderBy=${orderBy}&sort=${sort}`;
+    return new Observable((observer: Observer<ApiResponseTask>) => {
+      this.http.get(url, header)
+        .pipe(map((responseData: ApiResponseTask) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe((data: ApiResponseTask) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
   // tslint:disable-next-line:typedef
   uploadDocumentTask(postData, id: string) {
     const formData = new FormData();
@@ -335,4 +360,6 @@ export class TaskService {
         });
     });
   }
+
+
 }
