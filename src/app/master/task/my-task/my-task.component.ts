@@ -46,6 +46,11 @@ export class MyTaskComponent implements OnInit {
 
   isLoading = false
 
+  
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
+
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
               private releaseService: ReleaseService,
@@ -88,7 +93,8 @@ export class MyTaskComponent implements OnInit {
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedTask = data;
+        this.loadedTask = data.content;
+        this.totalItems = data.totalElements;
         for (const iterator of this.loadedTask) {
           this.releaseName.push(iterator.release.releaseName)
         }
@@ -98,13 +104,18 @@ export class MyTaskComponent implements OnInit {
       });
   }
 
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetTaskByUserId();
+  }
+
   // tslint:disable-next-line:typedef
   onGetTaskByUserIdFilter(param) {
     this.isLoading = true
         this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedTask = data;
+        this.loadedTask = data.content;
       }, error => {
         alert(error);
       });
@@ -195,7 +206,7 @@ export class MyTaskComponent implements OnInit {
   getAllProjectName() {
     this.projectService.getAllProject(this.paramNull2)
       .subscribe(data => {
-        this.projectName = data;
+        this.projectName = data.content;
       }, error => {
         alert(error);
       });

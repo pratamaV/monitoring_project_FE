@@ -7,6 +7,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {SidebarModule} from '../../layout/sidebar/sidebar.module';
 import { UserTaskComponent } from './user-task/user-task.component';
 import {DetailTaskComponent} from './detail-task/detail-task.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {DetailTaskComponent} from './detail-task/detail-task.component';
         CommonModule,
         TaskRoutingModule,
         ReactiveFormsModule,
-        SidebarModule
+        SidebarModule,
+        NgxPaginationModule
     ]
 })
 export class TaskModule { }

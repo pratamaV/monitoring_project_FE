@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {TaskModel, TaskModel2, TaskModel3} from './task.model';
+import {ApiResponseTask, ApiResponseTask2, TaskModel, TaskModel2, TaskModel3} from './task.model';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -65,7 +66,7 @@ export class TaskService {
     });
   }
 
-  getTaskByReleaseId(id, param): Observable<TaskModel2> {
+  getTaskByReleaseId(id, param): Observable<ApiResponseTask> {
     let url = ``;
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
@@ -79,9 +80,18 @@ export class TaskService {
     } else if (!(param.assignTo == null && param.statusDone == null)) {
       url = `api/taskByReleaseId/${id}?assignTo=${param.assignTo}&statusDone=${param.statusDone}`;
     }
-    return new Observable((observer: Observer<TaskModel2>) => {
+    return new Observable((observer: Observer<ApiResponseTask>) => {
       this.http.get(url, header)
-        .subscribe((data: TaskModel2) => {
+      .pipe(map((responseData : any) => {
+        const temp = {
+          content: responseData.content,
+          totalPages: responseData.totalPages,
+          totalElements: responseData.totalElements,
+          numberOfElements: responseData.numberOfElements
+        };
+        return temp;
+      }))
+        .subscribe((data: ApiResponseTask) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);
@@ -213,7 +223,7 @@ export class TaskService {
   //   });
   // }
 
-  getTaskByUserId(id, param): Observable<TaskModel2[]> {
+  getTaskByUserId(id, param): Observable<ApiResponseTask2> {
     if (param.statusDone === null) {
       param.statusDone = '';
     }
@@ -245,9 +255,18 @@ export class TaskService {
 
     // tslint:disable-next-line:max-line-length
     url = `api/taskByUserId/${id}?statusDone=${param.statusDone}&releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDateFrom=${param.estStartDateFrom}&estStartDateTo=${param.estStartDateTo}&estEndDateFrom=${param.estEndDateFrom}&estEndDateTo=${param.estEndDateTo}`;
-    return new Observable((observer: Observer<TaskModel2[]>) => {
+    return new Observable((observer: Observer<ApiResponseTask2>) => {
       this.http.get(url, header)
-        .subscribe((data: TaskModel2[]) => {
+      .pipe(map((responseData : any) => {
+        const temp = {
+          content: responseData.content,
+          totalPages: responseData.totalPages,
+          totalElements: responseData.totalElements,
+          numberOfElements: responseData.numberOfElements
+        };
+        return temp;
+      }))
+        .subscribe((data: ApiResponseTask2) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);

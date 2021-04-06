@@ -84,3 +84,10 @@ export interface DivisionModel {
   divisionName: string;
   divisionCode: string;
 }
+
+export interface ApiResponseModel{
+  content: ProjectModel[];
+  totalPages: number;
+  totalElements: number;
+  numberOfElements: number;
+}

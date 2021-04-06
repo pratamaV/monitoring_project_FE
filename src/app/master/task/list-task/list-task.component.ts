@@ -29,6 +29,9 @@ export class ListTaskComponent implements OnInit {
   currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
   isLoading = true
 
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
 
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
@@ -49,11 +52,17 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedTask = data;
+        this.loadedTask = data.content;
+        this.totalItems= data.totalElements;
         console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
+  }
+
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetAllTask();
   }
 
   // tslint:disable-next-line:typedef
@@ -83,7 +92,7 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedTask = data;
+        this.loadedTask = data.content;
       }, error => {
         alert(error);
       });

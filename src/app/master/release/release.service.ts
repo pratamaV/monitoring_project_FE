@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {ProjectModel, ProjectModel2} from '../project/project.model';
-import {ReleaseModel, ReleaseModel2} from './release.model';
+import {ApiResponseRelease, ReleaseModel, ReleaseModel2} from './release.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,6 @@ export class ReleaseService {
       this.http.get('/api/releases?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((data: ReleaseModel2[]) => {
           observer.next(data);
-
         }, error => {
           observer.error(error.message);
         });
@@ -35,7 +35,7 @@ export class ReleaseService {
     });
   }
 
-  getReleaseByProjectId(id, param): Observable<ReleaseModel2> {
+  getReleaseByProjectId(id, param): Observable<ApiResponseRelease> {
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
@@ -52,9 +52,18 @@ export class ReleaseService {
     else if (!(param.status == null && param.stage == null)){
       url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
     }
-    return new Observable((observer: Observer<ReleaseModel2>) => {
+    return new Observable((observer: Observer<ApiResponseRelease>) => {
      this.http.get(url, header)
-        .subscribe((data: ReleaseModel2) => {
+     .pipe(map((responseData : any) => {
+      const temp = {
+        content: responseData.content,
+        totalPages: responseData.totalPages,
+        totalElements: responseData.totalElements,
+        numberOfElements: responseData.numberOfElements
+      };
+      return temp;
+    }))
+        .subscribe((data: ApiResponseRelease) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);

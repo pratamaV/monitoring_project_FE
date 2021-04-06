@@ -5,7 +5,9 @@ import {
   HttpHeaders
 } from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {
+  ApiResponseModel,
   DivisionModel,
   ProjectModel,
   ProjectModel2,
@@ -20,16 +22,25 @@ export class ProjectServiceService {
   constructor(private http: HttpClient) {
   }
 
-  getAllProject(param): Observable<ProjectModel[]> {
-    return new Observable((observer: Observer<ProjectModel[]>) => {
+  getAllProject(param): Observable<ApiResponseModel> {
+    return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       };
       const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
       this.http
         .get(url, header)
+        .pipe(map((responseData : any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
         .subscribe(
-          (data: ProjectModel[]) => {
+          (data: ApiResponseModel) => {
             observer.next(data);
           },
           error => {
@@ -305,15 +316,24 @@ export class ProjectServiceService {
   }
 
   getAllProjectSort(orderBy: string, sort: string) {
-    return new Observable((observer: Observer<ProjectModel[]>) => {
+    return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       };
       const url = `/api/projects-sort?orderBy=${orderBy}&sort=${sort}`;
       this.http
         .get(url, header)
+        .pipe(map((responseData : any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
         .subscribe(
-          (data: ProjectModel[]) => {
+          (data: ApiResponseModel) => {
             observer.next(data);
           },
           error => {
