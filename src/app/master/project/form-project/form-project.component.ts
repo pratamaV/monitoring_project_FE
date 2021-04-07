@@ -186,7 +186,6 @@ export class FormProjectComponent implements OnInit {
       },
       lineItem: postData.lineItem
     };
-    console.log(this.project);
     if (valid) {
       this.projectService.saveProject(this.project, this.id)
         .subscribe(response => {

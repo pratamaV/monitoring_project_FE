@@ -6,6 +6,8 @@ import {ProjectServiceService} from '../../project/project-service.service';
 import {TaskService} from '../../task/task.service';
 import {Chart} from 'node_modules/chart.js';
 import ChartDataLabels from "chartjs-plugin-datalabels";
+import {LogErrorModel} from "../../log-error.model";
+import {LogErrorService} from "../../log-error.service";
 
 @Component({
   selector: 'app-fit-home',
@@ -24,10 +26,14 @@ export class FitHomeComponent implements OnInit {
     status: ''
   };
 
+  idLog: string;
+  logError: LogErrorModel;
+
 
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
-              private taskService: TaskService) {
+              private taskService: TaskService,
+              private logErrorService: LogErrorService) {
   }
 
   ngOnInit(): void {
@@ -181,7 +187,18 @@ export class FitHomeComponent implements OnInit {
           updateBarChart(myChart, updateDataRelease, colorBarChart);
         }, 1800000);
       }, error => {
-        alert(error);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Set Interval',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
 
 
@@ -461,7 +478,18 @@ export class FitHomeComponent implements OnInit {
           updatePieChart3(pieChart3, updateDataProject4, colorPieChart3);
         }, 1800000);
       }, error => {
-        alert(error);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Set Interval',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
 
 
@@ -481,7 +509,18 @@ export class FitHomeComponent implements OnInit {
           this.user.push(data[i]);
         }
       }, error => {
-        alert(error);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get User By Performance',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 
@@ -496,7 +535,18 @@ export class FitHomeComponent implements OnInit {
           this.taskDeadline.push(data[i]);
         }
       }, error => {
-        alert(error);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get Task Deadline',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 

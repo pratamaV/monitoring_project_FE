@@ -24,7 +24,7 @@ export class DetailProjectComponent implements OnInit {
       .subscribe(data => {
         this.project = data;
       }, error => {
-        alert(error);
+        alert(error.message);
       });
   }
 
