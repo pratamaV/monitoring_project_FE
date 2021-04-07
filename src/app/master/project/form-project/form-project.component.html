@@ -83,7 +83,7 @@
             </small>
           </div>
 
-          <div class="form-group" [hidden]="id!==null">
+          <div class="form-group" [hidden]="id">
             <label for="divisiUser">Divisi Owner <small style="color: red;">*</small></label>
             <select class="form-select" formControlName="divisiUser" id="divisiUser" [compareWith]="compareDivision"
                     aria-label="Default select example">
