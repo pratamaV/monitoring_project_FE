@@ -1,5 +1,5 @@
-import {ProjectModel} from "../project/project.model";
-import {TaskModel, TaskModel2} from "../task/task.model";
+import {ProjectModel} from '../project/project.model';
+import {TaskModel, TaskModel2} from '../task/task.model';
 
 export interface ReleaseModel{
   id: string;

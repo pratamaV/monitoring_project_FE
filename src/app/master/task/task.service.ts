@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ApiResponseTask, ApiResponseTask2, TaskModel, TaskModel2, TaskModel3} from './task.model';
+import {ApiResponseTask, ApiResponseTask2, TaskModel, TaskModel2, TaskModel3, TaskModel5} from './task.model';
 import {map} from 'rxjs/operators';
 import {ReleaseModel2} from "../release/release.model";
 
@@ -56,10 +56,10 @@ export class TaskService {
   }
 
 
-  getTaskById(id): Observable<TaskModel2> {
-    return new Observable((observer: Observer<TaskModel2>) => {
+  getTaskById(id): Observable<TaskModel5> {
+    return new Observable((observer: Observer<TaskModel5>) => {
       this.http.get(`api/task/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-        .subscribe((data: TaskModel2) => {
+        .subscribe((data: TaskModel5) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);

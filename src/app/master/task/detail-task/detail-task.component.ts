@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TaskService} from '../task.service';
-import {TaskModel2} from '../task.model';
+import {TaskModel2, TaskModel5} from '../task.model';
 import Swal from 'sweetalert2';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FileModel} from '../file.model';
@@ -13,7 +13,7 @@ import {FileModel} from '../file.model';
 })
 export class DetailTaskComponent implements OnInit {
   detailmytaskForm: FormGroup;
-  myTask: TaskModel2;
+  myTask: TaskModel5;
   files: FileModel[];
   role: string;
 
@@ -41,6 +41,7 @@ export class DetailTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskById() {
+    this.detailmytaskForm.get('filedesc').setValue(null);
     this.detailmytaskForm.get('taskDoc').setValue(null);
     this.detailmytaskForm.get('statusDone').setValue(null);
     this.detailmytaskForm.get('prosentase').setValue(null);
@@ -111,6 +112,7 @@ export class DetailTaskComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   onDeleteDoc(id) {
       Swal.fire({
         title: 'Are you sure?',
