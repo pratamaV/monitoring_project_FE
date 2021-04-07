@@ -74,8 +74,8 @@ export class ListProjectUserComponent implements OnInit {
       };
     } else if (project.statusProject === 'Active' && project.status === 'Delay') {
       return {
-        'background-color': '#b67162',
-        color: 'white'
+        'background-color': '#ffaaa7',
+        color: 'black'
       };
     }
   }

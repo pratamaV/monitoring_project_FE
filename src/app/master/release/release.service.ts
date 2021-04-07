@@ -110,9 +110,9 @@ export class ReleaseService {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
     const url = `api/releaseByProjectId-sort/${idProject}?orderBy=${orderBy}&sort=${sort}`;
-    return new Observable((observer: Observer<ReleaseModel2>) => {
+    return new Observable((observer: Observer<ReleaseModel2[]>) => {
       this.http.get(url, header)
-        .subscribe((data: ReleaseModel2) => {
+        .subscribe((data: ReleaseModel2[]) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);

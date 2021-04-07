@@ -56,7 +56,6 @@ export class ListTaskComponent implements OnInit {
         this.isLoading = false
         this.loadedTask = data.content;
         this.totalItems= data.totalElements;
-        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });

@@ -83,7 +83,7 @@
             </small>
           </div>
 
-          <div class="form-group">
+          <div class="form-group" [hidden]="id!==null">
             <label for="divisiUser">Divisi Owner <small style="color: red;">*</small></label>
             <select class="form-select" formControlName="divisiUser" id="divisiUser" [compareWith]="compareDivision"
                     aria-label="Default select example">
@@ -141,7 +141,7 @@
               <option value="Not Started">Not Started</option>
               <option value="On Schedule">On Schedule</option>
               <option value="PTR/ Live">PTR/ Live</option>
-              <option value="PTR/ Live">Delay</option>
+              <option value="Delay">Delay</option>
             </select>
             <small class="form-text text-danger "
                    *ngIf="form('status').invalid && form('status').dirty || form('status').touched">

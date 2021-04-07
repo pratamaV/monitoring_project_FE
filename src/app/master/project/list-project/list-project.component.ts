@@ -46,6 +46,8 @@ export class ListProjectComponent implements OnInit {
   pageSize = 10;
   totalItems = 0;
 
+  userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
+
   constructor(
     private projectService: ProjectServiceService,
     private userServicce: UserService,
@@ -133,7 +135,6 @@ export class ListProjectComponent implements OnInit {
     this.filterForm.get('userPMO').setValue(null);
     this.filterForm.get('direktorate').setValue(null);
     this.filterForm.get('status').setValue(null);
-    console.log('rest');
     this.filter = false;
   }
 
@@ -158,9 +159,8 @@ export class ListProjectComponent implements OnInit {
     this.projectService.getAllProject(this.paramNull).subscribe(
       data => {
         this.isLoading = false;
-        if (this.userRole != '01') {
+        if (this.userRole !== '01') {
           for (const iterator of data.content) {
-            console.log(iterator);
             if (iterator.statusProject === 'Active') {
               this.loadedProject.push(iterator);
             }
@@ -195,29 +195,33 @@ export class ListProjectComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  getColor() {
-    for (const iterator of this.loadedProject) {
-      console.log(iterator.statusProject);
-      if (iterator.statusProject === 'aktif') {
-        return 'red';
-      }
-    }
-  }
-
-  // tslint:disable-next-line:typedef
   onAddProject() {
     this.router.navigate(['/dashboard/project/form-project']);
   }
 
   onGetProjectBySort(orderBy: string, sort: string) {
+    this.loadedProject = [];
     this.projectService.getAllProjectSort(orderBy, sort).subscribe(
       data => {
-        this.isLoading = false;
-        this.loadedProject = data.content;
-        if (sort === 'ASC') {
-          this.asc = true;
-        } else if (sort === 'DESC') {
-          this.asc = false;
+        if (this.userRoleNew !== '01'){
+          for (const project of data.content) {
+            if (project.statusProject === 'Active'){
+              this.isLoading = false;
+              this.loadedProject.push(project);
+              if (sort === 'ASC') {
+                this.asc = true;
+              } else if (sort === 'DESC') {
+                this.asc = false;
+              }
+            }
+          }
+        } else {
+          this.loadedProject = data.content;
+          if (sort === 'ASC') {
+            this.asc = true;
+          } else if (sort === 'DESC') {
+            this.asc = false;
+          }
         }
       },
       error => {
@@ -304,8 +308,8 @@ export class ListProjectComponent implements OnInit {
       };
     } else if (project.statusProject === 'Active' && project.status === 'Delay') {
       return {
-        'background-color': '#b67162',
-        color: 'white'
+        'background-color': '#ffaaa7',
+        color: 'black'
       };
     }
   }
@@ -314,6 +318,5 @@ export class ListProjectComponent implements OnInit {
     this.token = window.sessionStorage.getItem('token');
     this.role = JSON.parse(this.token);
     this.userRole = this.role.user.userRole;
-    console.log(this.userRole);
   }
 }

@@ -41,7 +41,7 @@ export interface ReleaseModel2{
 }
 
 export interface ApiResponseRelease {
-  content: ReleaseModel2;
+  content: ReleaseModel2[];
   totalPages: number;
   totalElements: number;
   numberOfElements: number;
