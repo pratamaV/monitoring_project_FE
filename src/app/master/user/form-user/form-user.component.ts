@@ -19,6 +19,8 @@ export class FormUserComponent implements OnInit {
   loadedDivision: DivisionModel[] = [];
   divisionId: string;
   id: string;
+  idParam : string;
+
 
   isErrorValidation = false;
   errorPassword: string;
@@ -36,7 +38,8 @@ export class FormUserComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.onGetAllDivision();
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {      
+      this.idParam = params.id      
       if (params && params.id) {
         const id: string = params.id;
         this.userService.getUserById(id)
@@ -135,7 +138,7 @@ export class FormUserComponent implements OnInit {
       this.userForm.get('email').setValue(this.user.email);
       this.userForm.get('divisiUser').setValue(this.user.divisiUser);
       this.userForm.get('directorateUser').setValue(this.user.directorateUser);
-      this.userForm.get('password').setValue(this.user.password);
+      // this.userForm.get('password').setValue(this.user.password);
       this.userForm.get('statusUser').setValue(this.user.statusUser);
       this.userForm.get('totalWeight').setValue(this.user.totalWeight);
       this.userForm.get('totalPerformance').setValue(this.user.totalPerformance);

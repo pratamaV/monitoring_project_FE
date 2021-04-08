@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
               private logErrorService: LogErrorService) { }
 
   ngOnInit(): void {
-    this.onGetTaskByUserId();
+    this.onGetTaskByUserId();    
   }
 
   onGetTaskByUserId() {
@@ -63,6 +63,9 @@ export class SidebarComponent implements OnInit {
       });
   }
 
+  editProfile() {
+    this.router.navigateByUrl('/user/form-user/' + this.user.id);
+  }
 
   logout(){
     localStorage.removeItem('idUser');
