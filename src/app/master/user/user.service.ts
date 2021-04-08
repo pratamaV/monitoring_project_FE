@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {ApiResponseUser, UserModel, UserModel2} from './user.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ApiResponseUser, UserModel, UserModel2, UserModelPojo} from './user.model';
 import {formatDate} from "@angular/common";
 import {map} from 'rxjs/operators';
 import {LogErrorModel} from "../log-error.model";
@@ -17,10 +17,13 @@ export class UserService {
   constructor(private http: HttpClient,
               private logErrorService: LogErrorService) { }
 
-  saveUser(postData: UserModel2, id: string) {
+  saveUser(postData: UserModel2, userPojo: UserModelPojo, id: string) {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
     return new Observable((observer: Observer<UserModel2>) => {
       if (id) {
-        this.http.put('/api/user?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
+        this.http.put('/api/user-update/' + id + '?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, userPojo)
           .subscribe((response: UserModel2) => {
             observer.next(response);
           }, (error) => {

@@ -3,7 +3,7 @@ import {UserService} from '../user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {DivisionModel} from '../../project/project.model';
-import {UserModel2} from '../user.model';
+import {UserModel2, UserModelPojo} from '../user.model';
 import {ProjectServiceService} from '../../project/project-service.service';
 import Swal from 'sweetalert2';
 
@@ -16,10 +16,11 @@ export class FormUserComponent implements OnInit {
 
   userForm: FormGroup;
   user: UserModel2;
+  userPojo: UserModelPojo;
   loadedDivision: DivisionModel[] = [];
   divisionId: string;
   id: string;
-  idParam : string;
+  idParam: string;
 
 
   isErrorValidation = false;
@@ -38,8 +39,8 @@ export class FormUserComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.onGetAllDivision();
-    this.route.params.subscribe(params => {      
-      this.idParam = params.id      
+    this.route.params.subscribe(params => {
+      this.idParam = params.id;
       if (params && params.id) {
         const id: string = params.id;
         this.userService.getUserById(id)
@@ -109,8 +110,18 @@ export class FormUserComponent implements OnInit {
       totalWeight: postData.totalWeight,
       totalPerformance: postData.totalPerformance
     };
+
+    this.userPojo = {
+      username: postData.username,
+      userRole: postData.userRole,
+      email: postData.email,
+      divisiUser: {
+        id: postData.divisiUser.id
+      },
+      directorateUser: postData.directorateUser
+    };
     // if (valid) {
-    this.userService.saveUser(this.user, this.user.id)
+    this.userService.saveUser(this.user, this.userPojo, this.user.id)
         .subscribe(response => {
           Swal.fire( 'Success', 'User berhasil ditambahkan' , 'success'  );
           this.router.navigate(['/dashboard/user']);
