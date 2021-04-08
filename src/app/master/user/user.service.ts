@@ -43,7 +43,7 @@ export class UserService {
           numberOfElements: responseData.numberOfElements
         };
         return temp;
-      }))  
+      }))
       .subscribe((data: ApiResponseUser) => {
           observer.next(data);
         }, error => {
@@ -77,4 +77,17 @@ export class UserService {
   }
 
 
+  changePassword(id, param): Observable<UserModel2> {
+    const formData = new FormData();
+    formData.append('oldPassword', param.oldPasswordChange);
+    formData.append('newPassword', param.newPasswordChange);
+    return new Observable((observer: Observer<UserModel2>) => {
+      this.http.put(`/api/userChangePassword/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData)
+        .subscribe((response: UserModel2) => {
+          observer.next(response);
+        }, (error) => {
+          observer.error(error);
+        });
+    });
+  }
 }

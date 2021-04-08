@@ -5,7 +5,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {DivisionModel} from '../../project/project.model';
 import {UserModel2} from '../user.model';
 import {ProjectServiceService} from '../../project/project-service.service';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-user',
@@ -24,6 +24,8 @@ export class FormUserComponent implements OnInit {
   errorPassword: string;
   passwordFirst: string;
   passwordSecond: string;
+  passwordFirstChange: string;
+  passwordSecondChange: string;
 
 
   constructor(private userService: UserService,
@@ -61,7 +63,11 @@ export class FormUserComponent implements OnInit {
       confirmPassword: new FormControl(null, [Validators.required]),
       statusUser: new FormControl('Active'),
       totalWeight: new FormControl(0),
-      totalPerformance: new FormControl(0)
+      totalPerformance: new FormControl(0),
+      oldPasswordChange: new FormControl(null, [Validators.required, Validators.pattern(/(?=.*?[0-9]).{8,}/)]),
+      newPasswordChange: new FormControl(null, [Validators.required, Validators.pattern(/(?=.*?[0-9]).{8,}/)]),
+      confirmPasswordChange: new FormControl(null, [Validators.required]),
+
     });
   }
 
@@ -70,9 +76,14 @@ export class FormUserComponent implements OnInit {
   }
 
   passwordMatch() {
-    console.log(this.passwordFirst);
-    console.log(this.passwordSecond);
     if (this.passwordSecond !== this.passwordFirst) {
+      this.errorPassword = 'Password tidak sesuai';
+      this.isErrorValidation = true;
+    } else {
+      this.isErrorValidation = false;
+    }
+
+    if (this.passwordSecondChange !== this.passwordFirstChange) {
       this.errorPassword = 'Password tidak sesuai';
       this.isErrorValidation = true;
     } else {
@@ -137,5 +148,44 @@ export class FormUserComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/dashboard/user']);
+  }
+
+  onChangePassword(param) {
+    Swal.fire({
+      title: 'Are you sure?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title:  'Success!',
+          html: 'Password berhasil di ubah',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1200
+        });
+        this.userService.changePassword(localStorage.getItem('idUser'), param)
+          .subscribe(response => {
+            this.router.navigate(['/dashboard/user']);
+          }, error => {
+            Swal.fire( 'Failed', 'Password Gagal di ubah' , 'error'  );
+          });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire({
+          title:  'Cancelled',
+          html: 'Password batal di ubah',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }
+    });
+
   }
 }
