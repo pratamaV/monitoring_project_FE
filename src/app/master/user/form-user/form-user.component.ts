@@ -91,7 +91,7 @@ export class FormUserComponent implements OnInit {
     }
   }
 
-  onSaveUser(postData, valid: boolean) {
+  onSaveUser(postData) {
     this.user = {
       id: postData.id,
       username: postData.username,
@@ -106,15 +106,15 @@ export class FormUserComponent implements OnInit {
       totalWeight: postData.totalWeight,
       totalPerformance: postData.totalPerformance
     };
-    if (valid) {
-      this.userService.saveUser(this.user, this.user.id)
+    // if (valid) {
+    this.userService.saveUser(this.user, this.user.id)
         .subscribe(response => {
           Swal.fire( 'Success', 'User berhasil ditambahkan' , 'success'  );
           this.router.navigate(['/dashboard/user']);
         }, error => {
           Swal.fire( 'Failed', 'Gagal menambahkan user' , 'error'  );
         });
-    }
+    // }
   }
 
   onGetAllDivision() {

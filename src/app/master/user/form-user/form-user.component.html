@@ -10,7 +10,7 @@
       <!-- <button class="btn btn-outline-dark" (click)="goBack()">
   <i class="fa fa-chevron-circle-left"></i> Back
 </button> -->
-      <form role="form" [formGroup]="userForm" method="post" (ngSubmit)="onSaveUser(userForm.value, userForm.valid)">
+      <form role="form" [formGroup]="userForm" method="post" (ngSubmit)="onSaveUser(userForm.value)">
         <br style="clear:both">
         <h4 style="margin-bottom: 25px; text-align: left;"><i class="fa fa-chevron-circle-left" (click)="goBack()"></i>
           Register User</h4>
@@ -127,7 +127,9 @@
         <!--        <div class="form-group">-->
         <!--          <input type="text" class="form-control" id="directorateUser" name="directorateUser" placeholder="directorateUser" required>-->
         <!--        </div>-->
-        <button type="submit" id="submit" name="submit" class="btn btn-primary" [disabled]="!userForm.valid">
+        <button type="submit" id="submit" name="submit" class="btn btn-primary" [disabled]="!(form('password').valid || form('username').valid ||
+        form('userRole').valid || form('email').valid || form('divisiUser').valid || form('directorateUser').valid ||
+        form('password').valid || form('confirmPassword').valid)">
           Simpan User
         </button>
       </form>
