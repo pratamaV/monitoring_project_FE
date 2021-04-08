@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import { AuthService as AuthGuard } from '../../AuthService';
 import { AuthService } from '../auth.service';
 import { User } from '../user.model';
+import {LogErrorService} from "../../master/log-error.service";
+import {LogErrorModel} from "../../master/log-error.model";
 
 @Component({
   selector: 'app-login',
@@ -25,13 +27,16 @@ export class LoginComponent implements OnInit {
   valueEmail: string;
   forgetPassword;
   isLoading = false;
+  logError: LogErrorModel;
+  idLog: string;
 
   year: number;
 
   constructor(
     private authService: AuthService,
     private auth: AuthGuard,
-    private router: Router
+    private router: Router,
+    private logErrorService: LogErrorService
   ) {}
 
   ngOnInit(): void {
@@ -77,9 +82,6 @@ export class LoginComponent implements OnInit {
         if (this.x.user.statusUser === 'Active') {
           this.isLoading = false
           this.auth.login(this.x.user.userRole);
-
-          console.log(this.isLoading);
-
           Swal.fire('Success', 'Success Login', 'success');
           this.router.navigate(['/home']);
         } else {
@@ -92,8 +94,20 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        this.isLoading = false
+        this.isLoading = false;
         Swal.fire('Failed', 'Email or password incorrect', 'error');
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Login',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
         this.router.navigate(['/']);
       }
     );

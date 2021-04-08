@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../master/task/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiResponseTask2, TaskModel, TaskModel2} from '../../master/task/task.model';
+import {LogErrorService} from "../../master/log-error.service";
+import {LogErrorModel} from "../../master/log-error.model";
 declare var jQuery: any;
 
 @Component({
@@ -24,20 +26,17 @@ export class SidebarComponent implements OnInit {
     estStartDate: null
   };
 
+  idLog: string;
+  logError: LogErrorModel;
+
 
   constructor(private taskService: TaskService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private logErrorService: LogErrorService) { }
 
   ngOnInit(): void {
     this.onGetTaskByUserId();
-    // (function ($) {
-    //   $(document).ready(function(){
-    //     $(".push_menu").click(function(){
-    //          $(".wrapper").toggleClass("active");
-    //     });
-    // });
-    // })(jQuery);
   }
 
   onGetTaskByUserId() {
@@ -49,7 +48,18 @@ export class SidebarComponent implements OnInit {
           }
         }
       }, error => {
-        alert(error);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get Task By User Id',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 
@@ -73,27 +83,14 @@ export class SidebarComponent implements OnInit {
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
  closeNav() {
   this.getStyle()
-  // console.log('kena ga');
 
 
 }
 
 getStyle(){
-  // console.log('yg ini')
   return {
     'width': '0px;'
   }
-  // if ((estEndDate < this.currentDate) && statusDone === 'NOT STARTED') {
-  //   return {
-  //     'background-color': 'rgb(255, 82, 82)',
-  //     color : 'white'
-  //   };
-  // } else if ((estEndDate < this.currentDate) && statusDone === 'ON_PROGRESS'){
-  //   return {
-  //     'background-color': 'orange',
-  //     color : 'black'
-  //   };
-  // }
 }
 
 }

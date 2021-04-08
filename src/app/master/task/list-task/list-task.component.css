@@ -1,3 +1,15 @@
+.my-pagination /deep/ .ngx-pagination .current {
+  background: grey;
+  font-size: 15px;
+  color: black;
+  border-radius: 20px;
+}
+
+.my-pagination /deep/ .ngx-pagination{
+  text-align: center;
+  font-size: 15px;
+}
+
 #button-atas {
     float: right;
     align-self: flex-end;

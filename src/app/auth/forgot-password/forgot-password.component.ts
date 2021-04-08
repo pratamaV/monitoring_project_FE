@@ -4,6 +4,8 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import Swal from '../../../../node_modules/sweetalert2';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {LogErrorService} from '../../master/log-error.service';
+import {LogErrorModel} from "../../master/log-error.model";
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,8 +15,11 @@ import {Router} from '@angular/router';
 export class ForgotPasswordComponent implements OnInit {
   forgotPassForm: FormGroup;
   isLoading = false;
+  idLog: string;
+  logError: LogErrorModel;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router,
+              private logErrorService: LogErrorService) {
   }
 
   ngOnInit(): void {
@@ -35,10 +40,10 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   submit(data) {
-    this.isLoading = true
+    this.isLoading = true;
     this.authService.forgotPass(data)
       .subscribe(() => {
-        this.isLoading = false
+        this.isLoading = false;
         Swal.fire({
           title: 'Success!',
           text: 'Check your email for new Password',
@@ -46,23 +51,34 @@ export class ForgotPasswordComponent implements OnInit {
           timer: 2500,
           showConfirmButton: true
         }).then(
-          function () {
+          function() {
           },
-          function (dismiss) {
+          function(dismiss) {
             if (dismiss === 'timer') {
             }
           });
-        // console.log('halo', data);
         this.router.navigate(['/']);
       }, (error) => {
         this.setDataForm();
-        this.isLoading = false
+        this.isLoading = false;
         Swal.fire({
           title: 'Failed Reset Password',
           icon: 'error',
           timer: 2500,
           showConfirmButton: false
         });
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Forgot Password',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 

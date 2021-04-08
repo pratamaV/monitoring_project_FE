@@ -4,13 +4,18 @@ import {HttpClient} from '@angular/common/http';
 import {ApiResponseUser, UserModel, UserModel2} from './user.model';
 import {formatDate} from "@angular/common";
 import {map} from 'rxjs/operators';
+import {LogErrorModel} from "../log-error.model";
+import {LogErrorService} from "../log-error.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  idLog: string;
+  logError: LogErrorModel;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private logErrorService: LogErrorService) { }
 
   saveUser(postData: UserModel2, id: string) {
     return new Observable((observer: Observer<UserModel2>) => {
@@ -19,7 +24,19 @@ export class UserService {
           .subscribe((response: UserModel2) => {
             observer.next(response);
           }, (error) => {
-            observer.error(error);
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Update User',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           });
       } else {
         this.http.post('/api/signup', postData)
@@ -27,6 +44,18 @@ export class UserService {
             observer.next(response);
           }, (error) => {
             observer.error(error);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Save User',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           });
       }
     });
@@ -48,6 +77,18 @@ export class UserService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get All User',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
         });
     });
   }
@@ -59,6 +100,18 @@ export class UserService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get User By Id',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -72,6 +125,18 @@ export class UserService {
           observer.next(response);
         }, (error) => {
           observer.error(error);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Change Status User',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }

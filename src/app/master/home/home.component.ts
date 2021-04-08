@@ -6,6 +6,8 @@ import {UserModel} from '../user/user.model';
 import {TaskService} from '../task/task.service';
 import {TaskModel, TaskModel2} from '../task/task.model';
 import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
+import {LogErrorModel} from "../log-error.model";
+import {LogErrorService} from "../log-error.service";
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,8 @@ import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
 })
 export class HomeComponent implements OnInit {
 
+  idLog: string;
+  logError: LogErrorModel;
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
   paramNull = {
@@ -27,7 +31,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
-              private taskService: TaskService) {
+              private taskService: TaskService,
+              private logErrorService: LogErrorService) {
   }
 
   ngOnInit(): void {
@@ -181,7 +186,18 @@ export class HomeComponent implements OnInit {
           updateBarChart(myChart, updateDataRelease, colorBarChart);
         }, 1800000);
       }, error => {
-        alert(error);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Set Interval',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
 
 
@@ -460,7 +476,19 @@ export class HomeComponent implements OnInit {
           updatePieChart3(pieChart3, updateDataProject4, colorPieChart3);
         }, 1800000);
       }, error => {
-        alert(error);
+        alert(error.message);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Set Interval',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
 
 
@@ -480,7 +508,19 @@ export class HomeComponent implements OnInit {
           this.user.push(data[i]);
         }
       }, error => {
-        alert(error);
+        alert('Gagal Memuat');
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get User By Performance',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 
@@ -495,7 +535,19 @@ export class HomeComponent implements OnInit {
           this.taskDeadline.push(data[i]);
         }
       }, error => {
-        alert(error);
+        alert('Gagal Memuat');
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get Task Deadline',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 

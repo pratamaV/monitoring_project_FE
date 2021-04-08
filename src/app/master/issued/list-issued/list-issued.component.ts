@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {IssuedModel, IssuedModel2} from '../issued.model';
 import * as XLSX from "xlsx";
 import Swal from "sweetalert2";
+import {LogErrorModel} from "../../log-error.model";
+import {LogErrorService} from "../../log-error.service";
 
 @Component({
   selector: 'app-list-issued',
@@ -13,10 +15,13 @@ import Swal from "sweetalert2";
 export class ListIssuedComponent implements OnInit {
   fileName = 'List-Issued-' + new Date().toDateString() + '.xlsx';
   loadedIssued: IssuedModel2[] = [];
-  isLoading = false
+  isLoading = false;
+  idLog: string;
+  logError: LogErrorModel;
 
   constructor(private issuedService: IssuedService,
-              private router: Router) { }
+              private router: Router,
+              private logErrorService: LogErrorService) { }
 
   ngOnInit(): void {
     this.onGetListIssued();
@@ -30,6 +35,18 @@ export class ListIssuedComponent implements OnInit {
         this.loadedIssued = data;
       }, error => {
         Swal.fire( 'Failed', 'maybe you are not logged in' , 'question'  );
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Forgot Password',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 
