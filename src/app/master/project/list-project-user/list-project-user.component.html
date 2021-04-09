@@ -38,7 +38,7 @@
                 <td>{{project.projectName}}</td>
                 <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
                 <td style="text-align: center;">
-                  <button (click)="getDetail(project)" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
+                  <button (click)="getDetail(project, 'listprojectuser')" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
                           data-placement="bottom" title="Detail"><i
                     class="fa fa-eye"></i></button>
                 </td>

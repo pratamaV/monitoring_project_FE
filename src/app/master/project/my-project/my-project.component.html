@@ -120,10 +120,10 @@
                 <th scope="row">{{project.projectCode}}</th>
                 <td>{{project.projectName}}</td>
                 <td style="width: 200px;">
-                  <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm"
+                  <button (click)="onGetProjectById(project.id, 'backmyproject')" class="btn btn-outline-success btn-sm"
                           data-toggle="tooltip" data-placement="bottom" title="Detail"><i
                     class="fa fa-eye"></i></button>&nbsp;
-                  <button (click)="onGetReleaseByProjectId(project)" class="btn btn-outline-success btn-sm"
+                  <button (click)="onGetReleaseByProjectId(project, 'backmyproject')" class="btn btn-outline-success btn-sm"
                           data-toggle="tooltip" data-placement="bottom" title="Release"><i
                     class="fa fa-bars"></i></button>&nbsp;
                 </td>

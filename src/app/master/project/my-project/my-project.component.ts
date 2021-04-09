@@ -117,7 +117,8 @@ export class MyProjectComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onGetProjectById(id) {
+  onGetProjectById(id, param) {
+    localStorage.setItem('backtoproject', param);
     localStorage.setItem('projectId', id);
     this.projectService.getProjectById(id).subscribe(
       data => {
@@ -174,7 +175,8 @@ export class MyProjectComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onGetReleaseByProjectId(project) {
+  onGetReleaseByProjectId(project, param) {
+    localStorage.setItem('backtoproject', param);
     this.router.navigateByUrl('/dashboard/project/detail-project-user/ ' + project.id, {state: project});
   }
 

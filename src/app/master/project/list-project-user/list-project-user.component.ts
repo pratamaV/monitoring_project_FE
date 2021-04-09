@@ -58,7 +58,8 @@ export class ListProjectUserComponent implements OnInit {
     this.onGetListProject();
   }
 
-  getDetail(project: ProjectModel) {
+  getDetail(project: ProjectModel, param) {
+    localStorage.setItem('backtoproject', param);
     this.router.navigateByUrl('/dashboard/project/detail-project-user/ ' + project.id, {state: project});
   }
 

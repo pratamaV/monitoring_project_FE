@@ -185,7 +185,8 @@ export class ListProjectComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onGetProjectById(id) {
+  onGetProjectById(id, param) {
+    localStorage.setItem('backtoproject', param);
     localStorage.setItem('projectId', id);
     this.projectService.getProjectById(id).subscribe(
       data => {
