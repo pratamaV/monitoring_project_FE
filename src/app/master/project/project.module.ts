@@ -10,11 +10,12 @@ import { DetailProjectUserComponent } from './detail-project-user/detail-project
 import {SidebarModule} from "../../layout/sidebar/sidebar.module";
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MyProjectComponent } from './my-project/my-project.component';
 
 
 
 @NgModule({
-  declarations: [ListProjectComponent, FormProjectComponent, DetailProjectComponent, ListProjectUserComponent, DetailProjectUserComponent],
+  declarations: [ListProjectComponent, FormProjectComponent, DetailProjectComponent, ListProjectUserComponent, DetailProjectUserComponent, MyProjectComponent],
     imports: [
         CommonModule,
         ProjectRoutingModule,

@@ -22,57 +22,57 @@
           <div class="card-header border-0">
             <div class="row">
               <div class="col-12 col-xs-8">
-                <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListProjectFilter(filterForm.value)">
+<!--                <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListProjectFilter(filterForm.value)">-->
                   <div class="row">
-                    <div class="form-group col">
-                      <label for="divisi" style="float: left;">Divisi Owner</label>
-                      <select class="custom-select" formControlName="divisi" id="divisi"
-                              aria-label="Default select example">
-                        <option *ngFor="let divisi of divitions; let i = index" [ngValue]="divisi.id">
-                          {{ divisi.divisionName }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="form-group col">
-                      <label for="direktorate" style="float: left;">Direktorate Owner</label>
-                      <select class="form-select" formControlName="direktorate" id="direktorate"
-                              aria-label="Default select example">
-                        <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
-                        <option value="Keuangan">Keuangan</option>
-                        <option value="Operational Retail">Operational Retail</option>
-                        <option value="Teknik">Teknik</option>
-                        <option value="Utama">Utama</option>
-                      </select>
-                    </div>
-                    <div class="form-group col">
-                      <label for="userPM" style="float: left;">User PM</label>
-                      <select class="custom-select" formControlName="userPM" id="userPM"
-                              aria-label="Default select example">
-                        <option *ngFor="let user of usersPm; let i = index" [ngValue]="user.id">
-                          {{ user.username }}
-                        </option>
-                      </select>
-                    </div>
+<!--                    <div class="form-group col">-->
+<!--                      <label for="divisi" style="float: left;">Divisi Owner</label>-->
+<!--                      <select class="custom-select" formControlName="divisi" id="divisi"-->
+<!--                              aria-label="Default select example">-->
+<!--                        <option *ngFor="let divisi of divitions; let i = index" [ngValue]="divisi.id">-->
+<!--                          {{ divisi.divisionName }}-->
+<!--                        </option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                    <div class="form-group col">-->
+<!--                      <label for="direktorate" style="float: left;">Direktorate Owner</label>-->
+<!--                      <select class="form-select" formControlName="direktorate" id="direktorate"-->
+<!--                              aria-label="Default select example">-->
+<!--                        <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>-->
+<!--                        <option value="Keuangan">Keuangan</option>-->
+<!--                        <option value="Operational Retail">Operational Retail</option>-->
+<!--                        <option value="Teknik">Teknik</option>-->
+<!--                        <option value="Utama">Utama</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                    <div class="form-group col">-->
+<!--                      <label for="userPM" style="float: left;">User PM</label>-->
+<!--                      <select class="custom-select" formControlName="userPM" id="userPM"-->
+<!--                              aria-label="Default select example">-->
+<!--                        <option *ngFor="let user of usersPm; let i = index" [ngValue]="user.id">-->
+<!--                          {{ user.username }}-->
+<!--                        </option>-->
+<!--                      </select>-->
+<!--                    </div>-->
 
-                    <div class="form-group col">
-                      <label for="userPMO" style="float: left;">User PMO</label>
-                      <select class="custom-select" formControlName="userPMO" id="userPMO"
-                              aria-label="Default select example">
-                        <option *ngFor="let user of usersPmo; let i = index" [ngValue]="user.id">
-                          {{ user.username }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="form-group col">
-                      <label for="status">Status <small style="color: red;">*</small></label>
-                      <select class="form-select" formControlName="status" id="status"
-                              aria-label="Default select example">
-                        <option value="Not Started">Not Started</option>
-                        <option value="On Schedule">On Schedule</option>
-                        <option value="PTR/ Live">PTR/ Live</option>
-                        <option value="PTR/ Live">Delay</option>
-                      </select>
-                    </div>
+<!--                    <div class="form-group col">-->
+<!--                      <label for="userPMO" style="float: left;">User PMO</label>-->
+<!--                      <select class="custom-select" formControlName="userPMO" id="userPMO"-->
+<!--                              aria-label="Default select example">-->
+<!--                        <option *ngFor="let user of usersPmo; let i = index" [ngValue]="user.id">-->
+<!--                          {{ user.username }}-->
+<!--                        </option>-->
+<!--                      </select>-->
+<!--                    </div>-->
+<!--                    <div class="form-group col">-->
+<!--                      <label for="status">Status <small style="color: red;">*</small></label>-->
+<!--                      <select class="form-select" formControlName="status" id="status"-->
+<!--                              aria-label="Default select example">-->
+<!--                        <option value="Not Started">Not Started</option>-->
+<!--                        <option value="On Schedule">On Schedule</option>-->
+<!--                        <option value="PTR/ Live">PTR/ Live</option>-->
+<!--                        <option value="PTR/ Live">Delay</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
                   </div>
 
                   <div class="row">
@@ -88,18 +88,18 @@
                       </form>
                     </div>
 
-                    <div class="col-6" id="button-filter">
+                    <div class="col-6" id="button-filter" style="float: right">
                       <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
                         class="fa fa-file"></i> Export to excel
                       </button>&nbsp;
                       <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()"><i
                         class="fa fa-plus"></i> Add New Project
                       </button>&nbsp;
-                      <button class="btn btn-success btn-sm" (click)="onGetListProject()">Reset Filter</button>&nbsp;
-                      <button type="submit" class="btn btn-info btn-sm">Apply Filter</button>
+<!--                      <button class="btn btn-success btn-sm" (click)="onGetListProject()">Reset Filter</button>&nbsp;-->
+<!--                      <button type="submit" class="btn btn-info btn-sm">Apply Filter</button>-->
                     </div>
                   </div>
-                </form>
+<!--                </form>-->
 
               </div>
             </div>
@@ -132,46 +132,46 @@
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Action</th>
-                <th scope="col">PMO
-                  <button (click)="onGetProjectBySort('pmo.username', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('pmo.username', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">PM
-                  <button (click)="onGetProjectBySort('pm.username', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('pm.username', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Directorate Owner
-                  <button (click)="onGetProjectBySort('directorateUser', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('directorateUser', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Divisi Owner
-                  <button (click)="onGetProjectBySort('divisiUser.divisionName', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('divisiUser.divisionName', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">CO-PM
-                  <button (click)="onGetProjectBySort('coPM.username', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('coPM.username', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
+<!--                <th scope="col">PMO-->
+<!--                  <button (click)="onGetProjectBySort('pmo.username', 'ASC')" *ngIf="asc == false"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
+<!--                  <button (click)="onGetProjectBySort('pmo.username', 'DESC')" *ngIf="asc == true"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
+<!--                </th>-->
+<!--                <th scope="col">PM-->
+<!--                  <button (click)="onGetProjectBySort('pm.username', 'ASC')" *ngIf="asc == false"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
+<!--                  <button (click)="onGetProjectBySort('pm.username', 'DESC')" *ngIf="asc == true"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
+<!--                </th>-->
+<!--                <th scope="col">Directorate Owner-->
+<!--                  <button (click)="onGetProjectBySort('directorateUser', 'ASC')" *ngIf="asc == false"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
+<!--                  <button (click)="onGetProjectBySort('directorateUser', 'DESC')" *ngIf="asc == true"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
+<!--                </th>-->
+<!--                <th scope="col">Divisi Owner-->
+<!--                  <button (click)="onGetProjectBySort('divisiUser.divisionName', 'ASC')" *ngIf="asc == false"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
+<!--                  <button (click)="onGetProjectBySort('divisiUser.divisionName', 'DESC')" *ngIf="asc == true"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
+<!--                </th>-->
+<!--                <th scope="col">CO-PM-->
+<!--                  <button (click)="onGetProjectBySort('coPM.username', 'ASC')" *ngIf="asc == false"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
+<!--                  <button (click)="onGetProjectBySort('coPM.username', 'DESC')" *ngIf="asc == true"-->
+<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
+<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
+<!--                </th>-->
                 <th scope="col">Status
                   <button (click)="onGetProjectBySort('status', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
@@ -198,10 +198,26 @@
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Project Dependency
-                  <button (click)="onGetProjectBySort('keyword', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetProjectBySort('projectDependency', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('keyword', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetProjectBySort('projectDependency', 'DESC')" *ngIf="asc == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th>Bugdet
+                  <button (click)="onGetProjectBySort('budget', 'ASC')" *ngIf="asc == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="onGetProjectBySort('budget', 'DESC')" *ngIf="asc == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th>Bugdet Realization
+                  <button (click)="onGetProjectBySort('paymentRealization', 'ASC')" *ngIf="asc == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="onGetProjectBySort('paymentRealization', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
@@ -215,7 +231,7 @@
                 <th scope="row">{{project.projectCode}}</th>
                 <td>{{project.projectName}}</td>
                 <td style="width: 200px;">
-                  <button (click)="onGetProjectById(project.id)" class="btn btn-outline-success btn-sm"
+                  <button (click)="onGetProjectById(project.id, 'backlistproject')" class="btn btn-outline-success btn-sm"
                           data-toggle="tooltip" data-placement="bottom" title="Detail"><i
                     class="fa fa-eye"></i></button>&nbsp;
                   <button (click)="onGetReleaseByProjectId(project.id)" class="btn btn-outline-success btn-sm"
@@ -225,17 +241,14 @@
                           data-placement="bottom" title="Update" [disabled]="project.statusProject==='Completed'"><i
                     class="fa fa-edit"></i></button>&nbsp;
                 </td>
-                <td>{{project.pmo.username}}</td>
-                <td>{{project.pm.username}}</td>
-                <td>{{project.directorateUser}}</td>
-                <td>{{project.divisiUser.divisionName}}</td>
-                <td>{{project.coPM.username}}</td>
                 <td>{{project.status}}</td>
                 <!--                                        <td>{{project.weight | number : '1.2-2'}}</td>-->
                 <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
                 <td>{{project.statusProject}}</td>
                 <!--                                        <td [ngClass]="project.statusProject === 'aktif' ? 'color-red' : 'color-green'">{{project.statusProject}}</td>-->
-                <td>{{project.keyword}}</td>
+                <td>{{project.projectDependency}}</td>
+                <td>{{project.budget  | currency:'Rp.'}}</td>
+                <td>{{project.paymentRealization  | currency:'Rp.'}}</td>
                 <td [hidden]="userRole != '01'">
                   <select class="form-select-sm" (change)="onChangeStatusProject(project.id, $event)"
                           aria-label="Default select example">

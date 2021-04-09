@@ -1,36 +1,29 @@
-import {Component, OnInit} from '@angular/core';
-import {ProjectModel, ProjectModel2} from '../project.model';
-import {ProjectServiceService} from '../project-service.service';
-import {Router} from '@angular/router';
-import * as XLSX from 'xlsx';
-import {FormControl, FormGroup} from '@angular/forms';
-import {UserModel} from '../../user/user.model';
-import {UserService} from '../../user/user.service';
+import { Component, OnInit } from '@angular/core';
+import {ProjectModel, ProjectModel2} from "../project.model";
+import {FormGroup} from "@angular/forms";
+import {ProjectServiceService} from "../project-service.service";
+import {UserService} from "../../user/user.service";
+import {Router} from "@angular/router";
+import * as XLSX from "xlsx";
 
 @Component({
-  selector: 'app-list-project',
-  templateUrl: './list-project.component.html',
-  styleUrls: ['./list-project.component.css']
+  selector: 'app-my-project',
+  templateUrl: './my-project.component.html',
+  styleUrls: ['./my-project.component.css']
 })
-export class ListProjectComponent implements OnInit {
+export class MyProjectComponent implements OnInit {
 
   isLoading = false;
+  userLogin = JSON.parse(window.sessionStorage.getItem('token')).user;
 
   loadedProject: ProjectModel[] = [];
   loadedProjectResult: ProjectModel[] = [];
   filterForm: FormGroup;
   loadedRelease: any;
   filter = false;
-  // paramNull = {
-  //   divisi: '',
-  //   userPM: '',
-  //   userPMO: '',
-  //   direktorate: '',
-  //   status: ''
-  // };
   asc = true;
-  fileName = 'List-Project-' + new Date().toDateString() + '.xlsx';
-  divitions: any[] = [];
+  fileName = 'My-Project-' + new Date().toDateString() + '.xlsx';
+  divisions: any[] = [];
   users: any[] = [];
   usersPm: any[] = [];
   usersPmo: any[] = [];
@@ -53,25 +46,23 @@ export class ListProjectComponent implements OnInit {
     private projectService: ProjectServiceService,
     private userServicce: UserService,
     private router: Router
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     // this.buildForm();
     this.onGetListProject();
     this.getAllDivisi();
     this.getAllUser();
-    this.getUserRole();
   }
 
   // tslint:disable-next-line:typedef
   getAllDivisi() {
     this.projectService.getAllDivisi().subscribe(
       response => {
-        this.divitions = response;
+        this.divisions = response;
       },
       error => {
-        alert(error);
+        alert(error.message);
       }
     );
   }
@@ -92,73 +83,14 @@ export class ListProjectComponent implements OnInit {
         }
       },
       error => {
-        alert(error);
+        alert(error.message);
       }
     );
   }
 
-  // // tslint:disable-next-line:typedef
-  // onGetListProjectFilter(param) {
-  //   // this.isLoading = true;
-  //   // this.filter = true;
-  //   // if (param.projectDependency === null) {
-  //   //   param.projectDependency = '';
-  //   // }
-  //   // if (param.divisi === null) {
-  //   //   param.divisi = '';
-  //   // }
-  //   // if (param.userPM === null) {
-  //   //   param.userPM = '';
-  //   // }
-  //   // if (param.userPMO === null) {
-  //   //   param.userPMO = '';
-  //   // }
-  //   // if (param.status === null) {
-  //   //   param.status = '';
-  //   // }
-  //
-  //   // this.projectService.getResultProject(param).subscribe(
-  //   this.projectService.getAllProject(param).subscribe(
-  //     data => {
-  //       this.isLoading = false;
-  //       this.loadedProject = data.content;
-  //     },
-  //     error => {
-  //       alert(error);
-  //     }
-  //   );
-  // }
-
-  // tslint:disable-next-line:typedef
-  // onGetListRelease() {
-  //   this.filterForm.get('projectDependency').setValue(null);
-  //   // this.filterForm.get('divisi').setValue(null);
-  //   // this.filterForm.get('userPM').setValue(null);
-  //   // this.filterForm.get('userPMO').setValue(null);
-  //   // this.filterForm.get('direktorate').setValue(null);
-  //   // this.filterForm.get('status').setValue(null);
-  //   this.filter = false;
-  // }
-
-  // private buildForm(): void {
-  //   this.filterForm = new FormGroup({
-  //     // direktorate: new FormControl(null),
-  //     // divisi: new FormControl(null),
-  //     // userPM: new FormControl(null),
-  //     // userPMO: new FormControl(null),
-  //     projectDependency: new FormControl(null)
-  //   });
-  // }
-
-  // tslint:disable-next-line:typedef
   onGetListProject() {
     this.isLoading = true;
-    // this.filterForm.get('projectDependency').setValue(null);
-    // this.filterForm.get('divisi').setValue(null);
-    // this.filterForm.get('userPMO').setValue(null);
-    // this.filterForm.get('userPM').setValue(null);
-    // this.filterForm.get('status').setValue(null);
-    this.projectService.getAllProject(this.projectDependency).subscribe(
+    this.projectService.getAllProjectByCoPMID(this.userLogin.id).subscribe(
       data => {
         this.isLoading = false;
         if (this.userRole !== '01') {
@@ -173,7 +105,7 @@ export class ListProjectComponent implements OnInit {
         this.totalItems = data.totalElements;
       },
       error => {
-        alert(error);
+        alert(error.message);
       }
     );
   }
@@ -193,7 +125,7 @@ export class ListProjectComponent implements OnInit {
         this.router.navigate(['/dashboard/project/detail-project']);
       },
       error => {
-        alert(error);
+        alert(error.message);
       }
     );
   }
@@ -230,7 +162,7 @@ export class ListProjectComponent implements OnInit {
         }
       },
       error => {
-        alert(error);
+        alert(error.message);
       }
     );
   }
@@ -243,9 +175,9 @@ export class ListProjectComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onGetReleaseByProjectId(projectId) {
-    localStorage.setItem('projectId', projectId);
-    this.router.navigate(['/dashboard/release']);
+  onGetReleaseByProjectId(project, param) {
+    localStorage.setItem('backtoproject', param);
+    this.router.navigateByUrl('/dashboard/project/detail-project-user/ ' + project.id, {state: project});
   }
 
   // tslint:disable-next-line:typedef
@@ -258,7 +190,7 @@ export class ListProjectComponent implements OnInit {
           this.router.navigate(['/dashboard/project']);
         },
         error => {
-          alert(error);
+          alert(error.message);
         }
       );
   }
@@ -279,25 +211,14 @@ export class ListProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-    // if (this.searchByKeyword === '') {
-      this.projectService.getAllProject(this.searchByKeyword).subscribe(
-        data => {
-          this.loadedProject = data.content;
-        },
-        error => {
-          alert(error);
-        }
-      );
-    // } else {
-    //   this.projectService.getProjectByKeyword(this.searchByKeyword).subscribe(
-    //     data => {
-    //       this.loadedProject = data;
-    //     },
-    //     error => {
-    //       alert(error);
-    //     }
-    //   );
-    // }
+    this.projectService.getAllProject(this.searchByKeyword).subscribe(
+      data => {
+        this.loadedProject = data.content;
+      },
+      error => {
+        alert(error.message);
+      }
+    );
   }
 
   getStyle(project): any {
@@ -319,10 +240,5 @@ export class ListProjectComponent implements OnInit {
     }
   }
 
-  // tslint:disable-next-line:typedef
-  getUserRole() {
-    this.token = window.sessionStorage.getItem('token');
-    this.role = JSON.parse(this.token);
-    this.userRole = this.role.user.userRole;
-  }
+
 }

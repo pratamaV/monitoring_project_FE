@@ -80,9 +80,6 @@
                                             <button (click)="onGetReleaseByIdSort('releaseName', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                                         </th>
                                         <th scope="col" style="width: 100px;">Action</th>
-                                        <!--                                        <th scope="col">Score</th>-->
-                                        <!--                                        <th scope="col">Weight</th>-->
-                                        <!-- <th scope="col">Description</th> -->
                                         <th scope="col">Status
                                             <button (click)="onGetReleaseByIdSort('status', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
                                             <button (click)="onGetReleaseByIdSort('status', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
@@ -95,11 +92,6 @@
                                             <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
                                             <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                                         </th>
-                                        <th scope="col">Status Release
-                                            <button (click)="onGetReleaseByIdSort('statusRelease', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetReleaseByIdSort('statusRelease', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">Update Status Release</th>
                                         <th scope="col">Est. StartDate
                                             <button (click)="onGetReleaseByIdSort('estStartdate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
                                             <button (click)="onGetReleaseByIdSort('estStartdate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
@@ -116,6 +108,11 @@
                                             <button (click)="onGetReleaseByIdSort('actEnddate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
                                             <button (click)="onGetReleaseByIdSort('actEnddate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                                         </th>
+                                      <th scope="col">Status Release
+                                        <button (click)="onGetReleaseByIdSort('statusRelease', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                        <button (click)="onGetReleaseByIdSort('statusRelease', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                      </th>
+                                      <th scope="col">Update Status Release</th>
 
                                     </tr>
                                 </thead>
@@ -131,33 +128,22 @@
                                             <button (click)="onAddIssued(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Issue"><i
                                             class="fa fa-folder"></i></button>&nbsp;
                                         </td>
-                                        <!--                                        <td>{{release.score}}</td>-->
-                                        <!--                                        <td>{{release.weight | number : '1.2-2'}}</td>-->
-                                        <!-- <td>{{release.description}}</td> -->
                                         <td>{{release.status}}</td>
                                         <td>{{release.stage}}</td>
                                         <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
-                                        <td>{{release.statusRelease}}</td>
-                                        <td>
-                                            <select class="form-select-sm" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">
-                                                <option disabled="disabled" selected="selected">Select an option.</option>
-                                                <option value="Active">Active</option>
-                                                <option value="Not Active">Not Active</option>
-                                                <option value="Completed">Completed</option>
-                                            </select>
-                                        </td>
                                         <td>{{release.estStartdate | date}}</td>
                                         <td>{{release.actStartdate | date}}</td>
                                         <td>{{release.estEnddate | date}}</td>
                                         <td>{{release.actEnddate | date}}</td>
-                                        <!--                                        <td style="width: 200px;">-->
-                                        <!--                                            <button [disabled]="release.statusRelease === 'Completed'" (click)="updateRelease(release)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i-->
-                                        <!--                                            class="fa fa-edit"></i></button>&nbsp;-->
-                                        <!--                                            <button (click)="onGoTask(release.id)" [disabled]="release.statusRelease === 'Not Active'" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i-->
-                                        <!--                                            class="fa fa-tasks"></i></button>&nbsp;-->
-                                        <!--                                            <button (click)="onAddIssued(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Issue"><i-->
-                                        <!--                                            class="fa fa-folder"></i></button>&nbsp;-->
-                                        <!--                                        </td>-->
+                                      <td>{{release.statusRelease}}</td>
+                                      <td>
+                                        <select class="form-select-sm" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">
+                                          <option disabled="disabled" selected="selected">Select an option.</option>
+                                          <option value="Active">Active</option>
+                                          <option value="Not Active">Not Active</option>
+                                          <option value="Completed">Completed</option>
+                                        </select>
+                                      </td>
                                     </tr>
                                 </tbody>
                             </table>

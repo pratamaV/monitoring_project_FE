@@ -18,13 +18,14 @@ export class FitHomeComponent implements OnInit {
 
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
-  paramNull = {
-    divisi: '',
-    userPM: '',
-    userPMO: '',
-    direktorate: '',
-    status: ''
-  };
+  projectDependency= '';
+  // paramNull = {
+  //   divisi: '',
+  //   userPM: '',
+  //   userPMO: '',
+  //   direktorate: '',
+  //   status: ''
+  // };
 
   idLog: string;
   logError: LogErrorModel;
@@ -202,7 +203,7 @@ export class FitHomeComponent implements OnInit {
       });
 
 
-    this.projectService.getAllProject(this.paramNull)
+    this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
         let KepatuhanandSDM = 0;
         let Keuangan = 0;

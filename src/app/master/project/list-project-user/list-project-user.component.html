@@ -26,12 +26,6 @@
                                     <tr>
                                         <th scope="col">Project Code</th>
                                         <th scope="col">Project Name</th>
-                                        <th scope="col">PMO</th>
-                                        <th scope="col">PM</th>
-                                        <th scope="col">CO-PM</th>
-                                        <th scope="col">Directorate Owner</th>
-                                        <th scope="col">Divisi Owner</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col">Prosentase Project</th>
                                         <th scope="col">Detail Project</th>
                                     </tr>
@@ -40,15 +34,9 @@
                                     <tr *ngFor="let project of loadedProject | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(project)">
                                         <th scope="row">{{project.projectCode}}</th>
                                         <td>{{project.projectName}}</td>
-                                        <td>{{project.pmo.username}}</td>
-                                        <td>{{project.pm.username}}</td>
-                                        <td>{{project.coPM.username}}</td>
-                                        <td>{{project.directorateUser}}</td>
-                                        <td>{{project.divisiUser.divisionName}}</td>
-                                        <td>{{project.status}}</td>
                                         <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
                                         <td style="text-align: center;">
-                                            <button (click)="getDetail(project)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+                                            <button (click)="getDetail(project, 'listprojectuser')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
                     class="fa fa-eye"></i></button>
                                         </td>
                                     </tr>
