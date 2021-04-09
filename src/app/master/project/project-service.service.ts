@@ -540,4 +540,45 @@ export class ProjectServiceService {
         );
     });
   }
+
+  getAllProjectByCoPMID(id: string): Observable<ApiResponseModel> {
+    return new Observable((observer: Observer<ApiResponseModel>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      const url = `/api/my-project/${id}`;
+
+      this.http
+        .get(url, header)
+        .pipe(map((responseData: any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe(
+          (data: ApiResponseModel) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Project',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
+    });
+  }
 }

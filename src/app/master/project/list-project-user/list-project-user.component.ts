@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 })
 export class ListProjectUserComponent implements OnInit {
   loadedProject: ProjectModel[] = [];
-  projectDependency='';
+  projectDependency = '';
   // paramNull = {
   //   divisi: '',
   //   userPM: '',

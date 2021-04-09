@@ -31,7 +31,6 @@ export class DetailProjectUserComponent implements OnInit {
   getTaskByReleaseId(id){
     this.projectService.getTaskByReleaseId(id)
       .subscribe(data => {
-        console.log(data);
         this.taskModel = data;
       }, error => {
         alert(error);

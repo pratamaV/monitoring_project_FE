@@ -33,6 +33,8 @@ export class FormReleaseComponent implements OnInit {
               private projectService: ProjectServiceService) { }
 
   ngOnInit(): void {
+    this.onGetAllDivision();
+    this.onGetAllUser();
     this.buildForm();
     this.route.params.subscribe(params => {
       if (params && params.id) {
@@ -72,6 +74,7 @@ export class FormReleaseComponent implements OnInit {
       directorateUser: new FormControl(null, [Validators.required]),
       departmentHead : new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
+      contractedValue: new FormControl(0 ),
       project: new FormControl(localStorage.getItem('projectId'))
     });
   }
@@ -107,6 +110,7 @@ export class FormReleaseComponent implements OnInit {
       },
       directorateUser: postData.directorateUser,
       categoryActivity: postData.categoryActivity,
+      contractedValue: postData.contractedValue,
       departmentHead: {
         id: postData.departmentHead.id
       },

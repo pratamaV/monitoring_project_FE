@@ -247,8 +247,8 @@
                 <td>{{project.statusProject}}</td>
                 <!--                                        <td [ngClass]="project.statusProject === 'aktif' ? 'color-red' : 'color-green'">{{project.statusProject}}</td>-->
                 <td>{{project.projectDependency}}</td>
-                <td>{{project.budget}}</td>
-                <td>{{project.paymentRealization}}</td>
+                <td>{{project.budget  | currency:'Rp.'}}</td>
+                <td>{{project.paymentRealization  | currency:'Rp.'}}</td>
                 <td [hidden]="userRole != '01'">
                   <select class="form-select-sm" (change)="onChangeStatusProject(project.id, $event)"
                           aria-label="Default select example">

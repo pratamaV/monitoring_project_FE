@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
               private logErrorService: LogErrorService) { }
 
   ngOnInit(): void {
-    this.onGetTaskByUserId();    
+    this.onGetTaskByUserId();
   }
 
   onGetTaskByUserId() {

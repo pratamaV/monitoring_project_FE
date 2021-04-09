@@ -31,6 +31,7 @@ export interface ReleaseModel{
   };
   directorateUser: string;
   categoryActivity: string;
+  contractedValue: number;
   departmentHead: {
     id: string;
   };
@@ -60,6 +61,7 @@ export interface ReleaseModel2{
   divisiUser: DivisionModel;
   directorateUser: string;
   categoryActivity: string;
+  contractedValue: number;
   departmentHead: UserModel;
   project: ProjectModel;
   statusRelease: string;
