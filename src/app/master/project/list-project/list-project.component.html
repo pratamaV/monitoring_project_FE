@@ -205,6 +205,8 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
+                <th>Bugdet</th>
+                <th>Bugdet Realization</th>
                 <th scope="col" [hidden]="userRole != '01'">Update Status Project</th>
               </tr>
               </thead>
@@ -236,6 +238,8 @@
                 <td>{{project.statusProject}}</td>
                 <!--                                        <td [ngClass]="project.statusProject === 'aktif' ? 'color-red' : 'color-green'">{{project.statusProject}}</td>-->
                 <td>{{project.keyword}}</td>
+                <td>{{project.budget}}</td>
+                <td>{{project.paymentRealization}}</td>
                 <td [hidden]="userRole != '01'">
                   <select class="form-select-sm" (change)="onChangeStatusProject(project.id, $event)"
                           aria-label="Default select example">
