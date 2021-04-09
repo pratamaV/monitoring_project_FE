@@ -23,40 +23,16 @@
                                         <td>:</td>
                                         <td>{{project.projectName}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>PMO</td>
-                                        <td>:</td>
-                                        <td>{{project.pmo.username}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PM</td>
-                                        <td>:</td>
-                                        <td>{{project.pm.username}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Department Head</td>
-                                        <td>:</td>
-                                        <td>{{project.departmentHead.username}}</td>
-                                    </tr>
+
                                     <tr>
                                         <td>Benefit</td>
                                         <td>:</td>
                                         <td>{{project.benefit}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Description</td>
-                                        <td>:</td>
-                                        <td>{{project.description}}</td>
-                                    </tr>
-                                    <tr>
                                         <td>Category Initiative</td>
                                         <td>:</td>
                                         <td>{{project.categoryInitiative}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Category Activity</td>
-                                        <td>:</td>
-                                        <td>{{project.categoryActivity}}</td>
                                     </tr>
                                     <tr>
                                         <td>Status Project</td>
@@ -72,16 +48,6 @@
                             <table class="table table-striped ">
                                 <tbody class="text-left">
                                     <tr>
-                                        <td>Directorate User</td>
-                                        <td>:</td>
-                                        <td>{{project.directorateUser}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Target Live</td>
-                                        <td>:</td>
-                                        <td>{{project.targetLive | date}}</td>
-                                    </tr>
-                                    <tr>
                                         <td>Prosentase Project</td>
                                         <td>:</td>
                                         <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
@@ -94,7 +60,7 @@
                                     <tr>
                                         <td>Contracted Value</td>
                                         <td>:</td>
-                                        <td>{{project.contracted_value | currency:'Rp.'}}</td>
+                                        <td>{{project.contractedValue | currency:'Rp.'}}</td>
                                     </tr>
                                     <tr>
                                         <td>Payment Realization</td>
@@ -102,29 +68,19 @@
                                         <td>{{project.paymentRealization | currency:'Rp.'}}</td>
                                     </tr>
                                     <tr>
-                                      <td>Mata Anggaran</td>
-                                      <td>:</td>
-                                      <td>{{project.lineItem}}</td>
+                                        <td>Mata Anggaran</td>
+                                        <td>:</td>
+                                        <td>{{project.lineItem}}</td>
                                     </tr>
                                     <tr>
                                         <td>Keyword</td>
                                         <td>:</td>
-                                        <td>{{project.keyword}}</td>
+                                        <td>{{project.projectDependency}}</td>
                                     </tr>
                                     <tr>
                                         <td>Weight</td>
                                         <td>:</td>
                                         <td>{{project.weight | number : '1.2-2'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>User</td>
-                                        <td>:</td>
-                                        <td>{{project.coPM.username}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Divisi User</td>
-                                        <td>:</td>
-                                        <td>{{project.divisiUser.divisionName}}</td>
                                     </tr>
                                 </tbody>
                             </table>

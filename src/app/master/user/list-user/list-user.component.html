@@ -1,95 +1,91 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
 <head>
   <script
     src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
-</head>
+</head> -->
 
 <body>
-<div class="main-content">
-  <app-sidebar></app-sidebar>
-  <div id="cover">
-    <!-- Table -->
-    <h4 class="mb-5" style="padding-top: 70px">List User</h4>
-    <div class="row">
+    <div class="main-content">
+        <app-sidebar></app-sidebar>
+        <div id="cover">
+            <!-- Table -->
+            <h4 class="mb-5" style="padding-top: 70px">List User</h4>
+            <div class="row">
 
-      <div class="col">
-        <div class="card shadow">
-          <div class="card-header border-0">
-            <button (click)="onAddUser()" class="btn btn-dark mt-2 mb-2" style="width: 200px; align-self: flex-end"><i
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <button (click)="onAddUser()" class="btn btn-dark mt-2 mb-2" style="width: 200px; align-self: flex-end"><i
               class="fa fa-plus"></i> Add User
             </button>
-          </div>
-          <div class="table-responsive">
-            <table class="table align-items-center table-flush">
-              <thead class="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Role</th>
-                <th scope="col">Function</th>
-                <th scope="col">Email</th>
-                <th scope="col">Directorate</th>
-                <th scope="col">Divisi</th>
-                <th scope="col">Status User</th>
-                <th scope="col">Total Weight</th>
-                <th scope="col">Total Performance</th>
-                <th scope="col">Update Active/Not Active User</th>
-                <th scope="col">Detail Task</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr
-                *ngFor="let user of loadedUser | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index">
-                <td>{{user.username}}</td>
-                <td>{{user.userRole}}</td>
-                <td *ngIf="user.userRole === '01'">PMO</td>
-                <td *ngIf="user.userRole === '02'">PM</td>
-                <td *ngIf="user.userRole === '03'">CO-PM</td>
-                <td *ngIf="user.userRole === '04'">Squad</td>
-                <td *ngIf="user.userRole === '05'">Kepala Bagian</td>
-                <td>{{user.email}}</td>
-                <td>{{user.directorateUser}}</td>
-                <td>{{user.divisiUser.divisionName}}</td>
-                <td>{{user.statusUser}}</td>
-                <td>{{user.totalWeight * 100 | number : '1.2-2'}}%</td>
-                <td>{{user.totalPerformance * 100 | number : '1.2-2'}}%</td>
-                <td *ngIf="user.statusUser === 'Active'">
-                  <button (click)="updateActiveInactive(user.id,'Not Active')" class="btn btn-danger btn-sm">Not
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Function</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Directorate</th>
+                                        <th scope="col">Divisi</th>
+                                        <th scope="col">Status User</th>
+                                        <th scope="col">Total Weight</th>
+                                        <th scope="col">Total Performance</th>
+                                        <th scope="col">Update Active/Not Active User</th>
+                                        <th scope="col">Detail Task</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of loadedUser | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index">
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.userRole}}</td>
+                                        <td *ngIf="user.userRole === '01'">PMO</td>
+                                        <td *ngIf="user.userRole === '02'">PM</td>
+                                        <td *ngIf="user.userRole === '03'">CO-PM</td>
+                                        <td *ngIf="user.userRole === '04'">Squad</td>
+                                        <td *ngIf="user.userRole === '05'">Kepala Bagian</td>
+                                        <td>{{user.email}}</td>
+                                        <td>{{user.directorateUser}}</td>
+                                        <td>{{user.divisiUser.divisionName}}</td>
+                                        <td>{{user.statusUser}}</td>
+                                        <td>{{user.totalWeight * 100 | number : '1.2-2'}}%</td>
+                                        <td>{{user.totalPerformance * 100 | number : '1.2-2'}}%</td>
+                                        <td *ngIf="user.statusUser === 'Active'">
+                                            <button (click)="updateActiveInactive(user.id,'Not Active')" class="btn btn-danger btn-sm">Not
                     Active
                   </button>
-                </td>
-                <td *ngIf="user.statusUser === 'Not Active'">
-                  <button (click)="updateActiveInactive(user.id, 'Active')" class="btn btn-danger btn-sm"> Active
+                                        </td>
+                                        <td *ngIf="user.statusUser === 'Not Active'">
+                                            <button (click)="updateActiveInactive(user.id, 'Active')" class="btn btn-danger btn-sm"> Active
                   </button>
-                </td>
-                <td>
-                  <button (click)="detailTask(user.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
-                          data-placement="bottom" title="Task"><i class="fa fa-tasks"></i> Task
+                                        </td>
+                                        <td>
+                                            <button (click)="detailTask(user.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i class="fa fa-tasks"></i> Task
                   </button>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;"
-                               (pageChange)="onPageChanges($event)"></pagination-controls>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;" (pageChange)="onPageChanges($event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="container" *ngIf="isLoading == true">
-    <div id="id01" class="modal">
-      <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
-        <div class="spinner-border text-info"></div>
-      </div>
+        <div class="container" *ngIf="isLoading == true">
+            <div id="id01" class="modal">
+                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <div class="spinner-border text-info"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 </body>

@@ -8,6 +8,7 @@ import {TaskModel, TaskModel2} from '../task/task.model';
 import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
 import {LogErrorModel} from '../log-error.model';
 import {LogErrorService} from "../log-error.service";
+declare var jQuery: any;
 
 @Component({
   selector: 'app-home',
@@ -496,6 +497,8 @@ export class HomeComponent implements OnInit {
       this.onGetUserByPerformance();
       this.onGetTaskDeadline();
     }, 1800000);
+
+  
 
   }
 
