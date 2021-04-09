@@ -220,19 +220,19 @@ export class FitHomeComponent implements OnInit {
         let budgetBelanjaModal = 0;
         for (const project of data.content) {
           if (project.statusProject === 'Active') {
-            if (project.directorateUser === 'Kepatuhan & SDM') {
-              KepatuhanandSDM = KepatuhanandSDM + 1;
-            } else if (project.directorateUser === 'Keuangan') {
-              Keuangan = Keuangan + 1;
-            } else if (project.directorateUser === 'Operational Retail') {
-              OperationalRetail = OperationalRetail + 1;
-            } else if (project.directorateUser === 'Teknik') {
-              Teknik = Teknik + 1;
-            } else if (project.directorateUser === 'Utama') {
-              Utama = Utama + 1;
-            } else {
-              allDirectorate = allDirectorate + 1;
-            }
+            // if (project.directorateUser === 'Kepatuhan & SDM') {
+            //   KepatuhanandSDM = KepatuhanandSDM + 1;
+            // } else if (project.directorateUser === 'Keuangan') {
+            //   Keuangan = Keuangan + 1;
+            // } else if (project.directorateUser === 'Operational Retail') {
+            //   OperationalRetail = OperationalRetail + 1;
+            // } else if (project.directorateUser === 'Teknik') {
+            //   Teknik = Teknik + 1;
+            // } else if (project.directorateUser === 'Utama') {
+            //   Utama = Utama + 1;
+            // } else {
+            //   allDirectorate = allDirectorate + 1;
+            // }
 
             if (project.status === 'Not Started') {
               notStarted = notStarted + 1;
@@ -243,14 +243,14 @@ export class FitHomeComponent implements OnInit {
             } else if (project.status === 'Delay') {
               delay = delay + 1;
             }
-
-            if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
-              budgetBelanjaModal = budgetBelanjaModal + project.budget;
-              contractedValueBelanjaModal = contractedValueBelanjaModal + project.contracted_value;
-            } else if (project.lineItem === 'Beban Usaha') {
-              budgetBebanUsaha = budgetBebanUsaha + project.budget;
-              contractedValueBebanUsaha = contractedValueBebanUsaha + project.contracted_value;
-            }
+            //
+            // if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
+            //   budgetBelanjaModal = budgetBelanjaModal + project.budget;
+            //   contractedValueBelanjaModal = contractedValueBelanjaModal + project.contracted_value;
+            // } else if (project.lineItem === 'Beban Usaha') {
+            //   budgetBebanUsaha = budgetBebanUsaha + project.budget;
+            //   contractedValueBebanUsaha = contractedValueBebanUsaha + project.contracted_value;
+            // }
           }
         }
 

@@ -5,6 +5,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {ReleaseModel} from '../release.model';
 import Swal from 'sweetalert2';
 import {DivisionModel, UserModel} from '../../project/project.model';
+import {ProjectServiceService} from "../../project/project-service.service";
 
 @Component({
   selector: 'app-form-release',
@@ -20,6 +21,7 @@ export class FormReleaseComponent implements OnInit {
   userPM: UserModel[] = [];
   userCoPM: UserModel[] = [];
   userDepartmentHead: UserModel[] = [];
+  loadedDivision: DivisionModel[] = [];
   pmId: '';
   pmoId: '';
   coPMId: '';
@@ -27,7 +29,8 @@ export class FormReleaseComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private releaseService: ReleaseService,
-              private router: Router) { }
+              private router: Router,
+              private projectService: ProjectServiceService) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -148,6 +151,38 @@ export class FormReleaseComponent implements OnInit {
       this.releaseForm.get('categoryActivity').setValue(this.release.categoryActivity);
       this.releaseForm.get('project').setValue(this.release.project.id);
     }
+  }
+
+  onGetAllUser() {
+    this.projectService.getAllUser()
+      .subscribe(data => {
+        for (const user of data) {
+          if (user.userRole === '01') {
+            this.userPMO.push(user);
+          }
+          if (user.userRole === '02') {
+            this.userPM.push(user);
+          }
+          if (user.userRole === '03') {
+            this.userCoPM.push(user);
+          }
+          if (user.userRole === '05') {
+            this.userDepartmentHead.push(user);
+          }
+        }
+
+      }, error => {
+        alert(error);
+      });
+  }
+
+  onGetAllDivision() {
+    this.projectService.getAllDivison()
+      .subscribe(data => {
+        this.loadedDivision = data;
+      }, error => {
+        alert(error);
+      });
   }
 
   compareDivision(c1: DivisionModel, c2: DivisionModel): boolean {
