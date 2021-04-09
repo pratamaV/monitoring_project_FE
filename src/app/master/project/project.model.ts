@@ -4,27 +4,18 @@ export interface ProjectModel{
     id: string;
     projectCode: string;
     projectName: string;
-    pmo: UserModel;
-    pm: UserModel;
     benefit: string;
-    description: string;
-    coPM: UserModel;
-    divisiUser: DivisionModel;
-    directorateUser: string;
     status: string;
-    targetLive: Date;
     prosentaseProject: number;
     budget: number;
-    contracted_value: number;
+    contractedValue: number;
     paymentRealization: number;
     score: number;
     weight: number;
-    categoryActivity: string;
     categoryInitiative: string;
     statusProject: string;
-    keyword: string;
+    projectDependency: string;
     releaseList?: ReleaseModel[];
-    departmentHead: UserModel;
     lineItem: string;
 }
 
@@ -32,38 +23,18 @@ export interface ProjectModel2{
   id: string;
   projectCode: string;
   projectName: string;
-  pmo: {
-    id: string
-  };
-  pm: {
-    id: string
-  };
   benefit: string;
-  description: string;
-  coPM: {
-    id: string
-  };
-  divisiUser: {
-    id: string
-  };
-  directorateUser: string;
   status: string;
-  targetLive: Date;
   prosentaseProject: number;
   budget: number;
-  contracted_value: number;
+  contractedValue: number;
   paymentRealization: number;
   score: number;
   weight: number;
-  categoryActivity: string;
   categoryInitiative: string;
   statusProject: string;
-  keyword: string;
-  departmentHead: {
-    id: string;
-  };
+  projectDependency: string;
   lineItem: string;
-
 }
 
 export interface UserModel{

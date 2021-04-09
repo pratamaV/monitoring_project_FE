@@ -1,5 +1,6 @@
-import {ProjectModel} from '../project/project.model';
+import {DivisionModel, ProjectModel} from '../project/project.model';
 import {TaskModel, TaskModel2} from '../task/task.model';
+import {UserModel} from '../user/user.model';
 
 export interface ReleaseModel{
   id: string;
@@ -16,6 +17,23 @@ export interface ReleaseModel{
   actStartdate: Date;
   actEnddate: Date;
   statusRelease: string;
+  pmo: {
+    id: string
+  };
+  pm: {
+    id: string
+  };
+  coPM: {
+    id: string
+  };
+  divisiUser: {
+    id: string
+  };
+  directorateUser: string;
+  categoryActivity: string;
+  departmentHead: {
+    id: string;
+  };
   project: {
     id: string;
   };
@@ -36,6 +54,13 @@ export interface ReleaseModel2{
   estEnddate: Date;
   actStartdate: Date;
   actEnddate: Date;
+  pmo: UserModel;
+  pm: UserModel;
+  coPM: UserModel;
+  divisiUser: DivisionModel;
+  directorateUser: string;
+  categoryActivity: string;
+  departmentHead: UserModel;
   project: ProjectModel;
   statusRelease: string;
 }
