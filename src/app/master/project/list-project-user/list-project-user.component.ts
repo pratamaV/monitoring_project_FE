@@ -10,13 +10,14 @@ import {Router} from "@angular/router";
 })
 export class ListProjectUserComponent implements OnInit {
   loadedProject: ProjectModel[] = [];
-  paramNull = {
-    divisi: '',
-    userPM: '',
-    userPMO: '',
-    direktorate: '',
-    status: ''
-  };
+  projectDependency='';
+  // paramNull = {
+  //   divisi: '',
+  //   userPM: '',
+  //   userPMO: '',
+  //   direktorate: '',
+  //   status: ''
+  // };
   isLoading = false
   page = 1;
   pageSize = 10;
@@ -33,7 +34,7 @@ export class ListProjectUserComponent implements OnInit {
   onGetListProject() {
     this.loadedProject = [];
     this.isLoading = true;
-    this.projectService.getAllProject(this.paramNull)
+    this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
         if (this.userRole !== '01'){
           for (const project of data.content) {

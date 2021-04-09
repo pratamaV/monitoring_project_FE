@@ -21,13 +21,13 @@ export class ListProjectComponent implements OnInit {
   filterForm: FormGroup;
   loadedRelease: any;
   filter = false;
-  paramNull = {
-    divisi: '',
-    userPM: '',
-    userPMO: '',
-    direktorate: '',
-    status: ''
-  };
+  // paramNull = {
+  //   divisi: '',
+  //   userPM: '',
+  //   userPMO: '',
+  //   direktorate: '',
+  //   status: ''
+  // };
   asc = true;
   fileName = 'List-Project-' + new Date().toDateString() + '.xlsx';
   divitions: any[] = [];
@@ -37,6 +37,7 @@ export class ListProjectComponent implements OnInit {
   projectStatus: string;
 
   searchByKeyword: string;
+  projectDependency = '';
 
   token: any;
   role: any;
@@ -56,7 +57,7 @@ export class ListProjectComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.buildForm();
+    // this.buildForm();
     this.onGetListProject();
     this.getAllDivisi();
     this.getAllUser();
@@ -96,67 +97,68 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  // // tslint:disable-next-line:typedef
+  // onGetListProjectFilter(param) {
+  //   // this.isLoading = true;
+  //   // this.filter = true;
+  //   // if (param.projectDependency === null) {
+  //   //   param.projectDependency = '';
+  //   // }
+  //   // if (param.divisi === null) {
+  //   //   param.divisi = '';
+  //   // }
+  //   // if (param.userPM === null) {
+  //   //   param.userPM = '';
+  //   // }
+  //   // if (param.userPMO === null) {
+  //   //   param.userPMO = '';
+  //   // }
+  //   // if (param.status === null) {
+  //   //   param.status = '';
+  //   // }
+  //
+  //   // this.projectService.getResultProject(param).subscribe(
+  //   this.projectService.getAllProject(param).subscribe(
+  //     data => {
+  //       this.isLoading = false;
+  //       this.loadedProject = data.content;
+  //     },
+  //     error => {
+  //       alert(error);
+  //     }
+  //   );
+  // }
+
   // tslint:disable-next-line:typedef
-  onGetListProjectFilter(param) {
-    this.isLoading = true;
-    // this.filter = true;
-    if (param.direktorate === null) {
-      param.direktorate = '';
-    }
-    if (param.divisi === null) {
-      param.divisi = '';
-    }
-    if (param.userPM === null) {
-      param.userPM = '';
-    }
-    if (param.userPMO === null) {
-      param.userPMO = '';
-    }
-    if (param.status === null) {
-      param.status = '';
-    }
+  // onGetListRelease() {
+  //   this.filterForm.get('projectDependency').setValue(null);
+  //   // this.filterForm.get('divisi').setValue(null);
+  //   // this.filterForm.get('userPM').setValue(null);
+  //   // this.filterForm.get('userPMO').setValue(null);
+  //   // this.filterForm.get('direktorate').setValue(null);
+  //   // this.filterForm.get('status').setValue(null);
+  //   this.filter = false;
+  // }
 
-    // this.projectService.getResultProject(param).subscribe(
-    this.projectService.getAllProject(param).subscribe(
-      data => {
-        this.isLoading = false;
-        this.loadedProject = data.content;
-      },
-      error => {
-        alert(error);
-      }
-    );
-  }
-
-  // tslint:disable-next-line:typedef
-  onGetListRelease() {
-    this.filterForm.get('divisi').setValue(null);
-    this.filterForm.get('userPM').setValue(null);
-    this.filterForm.get('userPMO').setValue(null);
-    this.filterForm.get('direktorate').setValue(null);
-    this.filterForm.get('status').setValue(null);
-    this.filter = false;
-  }
-
-  private buildForm(): void {
-    this.filterForm = new FormGroup({
-      direktorate: new FormControl(null),
-      divisi: new FormControl(null),
-      userPM: new FormControl(null),
-      userPMO: new FormControl(null),
-      status: new FormControl(null)
-    });
-  }
+  // private buildForm(): void {
+  //   this.filterForm = new FormGroup({
+  //     // direktorate: new FormControl(null),
+  //     // divisi: new FormControl(null),
+  //     // userPM: new FormControl(null),
+  //     // userPMO: new FormControl(null),
+  //     projectDependency: new FormControl(null)
+  //   });
+  // }
 
   // tslint:disable-next-line:typedef
   onGetListProject() {
     this.isLoading = true;
-    this.filterForm.get('direktorate').setValue(null);
-    this.filterForm.get('divisi').setValue(null);
-    this.filterForm.get('userPMO').setValue(null);
-    this.filterForm.get('userPM').setValue(null);
-    this.filterForm.get('status').setValue(null);
-    this.projectService.getAllProject(this.paramNull).subscribe(
+    // this.filterForm.get('projectDependency').setValue(null);
+    // this.filterForm.get('divisi').setValue(null);
+    // this.filterForm.get('userPMO').setValue(null);
+    // this.filterForm.get('userPM').setValue(null);
+    // this.filterForm.get('status').setValue(null);
+    this.projectService.getAllProject(this.projectDependency).subscribe(
       data => {
         this.isLoading = false;
         if (this.userRole !== '01') {
@@ -176,6 +178,7 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:typedef
   onPageChanges(event) {
     this.page = event;
     this.onGetListProject();
@@ -199,6 +202,7 @@ export class ListProjectComponent implements OnInit {
     this.router.navigate(['/dashboard/project/form-project']);
   }
 
+  // tslint:disable-next-line:typedef
   onGetProjectBySort(orderBy: string, sort: string) {
     this.loadedProject = [];
     this.projectService.getAllProjectSort(orderBy, sort).subscribe(
@@ -274,8 +278,8 @@ export class ListProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-    if (this.searchByKeyword === '') {
-      this.projectService.getAllProject(this.paramNull).subscribe(
+    // if (this.searchByKeyword === '') {
+      this.projectService.getAllProject(this.searchByKeyword).subscribe(
         data => {
           this.loadedProject = data.content;
         },
@@ -283,16 +287,16 @@ export class ListProjectComponent implements OnInit {
           alert(error);
         }
       );
-    } else {
-      this.projectService.getProjectByKeyword(this.searchByKeyword).subscribe(
-        data => {
-          this.loadedProject = data;
-        },
-        error => {
-          alert(error);
-        }
-      );
-    }
+    // } else {
+    //   this.projectService.getProjectByKeyword(this.searchByKeyword).subscribe(
+    //     data => {
+    //       this.loadedProject = data;
+    //     },
+    //     error => {
+    //       alert(error);
+    //     }
+    //   );
+    // }
   }
 
   getStyle(project): any {
@@ -314,6 +318,7 @@ export class ListProjectComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   getUserRole() {
     this.token = window.sessionStorage.getItem('token');
     this.role = JSON.parse(this.token);

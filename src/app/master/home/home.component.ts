@@ -20,13 +20,14 @@ export class HomeComponent implements OnInit {
   logError: LogErrorModel;
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
-  paramNull = {
-    divisi: '',
-    userPM: '',
-    userPMO: '',
-    direktorate: '',
-    status: ''
-  };
+  projectDependency = '';
+  // paramNull = {
+  //   divisi: '',
+  //   userPM: '',
+  //   userPMO: '',
+  //   direktorate: '',
+  //   status: ''
+  // };
 
 
   constructor(private homeService: HomeService,
@@ -201,7 +202,7 @@ export class HomeComponent implements OnInit {
       });
 
 
-    this.projectService.getAllProject(this.paramNull)
+    this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
         let KepatuhanandSDM = 0;
         let Keuangan = 0;

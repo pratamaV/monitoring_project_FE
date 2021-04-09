@@ -31,13 +31,14 @@ export class MyTaskComponent implements OnInit {
     estEndDateTo: ''
   };
 
-  paramNull2 = {
-    divisi: '',
-    userPM: '',
-    userPMO: '',
-    direktorate: '',
-    status: ''
-  };
+  projectDependency='';
+  // paramNull2 = {
+  //   divisi: '',
+  //   userPM: '',
+  //   userPMO: '',
+  //   direktorate: '',
+  //   status: ''
+  // };
 
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
@@ -206,7 +207,7 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getAllProjectName() {
-    this.projectService.getAllProject(this.paramNull2)
+    this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
         this.projectName = data.content;
       }, error => {

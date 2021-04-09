@@ -14,8 +14,8 @@ import {
   UserModel
 } from './project.model';
 import {TaskModel} from '../task/task.model';
-import {LogErrorModel} from "../log-error.model";
-import {LogErrorService} from "../log-error.service";
+import {LogErrorModel} from '../log-error.model';
+import {LogErrorService} from '../log-error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +28,13 @@ export class ProjectServiceService {
               private logErrorService: LogErrorService) {
   }
 
-  getAllProject(param): Observable<ApiResponseModel> {
+  getAllProject(projectDependency): Observable<ApiResponseModel> {
     return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       };
       // const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
-      const url = `/api/projects-page?projectDependency=`;
+      const url = `/api/projects-page?projectDependency=${projectDependency}`;
 
       this.http
         .get(url, header)
@@ -70,36 +70,36 @@ export class ProjectServiceService {
     });
   }
 
-  getResultProject(param) {
-    var divisi = param.divisi;
-    var direktorate = param.direktorate;
-    // console.log('/api/project?divisiUser=', param.divisi, '&directorateUser=', param.direktorate + '&pm=' + param.userPM + '&pmo=' param.userPMO);
-    return new Observable((observer: Observer<any[]>) => {
-      const header = {
-        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-      };
-      this.http.get('/api/project?divisiUser=' + divisi.replace("&", "%26") + '&directorateUser=' + direktorate.replace("&", "%26") + '&pm=' + param.userPM + '&pmo=' + param.userPMO, header).subscribe(
-        (data: any[]) => {
-          observer.next(data);
-        },
-        error => {
-          observer.error(error.message);
-          this.logError = {
-            errorMessage: error.message,
-            incidentDate: new Date(),
-            function: 'Get Result Project',
-            isActive: true
-          };
-          this.logErrorService.saveLogError(this.logError, this.idLog)
-            .subscribe(response => {
-              // tslint:disable-next-line:no-shadowed-variable
-            }, error => {
-              alert('Gagal merekam kesalahan');
-            });
-        }
-      );
-    });
-  }
+  // getResultProject(param) {
+  //   let divisi = param.divisi;
+  //   let direktorate = param.direktorate;
+  //   // console.log('/api/project?divisiUser=', param.divisi, '&directorateUser=', param.direktorate + '&pm=' + param.userPM + '&pmo=' param.userPMO);
+  //   return new Observable((observer: Observer<any[]>) => {
+  //     const header = {
+  //       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+  //     };
+  //     this.http.get('/api/project?divisiUser=' + divisi.replace('&', '%26') + '&directorateUser=' + direktorate.replace('&', '%26') + '&pm=' + param.userPM + '&pmo=' + param.userPMO, header).subscribe(
+  //       (data: any[]) => {
+  //         observer.next(data);
+  //       },
+  //       error => {
+  //         observer.error(error.message);
+  //         this.logError = {
+  //           errorMessage: error.message,
+  //           incidentDate: new Date(),
+  //           function: 'Get Result Project',
+  //           isActive: true
+  //         };
+  //         this.logErrorService.saveLogError(this.logError, this.idLog)
+  //           .subscribe(response => {
+  //             // tslint:disable-next-line:no-shadowed-variable
+  //           }, error => {
+  //             alert('Gagal merekam kesalahan');
+  //           });
+  //       }
+  //     );
+  //   });
+  // }
 
   getAllDivisi(): Observable<any[]> {
     return new Observable((observer: Observer<any[]>) => {
@@ -500,6 +500,7 @@ export class ProjectServiceService {
     });
   }
 
+  // tslint:disable-next-line:typedef
   getAllProjectSort(orderBy: string, sort: string) {
     return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
@@ -508,7 +509,7 @@ export class ProjectServiceService {
       const url = `/api/projects-sort?orderBy=${orderBy}&sort=${sort}`;
       this.http
         .get(url, header)
-        .pipe(map((responseData : any) => {
+        .pipe(map((responseData: any) => {
           const temp = {
             content: responseData.content,
             totalPages: responseData.totalPages,
