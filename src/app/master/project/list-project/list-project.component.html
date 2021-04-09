@@ -82,7 +82,7 @@
                           <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
                             <input [(ngModel)]="searchByKeyword" name="searchByKeyword" type="text" class="form-control"
-                                   placeholder="Cari berdasarkan Keyword" (keyup)="searchLive()">
+                                   placeholder="Cari berdasarkan Project Dependency" (keyup)="searchLive()">
                           </div>
                         </div>
                       </form>
@@ -197,7 +197,7 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col">Keyword
+                <th scope="col">Project Dependency
                   <button (click)="onGetProjectBySort('keyword', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
