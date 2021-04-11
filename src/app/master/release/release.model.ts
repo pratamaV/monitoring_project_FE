@@ -35,6 +35,7 @@ export interface ReleaseModel{
   departmentHead: {
     id: string;
   };
+  developmentMode: string;
   project: {
     id: string;
   };
@@ -63,8 +64,10 @@ export interface ReleaseModel2{
   categoryActivity: string;
   contractedValue: number;
   departmentHead: UserModel;
+  developmentMode: string;
   project: ProjectModel;
   statusRelease: string;
+  taskList?: TaskModel2[];
 }
 
 export interface ApiResponseRelease {

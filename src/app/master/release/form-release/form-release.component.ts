@@ -74,6 +74,7 @@ export class FormReleaseComponent implements OnInit {
       directorateUser: new FormControl(null, [Validators.required]),
       departmentHead : new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
+      developmentMode: new FormControl(null, [Validators.required]),
       contractedValue: new FormControl(0 ),
       project: new FormControl(localStorage.getItem('projectId'))
     });
@@ -114,6 +115,7 @@ export class FormReleaseComponent implements OnInit {
       departmentHead: {
         id: postData.departmentHead.id
       },
+      developmentMode: postData.developmentMode,
       project: {
         id: postData.project
       }
