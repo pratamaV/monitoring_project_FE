@@ -28,6 +28,16 @@ export interface UserModel2{
   totalPerformance: number;
 }
 
+export interface UserModelPojo{
+  username: string;
+  userRole: string;
+  email: string;
+  divisiUser: {
+    id: string;
+  };
+  directorateUser: string;
+}
+
 export interface ApiResponseUser {
   content: UserModel[];
   totalPages: number;

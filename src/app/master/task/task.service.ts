@@ -1,15 +1,21 @@
 import {Injectable} from '@angular/core';
 import {Observable, Observer} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ApiResponseTask, ApiResponseTask2, TaskModel, TaskModel2, TaskModel3} from './task.model';
+import {ApiResponseTask, ApiResponseTask2, TaskModel, TaskModel2, TaskModel3, TaskModel5} from './task.model';
 import {map} from 'rxjs/operators';
+import {ReleaseModel2} from "../release/release.model";
+import {LogErrorModel} from "../log-error.model";
+import {LogErrorService} from "../log-error.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
+  idLog: string;
+  logError: LogErrorModel;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private logErrorService: LogErrorService) {
   }
 
   getAllTask(): Observable<TaskModel2[]> {
@@ -19,6 +25,18 @@ export class TaskService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get All Task',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -30,6 +48,18 @@ export class TaskService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get All Task Deadline',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -42,6 +72,18 @@ export class TaskService {
             observer.next(response);
           }, (error) => {
             observer.error(error);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Edit Task',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           });
       } else {
         this.http.post('/api/addTask?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
@@ -49,19 +91,43 @@ export class TaskService {
             observer.next(response);
           }, (error) => {
             observer.error(error);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Save Task',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           });
       }
     });
   }
 
 
-  getTaskById(id): Observable<TaskModel2> {
-    return new Observable((observer: Observer<TaskModel2>) => {
+  getTaskById(id): Observable<TaskModel5> {
+    return new Observable((observer: Observer<TaskModel5>) => {
       this.http.get(`api/task/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-        .subscribe((data: TaskModel2) => {
+        .subscribe((data: TaskModel5) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Task By Id',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -95,6 +161,18 @@ export class TaskService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Task By Release Id',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -110,7 +188,19 @@ export class TaskService {
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {
-          observer.error(error);
+          observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Save Task',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -121,7 +211,19 @@ export class TaskService {
         .subscribe((response: any) => {
           observer.next(response);
         }, error => {
-          observer.error(error);
+          observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'On Done Task',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -143,6 +245,18 @@ export class TaskService {
           observer.next(response);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Download Document',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -270,6 +384,54 @@ export class TaskService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Task By User Id',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
+        });
+    });
+  }
+
+  getAllTaskByIdReleaseSort(idRelease: string, orderBy: string, sort: string) {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    const url = `api/taskByReleaseId-sort/${idRelease}?orderBy=${orderBy}&sort=${sort}`;
+    return new Observable((observer: Observer<ApiResponseTask>) => {
+      this.http.get(url, header)
+        .pipe(map((responseData: ApiResponseTask) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe((data: ApiResponseTask) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Task By Id Release Sort',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -288,6 +450,18 @@ export class TaskService {
           observer.next(response);
         }, error => {
           observer.error(error);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Upload Document Task',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -320,6 +494,18 @@ export class TaskService {
           observer.next(response);
         }, (error) => {
           observer.error(error);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Update Status Done Task',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -332,6 +518,55 @@ export class TaskService {
           observer.next(response);
         }, (error) => {
           observer.error(error);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Delete Document',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
+        });
+    });
+  }
+
+
+  getAllTaskByIdUserSort(idUser: string, orderBy: string, sort: string) {
+    const header = {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+    };
+    const url = `api/taskByUserId-sort/${idUser}?orderBy=${orderBy}&sort=${sort}`;
+    return new Observable((observer: Observer<ApiResponseTask2>) => {
+      this.http.get(url, header)
+        .pipe(map((responseData: ApiResponseTask2) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe((data: ApiResponseTask2) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Task By Id User Sort',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }

@@ -6,6 +6,7 @@ import { DetailProjectComponent } from './detail-project/detail-project.componen
 import { ListProjectUserComponent } from './list-project-user/list-project-user.component';
 import { DetailProjectUserComponent } from './detail-project-user/detail-project-user.component';
 import { AuthGuardService } from 'src/app/auth-guard.service';
+import {MyProjectComponent} from "./my-project/my-project.component";
 
 const routes: Routes = [
   {
@@ -57,6 +58,10 @@ const routes: Routes = [
   {
     path: 'detail-project-user/:id',
     component: DetailProjectUserComponent
+  },
+  {
+    path: 'my-project',
+    component: MyProjectComponent
   }
 ];
 

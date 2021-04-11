@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {IssuedService} from "../issued.service";
 import {IssuedModel} from "../issued.model";
 import Swal from "sweetalert2";
+import {LogErrorModel} from "../../log-error.model";
+import {LogErrorService} from "../../log-error.service";
 
 @Component({
   selector: 'app-form-issued',
@@ -12,13 +14,15 @@ import Swal from "sweetalert2";
   styleUrls: ['./form-issued.component.css']
 })
 export class FormIssuedComponent implements OnInit {
-
+  idLog: string;
+  logError: LogErrorModel;
   issuedForm: FormGroup;
   issued: IssuedModel;
   id: string;
   constructor(private issuedService: IssuedService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private logErrorService: LogErrorService) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -31,6 +35,18 @@ export class FormIssuedComponent implements OnInit {
               this.setDataToForm(response);
             }, error => {
               alert(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Set Data Form Issued',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
             }
           );
       }
@@ -68,6 +84,18 @@ export class FormIssuedComponent implements OnInit {
           this.router.navigate(['/dashboard/issued']);
         }, error => {
           Swal.fire( 'Failed', 'Gagal menyimpan isu' , 'error'  );
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Save Issue',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     }
   }

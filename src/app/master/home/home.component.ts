@@ -6,6 +6,8 @@ import {UserModel} from '../user/user.model';
 import {TaskService} from '../task/task.service';
 import {TaskModel, TaskModel2} from '../task/task.model';
 import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
+import {LogErrorModel} from '../log-error.model';
+import {LogErrorService} from "../log-error.service";
 
 @Component({
   selector: 'app-home',
@@ -14,20 +16,24 @@ import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
 })
 export class HomeComponent implements OnInit {
 
+  idLog: string;
+  logError: LogErrorModel;
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
-  paramNull = {
-    divisi: '',
-    userPM: '',
-    userPMO: '',
-    direktorate: '',
-    status: ''
-  };
+  projectDependency = '';
+  // paramNull = {
+  //   divisi: '',
+  //   userPM: '',
+  //   userPMO: '',
+  //   direktorate: '',
+  //   status: ''
+  // };
 
 
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
-              private taskService: TaskService) {
+              private taskService: TaskService,
+              private logErrorService: LogErrorService) {
   }
 
   ngOnInit(): void {
@@ -50,26 +56,28 @@ export class HomeComponent implements OnInit {
         let requirementGathering = 0;
         let uat = 0;
         for (const release of data) {
-          if (release.stage === 'Delivery Barang') {
-            deliveryStage = deliveryStage + 1;
-          } else if (release.stage === 'Development') {
-            development = development + 1;
-          } else if (release.stage === 'Implementation') {
-            implementation = implementation + 1;
-          } else if (release.stage === 'Live') {
-            live = live + 1;
-          } else if (release.stage === 'Migration') {
-            migration = migration + 1;
-          } else if (release.stage === 'Not Started') {
-            notStarted = notStarted + 1;
-          } else if (release.stage === 'Procurement') {
-            procurement = procurement + 1;
-          } else if (release.stage === 'PTR') {
-            PTR = PTR + 1;
-          } else if (release.stage === 'Requirement Gathering') {
-            requirementGathering = requirementGathering + 1;
-          } else if (release.stage === 'UAT') {
-            uat = uat + 1;
+          if (release.statusRelease === 'Active') {
+            if (release.stage === 'Delivery Barang') {
+              deliveryStage = deliveryStage + 1;
+            } else if (release.stage === 'Development') {
+              development = development + 1;
+            } else if (release.stage === 'Implementation') {
+              implementation = implementation + 1;
+            } else if (release.stage === 'Live') {
+              live = live + 1;
+            } else if (release.stage === 'Migration') {
+              migration = migration + 1;
+            } else if (release.stage === 'Not Started') {
+              notStarted = notStarted + 1;
+            } else if (release.stage === 'Procurement') {
+              procurement = procurement + 1;
+            } else if (release.stage === 'PTR') {
+              PTR = PTR + 1;
+            } else if (release.stage === 'Requirement Gathering') {
+              requirementGathering = requirementGathering + 1;
+            } else if (release.stage === 'UAT') {
+              uat = uat + 1;
+            }
           }
         }
 
@@ -179,11 +187,22 @@ export class HomeComponent implements OnInit {
           updateBarChart(myChart, updateDataRelease, colorBarChart);
         }, 1800000);
       }, error => {
-        alert(error);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Set Interval',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
 
 
-    this.projectService.getAllProject(this.paramNull)
+    this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
         let KepatuhanandSDM = 0;
         let Keuangan = 0;
@@ -201,19 +220,19 @@ export class HomeComponent implements OnInit {
         let budgetBelanjaModal = 0;
         for (const project of data.content) {
           if (project.statusProject === 'Active') {
-            if (project.directorateUser === 'Kepatuhan & SDM') {
-              KepatuhanandSDM = KepatuhanandSDM + 1;
-            } else if (project.directorateUser === 'Keuangan') {
-              Keuangan = Keuangan + 1;
-            } else if (project.directorateUser === 'Operational Retail') {
-              OperationalRetail = OperationalRetail + 1;
-            } else if (project.directorateUser === 'Teknik') {
-              Teknik = Teknik + 1;
-            } else if (project.directorateUser === 'Utama') {
-              Utama = Utama + 1;
-            } else {
-              allDirectorate = allDirectorate + 1;
-            }
+            // if (project.directorateUser === 'Kepatuhan & SDM') {
+            //   KepatuhanandSDM = KepatuhanandSDM + 1;
+            // } else if (project.directorateUser === 'Keuangan') {
+            //   Keuangan = Keuangan + 1;
+            // } else if (project.directorateUser === 'Operational Retail') {
+            //   OperationalRetail = OperationalRetail + 1;
+            // } else if (project.directorateUser === 'Teknik') {
+            //   Teknik = Teknik + 1;
+            // } else if (project.directorateUser === 'Utama') {
+            //   Utama = Utama + 1;
+            // } else {
+            //   allDirectorate = allDirectorate + 1;
+            // }
 
             if (project.status === 'Not Started') {
               notStarted = notStarted + 1;
@@ -225,13 +244,13 @@ export class HomeComponent implements OnInit {
               delay = delay + 1;
             }
 
-            if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
-              budgetBelanjaModal = budgetBelanjaModal + project.budget;
-              contractedValueBelanjaModal = contractedValueBelanjaModal + project.contracted_value;
-            } else if (project.lineItem === 'Beban Usaha') {
-              budgetBebanUsaha = budgetBebanUsaha + project.budget;
-              contractedValueBebanUsaha = contractedValueBebanUsaha + project.contracted_value;
-            }
+            // if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
+            //   budgetBelanjaModal = budgetBelanjaModal + project.budget;
+            //   contractedValueBelanjaModal = contractedValueBelanjaModal + project.contracted_value;
+            // } else if (project.lineItem === 'Beban Usaha') {
+            //   budgetBebanUsaha = budgetBebanUsaha + project.budget;
+            //   contractedValueBebanUsaha = contractedValueBebanUsaha + project.contracted_value;
+            // }
           }
         }
 
@@ -458,7 +477,19 @@ export class HomeComponent implements OnInit {
           updatePieChart3(pieChart3, updateDataProject4, colorPieChart3);
         }, 1800000);
       }, error => {
-        alert(error);
+        alert(error.message);
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Set Interval',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
 
 
@@ -478,7 +509,19 @@ export class HomeComponent implements OnInit {
           this.user.push(data[i]);
         }
       }, error => {
-        alert(error);
+        alert('Gagal Memuat');
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get User By Performance',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 
@@ -493,7 +536,19 @@ export class HomeComponent implements OnInit {
           this.taskDeadline.push(data[i]);
         }
       }, error => {
-        alert(error);
+        alert('Gagal Memuat');
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Get Task Deadline',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
       });
   }
 

@@ -1,3 +1,15 @@
+.my-pagination /deep/ .ngx-pagination .current {
+  background: grey;
+  font-size: 15px;
+  color: black;
+  border-radius: 20px;
+}
+
+.my-pagination /deep/ .ngx-pagination{
+  text-align: center;
+  font-size: 15px;
+}
+
 .changecolor {
     background-color: rgb(255, 130, 130);
     color: white;
@@ -305,6 +317,7 @@ h3,
     #cover {
         width: 100%;
         margin: 0;
+        padding: 10px
     }
     #cover.active {
         margin-left: 17rem;

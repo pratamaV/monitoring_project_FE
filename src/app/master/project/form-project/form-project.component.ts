@@ -68,24 +68,15 @@ export class FormProjectComponent implements OnInit {
       id: new FormControl(null),
       projectCode: new FormControl(null),
       projectName: new FormControl(null, [Validators.required]),
-      pmo: new FormControl(null, [Validators.required]),
-      pm: new FormControl(null, [Validators.required]),
       benefit: new FormControl(null),
-      description: new FormControl(null, [Validators.maxLength(255)]),
-      coPM: new FormControl(null, [Validators.required]),
-      divisiUser: new FormControl(null, [Validators.required]),
-      directorateUser: new FormControl(null, [Validators.required]),
-      status: new FormControl(null, [Validators.required]),
-      targetLive: new FormControl(null, [Validators.required]),
+      status: new FormControl(null),
       prosentaseProject: new FormControl(0),
       budget: new FormControl(null),
-      contracted_value: new FormControl(null),
+      contractedValue: new FormControl(null),
       paymentRealization: new FormControl(null),
-      keyword : new FormControl(null),
-      departmentHead : new FormControl(null),
+      projectDependency : new FormControl(null),
       score: new FormControl(null, [Validators.required, Validators.pattern('^(?:[1-9]|0[1-9]|10)$')]),
       weight: new FormControl(null),
-      categoryActivity: new FormControl(null, [Validators.required]),
       categoryInitiative: new FormControl(null, [Validators.required]),
       statusProject: new FormControl('Active'),
       lineItem: new FormControl(null, [Validators.required])
@@ -122,68 +113,49 @@ export class FormProjectComponent implements OnInit {
   compareUser(c1: UserModel, c2: UserModel): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
- 
-  onSaveProject(postData, valid: boolean) {  
+
+  onSaveProject(postData, valid: boolean) {
 
     if(postData.budget){
-      this.budgetString = postData.budget + ''
-      this.split = this.budgetString.split(',')
-      this.join1 = this.split.join('')
-      this.match = this.join1.match(/\d/g)
-      this.join2 = this.match.join('')
-      this.fixBudget = parseInt(this.join2)
+      this.budgetString = postData.budget + '';
+      this.split = this.budgetString.split(',');
+      this.join1 = this.split.join('');
+      this.match = this.join1.match(/\d/g);
+      this.join2 = this.match.join('');
+      this.fixBudget = parseInt(this.join2);
     }
     if(postData.contracted_value){
-      this.ContractedValueString = postData.contracted_value + ''
-      this.split = this.ContractedValueString.split(',')
-      this.join1 = this.split.join('')
-      this.match = this.join1.match(/\d/g)
-      this.join2 = this.match.join('')
-      this.fixContractedValue = parseInt(this.join2)
+      this.ContractedValueString = postData.contracted_value + '';
+      this.split = this.ContractedValueString.split(',');
+      this.join1 = this.split.join('');
+      this.match = this.join1.match(/\d/g);
+      this.join2 = this.match.join('');
+      this.fixContractedValue = parseInt(this.join2);
     }
     if(postData.paymentRealization){
-      this.PaymentRealizationString = postData.paymentRealization + ''
-      this.split = this.PaymentRealizationString.split(',')
-      this.join1 = this.split.join('')
-      this.match = this.join1.match(/\d/g)
-      this.join2 = this.match.join('')
-      this.fixPaymentRealization = parseInt(this.join2)
+      this.PaymentRealizationString = postData.paymentRealization + '';
+      this.split = this.PaymentRealizationString.split(',');
+      this.join1 = this.split.join('');
+      this.match = this.join1.match(/\d/g);
+      this.join2 = this.match.join('');
+      this.fixPaymentRealization = parseInt(this.join2);
     }
 
     this.project = {
       id: postData.id,
       projectCode: postData.projectCode,
       projectName: postData.projectName,
-      pmo: {
-        id: postData.pmo.id
-      },
-      pm: {
-        id: postData.pm.id
-      },
       benefit: postData.benefit,
-      description: postData.description,
-      coPM: {
-        id: postData.coPM.id
-      },
-      divisiUser: {
-        id: postData.divisiUser.id
-      },
-      directorateUser: postData.directorateUser,
       status: postData.status,
-      targetLive: postData.targetLive,
       prosentaseProject: postData.prosentaseProject,
       budget: this.fixBudget,
-      contracted_value: this.fixContractedValue,
+      contractedValue: this.fixContractedValue,
       paymentRealization: this.fixPaymentRealization,
       score: postData.score,
       weight: postData.weight,
-      categoryActivity: postData.categoryActivity,
       categoryInitiative: postData.categoryInitiative,
       statusProject: postData.statusProject,
-      keyword: postData.keyword,
-      departmentHead: {
-        id: postData.departmentHead.id
-      },
+      projectDependency: postData.projectDependency,
       lineItem: postData.lineItem
     };
     if (valid) {
@@ -236,24 +208,15 @@ export class FormProjectComponent implements OnInit {
       this.projectForm.get('id').setValue(this.project.id);
       this.projectForm.get('projectCode').setValue(this.project.projectCode);
       this.projectForm.get('projectName').setValue(this.project.projectName);
-      this.projectForm.get('pmo').setValue(this.project.pmo);
-      this.projectForm.get('pm').setValue(this.project.pm);
       this.projectForm.get('benefit').setValue(this.project.benefit);
-      this.projectForm.get('description').setValue(this.project.description);
-      this.projectForm.get('coPM').setValue(this.project.coPM);
-      this.projectForm.get('divisiUser').setValue(this.project.divisiUser);
-      this.projectForm.get('directorateUser').setValue(this.project.directorateUser);
       this.projectForm.get('status').setValue(this.project.status);
-      this.projectForm.get('targetLive').setValue(this.project.targetLive);
       this.projectForm.get('prosentaseProject').setValue(this.project.prosentaseProject);
       this.projectForm.get('budget').setValue(this.project.budget);
-      this.projectForm.get('contracted_value').setValue(this.project.contracted_value);
+      this.projectForm.get('contractedValue').setValue(this.project.contractedValue);
       this.projectForm.get('paymentRealization').setValue(this.project.paymentRealization);
-      this.projectForm.get('keyword').setValue(this.project.keyword);
-      this.projectForm.get('departmentHead').setValue(this.project.departmentHead);
+      this.projectForm.get('projectDependency').setValue(this.project.projectDependency);
       this.projectForm.get('score').setValue(this.project.score);
       this.projectForm.get('weight').setValue(this.project.weight);
-      this.projectForm.get('categoryActivity').setValue(this.project.categoryActivity);
       this.projectForm.get('categoryInitiative').setValue(this.project.categoryInitiative);
       this.projectForm.get('statusProject').setValue(this.project.statusProject);
       this.projectForm.get('lineItem').setValue(this.project.lineItem);

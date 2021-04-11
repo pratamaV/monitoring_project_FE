@@ -14,23 +14,31 @@ import {
   UserModel
 } from './project.model';
 import {TaskModel} from '../task/task.model';
+import {LogErrorModel} from '../log-error.model';
+import {LogErrorService} from '../log-error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectServiceService {
-  constructor(private http: HttpClient) {
+  idLog: string;
+  logError: LogErrorModel;
+
+  constructor(private http: HttpClient,
+              private logErrorService: LogErrorService) {
   }
 
-  getAllProject(param): Observable<ApiResponseModel> {
+  getAllProject(projectDependency): Observable<ApiResponseModel> {
     return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       };
-      const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
+      // const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
+      const url = `/api/projects-page?projectDependency=${projectDependency}`;
+
       this.http
         .get(url, header)
-        .pipe(map((responseData : any) => {
+        .pipe(map((responseData: any) => {
           const temp = {
             content: responseData.content,
             totalPages: responseData.totalPages,
@@ -45,32 +53,53 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Project',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
   }
 
-  getResultProject(param) {
-    var divisi = param.divisi;
-    var direktorate = param.direktorate;
-    console.log("encode2: ", divisi.replace("&", "%26"));
-    console.log(`/api/project?divisiUser=${param.divisi}&directorateUser=${param.direktorate}&pm=${param.userPM}&pmo=${param.userPMO}`);
-
-    // console.log('/api/project?divisiUser=', param.divisi, '&directorateUser=', param.direktorate + '&pm=' + param.userPM + '&pmo=' param.userPMO);
-    return new Observable((observer: Observer<any[]>) => {
-      const header = {
-        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-      };
-      this.http.get('/api/project?divisiUser=' + divisi.replace("&", "%26") + '&directorateUser=' + direktorate.replace("&", "%26") + '&pm=' + param.userPM + '&pmo=' + param.userPMO, header).subscribe(
-        (data: any[]) => {
-          observer.next(data);
-        },
-        error => {
-          observer.error(error.message);
-        }
-      );
-    });
-  }
+  // getResultProject(param) {
+  //   let divisi = param.divisi;
+  //   let direktorate = param.direktorate;
+  //   // console.log('/api/project?divisiUser=', param.divisi, '&directorateUser=', param.direktorate + '&pm=' + param.userPM + '&pmo=' param.userPMO);
+  //   return new Observable((observer: Observer<any[]>) => {
+  //     const header = {
+  //       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+  //     };
+  //     this.http.get('/api/project?divisiUser=' + divisi.replace('&', '%26') + '&directorateUser=' + direktorate.replace('&', '%26') + '&pm=' + param.userPM + '&pmo=' + param.userPMO, header).subscribe(
+  //       (data: any[]) => {
+  //         observer.next(data);
+  //       },
+  //       error => {
+  //         observer.error(error.message);
+  //         this.logError = {
+  //           errorMessage: error.message,
+  //           incidentDate: new Date(),
+  //           function: 'Get Result Project',
+  //           isActive: true
+  //         };
+  //         this.logErrorService.saveLogError(this.logError, this.idLog)
+  //           .subscribe(response => {
+  //             // tslint:disable-next-line:no-shadowed-variable
+  //           }, error => {
+  //             alert('Gagal merekam kesalahan');
+  //           });
+  //       }
+  //     );
+  //   });
+  // }
 
   getAllDivisi(): Observable<any[]> {
     return new Observable((observer: Observer<any[]>) => {
@@ -80,6 +109,18 @@ export class ProjectServiceService {
         },
         error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get All Division',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         }
       );
     });
@@ -98,6 +139,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get Project By Id',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -117,6 +170,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get Project By PM Id',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -135,6 +200,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get Project By PMO Id',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -153,6 +230,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get Project By coPM Id',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -183,6 +272,18 @@ export class ProjectServiceService {
         },
         error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Release By Project Id',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         }
       );
     });
@@ -203,6 +304,18 @@ export class ProjectServiceService {
             },
             error => {
               observer.error(error);
+              this.logError = {
+                errorMessage: error.message,
+                incidentDate: new Date(),
+                function: 'Update Project',
+                isActive: true
+              };
+              this.logErrorService.saveLogError(this.logError, this.idLog)
+                .subscribe(response => {
+                  // tslint:disable-next-line:no-shadowed-variable
+                }, error => {
+                  alert('Gagal merekam kesalahan');
+                });
             }
           );
       } else {
@@ -218,6 +331,18 @@ export class ProjectServiceService {
             },
             error => {
               observer.error(error);
+              this.logError = {
+                errorMessage: error.message,
+                incidentDate: new Date(),
+                function: 'Save Project',
+                isActive: true
+              };
+              this.logErrorService.saveLogError(this.logError, this.idLog)
+                .subscribe(response => {
+                  // tslint:disable-next-line:no-shadowed-variable
+                }, error => {
+                  alert('Gagal merekam kesalahan');
+                });
             }
           );
       }
@@ -228,7 +353,7 @@ export class ProjectServiceService {
     return new Observable((observer: Observer<UserModel[]>) => {
       this.http
         .get(
-          '/api/users?access_token=' +
+          '/api/users-list?access_token=' +
           JSON.parse(window.sessionStorage.getItem('token')).access_token
         )
         .subscribe(
@@ -237,6 +362,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All User',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -255,6 +392,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Division',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -274,6 +423,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Change Status Project',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -292,6 +453,18 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get Task By Release Id',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
@@ -310,11 +483,24 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get Project By Keyword',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });
   }
 
+  // tslint:disable-next-line:typedef
   getAllProjectSort(orderBy: string, sort: string) {
     return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
@@ -323,7 +509,7 @@ export class ProjectServiceService {
       const url = `/api/projects-sort?orderBy=${orderBy}&sort=${sort}`;
       this.http
         .get(url, header)
-        .pipe(map((responseData : any) => {
+        .pipe(map((responseData: any) => {
           const temp = {
             content: responseData.content,
             totalPages: responseData.totalPages,
@@ -338,6 +524,59 @@ export class ProjectServiceService {
           },
           error => {
             observer.error(error.message);
+            this.logError = {
+              errorMessage: error.content,
+              incidentDate: new Date(),
+              function: 'Get All Project Sort',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
+    });
+  }
+
+  getAllProjectByCoPMID(id: string): Observable<ApiResponseModel> {
+    return new Observable((observer: Observer<ApiResponseModel>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      const url = `/api/my-project/${id}`;
+
+      this.http
+        .get(url, header)
+        .pipe(map((responseData: any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe(
+          (data: ApiResponseModel) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Project',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           }
         );
     });

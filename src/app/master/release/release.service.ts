@@ -4,13 +4,18 @@ import {Observable, Observer} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ProjectModel, ProjectModel2} from '../project/project.model';
 import {ApiResponseRelease, ReleaseModel, ReleaseModel2} from './release.model';
+import {LogErrorModel} from "../log-error.model";
+import {LogErrorService} from "../log-error.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReleaseService {
+  idLog: string;
+  logError: LogErrorModel;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private logErrorService: LogErrorService) { }
 
   getAllRelease(): Observable<ReleaseModel2[]> {
     return new Observable((observer: Observer<ReleaseModel2[]>) => {
@@ -19,6 +24,18 @@ export class ReleaseService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get All Release',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -31,6 +48,18 @@ export class ReleaseService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Release By Id',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -67,6 +96,18 @@ export class ReleaseService {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Get Release By Project Id',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -81,6 +122,18 @@ export class ReleaseService {
             observer.next(response);
           }, (error) => {
             observer.error(error);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: '',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Update Release');
+              });
           });
       } else {
         this.http.post('/api/release?access_token=' + JSON.parse(window.sessionStorage.getItem('token')).access_token, postData)
@@ -88,6 +141,18 @@ export class ReleaseService {
             observer.next(response);
           }, (error) => {
             observer.error(error);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Save Release',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
           });
       }
     });
@@ -100,6 +165,18 @@ export class ReleaseService {
           observer.next(response);
         }, (error) => {
           observer.error(error);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'Change Status Release',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }
@@ -110,12 +187,24 @@ export class ReleaseService {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
     const url = `api/releaseByProjectId-sort/${idProject}?orderBy=${orderBy}&sort=${sort}`;
-    return new Observable((observer: Observer<ReleaseModel2>) => {
+    return new Observable((observer: Observer<ReleaseModel2[]>) => {
       this.http.get(url, header)
-        .subscribe((data: ReleaseModel2) => {
+        .subscribe((data: ReleaseModel2[]) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);
+          this.logError = {
+            errorMessage: error.message,
+            incidentDate: new Date(),
+            function: 'get All Relase By Id Sort',
+            isActive: true
+          };
+          this.logErrorService.saveLogError(this.logError, this.idLog)
+            .subscribe(response => {
+              // tslint:disable-next-line:no-shadowed-variable
+            }, error => {
+              alert('Gagal merekam kesalahan');
+            });
         });
     });
   }

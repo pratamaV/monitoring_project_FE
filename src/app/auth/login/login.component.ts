@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 import { AuthService as AuthGuard } from '../../AuthService';
 import { AuthService } from '../auth.service';
 import { User } from '../user.model';
+import {LogErrorService} from "../../master/log-error.service";
+import {LogErrorModel} from "../../master/log-error.model";
 
 @Component({
   selector: 'app-login',
@@ -25,13 +27,16 @@ export class LoginComponent implements OnInit {
   valueEmail: string;
   forgetPassword;
   isLoading = false;
+  logError: LogErrorModel;
+  idLog: string;
 
   year: number;
 
   constructor(
     private authService: AuthService,
     private auth: AuthGuard,
-    private router: Router
+    private router: Router,
+    private logErrorService: LogErrorService
   ) {}
 
   ngOnInit(): void {
@@ -59,11 +64,11 @@ export class LoginComponent implements OnInit {
     const body = new HttpParams()
       .set('username', value.email)
       .set('password', value.password)
-      .set('grant_type', 'password');     
+      .set('grant_type', 'password');
     this.authService.login(body.toString()).subscribe(
-      
+
       data => {
-        
+
         var resultBody;
         resultBody = data;
 
@@ -74,15 +79,12 @@ export class LoginComponent implements OnInit {
         window.sessionStorage.setItem('token', JSON.stringify(data));
         this.token = window.sessionStorage.getItem('token');
         this.x = JSON.parse(this.token);
-        if (this.x.user.statusUser === 'Active') {  
+        if (this.x.user.statusUser === 'Active') {
           this.isLoading = false
           this.auth.login(this.x.user.userRole);
-          
-          console.log(this.isLoading);
-          
           Swal.fire('Success', 'Success Login', 'success');
           this.router.navigate(['/home']);
-        } else {                   
+        } else {
           Swal.fire(
             'Failed',
             'Your account still inactive',
@@ -92,8 +94,20 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        this.isLoading = false
+        this.isLoading = false;
         Swal.fire('Failed', 'Email or password incorrect', 'error');
+        this.logError = {
+          errorMessage: error.message,
+          incidentDate: new Date(),
+          function: 'Login',
+          isActive: true
+        };
+        this.logErrorService.saveLogError(this.logError, this.idLog)
+          .subscribe(response => {
+            // tslint:disable-next-line:no-shadowed-variable
+          }, error => {
+            alert('Gagal merekam kesalahan');
+          });
         this.router.navigate(['/']);
       }
     );

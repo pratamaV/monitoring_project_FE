@@ -31,7 +31,6 @@ export class DetailProjectUserComponent implements OnInit {
   getTaskByReleaseId(id){
     this.projectService.getTaskByReleaseId(id)
       .subscribe(data => {
-        console.log(data);
         this.taskModel = data;
       }, error => {
         alert(error);
@@ -39,6 +38,11 @@ export class DetailProjectUserComponent implements OnInit {
   }
 
   onGolistProject() {
-    this.router.navigate(['/dashboard/project/project-user']);
+    const back = localStorage.getItem('backtoproject');
+    if (back === 'listprojectuser') {
+      this.router.navigate(['/dashboard/project/project-user']);
+    } else if (back === 'backmyproject') {
+      this.router.navigate(['/dashboard/project/my-project']);
+    }
   }
 }

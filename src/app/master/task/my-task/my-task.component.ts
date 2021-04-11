@@ -31,22 +31,22 @@ export class MyTaskComponent implements OnInit {
     estEndDateTo: ''
   };
 
-  paramNull2 = {
-    divisi: '',
-    userPM: '',
-    userPMO: '',
-    direktorate: '',
-    status: ''
-  };
+  projectDependency='';
+  // paramNull2 = {
+  //   divisi: '',
+  //   userPM: '',
+  //   userPMO: '',
+  //   direktorate: '',
+  //   status: ''
+  // };
 
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
   projectName: any[] = [];
   releaseName: any[] = [];
+  asc = true;
+  isLoading = false;
 
-  isLoading = false
-
-  
   page = 1;
   pageSize = 10;
   totalItems = 0;
@@ -81,7 +81,7 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskByUserId() {
-    this.isLoading = true
+    this.isLoading = true;
     // this.taskForm.get('taskDoc').setValue(null);
     this.taskForm.get('statusDone').setValue(null);
     this.taskForm.get('releaseName').setValue(null);
@@ -92,13 +92,16 @@ export class MyTaskComponent implements OnInit {
     this.taskForm.get('estEndDateTo').setValue(null);
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
-        this.isLoading = false
+        this.isLoading = false;
+        // for (const datum of data.content) {
+        //   if (datum.release.project.statusProject === 'Active')
+        // }
+        // console.log(data.content, 'ini apa')
         this.loadedTask = data.content;
         this.totalItems = data.totalElements;
         for (const iterator of this.loadedTask) {
-          this.releaseName.push(iterator.release.releaseName)
+          this.releaseName.push(iterator.release.releaseName);
         }
-        console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
@@ -114,7 +117,7 @@ export class MyTaskComponent implements OnInit {
     this.isLoading = true
         this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
       .subscribe(data => {
-        this.isLoading = false
+        this.isLoading = false;
         this.loadedTask = data.content;
       }, error => {
         alert(error);
@@ -194,8 +197,8 @@ export class MyTaskComponent implements OnInit {
       console.log(data);
       this.releaseName = data
       // console.log(this.releaseName);
-      
-      
+
+
       this.releaseName = data
     }, error => {
       alert(error)
@@ -204,12 +207,29 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getAllProjectName() {
-    this.projectService.getAllProject(this.paramNull2)
+    this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
         this.projectName = data.content;
       }, error => {
         alert(error);
       });
+  }
+
+  onGetTaskByIdUserSort(orderBy: string, sort: string) {
+    this.taskService.getAllTaskByIdUserSort(localStorage.getItem('idUser'), orderBy, sort).subscribe(
+      data => {
+        this.isLoading = false;
+        this.loadedTask = data.content;
+        if (sort === 'ASC') {
+          this.asc = true;
+        } else if (sort === 'DESC') {
+          this.asc = false;
+        }
+      },
+      error => {
+        alert(error);
+      }
+    );
   }
 
 }

@@ -4,7 +4,8 @@ import {ReleaseService} from '../release.service';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReleaseModel} from '../release.model';
 import Swal from 'sweetalert2';
-import {UserModel} from '../../project/project.model';
+import {DivisionModel, UserModel} from '../../project/project.model';
+import {ProjectServiceService} from "../../project/project-service.service";
 
 @Component({
   selector: 'app-form-release',
@@ -16,12 +17,24 @@ export class FormReleaseComponent implements OnInit {
   releaseForm: FormGroup;
   release: ReleaseModel;
   id: string;
+  userPMO: UserModel[] = [];
+  userPM: UserModel[] = [];
+  userCoPM: UserModel[] = [];
+  userDepartmentHead: UserModel[] = [];
+  loadedDivision: DivisionModel[] = [];
+  pmId: '';
+  pmoId: '';
+  coPMId: '';
+  divisionId: '';
 
   constructor(private route: ActivatedRoute,
               private releaseService: ReleaseService,
-              private router: Router) { }
+              private router: Router,
+              private projectService: ProjectServiceService) { }
 
   ngOnInit(): void {
+    this.onGetAllDivision();
+    this.onGetAllUser();
     this.buildForm();
     this.route.params.subscribe(params => {
       if (params && params.id) {
@@ -54,6 +67,15 @@ export class FormReleaseComponent implements OnInit {
       actStartdate: new FormControl(null),
       actEnddate: new FormControl(null),
       statusRelease: new FormControl('Active'),
+      pmo: new FormControl(null, [Validators.required]),
+      pm: new FormControl(null, [Validators.required]),
+      coPM: new FormControl(null, [Validators.required]),
+      divisiUser: new FormControl(null, [Validators.required]),
+      directorateUser: new FormControl(null, [Validators.required]),
+      departmentHead : new FormControl(null),
+      categoryActivity: new FormControl(null, [Validators.required]),
+      developmentMode: new FormControl(null, [Validators.required]),
+      contractedValue: new FormControl(0 ),
       project: new FormControl(localStorage.getItem('projectId'))
     });
   }
@@ -75,6 +97,25 @@ export class FormReleaseComponent implements OnInit {
       actStartdate: postData.actStartdate,
       actEnddate: postData.actEnddate,
       statusRelease: postData.statusRelease,
+      pmo: {
+        id: postData.pmo.id
+      },
+      pm: {
+        id: postData.pm.id
+      },
+      coPM: {
+        id: postData.coPM.id
+      },
+      divisiUser: {
+        id: postData.divisiUser.id
+      },
+      directorateUser: postData.directorateUser,
+      categoryActivity: postData.categoryActivity,
+      contractedValue: postData.contractedValue,
+      departmentHead: {
+        id: postData.departmentHead.id
+      },
+      developmentMode: postData.developmentMode,
       project: {
         id: postData.project
       }
@@ -107,8 +148,55 @@ export class FormReleaseComponent implements OnInit {
       this.releaseForm.get('actStartdate').setValue(this.release.actStartdate);
       this.releaseForm.get('actEnddate').setValue(this.release.actEnddate);
       this.releaseForm.get('statusRelease').setValue(this.release.statusRelease);
+      this.releaseForm.get('pmo').setValue(this.release.pmo);
+      this.releaseForm.get('pm').setValue(this.release.pm);
+      this.releaseForm.get('coPM').setValue(this.release.coPM);
+      this.releaseForm.get('divisiUser').setValue(this.release.divisiUser);
+      this.releaseForm.get('directorateUser').setValue(this.release.directorateUser);
+      this.releaseForm.get('departmentHead').setValue(this.release.departmentHead);
+      this.releaseForm.get('categoryActivity').setValue(this.release.categoryActivity);
       this.releaseForm.get('project').setValue(this.release.project.id);
     }
+  }
+
+  onGetAllUser() {
+    this.projectService.getAllUser()
+      .subscribe(data => {
+        for (const user of data) {
+          if (user.userRole === '01') {
+            this.userPMO.push(user);
+          }
+          if (user.userRole === '02') {
+            this.userPM.push(user);
+          }
+          if (user.userRole === '03') {
+            this.userCoPM.push(user);
+          }
+          if (user.userRole === '05') {
+            this.userDepartmentHead.push(user);
+          }
+        }
+
+      }, error => {
+        alert(error);
+      });
+  }
+
+  onGetAllDivision() {
+    this.projectService.getAllDivison()
+      .subscribe(data => {
+        this.loadedDivision = data;
+      }, error => {
+        alert(error);
+      });
+  }
+
+  compareDivision(c1: DivisionModel, c2: DivisionModel): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  compareUser(c1: UserModel, c2: UserModel): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
   form(property): AbstractControl {

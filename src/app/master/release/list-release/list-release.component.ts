@@ -16,7 +16,7 @@ export class ListReleaseComponent implements OnInit {
 
   fileName = 'List-Release-' + new Date().toDateString() + '.xlsx';
   filterForm: FormGroup;
-  loadedRelease: ReleaseModel2;
+  loadedRelease: ReleaseModel2[];
   paramNull = {
     status: null,
     stage: null
@@ -26,6 +26,8 @@ export class ListReleaseComponent implements OnInit {
   page = 1;
   pageSize = 10;
   totalItems = 0;
+
+  userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
 
   constructor(private releaseService: ReleaseService, private router: Router) {
   }
@@ -42,7 +44,7 @@ export class ListReleaseComponent implements OnInit {
     this.filterForm.get('stage').setValue(null);
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
       .subscribe(data => {
-        this.isLoading = false
+        this.isLoading = false;
         this.loadedRelease = data.content;
         this.totalItems = data.totalElements;
       }, error => {
@@ -124,15 +126,29 @@ export class ListReleaseComponent implements OnInit {
   }
 
   onGetReleaseByIdSort(orderBy: string, sort: string) {
+    this.loadedRelease = [];
     this.releaseService.getAllRelaseByIdSort(localStorage.getItem('projectId'), orderBy, sort).subscribe(
       data => {
-        this.isLoading = false;
-        this.loadedRelease = data;
-        if (sort === 'ASC') {
-          this.asc = true;
-        } else if (sort === 'DESC') {
-          this.asc = false;
-        }
+        // if (this.userRoleNew !== '01'){
+        //   for (const relase of data) {
+        //     if (relase.statusRelease === 'Active'){
+        //       this.isLoading = false;
+        //       this.loadedRelease.push(relase);
+        //       if (sort === 'ASC') {
+        //         this.asc = true;
+        //       } else if (sort === 'DESC') {
+        //         this.asc = false;
+        //       }
+        //     }
+        //   }
+        // } else {
+          this.loadedRelease = data;
+          if (sort === 'ASC') {
+            this.asc = true;
+          } else if (sort === 'DESC') {
+            this.asc = false;
+          }
+        // }
       },
       error => {
         alert(error);
@@ -153,8 +169,8 @@ export class ListReleaseComponent implements OnInit {
       };
     } else if (release.statusRelease === 'Active' && release.status === 'Delay') {
       return {
-        'background-color': '#b67162',
-        color: 'white'
+        'background-color': '#ffaaa7',
+        color: 'black'
       };
     }
   }
