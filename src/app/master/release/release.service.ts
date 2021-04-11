@@ -68,22 +68,47 @@ export class ReleaseService {
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
-    let url = ``;
-    if (param.status == null && param.stage == null){
-        url = `api/releaseByProjectId/${id}`;
+
+    if (param.userPM === null) {
+      param.userPM = '';
     }
-    else if (param.stage == null){
-        url = `api/releaseByProjectId/${id}?status=${param.status}`;
+    if (param.userPMO === null) {
+      param.userPMO = '';
     }
-    else if (param.status == null){
-        url = `api/releaseByProjectId/${id}?stage=${param.stage}`;
+    if (param.userCoPM === null) {
+      param.userCoPM = '';
     }
-    else if (!(param.status == null && param.stage == null)){
-      url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
+    if (param.stage === null) {
+      param.stage = '';
     }
+    if (param.status === null) {
+      param.status = '';
+    }
+    if (param.divisi === null) {
+      param.divisi = '';
+    }
+    if (param.directoratUser === null) {
+      param.directoratUser = '';
+    }
+
+    // let url = ``;
+    // if (param.status == null && param.stage == null){
+    //     url = `api/releaseByProjectId/${id}`;
+    // }
+    // else if (param.stage == null){
+    //     url = `api/releaseByProjectId/${id}?status=${param.status}`;
+    // }
+    // else if (param.status == null){
+    //     url = `api/releaseByProjectId/${id}?stage=${param.stage}`;
+    // }
+    // else if (!(param.status == null && param.stage == null)){
+    //   url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
+    // }
+    const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}`;
+    console.log(url);
     return new Observable((observer: Observer<ApiResponseRelease>) => {
      this.http.get(url, header)
-     .pipe(map((responseData : any) => {
+     .pipe(map((responseData: any) => {
       const temp = {
         content: responseData.content,
         totalPages: responseData.totalPages,

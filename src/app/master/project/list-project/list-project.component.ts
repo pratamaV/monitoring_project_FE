@@ -34,6 +34,7 @@ export class ListProjectComponent implements OnInit {
   users: any[] = [];
   usersPm: any[] = [];
   usersPmo: any[] = [];
+
   projectStatus: string;
 
   searchByKeyword: string;
@@ -59,7 +60,7 @@ export class ListProjectComponent implements OnInit {
   ngOnInit(): void {
     // this.buildForm();
     this.onGetListProject();
-    this.getAllDivisi();
+    // this.getAllDivisi();
     this.getAllUser();
     this.getUserRole();
   }
@@ -88,6 +89,7 @@ export class ListProjectComponent implements OnInit {
             // tslint:disable-next-line:triple-equals
           } else if (user.userRole == '02') {
             this.usersPm.push(user);
+            // tslint:disable-next-line:triple-equals
           }
         }
       },
