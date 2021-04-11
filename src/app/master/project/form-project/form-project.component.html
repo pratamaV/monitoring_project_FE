@@ -37,7 +37,19 @@
         <div class="col-6">
 
           <div class="form-group">
-            <input type="hidden" class="form-control" formControlName="status" id="status">
+            <label for="status">Status</label>
+            <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+              <option value="Not Started">Not Started</option>
+              <option value="On Schedule">On Schedule</option>
+              <option value="PTR/ Live">PTR/ Live</option>
+              <option value="Delay">Delay</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
+              <div *ngIf="form('status').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
           </div>
 
 
