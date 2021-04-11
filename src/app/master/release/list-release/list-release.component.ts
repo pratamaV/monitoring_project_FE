@@ -23,6 +23,9 @@ export class ListReleaseComponent implements OnInit {
   };
   isLoading = false;
   asc = true;
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
 
   constructor(private releaseService: ReleaseService, private router: Router) {
   }
@@ -40,10 +43,16 @@ export class ListReleaseComponent implements OnInit {
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedRelease = data;
+        this.loadedRelease = data.content;
+        this.totalItems = data.totalElements;
       }, error => {
         alert(error);
       });
+  }
+
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetListRelease();
   }
 
   private buildForm(): void {
@@ -63,7 +72,7 @@ export class ListReleaseComponent implements OnInit {
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), param)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedRelease = data;
+        this.loadedRelease = data.content;
       }, error => {
         alert(error);
       });

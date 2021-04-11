@@ -11,7 +11,7 @@ import {SidebarComponent} from '../layout/sidebar/sidebar.component';
 import { FitHomeComponent } from './home/fit-home/fit-home.component';
 
 @NgModule({
-  declarations: [MasterComponent, FormReleaseComponent, ListTaskComponent, FormTaskComponent, FitHomeComponent],
+  declarations: [MasterComponent, FormReleaseComponent, FormTaskComponent, FitHomeComponent],
     imports: [
         CommonModule,
         MasterRoutingModule,

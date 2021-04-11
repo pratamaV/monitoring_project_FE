@@ -28,6 +28,10 @@ export class UserTaskComponent implements OnInit {
     estStartDate: null
   };
 
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
+
   constructor(private taskService: TaskService,
               private router: Router,
               private userService: UserService,
@@ -44,7 +48,7 @@ export class UserTaskComponent implements OnInit {
         this.user = data;
         this.taskService.getTaskByUserId(localStorage.getItem('userIdTask'), this.paramNull)
           .subscribe(data2 => {
-            this.loadedTask = data2;
+            this.loadedTask = data2.content;
           }, error => {
             alert(error);
           });
@@ -75,6 +79,11 @@ export class UserTaskComponent implements OnInit {
       }, error => {
         alert(error);
       });
+  }
+
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetUserById();
   }
 
   // onGetTaskByUserId() {

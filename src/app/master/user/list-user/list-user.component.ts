@@ -16,6 +16,10 @@ export class ListUserComponent implements OnInit {
   loadedUser: UserModel[] = [];
   isLoading = false
 
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
+
   constructor(private userService: UserService,
               private router: Router) { }
 
@@ -28,10 +32,16 @@ export class ListUserComponent implements OnInit {
     this.userService.getAllUser()
       .subscribe(data => {
         this.isLoading = false
-        this.loadedUser = data;
+        this.loadedUser = data.content;
+        this.totalItems = data.totalElements;
       }, error => {
         alert(error);
       });
+  }
+
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetListUser();
   }
 
   updateUser(user: UserModel2){

@@ -8,6 +8,7 @@ import { DetailUserComponent } from './detail-user/detail-user.component';
 import {UserRoutingModule} from "./user-routing.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {SidebarModule} from "../../layout/sidebar/sidebar.module";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [DetailUserComponent, FormUserComponent, ListUserComponent],
@@ -15,7 +16,8 @@ import {SidebarModule} from "../../layout/sidebar/sidebar.module";
         CommonModule,
         UserRoutingModule,
         ReactiveFormsModule,
-        SidebarModule
+        SidebarModule,
+        NgxPaginationModule
     ]
 })
 export class UserModule { }

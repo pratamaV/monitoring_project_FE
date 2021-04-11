@@ -8,6 +8,7 @@ import {ProjectServiceService} from '../../project/project-service.service';
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import {formatDate} from "@angular/common";
+import { UserService } from '../../user/user.service';
 
 
 @Component({
@@ -29,11 +30,15 @@ export class ListTaskComponent implements OnInit {
   currentDate = formatDate(new Date(), 'yyyy-MM-dd', 'en-US');
   isLoading = true
 
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
 
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -47,20 +52,26 @@ export class ListTaskComponent implements OnInit {
     this.filterForm.get('assignTo').setValue(null);
     this.filterForm.get('statusDone').setValue(null);
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), this.paramNull)
-      .subscribe(data => {
+      .subscribe(data => {       
         this.isLoading = false
-        this.loadedTask = data;
+        this.loadedTask = data.content;
+        this.totalItems= data.totalElements;
         console.log(this.loadedTask);
       }, error => {
         alert(error);
       });
   }
 
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetAllTask();
+  }
+
   // tslint:disable-next-line:typedef
   onGetAllUser() {
-    this.projectService.getAllUser()
+    this.userService.getAllUser()
       .subscribe(data => {
-        this.loadedUser = data;
+        this.loadedUser = data.content;
       }, error => {
         alert(error);
       });
@@ -83,7 +94,7 @@ export class ListTaskComponent implements OnInit {
     this.taskService.getTaskByReleaseId(localStorage.getItem('releaseId'), param)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedTask = data;
+        this.loadedTask = data.content;
       }, error => {
         alert(error);
       });

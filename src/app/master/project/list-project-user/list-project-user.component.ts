@@ -18,6 +18,9 @@ export class ListProjectUserComponent implements OnInit {
     status: ''
   };
   isLoading = false
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
 
   constructor(private projectService: ProjectServiceService,
               private router: Router) { }
@@ -31,10 +34,15 @@ export class ListProjectUserComponent implements OnInit {
     this.projectService.getAllProject(this.paramNull)
       .subscribe(data => {
         this.isLoading = false
-        this.loadedProject = data;
+        this.loadedProject = data.content;
+        this.totalItems = data.totalElements;
       }, error => {
         alert(error);
       });
+  }
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetListProject();
   }
 
   getDetail(project: ProjectModel) {

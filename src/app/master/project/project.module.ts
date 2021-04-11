@@ -9,6 +9,7 @@ import { ListProjectUserComponent } from './list-project-user/list-project-user.
 import { DetailProjectUserComponent } from './detail-project-user/detail-project-user.component';
 import {SidebarModule} from "../../layout/sidebar/sidebar.module";
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -20,7 +21,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
         FormsModule,
         ReactiveFormsModule,
         SidebarModule,
-        SharedModule
+        SharedModule,
+        NgxPaginationModule
     ],
     providers: [CurrencyPipe]
 })

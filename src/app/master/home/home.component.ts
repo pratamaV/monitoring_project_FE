@@ -199,7 +199,7 @@ export class HomeComponent implements OnInit {
         let contractedValueBelanjaModal = 0;
         let budgetBebanUsaha = 0;
         let budgetBelanjaModal = 0;
-        for (const project of data) {
+        for (const project of data.content) {
           if (project.statusProject === 'Active') {
             if (project.directorateUser === 'Kepatuhan & SDM') {
               KepatuhanandSDM = KepatuhanandSDM + 1;

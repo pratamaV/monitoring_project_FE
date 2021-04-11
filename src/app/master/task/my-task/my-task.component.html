@@ -98,7 +98,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let task of loadedTask; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
+                                    <tr *ngFor="let task of loadedTask | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
                                         <td>{{task.release.releaseName}}</td>
@@ -118,7 +118,7 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <pagination-controls class="text-right" style="font-size: 10pt; margin-top: 2px;" (pageChange)="onPageChanges($event)"></pagination-controls>
                     </div>
                 </div>
             </div>

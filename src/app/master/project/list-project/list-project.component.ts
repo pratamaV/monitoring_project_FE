@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import * as XLSX from 'xlsx';
 import {FormControl, FormGroup} from '@angular/forms';
 import {UserModel} from '../../user/user.model';
+import { UserService } from '../../user/user.service';
 
 @Component({
   selector: 'app-list-project',
@@ -14,12 +15,6 @@ import {UserModel} from '../../user/user.model';
 export class ListProjectComponent implements OnInit {
 
   isLoading = false;
-
-  constructor(
-    private projectService: ProjectServiceService,
-    private router: Router
-  ) {
-  }
 
   loadedProject: ProjectModel[] = [];
   loadedProjectResult: ProjectModel[] = [];
@@ -43,12 +38,26 @@ export class ListProjectComponent implements OnInit {
 
   searchByKeyword: string;
 
+  token : any;
+  role : any;
+  userRole : any;
+
+  page = 1;
+  pageSize = 10;
+  totalItems = 0;
+
+  constructor(
+    private projectService: ProjectServiceService,
+    private userServicce: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
     this.onGetListProject();
     this.getAllDivisi();
     this.getAllUser();
+    this.getUserRole();
   }
 
   // tslint:disable-next-line:typedef
@@ -108,7 +117,7 @@ export class ListProjectComponent implements OnInit {
     this.projectService.getAllProject(param).subscribe(
       data => {
         this.isLoading = false;
-        this.loadedProject = data;
+        this.loadedProject = data.content;
       },
       error => {
         alert(error);
@@ -147,13 +156,26 @@ export class ListProjectComponent implements OnInit {
     this.filterForm.get('status').setValue(null);
     this.projectService.getAllProject(this.paramNull).subscribe(
       data => {
-        this.isLoading = false;
-        this.loadedProject = data;
+        this.isLoading = false
+        if(this.userRole != '01'){
+          for (const iterator of data.content) {
+          console.log(iterator);
+          if(iterator.statusProject === 'Active'){            
+              this.loadedProject.push(iterator)  
+        }}} else {
+          this.loadedProject = data.content;
+        }
+        this.totalItems = data.totalElements;
       },
       error => {
         alert(error);
       }
     );
+  }
+
+  onPageChanges(event) {
+    this.page = event;
+    this.onGetListProject();
   }
 
   // tslint:disable-next-line:typedef
@@ -188,7 +210,7 @@ export class ListProjectComponent implements OnInit {
     this.projectService.getAllProjectSort(orderBy, sort).subscribe(
       data => {
         this.isLoading = false
-        this.loadedProject = data;
+        this.loadedProject = data.content;
         if (sort === 'ASC') {
           this.asc = true;
         } else if (sort === 'DESC') {
@@ -248,7 +270,7 @@ export class ListProjectComponent implements OnInit {
     if (this.searchByKeyword === '') {
       this.projectService.getAllProject(this.paramNull).subscribe(
         data => {
-          this.loadedProject = data;
+          this.loadedProject = data.content;
         },
         error => {
           alert(error);
@@ -283,5 +305,12 @@ export class ListProjectComponent implements OnInit {
         color: 'white'
       };
     }
+  }
+
+  getUserRole(){
+    this.token = window.sessionStorage.getItem('token')
+    this.role = JSON.parse(this.token)
+    this.userRole = this.role.user.userRole
+    console.log(this.userRole);
   }
 }
