@@ -166,11 +166,11 @@ export class FormUserComponent implements OnInit {
 
   onChangePassword(param) {
     Swal.fire({
-      title: 'Are you sure?',
+      title: 'Apakah anda yakin akan mengubah password?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: 'Ya, ubah!',
+      cancelButtonText: 'Tidak, batalkan!',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
