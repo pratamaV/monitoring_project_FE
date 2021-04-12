@@ -26,12 +26,13 @@
               <div class="col-9 col-xs-8">
                 <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
                   <div class="row">
+                    <div class="form-group col">
 
 
 
 
                       <div class="form-group col">
-                        <label for="userPM" style="float: left;font-size: 13px">User PM</label>
+                        <label for="userPM" style="float: left;">User PM</label>
                         <select class="custom-select" formControlName="userPM" id="userPM"
                                 aria-label="Default select example">
                           <option *ngFor="let user of usersPm; let i = index" [ngValue]="user.id">
@@ -41,7 +42,7 @@
                       </div>
 
                       <div class="form-group col">
-                        <label for="userPMO" style="float: left;font-size: 13px">User PMO</label>
+                        <label for="userPMO" style="float: left;">User PMO</label>
                         <select class="custom-select" formControlName="userPMO" id="userPMO"
                                 aria-label="Default select example">
                           <option *ngFor="let user of usersPmo; let i = index" [ngValue]="user.id">
@@ -49,9 +50,8 @@
                           </option>
                         </select>
                       </div>
-
                       <div class="form-group col">
-                        <label for="userCoPM" style="float: left;font-size: 13px">User PMO</label>
+                        <label for="userCoPM" style="float: left;">User PMO</label>
                         <select class="custom-select" formControlName="userCoPM" id="userCoPM"
                                 aria-label="Default select example">
                           <option *ngFor="let user of usersCoPM; let i = index" [ngValue]="user.id">
@@ -59,9 +59,8 @@
                           </option>
                         </select>
                       </div>
-
                       <div class="form-group col">
-                        <label for="status" style="float: left;font-size: 13px">Status</label>
+                        <label for="status" style="float: left;">Status</label>
                         <select class="form-select" formControlName="status" id="status"
                                 aria-label="Default select example">
                           <option value="Not Started">Not Started</option>
@@ -69,9 +68,8 @@
                           <option value="PTR/ Live">PTR/ Live</option>
                         </select>
                       </div>
-
                       <div class="form-group col">
-                        <label for="stage" style="float: left; font-size: 13px">Stage</label>
+                        <label for="stage" style="float: left;">Stage</label>
                         <select class="form-select" formControlName="stage" id="stage"
                                 aria-label="Default select example">
                           <option value="Delivery Barang">Delivery Barang</option>
@@ -86,9 +84,7 @@
                           <option value="UAT">UAT</option>
                         </select>
                       </div>
-
-                      <div class="form-group col-2">
-                      <label for="divisi" style="float: left; font-size: 13px">Divisi Owner</label>
+                      <label for="divisi" style="float: left;">Divisi Owner</label>
                       <select class="custom-select" formControlName="divisi" id="divisi"
                               aria-label="Default select example">
                         <option *ngFor="let divisi of divitions; let i = index"
@@ -96,11 +92,9 @@
                           {{ divisi.divisionName }}
                         </option>
                       </select>
-                      </div>
-
-
-                    <div class="form-group col-2">
-                      <label for="directoratUser" style="float: left; font-size: 13px">Direktorate</label>
+                    </div>
+                    <div class="form-group col">
+                      <label for="directoratUser" style="float: left;">Direktorate Owner</label>
                       <select class="form-select" formControlName="directoratUser" id="directoratUser"
                               aria-label="Default select example">
                         <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
@@ -110,11 +104,35 @@
                         <option value="Utama">Utama</option>
                       </select>
                     </div>
+                    <div class="form-group col">
+                      <label for="projectName" style="float: left;">Project Name</label>
+                      <select class="form-select" formControlName="projectName" id="projectName"
+                              aria-label="Default select example">
+                        <option *ngFor="let projectName of projectNames"
+                                [ngValue]="projectName">{{projectName}}</option>
+                      </select>
+                    </div>
 
+                    <div class="form-group col">
+                      <label for="projectCode" style="float: left;">Project Name</label>
+                      <select class="form-select" formControlName="projectCode" id="projectCode"
+                              aria-label="Default select example">
+                        <option *ngFor="let projectCode of projectCodes"
+                                [ngValue]="projectCode">{{projectCode}}</option>
 
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="developmentMode">Mode Pengembangan <small style="color: red;">*</small></label>
+                      <select class="form-select" formControlName="developmentMode" id="developmentMode"
+                              aria-label="Default select example">
+                        <option value="Internal Development">Internal Development</option>
+                        <option value="Vendor">Vendor</option>
+                        <option value="Join Development">Join Development</option>
+                      </select>
 
-
-
+                    </div>
+>>>>>>> 848f4d2e4270b66d4ba758521765189afd8d4270
                   </div>
                   <div id="button-filter">
                     <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;"
@@ -312,7 +330,6 @@
           </div>
           <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;"
                                (pageChange)="onPageChanges($event)"></pagination-controls>
-
         </div>
       </div>
     </div>
