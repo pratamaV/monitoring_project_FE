@@ -31,9 +31,11 @@ export class DetailTaskComponent implements OnInit {
       filedesc: new FormControl(null, [Validators.required]),
       taskDoc: new FormControl(null, [Validators.required]),
       statusDone: new FormControl(null),
-      prosentase: new FormControl(null, [Validators.required])
+      prosentase: new FormControl(null, [Validators.required, Validators.pattern(/^([0-9]\.[0-9]{1}|[0-9]\.[0-9]{2}|\.[0-9]{2}|[1-9][0-9]\.[0-9]{1}|[1-9][0-9]\.[0-9]{2}|[0-9][0-9]|[1-9][0-9]\.[0-9]{2})$|^([0-9]|[0-9][0-9]|[0-99])$|^100$/gm)])
     });
   }
+
+
 
   form(property): AbstractControl {
     return this.detailmytaskForm.get(property);
