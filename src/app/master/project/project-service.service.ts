@@ -70,36 +70,6 @@ export class ProjectServiceService {
     });
   }
 
-  // getResultProject(param) {
-  //   let divisi = param.divisi;
-  //   let direktorate = param.direktorate;
-  //   // console.log('/api/project?divisiUser=', param.divisi, '&directorateUser=', param.direktorate + '&pm=' + param.userPM + '&pmo=' param.userPMO);
-  //   return new Observable((observer: Observer<any[]>) => {
-  //     const header = {
-  //       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-  //     };
-  //     this.http.get('/api/project?divisiUser=' + divisi.replace('&', '%26') + '&directorateUser=' + direktorate.replace('&', '%26') + '&pm=' + param.userPM + '&pmo=' + param.userPMO, header).subscribe(
-  //       (data: any[]) => {
-  //         observer.next(data);
-  //       },
-  //       error => {
-  //         observer.error(error.message);
-  //         this.logError = {
-  //           errorMessage: error.message,
-  //           incidentDate: new Date(),
-  //           function: 'Get Result Project',
-  //           isActive: true
-  //         };
-  //         this.logErrorService.saveLogError(this.logError, this.idLog)
-  //           .subscribe(response => {
-  //             // tslint:disable-next-line:no-shadowed-variable
-  //           }, error => {
-  //             alert('Gagal merekam kesalahan');
-  //           });
-  //       }
-  //     );
-  //   });
-  // }
 
   getAllDivisi(): Observable<any[]> {
     return new Observable((observer: Observer<any[]>) => {
@@ -123,6 +93,36 @@ export class ProjectServiceService {
             });
         }
       );
+    });
+  }
+
+  getProjects(): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http
+        .get(
+          `api/projects-list?access_token=` +
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
+        )
+        .subscribe(
+          (data: ProjectModel[]) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get Projects',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
     });
   }
 

@@ -15,8 +15,9 @@
   <app-sidebar></app-sidebar>
   <div id="cover">
     <!-- Table -->
-    <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>
-      List Release</h4>
+    <h4 class="mb-5" style="padding-top: 70px">
+<!--      <i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>-->
+      Release</h4>
     <div class="row">
 
       <div class="col">
@@ -31,8 +32,7 @@
                       <label for="projectName" style="float: left;font-size: 13px">Project Name</label>
                       <select class="custom-select" formControlName="projectName" id="projectName"
                               aria-label="Default select example">
-                        <option value="xxxxx">
-                       xxxxx
+                        <option *ngFor="let project of projects; let i = index" [ngValue]="project.projectName">{{project.projectName}}
                         </option>
                       </select>
                     </div>

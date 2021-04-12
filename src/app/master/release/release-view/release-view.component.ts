@@ -5,6 +5,7 @@ import {ReleaseService} from "../release.service";
 import {ProjectServiceService} from "../../project/project-service.service";
 import {Router} from "@angular/router";
 import * as XLSX from "xlsx";
+import {ProjectModel} from "../../project/project.model";
 
 @Component({
   selector: 'app-release-view',
@@ -34,6 +35,7 @@ export class ReleaseViewComponent implements OnInit {
   pageSize = 10;
   totalItems = 0;
   divitions: any[] = [];
+  projects: ProjectModel[] = [];
   users: any[] = [];
   usersPm: any[] = [];
   usersPmo: any[] = [];
@@ -49,6 +51,7 @@ export class ReleaseViewComponent implements OnInit {
     this.onGetListRelease();
     this.getAllDivisi();
     this.getAllUser();
+    this.getProjects();
   }
 
   // tslint:disable-next-line:typedef
@@ -78,6 +81,17 @@ export class ReleaseViewComponent implements OnInit {
     this.projectService.getAllDivisi().subscribe(
       response => {
         this.divitions = response;
+      },
+      error => {
+        alert(error);
+      }
+    );
+  }
+
+  getProjects() {
+    this.projectService.getProjects().subscribe(
+      response => {
+        this.projects = response;
       },
       error => {
         alert(error);
