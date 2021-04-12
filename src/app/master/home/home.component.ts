@@ -96,7 +96,7 @@ export class HomeComponent implements OnInit {
 
         const ctx = document.getElementById('barChart');
         const myChart = new Chart('barChart', {
-          type: 'bar',
+          type: 'horizontalBar',
           data: {
             labels: ['Not Started',
               'Requirement Gathering',
@@ -213,6 +213,8 @@ export class HomeComponent implements OnInit {
         let onSchedule = 0;
         let ptr = 0;
         let delay = 0;
+        let potentialToBeDelay = 0;
+        let drop = 0;
         let allDirectorate = 0;
         let contractedValueBebanUsaha = 0;
         let contractedValueBelanjaModal = 0;
@@ -242,15 +244,19 @@ export class HomeComponent implements OnInit {
               ptr = ptr + 1;
             } else if (project.status === 'Delay') {
               delay = delay + 1;
+            } else if (project.status === 'Potential To Be Delay') {
+              potentialToBeDelay = potentialToBeDelay + 1;
+            } else if (project.status === 'Drop') {
+              drop = drop + 1;
             }
 
-            // if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
-            //   budgetBelanjaModal = budgetBelanjaModal + project.budget;
-            //   contractedValueBelanjaModal = contractedValueBelanjaModal + project.contracted_value;
-            // } else if (project.lineItem === 'Beban Usaha') {
-            //   budgetBebanUsaha = budgetBebanUsaha + project.budget;
-            //   contractedValueBebanUsaha = contractedValueBebanUsaha + project.contracted_value;
-            // }
+            if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
+              budgetBelanjaModal = budgetBelanjaModal + project.budget;
+              contractedValueBelanjaModal = contractedValueBelanjaModal + project.contractedValue;
+            } else if (project.lineItem === 'Beban Usaha') {
+              budgetBebanUsaha = budgetBebanUsaha + project.budget;
+              contractedValueBebanUsaha = contractedValueBebanUsaha + project.contractedValue;
+            }
           }
         }
 
@@ -259,17 +265,21 @@ export class HomeComponent implements OnInit {
         const colorPieChart = ['#43c6f3',
           '#ea710f',
           '#0ca506',
-          '#de0808'];
+          '#de0808',
+          '#3114d0',
+          '#070606'];
         const projectData = {
           labels: [
             'Not Started',
             'On Schedule',
             'PTR/ Live',
-            'Delay'
+            'Delay',
+            'Potential To Be Delay',
+            'Drop'
           ],
           datasets: [
             {
-              data: [notStarted, onSchedule, ptr, delay],
+              data: [notStarted, onSchedule, ptr, delay, potentialToBeDelay, drop],
               backgroundColor: colorPieChart
             }]
         };
