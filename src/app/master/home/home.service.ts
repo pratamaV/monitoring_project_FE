@@ -24,6 +24,17 @@ export class HomeService {
     });
   }
 
+  getProjectByDirectorateUser(directorateUser): Observable<ProjectModel[]> {
+    return new Observable((observer: Observer<ProjectModel[]>) => {
+      this.http.get(`api/projectByDirectorateUser?directorateUser=${directorateUser}&access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+        .subscribe((data: ProjectModel[]) => {
+          observer.next(data);
+        }, error => {
+          observer.error(error.message);
+        });
+    });
+  }
+
   getProjectByBebanUsaha(): Observable<ProjectModel[]> {
     return new Observable((observer: Observer<ProjectModel[]>) => {
       this.http.get(`api/projectByBebanUsaha?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
