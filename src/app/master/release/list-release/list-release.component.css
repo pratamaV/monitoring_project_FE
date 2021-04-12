@@ -18,7 +18,7 @@
 
 #button-atas {
     float: right;
-    align-self: flex-end;
+    align-self: center;
     /* justify-content: space-around; */
 }
 

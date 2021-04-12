@@ -16,7 +16,7 @@
   <div id="cover">
     <!-- Table -->
     <h4 class="mb-5" style="padding-top: 70px">
-<!--      <i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>-->
+      <!--      <i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>-->
       Release</h4>
     <div class="row">
 
@@ -32,7 +32,8 @@
                       <label for="projectName" style="float: left;font-size: 13px">Project Name</label>
                       <select class="custom-select" formControlName="projectName" id="projectName"
                               aria-label="Default select example">
-                        <option *ngFor="let project of projects; let i = index" [ngValue]="project.projectName">{{project.projectName}}
+                        <option *ngFor="let project of projects; let i = index"
+                                [ngValue]="project.projectName">{{project.projectName}}
                         </option>
                       </select>
                     </div>
@@ -58,7 +59,7 @@
                     </div>
 
                     <div class="form-group col">
-                      <label for="userCoPM" style="float: left;font-size: 13px">User PMO</label>
+                      <label for="userCoPM" style="float: left;font-size: 13px">User CO-PM</label>
                       <select class="custom-select" formControlName="userCoPM" id="userCoPM"
                               aria-label="Default select example">
                         <option *ngFor="let user of usersCoPM; let i = index" [ngValue]="user.id">
@@ -76,7 +77,9 @@
                         <option value="PTR/ Live">PTR/ Live</option>
                       </select>
                     </div>
+                  </div>
 
+                  <div class="row">
                     <div class="form-group col">
                       <label for="stage" style="float: left; font-size: 13px">Stage</label>
                       <select class="form-select" formControlName="stage" id="stage"
@@ -94,7 +97,7 @@
                       </select>
                     </div>
 
-                    <div class="form-group col-2">
+                    <div class="form-group col">
                       <label for="divisi" style="float: left; font-size: 13px">Divisi Owner</label>
                       <select class="custom-select" formControlName="divisi" id="divisi"
                               aria-label="Default select example">
@@ -106,7 +109,7 @@
                     </div>
 
 
-                    <div class="form-group col-2">
+                    <div class="form-group col">
                       <label for="directoratUser" style="float: left; font-size: 13px">Direktorate</label>
                       <select class="form-select" formControlName="directoratUser" id="directoratUser"
                               aria-label="Default select example">
@@ -118,7 +121,7 @@
                       </select>
                     </div>
 
-                    <div class="form-group col-2">
+                    <div class="form-group col">
                       <label for="developmentMode" style="float: left; font-size: 13px">Development Mode</label>
                       <select class="form-select" formControlName="developmentMode" id="developmentMode"
                               aria-label="Default select example">
@@ -143,9 +146,6 @@
               <div id="button-atas" class="col col-xs">
                 <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
                   class="fa fa-file"></i> Export to excel
-                </button>
-                <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddRelease()"><i
-                  class="fa fa-plus"></i> Add New Release
                 </button>
               </div>
             </div>

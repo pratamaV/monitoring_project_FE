@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="form-group col">
-                      <label for="userCoPM" style="float: left;">User PMO</label>
+                      <label for="userCoPM" style="float: left;">User CO-PM</label>
                       <select class="custom-select" formControlName="userCoPM" id="userCoPM"
                               aria-label="Default select example">
                         <option *ngFor="let user of usersCoPM; let i = index" [ngValue]="user.id">
@@ -84,7 +84,10 @@
                       </select>
                     </div>
 
-                    <div class="form-group col">
+                  </div>
+                  <div class="row">
+
+                    <div class="form-group col-2">
                       <label for="divisi" style="float: left;">Divisi Owner</label>
                       <select class="custom-select" formControlName="divisi" id="divisi"
                               aria-label="Default select example">
@@ -95,7 +98,7 @@
                       </select>
                     </div>
 
-                    <div class="form-group col">
+                    <div class="form-group col-3">
                       <label for="directoratUser" style="float: left;">Direktorate Owner</label>
                       <select class="form-select" formControlName="directoratUser" id="directoratUser"
                               aria-label="Default select example">
@@ -107,7 +110,7 @@
                       </select>
                     </div>
 
-                    <div class="form-group col">
+                    <div class="form-group col-2">
                       <label for="projectName" style="float: left;">Project Name</label>
                       <select class="form-select" formControlName="projectName" id="projectName"
                               aria-label="Default select example">
@@ -116,7 +119,7 @@
                       </select>
                     </div>
 
-                    <div class="form-group col">
+                    <div class="form-group col-2">
                       <label for="projectCode" style="float: left;">Project Code</label>
                       <select class="form-select" formControlName="projectCode" id="projectCode"
                               aria-label="Default select example">
@@ -126,7 +129,7 @@
                       </select>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-3">
                       <label for="developmentMode">Mode Pengembangan <small style="color: red;">*</small></label>
                       <select class="form-select" formControlName="developmentMode" id="developmentMode"
                               aria-label="Default select example">
