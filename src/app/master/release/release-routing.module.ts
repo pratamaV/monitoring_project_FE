@@ -5,11 +5,16 @@ import {ListReleaseComponent} from './list-release/list-release.component';
 import {FormReleaseComponent} from './form-release/form-release.component';
 import {DetailReleaseComponent} from './detail-release/detail-release.component';
 import { AuthGuardService } from 'src/app/auth-guard.service';
+import {ReleaseViewComponent} from './release-view/release-view.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ListReleaseComponent
+  },
+  {
+    path: 'release-view',
+    component: ReleaseViewComponent
   },
   {
     path: 'form-release',

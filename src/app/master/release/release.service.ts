@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {ProjectModel, ProjectModel2} from '../project/project.model';
+import {ApiResponseModel, ProjectModel, ProjectModel2} from '../project/project.model';
 import {ApiResponseRelease, ReleaseModel, ReleaseModel2} from './release.model';
-import {LogErrorModel} from "../log-error.model";
-import {LogErrorService} from "../log-error.service";
+import {LogErrorModel} from '../log-error.model';
+import {LogErrorService} from '../log-error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -231,6 +231,75 @@ export class ReleaseService {
               alert('Gagal merekam kesalahan');
             });
         });
+    });
+  }
+
+  getAllReleasePerPage(param): Observable<ApiResponseRelease> {
+    return new Observable((observer: Observer<ApiResponseRelease>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      if (param.projectName === null) {
+        param.projectName = '';
+      }
+      if (param.userPM === null) {
+        param.userPM = '';
+      }
+      if (param.userPMO === null) {
+        param.userPMO = '';
+      }
+      if (param.userCoPM === null) {
+        param.userCoPM = '';
+      }
+      if (param.stage === null) {
+        param.stage = '';
+      }
+      if (param.status === null) {
+        param.status = '';
+      }
+      if (param.divisi === null) {
+        param.divisi = '';
+      }
+      if (param.directoratUser === null) {
+        param.directoratUser = '';
+      }
+      if (param.developmentMode === null) {
+        param.developmentMode = '';
+      }
+
+      const url = `/api/releasesPage?projectName=${param.projectName}&pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&developmentMode=${param.developmentMode}`;
+
+      this.http
+        .get(url, header)
+        .pipe(map((responseData: any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe(
+          (data: ApiResponseRelease) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Release-View',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
     });
   }
 }
