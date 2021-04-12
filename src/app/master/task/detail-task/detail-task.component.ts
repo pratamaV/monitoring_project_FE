@@ -117,25 +117,25 @@ export class DetailTaskComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onDeleteDoc(id) {
       Swal.fire({
-        title: 'Are you sure?',
+        title: 'Apa kamu yakin akan menghapus file?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: 'Ya!',
+        cancelButtonText: 'Tidak!',
         reverseButtons: true
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-              title:  'Deleted!',
-              html: 'Your file has been deleted.',
+
+          this.taskService.deleteDoc(id).subscribe((response) => {
+            Swal.fire({
+              html: 'File Berhasil dihapus.',
               icon: 'success',
               showConfirmButton: false,
               timer: 1000
-          });
-          this.taskService.deleteDoc(id).subscribe((response) => {
+            });
             this.onGetTaskById();
           }, error => {
-          Swal.fire('Failed', 'Gagal menghapus dokumen task', 'error');
+          Swal.fire('Gagal', 'Gagal menghapus dokumen task', 'error');
         });
         } else if (
           /* Read more about handling dismissals below */

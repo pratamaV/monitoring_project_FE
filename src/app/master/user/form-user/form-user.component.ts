@@ -174,15 +174,15 @@ export class FormUserComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title:  'Success!',
-          html: 'Password berhasil di ubah',
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 1200
-        });
         this.userService.changePassword(localStorage.getItem('idUser'), param)
           .subscribe(response => {
+            Swal.fire({
+              title:  'Success!',
+              html: 'Password berhasil di ubah',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1200
+            });
             this.router.navigate(['/dashboard/user']);
           }, error => {
             Swal.fire( 'Failed', 'Password Gagal di ubah' , 'error'  );
