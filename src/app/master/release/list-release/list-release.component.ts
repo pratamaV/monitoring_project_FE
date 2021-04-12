@@ -33,6 +33,8 @@ export class ListReleaseComponent implements OnInit {
   pageSize = 10;
   totalItems = 0;
   divitions: any[] = [];
+  projectCodes: any[] = [];
+  projectNames: any[] = [];
   users: any[] = [];
   usersPm: any[] = [];
   usersPmo: any[] = [];
@@ -60,11 +62,16 @@ export class ListReleaseComponent implements OnInit {
     this.filterForm.get('stage').setValue(null);
     this.filterForm.get('divisi').setValue(null);
     this.filterForm.get('directoratUser').setValue(null);
+    this.filterForm.get('projectCode').setValue(null);
+    this.filterForm.get('projectName').setValue(null);
+    this.filterForm.get('developmentMode').setValue(null);
     this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;
         this.totalItems = data.totalElements;
+        this.projectCodes.push(this.loadedRelease[0].project.projectCode);
+        this.projectNames.push(this.loadedRelease[0].project.projectName);
       }, error => {
         alert(error);
       });
@@ -120,7 +127,10 @@ export class ListReleaseComponent implements OnInit {
       status: new FormControl(null),
       stage: new FormControl(null),
       divisi: new FormControl(null),
-      directoratUser: new FormControl(null)
+      directoratUser: new FormControl(null),
+      projectCode: new FormControl(null),
+      projectName: new FormControl(null),
+      developmentMode: new FormControl(null)
     });
   }
 

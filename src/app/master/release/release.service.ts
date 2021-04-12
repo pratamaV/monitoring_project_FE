@@ -90,6 +90,15 @@ export class ReleaseService {
     if (param.directoratUser === null) {
       param.directoratUser = '';
     }
+    if (param.projectCode === null || param.projectCode === undefined) {
+      param.projectCode = '';
+    }
+    if (param.projectName === null || param.projectName === undefined) {
+      param.projectName = '';
+    }
+    if (param.developmentMode === null || param.developmentMode === undefined) {
+      param.developmentMode = '';
+    }
 
     // let url = ``;
     // if (param.status == null && param.stage == null){
@@ -104,7 +113,7 @@ export class ReleaseService {
     // else if (!(param.status == null && param.stage == null)){
     //   url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
     // }
-    const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}`;
+    const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&projectCode=${param.projectCode}&projectName=${param.projectName}&developmentMode=${param.developmentMode}`;
     console.log(url);
     return new Observable((observer: Observer<ApiResponseRelease>) => {
      this.http.get(url, header)
