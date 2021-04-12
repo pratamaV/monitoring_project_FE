@@ -191,7 +191,7 @@
           </small>
         </div>
         <button type="submit" id="submitChange" name="submitChange" class="btn btn-primary"
-                [disabled]="!(form('oldPasswordChange').valid  || form('confirmPasswordChange').valid || form('newPasswordChange').valid ) ">
+                [disabled]="!(form('oldPasswordChange').valid  && form('confirmPasswordChange').valid && form('newPasswordChange').valid ) ">
           Ubah Password
         </button>
       </form>
