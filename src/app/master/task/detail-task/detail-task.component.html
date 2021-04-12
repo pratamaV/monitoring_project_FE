@@ -48,7 +48,7 @@
                             <table class="table table-striped ">
                                 <tbody>
                                     <tr>
-                                        <td>Task Status Done</td>
+                                        <td>Task Status</td>
                                         <td>:</td>
                                         <td>{{myTask.statusDone}}</td>
                                     </tr>
@@ -144,7 +144,7 @@
                                     </form>
                                 </div>
                                 <div class="col-3">
-                                    <small>Update Status Done</small>
+                                    <small>Update Status</small>
                                     <form [formGroup]="detailmytaskForm" method="POST" (ngSubmit)="updateStatusDoneTask(myTask.id,detailmytaskForm.value)">
                                         <div class="col-12 col-xs-6">
                                             <div class="row">

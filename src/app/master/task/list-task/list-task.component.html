@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="form-group col">
-                      <label for="statusDone" style="float: left;">Status Done</label>
+                      <label for="statusDone" style="float: left;">Status</label>
                       <select class="form-select" formControlName="statusDone" id="statusDone"
                               aria-label="Default select example">
                         <option value="ON_PROGRESS">ON PROGRESS</option>
@@ -104,7 +104,7 @@
                 </th>
                 <th scope="col">Score</th>
                 <th scope="col">Weight</th>
-                <th scope="col">Status Done
+                <th scope="col">Status
                   <button (click)="onGetTaskByIdReleaseSort('statusDone', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
@@ -120,7 +120,7 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col">Est. Start Date
+                <th scope="col">Start Date Plan
                   <button (click)="onGetTaskByIdReleaseSort('estStartDate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
@@ -128,7 +128,7 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col">Est. End Date
+                <th scope="col">End Date Plan
                   <button (click)="onGetTaskByIdReleaseSort('estEndDate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
@@ -136,7 +136,7 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col">Act. Start Date
+                <th scope="col">Start Date Actual
                   <button (click)="onGetTaskByIdReleaseSort('actStartDate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
@@ -144,7 +144,7 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col">Act. End Date
+                <th scope="col">End Date Actual
                   <button (click)="onGetTaskByIdReleaseSort('actEndDate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>

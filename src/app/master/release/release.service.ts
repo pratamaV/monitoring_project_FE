@@ -41,10 +41,10 @@ export class ReleaseService {
   }
 
 
-  getReleaseById(id): Observable<ReleaseModel> {
-    return new Observable((observer: Observer<ReleaseModel>) => {
+  getReleaseById(id): Observable<ReleaseModel2> {
+    return new Observable((observer: Observer<ReleaseModel2>) => {
       this.http.get(`api/release/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-        .subscribe((data: ReleaseModel) => {
+        .subscribe((data: ReleaseModel2) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);
