@@ -27,7 +27,7 @@ export class ReleaseViewComponent implements OnInit {
     stage: '',
     divisi: '',
     directoratUser: '',
-    developmentMode: '',
+    developmentMode: ''
   };
   isLoading = false;
   asc = true;
@@ -41,6 +41,9 @@ export class ReleaseViewComponent implements OnInit {
   usersPmo: any[] = [];
   usersCoPM: any[] = [];
   userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
+
+  resultSearch: string;
+
   constructor(private releaseService: ReleaseService,
               private projectService: ProjectServiceService,
               private router: Router) {
@@ -157,6 +160,37 @@ export class ReleaseViewComponent implements OnInit {
       }, error => {
         alert(error);
       });
+  }
+
+  // tslint:disable-next-line:typedef
+  searchLive(){
+    if (this.resultSearch === ''){
+      this.isLoading = true;
+      this.filterForm2.get('projectName').setValue(null);
+      this.filterForm2.get('userPM').setValue(null);
+      this.filterForm2.get('userPMO').setValue(null);
+      this.filterForm2.get('userCoPM').setValue(null);
+      this.filterForm2.get('status').setValue(null);
+      this.filterForm2.get('stage').setValue(null);
+      this.filterForm2.get('divisi').setValue(null);
+      this.filterForm2.get('directoratUser').setValue(null);
+      this.filterForm2.get('developmentMode').setValue(null);
+      this.releaseService.getAllReleasePerPage(this.paramNull)
+        .subscribe(data => {
+          this.isLoading = false;
+          this.loadedRelease = data.content;
+          this.totalItems = data.totalElements;
+        }, error => {
+          alert(error);
+        });
+    } else {
+      this.releaseService.getAllReleaseSearch(this.resultSearch, this.resultSearch)
+        .subscribe(data => {
+          this.loadedRelease = data.content;
+        }, error => {
+          alert(error);
+        });
+    }
   }
 
   // tslint:disable-next-line:typedef
