@@ -7,7 +7,7 @@ import {TaskService} from '../task/task.service';
 import {TaskModel, TaskModel2} from '../task/task.model';
 import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
 import {LogErrorModel} from '../log-error.model';
-import {LogErrorService} from "../log-error.service";
+import {LogErrorService} from '../log-error.service';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +30,8 @@ export class HomeComponent implements OnInit {
   //   status: ''
   // };
 
+  // serviceDirectoare;
+
 
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
@@ -37,6 +39,7 @@ export class HomeComponent implements OnInit {
               private logErrorService: LogErrorService) {
   }
 
+  // @ts-ignore
   ngOnInit(): void {
     this.onGetUserByPerformance();
     this.onGetTaskDeadline();
@@ -205,38 +208,19 @@ export class HomeComponent implements OnInit {
 
     this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
-        let KepatuhanandSDM = 0;
-        let Keuangan = 0;
-        let OperationalRetail = 0;
-        let Teknik = 0;
-        let Utama = 0;
         let notStarted = 0;
         let onSchedule = 0;
         let ptr = 0;
         let delay = 0;
         let potentialToBeDelay = 0;
         let drop = 0;
-        let allDirectorate = 0;
+        const allDirectorate = 0;
         let contractedValueBebanUsaha = 0;
         let contractedValueBelanjaModal = 0;
         let budgetBebanUsaha = 0;
         let budgetBelanjaModal = 0;
         for (const project of data.content) {
           if (project.statusProject === 'Active') {
-            // if (project.directorateUser === 'Kepatuhan & SDM') {
-            //   KepatuhanandSDM = KepatuhanandSDM + 1;
-            // } else if (project.directorateUser === 'Keuangan') {
-            //   Keuangan = Keuangan + 1;
-            // } else if (project.directorateUser === 'Operational Retail') {
-            //   OperationalRetail = OperationalRetail + 1;
-            // } else if (project.directorateUser === 'Teknik') {
-            //   Teknik = Teknik + 1;
-            // } else if (project.directorateUser === 'Utama') {
-            //   Utama = Utama + 1;
-            // } else {
-            //   allDirectorate = allDirectorate + 1;
-            // }
-
             if (project.status === 'Not Started') {
               notStarted = notStarted + 1;
             } else if (project.status === 'On Schedule') {
@@ -337,10 +321,8 @@ export class HomeComponent implements OnInit {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
-                // tslint:disable-next-line:only-arrow-functions
-                formatter: function (value) {
-                  // tslint:disable-next-line:prefer-const
-                  var number_string = value.toString(),
+                formatter(value) {
+                  let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
                     ribuan = number_string.substr(sisa).match(/\d{3}/g);
@@ -390,9 +372,9 @@ export class HomeComponent implements OnInit {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
-                formatter: function (value) {
-                  // tslint:disable-next-line:prefer-const
-                  var number_string = value.toString(),
+                // tslint:disable-next-line:typedef
+                formatter(value) {
+                  let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
                     ribuan = number_string.substr(sisa).match(/\d{3}/g);
@@ -447,80 +429,105 @@ export class HomeComponent implements OnInit {
           });
       });
 
-    this.homeService.getProjectByDirectorateUser('Kepatuhan & SDM')
+    let KepatuhanandSDM = 0;
+    let Keuangan = 0;
+    let Operasional = 0;
+    let Teknik = 0;
+    let Utama = 0;
+    this.homeService.getProjectByDirectorateUser('Operasional')
       .subscribe(data => {
-        console.log(data);
-        let KepatuhanandSDM = 0;
-        let Keuangan = 0;
-        let OperationalRetail = 0;
-        let Teknik = 0;
-        let Utama = 0;
-        let allDirectorate = 0;
-        let updateDataProject2;
-        const colorHorBarChart = ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'];
-
-        const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
-          type: 'horizontalBar',
-          data: {
-            labels: ['Kepatuhan & SDM', 'Keuangan', 'Operasional', 'Teknik', 'Utama', 'Semua Direktorat'],
-            datasets: [
-              {
-                label: '',
-                backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'],
-                data: [KepatuhanandSDM, Keuangan, OperationalRetail, Teknik, Utama, allDirectorate]
-              }
-            ]
-          },
-          options: {
-            legend: {display: false},
-            plugins: {
-              datalabels: {
-                color: 'white',
-                anchor: 'center',
-                align: 'center',
-                formatter: Math.round,
-                font: {
-                  weight: 'bold'
-                }
-              }
-            },
-            scales: {
-              xAxes: [{
-                ticks: {
-                  beginAtZero: true,
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
-                }
-              }]
-            }
-          }
-        });
-
-        // tslint:disable-next-line:typedef
-        function updateHorBarChart(chart, dataProject2, color) {
-          chart.data.datasets.pop();
-          chart.data.datasets.push({
-            data: dataProject2,
-            backgroundColor: color
-          });
-          chart.update();
-        }
-        setInterval(() => {
-          updateDataProject2 = [KepatuhanandSDM, Keuangan, OperationalRetail, Teknik, Utama, allDirectorate];
-          updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
-        }, 1800000);
+        Operasional = data.length;
       }, error => {
         alert('Gagal Memuat');
       });
 
+    this.homeService.getProjectByDirectorateUser('Kepatuhan %26 SDM')
+      .subscribe(data => {
+        KepatuhanandSDM = data.length;
+      }, error => {
+        alert('Gagal Memuat');
+      });
+
+    this.homeService.getProjectByDirectorateUser('Keuangan')
+      .subscribe(data => {
+        Keuangan = data.length;
+      }, error => {
+        alert('Gagal Memuat');
+      });
+
+    this.homeService.getProjectByDirectorateUser('Teknik')
+      .subscribe(data => {
+        Teknik = data.length;
+      }, error => {
+        alert('Gagal Memuat');
+      });
+
+    this.homeService.getProjectByDirectorateUser('Utama')
+      .subscribe(data => {
+        Utama = data.length;
+      }, error => {
+        alert('Gagal Memuat');
+      });
+
+    let updateDataProject2;
+    const colorHorBarChart = ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'];
+
+    const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
+      type: 'horizontalBar',
+      data: {
+        labels: ['Kepatuhan & SDM', 'Keuangan', 'Operasional', 'Teknik', 'Utama'],
+        datasets: [
+          {
+            label: '',
+            backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850'],
+            data: [KepatuhanandSDM, Keuangan, Operasional, Teknik, Utama]
+          }
+        ]
+      },
+      options: {
+        legend: {display: false},
+        plugins: {
+          datalabels: {
+            color: 'white',
+            anchor: 'center',
+            align: 'center',
+            formatter: Math.round,
+            font: {
+              weight: 'bold'
+            }
+          }
+        },
+        scales: {
+          xAxes: [{
+            ticks: {
+              beginAtZero: true,
+            }
+          }],
+          yAxes: [{
+            ticks: {
+              maxRotation: 90,
+              minRotation: 80
+            }
+          }]
+        }
+      }
+    });
+
+    // tslint:disable-next-line:typedef
+    function updateHorBarChart(chart, dataProject2, color) {
+      chart.data.datasets.pop();
+      chart.data.datasets.push({
+        data: dataProject2,
+        backgroundColor: color
+      });
+      chart.update();
+    }
 
     setInterval(() => {
       this.onGetUserByPerformance();
       this.onGetTaskDeadline();
+      updateDataProject2 = [KepatuhanandSDM, Keuangan, Operasional, Teknik, Utama];
+      updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
     }, 1800000);
 
   }
