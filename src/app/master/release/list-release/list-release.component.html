@@ -219,11 +219,13 @@
                                         <th scope="row">{{release.releaseCode}}</th>
                                         <td>{{release.releaseName}}</td>
                                         <td style="width: 200px;">
-                                            <button [disabled]="release.statusRelease === 'Completed'" (click)="updateRelease(release)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                                            <button (click)="onGetReleaseById(release.id, 'listRelease')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+                                            class="fa fa-eye"></i></button>&nbsp;
+                                            <button [disabled]="release.statusRelease === 'Completed'" (click)="updateRelease(release)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
                     class="fa fa-edit"></i></button>&nbsp;
                                             <button (click)="onGoTask(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i
                     class="fa fa-tasks"></i></button>&nbsp;
-                                            <button (click)="onAddIssued(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Issue"><i
+                                            <button (click)="onAddIssued(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Issue"><i
                     class="fa fa-folder"></i></button>&nbsp;
                                         </td>
                                         <td>{{release.pm.username}}</td>

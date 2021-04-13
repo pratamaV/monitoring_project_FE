@@ -1,1 +1,149 @@
-<p>detail-release works!</p>
+<app-sidebar></app-sidebar>
+<div class="card">
+
+    <div class="container-sm">
+        <div class="panel panel-default panel-table col-lg-12">
+            <div class="panel-heading">
+                <div class="col col-xs-6 mt-4 mb-3 text-left">
+                    <h4><i class="fa fa-chevron-circle-left" (click)="goToReleaseList()"></i> Detail Release {{release.releaseName}}</h4>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col col-xs-6 mt-3 mb-3">
+                        <div class="panel-body" style="overflow-x:auto;">
+                            <table class="table table-striped ">
+                                <tbody class="text-left">
+                                    <tr>
+                                        <td>Release Code</td>
+                                        <td>:</td>
+                                        <td>{{release.releaseCode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Release Name</td>
+                                        <td>:</td>
+                                        <td>{{release.releaseName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Project Name</td>
+                                        <td>:</td>
+                                        <td>{{release.project.projectName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PMO</td>
+                                        <td>:</td>
+                                        <td>{{release.pmo.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PM</td>
+                                        <td>:</td>
+                                        <td>{{release.pm.username}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>CoPM</td>
+                                        <td>:</td>
+                                        <td>{{release.coPM.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Department Head</td>
+                                        <td>:</td>
+                                        <td>{{release.departmentHead.username}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Development Mode</td>
+                                        <td>:</td>
+                                        <td>{{release.developmentMode}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Directorate User</td>
+                                        <td>:</td>
+                                        <td>{{release.directorateUser}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Divisi User</td>
+                                        <td>:</td>
+                                        <td>{{release.divisiUser.divisionName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Description</td>
+                                        <td>:</td>
+                                        <td>{{release.description}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col col-xs-6 mt-3 mb-3">
+                        <div class="panel-body" style="overflow-x:auto;">
+                            <table class="table table-striped ">
+                                <tbody class="text-left">
+                                    <tr>
+                                        <td>Start Date Actual</td>
+                                        <td>:</td>
+                                        <td>{{release.actStartdate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>End Date Actual</td>
+                                        <td>:</td>
+                                        <td>{{release.actEnddate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Start Date Plan</td>
+                                        <td>:</td>
+                                        <td>{{release.estStartdate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>End Date Plan</td>
+                                        <td>:</td>
+                                        <td>{{release.estEnddate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contracted Value</td>
+                                        <td>:</td>
+                                        <td>{{release.contractedValue | currency:'Rp.'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Prosentase Release</td>
+                                        <td>:</td>
+                                        <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Score</td>
+                                        <td>:</td>
+                                        <td>{{release.score}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Stage</td>
+                                        <td>:</td>
+                                        <td>{{release.stage}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Category Activity</td>
+                                        <td>:</td>
+                                        <td>{{release.categoryActivity}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>:</td>
+                                        <td>{{release.status}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status Release</td>
+                                        <td>:</td>
+                                        <td>{{release.statusRelease}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Weight</td>
+                                        <td>:</td>
+                                        <td>{{release.weight| number : '1.2-2'}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
