@@ -165,6 +165,7 @@ export class ReleaseViewComponent implements OnInit {
   // tslint:disable-next-line:typedef
   searchLive(){
     if (this.resultSearch === ''){
+      console.log('masuk sini');
       this.isLoading = true;
       this.filterForm2.get('projectName').setValue(null);
       this.filterForm2.get('userPM').setValue(null);
