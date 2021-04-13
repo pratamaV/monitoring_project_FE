@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit {
 
         const ctx = document.getElementById('barChart');
         const myChart = new Chart('barChart', {
-          type: 'horizontalBar',
+          type: 'bar',
           data: {
             labels: ['Not Started',
               'Requirement Gathering',
@@ -145,6 +145,7 @@ export class HomeComponent implements OnInit {
             }]
           },
           options: {
+            indexAxis: 'y',
             legend: {display: false},
             plugins: {
               datalabels: {
@@ -162,13 +163,13 @@ export class HomeComponent implements OnInit {
             scales: {
               xAxes: [{
                 ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
+                  beginAtZero: true
                 }
               }],
               yAxes: [{
                 ticks: {
-                  beginAtZero: true
+                  maxRotation: 90,
+                  minRotation: 80
                 }
               }]
             }
