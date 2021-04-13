@@ -154,124 +154,132 @@
             <table class="table align-items-center table-flush" id="excel-table">
               <thead class="thead-light">
               <tr style="text-align: center;">
-                <th scope="col">Release Code
-                  <button (click)="onGetReleaseByIdSort('releaseCode', 'ASC')" *ngIf="asc == false"
+                <th scope="col">Project Code
+                  <button (click)="onGetReleaseSort('project.projectCode', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('releaseCode', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('project.projectCode', 'DESC')" *ngIf="asc == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Release Code
+                  <button (click)="onGetReleaseSort('releaseCode', 'ASC')" *ngIf="asc == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="onGetReleaseSort('releaseCode', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Release Name
-                  <button (click)="onGetReleaseByIdSort('releaseName', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('releaseName', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('releaseName', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('releaseName', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col" style="width: 100px;">Action</th>
                 <th scope="col">PM
-                  <button (click)="onGetReleaseByIdSort('pm.username', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('pm.username', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('pm.username', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('pm.username', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">PMO
-                  <button (click)="onGetReleaseByIdSort('pmo.username', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('pmo.username', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('pmo.username', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('pmo.username', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">coPM
-                  <button (click)="onGetReleaseByIdSort('coPM.username', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('coPM.username', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('coPM.username', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('coPM.username', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Status
-                  <button (click)="onGetReleaseByIdSort('status', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('status', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('status', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('status', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Stage
-                  <button (click)="onGetReleaseByIdSort('stage', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('stage', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('stage', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('stage', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Divisi
-                  <button (click)="onGetReleaseByIdSort('divisiUser.divisionName', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('divisiUser.divisionName', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('divisiUser.divisionName', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('divisiUser.divisionName', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Directorat Owner
-                  <button (click)="onGetReleaseByIdSort('directoratUser', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('directoratUser', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('directoratUser', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('directoratUser', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Release Precentage
-                  <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('prosentaseRelease', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('prosentaseRelease', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">StartDate Plan
-                  <button (click)="onGetReleaseByIdSort('estStartdate', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('estStartdate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('estStartdate', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('estStartdate', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">StartDate Actual
-                  <button (click)="onGetReleaseByIdSort('actStartdate', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('actStartdate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('actStartdate', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('actStartdate', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">End Date Plan
-                  <button (click)="onGetReleaseByIdSort('estEnddate', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('estEnddate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('estEnddate', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('estEnddate', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">End Date Actual
-                  <button (click)="onGetReleaseByIdSort('actEnddate', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('actEnddate', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('actEnddate', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('actEnddate', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Status Release
-                  <button (click)="onGetReleaseByIdSort('statusRelease', 'ASC')" *ngIf="asc == false"
+                  <button (click)="onGetReleaseSort('statusRelease', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('statusRelease', 'DESC')" *ngIf="asc == true"
+                  <button (click)="onGetReleaseSort('statusRelease', 'DESC')" *ngIf="asc == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
@@ -283,6 +291,7 @@
               <tr
                 *ngFor="let release of loadedRelease | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
                 [ngStyle]="getStyle(release)">
+                <th scope="row">{{release.project.projectCode}}</th>
                 <th scope="row">{{release.releaseCode}}</th>
                 <td>{{release.releaseName}}</td>
                 <td style="width: 200px;">
