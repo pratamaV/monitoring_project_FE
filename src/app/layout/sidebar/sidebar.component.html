@@ -20,6 +20,7 @@
         </div>
 
         <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+        <!-- <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a> -->
         <ul class="nav flex-column bg-white mb-0">
             <li class="nav-item">
                 <a [routerLink]="['/home']" routerLinkActive="router-link-active" class="nav-link text-dark">
@@ -32,8 +33,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['/dashboard/release/release-view']" routerLinkActive="router-link-active">
+                    <i class="fa fa-file-archive-o mr-3 text-primary fa-fw"></i> Release-View
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link text-dark" [routerLink]="['/dashboard/project/project-user']" routerLinkActive="router-link-active">
-                    <i class="fa fa-percent mr-3 text-primary fa-fw"></i> Project-User
+                    <i class="fa fa-percent mr-3 text-primary fa-fw"></i> Project-View
                 </a>
             </li>
             <li class="nav-item">
@@ -44,6 +50,11 @@
             <li class="nav-item">
                 <a class="nav-link text-dark" [routerLink]="['/dashboard/user']" routerLinkActive="router-link-active">
                     <i class="fa fa-user-plus mr-3 text-primary fa-fw"></i> User
+                </a>
+            </li>
+            <li class="nav-item" [hidden]="user.userRole !== '03'">
+                <a class="nav-link text-dark" [routerLink]="['/dashboard/project/my-project']" routerLinkActive="router-link-active">
+                    <i class="fa fa-file-archive-o mr-3 text-primary fa-fw"></i> My-Project
                 </a>
             </li>
             <li class="nav-item" style="float :inline-end;">
@@ -135,5 +146,165 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="../../../assets/js/main.js"></script>
 </body>
+
+<!-- ================================================================================================== -->
+<!--
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<body>
+
+
+    <div class="container">
+    <div class="row">
+        <div class="wrapper">
+            <div class="side-bar">
+                <ul>
+                    <li class="menu-head">
+                        CLASH OF CLANS
+                        <a [routerLink]="['/dashboard/project/project-user']" routerLinkActive="router-link-active" class="push_menu"><span class="glyphicon glyphicon-align-justify pull-right"></span></a>
+                        <button class="btn push_menu">   <span class="glyphicon glyphicon-align-justify pull-right"></span></button>
+
+                    </li>
+                    <div class="menu">
+                        <li>
+                            <a [routerLink]="['/dashboard/project/project-user']" routerLinkActive="router-link-active">Dashboard <span class="glyphicon glyphicon-dashboard pull-right"></span></a>
+                        </li>
+                        <li>
+                            <a [routerLink]="['/dashboard/project']" routerLinkActive="router-link-active" class="active">Project<span class="glyphicon glyphicon-heart pull-right"></span></a>
+                        </li>
+                        <li>
+                            <a href="#">Like it? <span class="glyphicon glyphicon-star pull-right"></span></a>
+                        </li>
+                        <li>
+                            <a href="#">Settings <span class="glyphicon glyphicon-cog pull-right"></span></a>
+                        </li>
+                    </div>
+
+                </ul>
+            </div>
+            <div class="content">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Panel heading without title</div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+        <ul class="nav flex-column bg-white mb-0">
+            <li class="nav-item">
+                <a [routerLink]="['/home']" routerLinkActive="router-link-active" class="nav-link text-dark">
+                    <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i> Charts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['/dashboard/project']" routerLinkActive="router-link-active">
+                    <i class="fa fa-product-hunt mr-3 text-primary fa-fw"></i> Project
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['/dashboard/project/project-user']" routerLinkActive="router-link-active">
+                    <i class="fa fa-percent mr-3 text-primary fa-fw"></i> Project-User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['/dashboard/task/my-task']" routerLinkActive="router-link-active">
+                    <i class="fa fa-tasks mr-3 text-primary fa-fw"></i> My-Task <span class="badge badge-pill badge-warning ml-2">{{numberTask}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" [routerLink]="['/dashboard/user']" routerLinkActive="router-link-active">
+                    <i class="fa fa-user-plus mr-3 text-primary fa-fw"></i> User
+                </a>
+            </li>
+            <li class="nav-item" style="float :inline-end;">
+                <a class="nav-link text-dark" [routerLink]="['/logout']" routerLinkActive="router-link-active">
+                    <i class="fa fa-sign-out mr-3 text-primary fa-fw"></i> Sign Out
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <!--  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>-->
+
+<!--  <ul class="nav flex-column bg-white mb-0">-->
+<!--    <li class="nav-item">-->
+<!--      <a href="#" class="nav-link text-dark">-->
+<!--        <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>-->
+<!--        area charts-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="nav-item">-->
+<!--      <a href="#" class="nav-link text-dark">-->
+<!--        <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>-->
+<!--        bar charts-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="nav-item">-->
+<!--      <a href="#" class="nav-link text-dark">-->
+<!--        <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>-->
+<!--        pie charts-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li class="nav-item">-->
+<!--      <a href="#" class="nav-link text-dark">-->
+<!--        <i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>-->
+<!--        line charts-->
+<!--      </a>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!-- </div> -->
+<!-- End vertical navbar -->
+
+
+<!-- Page content holder -->
+<!--<div class="page-content p-5" id="content">-->
+<!--  &lt;!&ndash; Toggle button &ndash;&gt;-->
+<!--  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>-->
+
+<!--  &lt;!&ndash; Demo content &ndash;&gt;-->
+<!--  <h2 class="display-4 text-white">Bootstrap vertical nav</h2>-->
+<!--  <p class="lead text-white mb-0">Build a fixed sidebar using Bootstrap 4 vertical navigation and media objects.</p>-->
+<!--  <div class="separator"></div>-->
+<!--  <div class="row text-white">-->
+<!--    <div class="col-lg-7">-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor.-->
+<!--      </p>-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor.-->
+<!--      </p>-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor.-->
+<!--      </p>-->
+<!--    </div>-->
+<!--    <div class="col-lg-5">-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor.-->
+<!--      </p>-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
+<!--      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure-->
+<!--        dolor.-->
+<!--      </p>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->
+<!-- End demo content -->
+
 
 <!-- ================================================================================================== -->

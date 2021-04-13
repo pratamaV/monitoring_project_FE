@@ -1,31 +1,33 @@
-import {Component, OnInit} from '@angular/core';
-import {ReleaseService} from '../release.service';
-import {Router} from '@angular/router';
-import {ReleaseModel, ReleaseModel2} from '../release.model';
-import {ProjectModel2} from '../../project/project.model';
-import * as XLSX from 'xlsx';
-import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
-import {ProjectServiceService} from '../../project/project-service.service';
-
+import { Component, OnInit } from '@angular/core';
+import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
+import {ReleaseModel, ReleaseModel2} from "../release.model";
+import {ReleaseService} from "../release.service";
+import {ProjectServiceService} from "../../project/project-service.service";
+import {Router} from "@angular/router";
+import * as XLSX from "xlsx";
+import {ProjectModel} from "../../project/project.model";
 
 @Component({
-  selector: 'app-list-release',
-  templateUrl: './list-release.component.html',
-  styleUrls: ['./list-release.component.css']
+  selector: 'app-release-view',
+  templateUrl: './release-view.component.html',
+  styleUrls: ['./release-view.component.css']
 })
-export class ListReleaseComponent implements OnInit {
+export class ReleaseViewComponent implements OnInit {
+
 
   fileName = 'List-Release-' + new Date().toDateString() + '.xlsx';
-  filterForm: FormGroup;
+  filterForm2: FormGroup;
   loadedRelease: ReleaseModel2[];
   paramNull = {
+    projectName: '',
     userPM: '',
     userPMO: '',
     userCoPM: '',
     status: '',
     stage: '',
     divisi: '',
-    directoratUser: ''
+    directoratUser: '',
+    developmentMode: '',
   };
   isLoading = false;
   asc = true;
@@ -33,8 +35,7 @@ export class ListReleaseComponent implements OnInit {
   pageSize = 10;
   totalItems = 0;
   divitions: any[] = [];
-  projectCodes: any[] = [];
-  projectNames: any[] = [];
+  projects: ProjectModel[] = [];
   users: any[] = [];
   usersPm: any[] = [];
   usersPmo: any[] = [];
@@ -50,28 +51,26 @@ export class ListReleaseComponent implements OnInit {
     this.onGetListRelease();
     this.getAllDivisi();
     this.getAllUser();
+    this.getProjects();
   }
 
   // tslint:disable-next-line:typedef
   onGetListRelease() {
     this.isLoading = true;
-    this.filterForm.get('userPM').setValue(null);
-    this.filterForm.get('userPMO').setValue(null);
-    this.filterForm.get('userCoPM').setValue(null);
-    this.filterForm.get('status').setValue(null);
-    this.filterForm.get('stage').setValue(null);
-    this.filterForm.get('divisi').setValue(null);
-    this.filterForm.get('directoratUser').setValue(null);
-    this.filterForm.get('projectCode').setValue(null);
-    this.filterForm.get('projectName').setValue(null);
-    this.filterForm.get('developmentMode').setValue(null);
-    this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
+    this.filterForm2.get('projectName').setValue(null);
+    this.filterForm2.get('userPM').setValue(null);
+    this.filterForm2.get('userPMO').setValue(null);
+    this.filterForm2.get('userCoPM').setValue(null);
+    this.filterForm2.get('status').setValue(null);
+    this.filterForm2.get('stage').setValue(null);
+    this.filterForm2.get('divisi').setValue(null);
+    this.filterForm2.get('directoratUser').setValue(null);
+    this.filterForm2.get('developmentMode').setValue(null);
+    this.releaseService.getAllReleasePerPage(this.paramNull)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;
         this.totalItems = data.totalElements;
-        this.projectCodes.push(this.loadedRelease[0].project.projectCode);
-        this.projectNames.push(this.loadedRelease[0].project.projectName);
       }, error => {
         alert(error);
       });
@@ -82,6 +81,17 @@ export class ListReleaseComponent implements OnInit {
     this.projectService.getAllDivisi().subscribe(
       response => {
         this.divitions = response;
+      },
+      error => {
+        alert(error);
+      }
+    );
+  }
+
+  getProjects() {
+    this.projectService.getProjects().subscribe(
+      response => {
+        this.projects = response;
       },
       error => {
         alert(error);
@@ -120,7 +130,8 @@ export class ListReleaseComponent implements OnInit {
   }
 
   private buildForm(): void {
-    this.filterForm = new FormGroup({
+    this.filterForm2 = new FormGroup({
+      projectName: new FormControl(null),
       userPM: new FormControl(null),
       userPMO: new FormControl(null),
       userCoPM: new FormControl(null),
@@ -128,20 +139,18 @@ export class ListReleaseComponent implements OnInit {
       stage: new FormControl(null),
       divisi: new FormControl(null),
       directoratUser: new FormControl(null),
-      projectCode: new FormControl(null),
-      projectName: new FormControl(null),
       developmentMode: new FormControl(null)
     });
   }
 
   form(property): AbstractControl {
-    return this.filterForm.get(property);
+    return this.filterForm2.get(property);
   }
 
   // tslint:disable-next-line:typedef
   onGetListReleaseFilter(param) {
     this.isLoading = true;
-    this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), param)
+    this.releaseService.getAllReleasePerPage(param)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;
@@ -221,12 +230,12 @@ export class ListReleaseComponent implements OnInit {
         //     }
         //   }
         // } else {
-          this.loadedRelease = data;
-          if (sort === 'ASC') {
-            this.asc = true;
-          } else if (sort === 'DESC') {
-            this.asc = false;
-          }
+        this.loadedRelease = data;
+        if (sort === 'ASC') {
+          this.asc = true;
+        } else if (sort === 'DESC') {
+          this.asc = false;
+        }
         // }
       },
       error => {
@@ -239,12 +248,12 @@ export class ListReleaseComponent implements OnInit {
     if (release.statusRelease === 'Not Active') {
       return {
         'background-color': '#bbbfca',
-          color : 'black'
+        color : 'black'
       };
     } else if (release.statusRelease === 'Completed') {
       return {
         'background-color': '#e8e8e8',
-          color: 'black'
+        color: 'black'
       };
     } else if (release.statusRelease === 'Active' && release.status === 'Delay') {
       return {
@@ -253,4 +262,5 @@ export class ListReleaseComponent implements OnInit {
       };
     }
   }
+
 }

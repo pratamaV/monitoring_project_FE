@@ -31,9 +31,11 @@ export class DetailTaskComponent implements OnInit {
       filedesc: new FormControl(null, [Validators.required]),
       taskDoc: new FormControl(null, [Validators.required]),
       statusDone: new FormControl(null),
-      prosentase: new FormControl(null, [Validators.required])
+      prosentase: new FormControl(null, [Validators.required, Validators.pattern(/^([0-9]\.[0-9]{1}|[0-9]\.[0-9]{2}|\.[0-9]{2}|[1-9][0-9]\.[0-9]{1}|[1-9][0-9]\.[0-9]{2}|[0-9][0-9]|[1-9][0-9]\.[0-9]{2})$|^([0-9]|[0-9][0-9]|[0-99])$|^100$/gm)])
     });
   }
+
+
 
   form(property): AbstractControl {
     return this.detailmytaskForm.get(property);
@@ -115,25 +117,25 @@ export class DetailTaskComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onDeleteDoc(id) {
       Swal.fire({
-        title: 'Are you sure?',
+        title: 'Apa kamu yakin akan menghapus file?',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
+        confirmButtonText: 'Ya!',
+        cancelButtonText: 'Tidak!',
         reverseButtons: true
       }).then((result) => {
         if (result.isConfirmed) {
-          Swal.fire({
-              title:  'Deleted!',
-              html: 'Your file has been deleted.',
+
+          this.taskService.deleteDoc(id).subscribe((response) => {
+            Swal.fire({
+              html: 'File Berhasil dihapus.',
               icon: 'success',
               showConfirmButton: false,
               timer: 1000
-          });
-          this.taskService.deleteDoc(id).subscribe((response) => {
+            });
             this.onGetTaskById();
           }, error => {
-          Swal.fire('Failed', 'Gagal menghapus dokumen task', 'error');
+          Swal.fire('Gagal', 'Gagal menghapus dokumen task', 'error');
         });
         } else if (
           /* Read more about handling dismissals below */

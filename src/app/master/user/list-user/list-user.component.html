@@ -31,6 +31,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Role</th>
                                         <th scope="col">Function</th>
+                                        <th scope="col">Edit</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Directorate</th>
                                         <th scope="col">Divisi</th>
@@ -50,6 +51,10 @@
                                         <td *ngIf="user.userRole === '03'">CO-PM</td>
                                         <td *ngIf="user.userRole === '04'">Squad</td>
                                         <td *ngIf="user.userRole === '05'">Kepala Bagian</td>
+                                        <td>
+                                            <button (click)="updateUser(user)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                    class="fa fa-edit"></i></button>&nbsp;
+                                        </td>
                                         <td>{{user.email}}</td>
                                         <td>{{user.directorateUser}}</td>
                                         <td>{{user.divisiUser.divisionName}}</td>

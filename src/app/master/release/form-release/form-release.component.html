@@ -3,11 +3,14 @@
 
 <div class="container">
   <div>
-    <h4 style="text-align: left;"><i class="fa fa-chevron-circle-left" (click)="onGolistRelease()"></i> Form Pembuatan
-      Release</h4>
+    <h4 style="text-align: left;">
+<!--      <i class="fa fa-chevron-circle-left" (click)="onGolistRelease()"></i>-->
+      <i class="fa fa-chevron-circle-left" onclick="history.back()"></i>
+      Form Pembuatan Release</h4>
   </div>
 
   <div class="container-fluid" style="padding: 15px; margin: 20px">
+    <p style="font-weight: bold">Project Name : {{project.projectName}}</p>
     <form style="padding: 10px" [formGroup]="releaseForm" method="post"
           (ngSubmit)="onSaveRelease(releaseForm.value, releaseForm.valid)">
       <div class="Form-group">
@@ -146,11 +149,30 @@
           <option value="Not Started">Not Started</option>
           <option value="On Schedule">On Schedule</option>
           <option value="PTR/ Live">PTR/ Live</option>
+          <option value="Potentital To Be Delay">Potentital To Be Delay</option>
+          <option value="Drop">Drop</option>
           <option value="Delay">Delay</option>
         </select>
         <small class="form-text text-danger "
                *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
           <div *ngIf="form('status').errors?.required">
+            Bagian ini harus terisi
+          </div>
+        </small>
+      </div>
+
+
+      <div class="form-group">
+        <label for="developmentMode">Mode Pengembangan <small style="color: red;">*</small></label>
+        <select class="form-select" formControlName="developmentMode" id="developmentMode"
+                aria-label="Default select example">
+          <option value="Internal Development">Internal Development</option>
+          <option value="Vendor">Vendor</option>
+          <option value="Join Development">Join Development</option>
+        </select>
+        <small class="form-text text-danger "
+               *ngIf="form('developmentMode').invalid && form('developmentMode').dirty || form('developmentMode').touched">
+          <div *ngIf="form('developmentMode').errors?.required">
             Bagian ini harus terisi
           </div>
         </small>

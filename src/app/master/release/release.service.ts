@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {ProjectModel, ProjectModel2} from '../project/project.model';
+import {ApiResponseModel, ProjectModel, ProjectModel2} from '../project/project.model';
 import {ApiResponseRelease, ReleaseModel, ReleaseModel2} from './release.model';
-import {LogErrorModel} from "../log-error.model";
-import {LogErrorService} from "../log-error.service";
+import {LogErrorModel} from '../log-error.model';
+import {LogErrorService} from '../log-error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,10 +41,10 @@ export class ReleaseService {
   }
 
 
-  getReleaseById(id): Observable<ReleaseModel> {
-    return new Observable((observer: Observer<ReleaseModel>) => {
+  getReleaseById(id): Observable<ReleaseModel2> {
+    return new Observable((observer: Observer<ReleaseModel2>) => {
       this.http.get(`api/release/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
-        .subscribe((data: ReleaseModel) => {
+        .subscribe((data: ReleaseModel2) => {
           observer.next(data);
         }, error => {
           observer.error(error.message);
@@ -68,22 +68,56 @@ export class ReleaseService {
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
-    let url = ``;
-    if (param.status == null && param.stage == null){
-        url = `api/releaseByProjectId/${id}`;
+
+    if (param.userPM === null) {
+      param.userPM = '';
     }
-    else if (param.stage == null){
-        url = `api/releaseByProjectId/${id}?status=${param.status}`;
+    if (param.userPMO === null) {
+      param.userPMO = '';
     }
-    else if (param.status == null){
-        url = `api/releaseByProjectId/${id}?stage=${param.stage}`;
+    if (param.userCoPM === null) {
+      param.userCoPM = '';
     }
-    else if (!(param.status == null && param.stage == null)){
-      url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
+    if (param.stage === null) {
+      param.stage = '';
     }
+    if (param.status === null) {
+      param.status = '';
+    }
+    if (param.divisi === null) {
+      param.divisi = '';
+    }
+    if (param.directoratUser === null) {
+      param.directoratUser = '';
+    }
+    if (param.projectCode === null || param.projectCode === undefined) {
+      param.projectCode = '';
+    }
+    if (param.projectName === null || param.projectName === undefined) {
+      param.projectName = '';
+    }
+    if (param.developmentMode === null || param.developmentMode === undefined) {
+      param.developmentMode = '';
+    }
+
+    // let url = ``;
+    // if (param.status == null && param.stage == null){
+    //     url = `api/releaseByProjectId/${id}`;
+    // }
+    // else if (param.stage == null){
+    //     url = `api/releaseByProjectId/${id}?status=${param.status}`;
+    // }
+    // else if (param.status == null){
+    //     url = `api/releaseByProjectId/${id}?stage=${param.stage}`;
+    // }
+    // else if (!(param.status == null && param.stage == null)){
+    //   url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
+    // }
+    const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&projectCode=${param.projectCode}&projectName=${param.projectName}&developmentMode=${param.developmentMode}`;
+    console.log(url);
     return new Observable((observer: Observer<ApiResponseRelease>) => {
      this.http.get(url, header)
-     .pipe(map((responseData : any) => {
+     .pipe(map((responseData: any) => {
       const temp = {
         content: responseData.content,
         totalPages: responseData.totalPages,
@@ -206,6 +240,75 @@ export class ReleaseService {
               alert('Gagal merekam kesalahan');
             });
         });
+    });
+  }
+
+  getAllReleasePerPage(param): Observable<ApiResponseRelease> {
+    return new Observable((observer: Observer<ApiResponseRelease>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      if (param.projectName === null) {
+        param.projectName = '';
+      }
+      if (param.userPM === null) {
+        param.userPM = '';
+      }
+      if (param.userPMO === null) {
+        param.userPMO = '';
+      }
+      if (param.userCoPM === null) {
+        param.userCoPM = '';
+      }
+      if (param.stage === null) {
+        param.stage = '';
+      }
+      if (param.status === null) {
+        param.status = '';
+      }
+      if (param.divisi === null) {
+        param.divisi = '';
+      }
+      if (param.directoratUser === null) {
+        param.directoratUser = '';
+      }
+      if (param.developmentMode === null) {
+        param.developmentMode = '';
+      }
+
+      const url = `/api/releasesPage?projectName=${param.projectName}&pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&developmentMode=${param.developmentMode}`;
+
+      this.http
+        .get(url, header)
+        .pipe(map((responseData: any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe(
+          (data: ApiResponseRelease) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Release-View',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
     });
   }
 }

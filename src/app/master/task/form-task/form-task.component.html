@@ -1,9 +1,11 @@
 <app-sidebar></app-sidebar>
 
 <div class="container">
-  <h4><i class="fa fa-chevron-circle-left" (click)="onGolistTask()"></i> Form Pembuatan Task</h4>
+  <h4><i class="fa fa-chevron-circle-left" onclick="history.back()"></i> Form Pembuatan Task</h4>
 
   <div class="container-fluid" style="padding: 15px; margin: 20px">
+    <p style="font-weight: bold">Project Name : {{release.project.projectName}}</p>
+    <p style="font-weight: bold">Release Name : {{release.releaseName}}</p>
     <form style="padding: 10px" [formGroup]="taskForm" method="post"
           (ngSubmit)="onSaveTask(taskForm.value, taskForm.valid)">
       <div class="Form-group">

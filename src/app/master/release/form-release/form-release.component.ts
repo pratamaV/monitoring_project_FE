@@ -4,7 +4,7 @@ import {ReleaseService} from '../release.service';
 import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ReleaseModel} from '../release.model';
 import Swal from 'sweetalert2';
-import {DivisionModel, UserModel} from '../../project/project.model';
+import {DivisionModel, ProjectModel, UserModel} from '../../project/project.model';
 import {ProjectServiceService} from "../../project/project-service.service";
 
 @Component({
@@ -26,13 +26,14 @@ export class FormReleaseComponent implements OnInit {
   pmoId: '';
   coPMId: '';
   divisionId: '';
-
+  project: ProjectModel;
   constructor(private route: ActivatedRoute,
               private releaseService: ReleaseService,
               private router: Router,
               private projectService: ProjectServiceService) { }
 
   ngOnInit(): void {
+    this.onGetProjectById();
     this.onGetAllDivision();
     this.onGetAllUser();
     this.buildForm();
@@ -74,8 +75,17 @@ export class FormReleaseComponent implements OnInit {
       directorateUser: new FormControl(null, [Validators.required]),
       departmentHead : new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
+      developmentMode: new FormControl(null, [Validators.required]),
       contractedValue: new FormControl(0 ),
       project: new FormControl(localStorage.getItem('projectId'))
+    });
+  }
+
+  onGetProjectById(){
+    this.projectService.getProjectById(localStorage.getItem('projectId')).subscribe(response => {
+      this.project = response;
+    }, error => {
+      alert(error.message)
     });
   }
 
@@ -114,6 +124,7 @@ export class FormReleaseComponent implements OnInit {
       departmentHead: {
         id: postData.departmentHead.id
       },
+      developmentMode: postData.developmentMode,
       project: {
         id: postData.project
       }

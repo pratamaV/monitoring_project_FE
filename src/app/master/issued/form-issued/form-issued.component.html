@@ -2,7 +2,7 @@
 
 <div class="container">
 
-    <h4 style="text-align: left;"><i class="fa fa-chevron-circle-left" (click)="onGolistIssue()"></i> Form Pembuatan Issue</h4>
+    <h4 style="text-align: left;"><i class="fa fa-chevron-circle-left" onclick="history.back()"></i> Form Pembuatan Issue</h4>
     <div class="container-fluid" style="padding: 15px; margin: 20px">
         <form style="padding: 10px" [formGroup]="issuedForm" method="post" (ngSubmit)="onSaveIssued(issuedForm.value, issuedForm.valid)">
             <div class="Form-group">

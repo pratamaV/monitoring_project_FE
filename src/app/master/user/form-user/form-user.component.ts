@@ -166,23 +166,23 @@ export class FormUserComponent implements OnInit {
 
   onChangePassword(param) {
     Swal.fire({
-      title: 'Are you sure?',
+      title: 'Apakah anda yakin akan mengubah password?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
+      confirmButtonText: 'Ya, ubah!',
+      cancelButtonText: 'Tidak, batalkan!',
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title:  'Success!',
-          html: 'Password berhasil di ubah',
-          icon: 'success',
-          showConfirmButton: false,
-          timer: 1200
-        });
         this.userService.changePassword(localStorage.getItem('idUser'), param)
           .subscribe(response => {
+            Swal.fire({
+              title:  'Success!',
+              html: 'Password berhasil di ubah',
+              icon: 'success',
+              showConfirmButton: false,
+              timer: 1200
+            });
             this.router.navigate(['/dashboard/user']);
           }, error => {
             Swal.fire( 'Failed', 'Password Gagal di ubah' , 'error'  );

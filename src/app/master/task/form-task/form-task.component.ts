@@ -6,6 +6,8 @@ import {TaskService} from '../task.service';
 import {UserModel} from '../../project/project.model';
 import {ProjectServiceService} from '../../project/project-service.service';
 import Swal from 'sweetalert2';
+import {ReleaseService} from "../../release/release.service";
+import {ReleaseModel, ReleaseModel2} from "../../release/release.model";
 
 @Component({
   selector: 'app-form-task',
@@ -22,13 +24,16 @@ export class FormTaskComponent implements OnInit {
   loadedUser: UserModel[] = [];
   assignedTo;
   users: UserModel;
+  release: ReleaseModel2;
 
   constructor(private route: ActivatedRoute,
               private taskService: TaskService,
               private router: Router,
-              private projectService: ProjectServiceService) { }
+              private projectService: ProjectServiceService,
+              private releaseService: ReleaseService) { }
 
   ngOnInit(): void {
+    this.onGetReleaseById();
     this.buildForm();
     this.onGetAllUser();
     this.route.params.subscribe(params => {
@@ -84,6 +89,15 @@ export class FormTaskComponent implements OnInit {
       this.taskForm.get('actEndDate').setValue(this.task.actEndDate);
       this.taskForm.get('release').setValue(this.task.release.id);
     }
+  }
+
+  onGetReleaseById(){
+    this.releaseService.getReleaseById(localStorage.getItem('releaseId'))
+      .subscribe(response => {
+        this.release = response;
+      }, error => {
+        alert(error.message);
+      });
   }
 
   compareAssignedTo(c1: UserModel, c2: UserModel): boolean {

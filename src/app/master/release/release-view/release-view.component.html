@@ -1,28 +1,23 @@
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
 <head>
-<<<<<<< HEAD
-    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
-</head> -->
-=======
   <script
     src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
 </head>
->>>>>>> d84b0dceb209ba15d85e15d407a5fdb52d3f0206
 
 <body>
 <div class="main-content">
   <app-sidebar></app-sidebar>
   <div id="cover">
     <!-- Table -->
-    <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>
-      List Release</h4>
+    <h4 class="mb-5" style="padding-top: 70px">
+      <!--      <i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>-->
+      Release</h4>
     <div class="row">
 
       <div class="col">
@@ -30,11 +25,21 @@
           <div class="card-header border-0">
             <div class="row col-xs-12">
               <div class="col-9 col-xs-8">
-                <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
+                <form [formGroup]="filterForm2" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm2.value)">
                   <div class="row">
 
                     <div class="form-group col">
-                      <label for="userPM" style="float: left;">User PM</label>
+                      <label for="projectName" style="float: left;font-size: 13px">Project Name</label>
+                      <select class="custom-select" formControlName="projectName" id="projectName"
+                              aria-label="Default select example">
+                        <option *ngFor="let project of projects; let i = index"
+                                [ngValue]="project.projectName">{{project.projectName}}
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-group col">
+                      <label for="userPM" style="float: left;font-size: 13px">User PM</label>
                       <select class="custom-select" formControlName="userPM" id="userPM"
                               aria-label="Default select example">
                         <option *ngFor="let user of usersPm; let i = index" [ngValue]="user.id">
@@ -44,7 +49,7 @@
                     </div>
 
                     <div class="form-group col">
-                      <label for="userPMO" style="float: left;">User PMO</label>
+                      <label for="userPMO" style="float: left;font-size: 13px">User PMO</label>
                       <select class="custom-select" formControlName="userPMO" id="userPMO"
                               aria-label="Default select example">
                         <option *ngFor="let user of usersPmo; let i = index" [ngValue]="user.id">
@@ -54,7 +59,7 @@
                     </div>
 
                     <div class="form-group col">
-                      <label for="userCoPM" style="float: left;">User CO-PM</label>
+                      <label for="userCoPM" style="float: left;font-size: 13px">User CO-PM</label>
                       <select class="custom-select" formControlName="userCoPM" id="userCoPM"
                               aria-label="Default select example">
                         <option *ngFor="let user of usersCoPM; let i = index" [ngValue]="user.id">
@@ -64,7 +69,7 @@
                     </div>
 
                     <div class="form-group col">
-                      <label for="status" style="float: left;">Status</label>
+                      <label for="status" style="float: left;font-size: 13px">Status</label>
                       <select class="form-select" formControlName="status" id="status"
                               aria-label="Default select example">
                         <option value="Not Started">Not Started</option>
@@ -72,9 +77,11 @@
                         <option value="PTR/ Live">PTR/ Live</option>
                       </select>
                     </div>
+                  </div>
 
+                  <div class="row">
                     <div class="form-group col">
-                      <label for="stage" style="float: left;">Stage</label>
+                      <label for="stage" style="float: left; font-size: 13px">Stage</label>
                       <select class="form-select" formControlName="stage" id="stage"
                               aria-label="Default select example">
                         <option value="Delivery Barang">Delivery Barang</option>
@@ -90,11 +97,8 @@
                       </select>
                     </div>
 
-                  </div>
-                  <div class="row">
-
-                    <div class="form-group col-2">
-                      <label for="divisi" style="float: left;">Divisi Owner</label>
+                    <div class="form-group col">
+                      <label for="divisi" style="float: left; font-size: 13px">Divisi Owner</label>
                       <select class="custom-select" formControlName="divisi" id="divisi"
                               aria-label="Default select example">
                         <option *ngFor="let divisi of divitions; let i = index"
@@ -104,8 +108,9 @@
                       </select>
                     </div>
 
-                    <div class="form-group col-3">
-                      <label for="directoratUser" style="float: left;">Direktorate Owner</label>
+
+                    <div class="form-group col">
+                      <label for="directoratUser" style="float: left; font-size: 13px">Direktorate</label>
                       <select class="form-select" formControlName="directoratUser" id="directoratUser"
                               aria-label="Default select example">
                         <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
@@ -116,27 +121,8 @@
                       </select>
                     </div>
 
-                    <div class="form-group col-2">
-                      <label for="projectName" style="float: left;">Project Name</label>
-                      <select class="form-select" formControlName="projectName" id="projectName"
-                              aria-label="Default select example">
-                        <option *ngFor="let projectName of projectNames"
-                                [ngValue]="projectName">{{projectName}}</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group col-2">
-                      <label for="projectCode" style="float: left;">Project Code</label>
-                      <select class="form-select" formControlName="projectCode" id="projectCode"
-                              aria-label="Default select example">
-                        <option *ngFor="let projectCode of projectCodes"
-                                [ngValue]="projectCode">{{projectCode}}</option>
-
-                      </select>
-                    </div>
-
-                    <div class="form-group col-3">
-                      <label for="developmentMode">Mode Pengembangan <small style="color: red;">*</small></label>
+                    <div class="form-group col">
+                      <label for="developmentMode" style="float: left; font-size: 13px">Development Mode</label>
                       <select class="form-select" formControlName="developmentMode" id="developmentMode"
                               aria-label="Default select example">
                         <option value="Internal Development">Internal Development</option>
@@ -146,7 +132,6 @@
                     </div>
 
                   </div>
-
                   <div id="button-filter">
                     <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;"
                             (click)="onGetListRelease()">Reset Filter
@@ -155,16 +140,12 @@
                       Filter
                     </button>
                   </div>
-
                 </form>
               </div>
 
               <div id="button-atas" class="col col-xs">
                 <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
                   class="fa fa-file"></i> Export to excel
-                </button>
-                <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddRelease()"><i
-                  class="fa fa-plus"></i> Add New Release
                 </button>
               </div>
             </div>
@@ -344,6 +325,7 @@
           </div>
           <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;"
                                (pageChange)="onPageChanges($event)"></pagination-controls>
+
         </div>
       </div>
     </div>
@@ -372,3 +354,4 @@
   src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
