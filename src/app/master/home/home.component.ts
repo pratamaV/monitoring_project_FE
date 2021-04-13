@@ -8,6 +8,7 @@ import {TaskModel, TaskModel2} from '../task/task.model';
 import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
 import {LogErrorModel} from '../log-error.model';
 import {LogErrorService} from '../log-error.service';
+declare var jQuery: any;
 
 @Component({
   selector: 'app-home',
@@ -529,6 +530,8 @@ export class HomeComponent implements OnInit {
       updateDataProject2 = [KepatuhanandSDM, Keuangan, Operasional, Teknik, Utama];
       updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
     }, 1800000);
+
+
 
   }
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 
 import { ReleaseRoutingModule } from './release-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -18,6 +18,7 @@ import { ReleaseViewComponent } from './release-view/release-view.component';
         ReactiveFormsModule,
         SidebarModule,
         NgxPaginationModule
-    ]
+    ],
+    providers: [CurrencyPipe]
 })
 export class ReleaseModule { }

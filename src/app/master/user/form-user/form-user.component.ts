@@ -183,7 +183,7 @@ export class FormUserComponent implements OnInit {
               showConfirmButton: false,
               timer: 1200
             });
-            this.router.navigate(['/dashboard/user']);
+            window.location.reload();
           }, error => {
             Swal.fire( 'Failed', 'Password Gagal di ubah' , 'error'  );
           });

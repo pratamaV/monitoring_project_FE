@@ -2,10 +2,21 @@
     padding: 30px;
     /*margin: 30px;*/
     text-align: center;
-    width: calc(100% - 17rem);
+    /* width: calc(100% - 17rem); */
     margin-left: 17rem;
     transition: all 0.4s;
+    display: flex;
+    width: 100%;
+    align-items: stretch;
 }
+
+
+/* 
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+} */
 
 @media (max-width: 768px) {
     #sidebar {
