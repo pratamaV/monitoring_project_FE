@@ -82,7 +82,7 @@
                           <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
                             <input [(ngModel)]="searchByKeyword" name="searchByKeyword" type="text" class="form-control"
-                                   placeholder="Cari berdasarkan Project Dependency" (keyup)="searchLive()">
+                                   placeholder="Cari berdasarkan keyword" (keyup)="searchLive()">
                           </div>
                         </div>
                       </form>
@@ -95,11 +95,8 @@
                       <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()"><i
                         class="fa fa-plus"></i> Add New Project
                       </button>&nbsp;
-<!--                      <button class="btn btn-success btn-sm" (click)="onGetListProject()">Reset Filter</button>&nbsp;-->
-<!--                      <button type="submit" class="btn btn-info btn-sm">Apply Filter</button>-->
                     </div>
                   </div>
-<!--                </form>-->
 
               </div>
             </div>
@@ -132,46 +129,6 @@
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Action</th>
-<!--                <th scope="col">PMO-->
-<!--                  <button (click)="onGetProjectBySort('pmo.username', 'ASC')" *ngIf="asc == false"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
-<!--                  <button (click)="onGetProjectBySort('pmo.username', 'DESC')" *ngIf="asc == true"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
-<!--                </th>-->
-<!--                <th scope="col">PM-->
-<!--                  <button (click)="onGetProjectBySort('pm.username', 'ASC')" *ngIf="asc == false"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
-<!--                  <button (click)="onGetProjectBySort('pm.username', 'DESC')" *ngIf="asc == true"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
-<!--                </th>-->
-<!--                <th scope="col">Directorate Owner-->
-<!--                  <button (click)="onGetProjectBySort('directorateUser', 'ASC')" *ngIf="asc == false"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
-<!--                  <button (click)="onGetProjectBySort('directorateUser', 'DESC')" *ngIf="asc == true"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
-<!--                </th>-->
-<!--                <th scope="col">Divisi Owner-->
-<!--                  <button (click)="onGetProjectBySort('divisiUser.divisionName', 'ASC')" *ngIf="asc == false"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
-<!--                  <button (click)="onGetProjectBySort('divisiUser.divisionName', 'DESC')" *ngIf="asc == true"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
-<!--                </th>-->
-<!--                <th scope="col">CO-PM-->
-<!--                  <button (click)="onGetProjectBySort('coPM.username', 'ASC')" *ngIf="asc == false"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>-->
-<!--                  <button (click)="onGetProjectBySort('coPM.username', 'DESC')" *ngIf="asc == true"-->
-<!--                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"-->
-<!--                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>-->
-<!--                </th>-->
                 <th scope="col">Status
                   <button (click)="onGetProjectBySort('status', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
@@ -197,7 +154,7 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col">Project Dependency
+                <th scope="col">Keyword
                   <button (click)="onGetProjectBySort('projectDependency', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>

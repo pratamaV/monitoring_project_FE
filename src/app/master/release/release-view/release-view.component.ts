@@ -213,30 +213,16 @@ export class ReleaseViewComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
 
-  onGetReleaseByIdSort(orderBy: string, sort: string) {
+  onGetReleaseSort(orderBy: string, sort: string) {
     this.loadedRelease = [];
-    this.releaseService.getAllRelaseByIdSort(localStorage.getItem('projectId'), orderBy, sort).subscribe(
+    this.releaseService.getAllReleaseSort(orderBy, sort).subscribe(
       data => {
-        // if (this.userRoleNew !== '01'){
-        //   for (const relase of data) {
-        //     if (relase.statusRelease === 'Active'){
-        //       this.isLoading = false;
-        //       this.loadedRelease.push(relase);
-        //       if (sort === 'ASC') {
-        //         this.asc = true;
-        //       } else if (sort === 'DESC') {
-        //         this.asc = false;
-        //       }
-        //     }
-        //   }
-        // } else {
-        this.loadedRelease = data;
+        this.loadedRelease = data.content;
         if (sort === 'ASC') {
           this.asc = true;
         } else if (sort === 'DESC') {
           this.asc = false;
         }
-        // }
       },
       error => {
         alert(error);

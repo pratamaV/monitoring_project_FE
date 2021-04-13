@@ -311,4 +311,45 @@ export class ReleaseService {
         );
     });
   }
+
+  getAllReleaseSort(orderBy, sort): Observable<ApiResponseRelease> {
+    return new Observable((observer: Observer<ApiResponseRelease>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      const url = `/api/release-sort?orderBy=${orderBy}&sort=${sort}`;
+
+      this.http
+        .get(url, header)
+        .pipe(map((responseData: any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe(
+          (data: ApiResponseRelease) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Release-View',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
+    });
+  }
 }
