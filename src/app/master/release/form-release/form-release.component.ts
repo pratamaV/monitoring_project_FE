@@ -5,7 +5,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {ReleaseModel} from '../release.model';
 import Swal from 'sweetalert2';
 import {DivisionModel, ProjectModel, UserModel} from '../../project/project.model';
-import {ProjectServiceService} from "../../project/project-service.service";
+import {ProjectServiceService} from '../../project/project-service.service';
 import {CurrencyPipe} from '@angular/common';
 
 @Component({
@@ -31,7 +31,7 @@ export class FormReleaseComponent implements OnInit {
   ContractedValueString: string;
   split: any;
   join1: any;
-  match : any;
+  match: any;
   join2: any;
   fixContractedValue: number;
 
@@ -87,34 +87,33 @@ export class FormReleaseComponent implements OnInit {
       departmentHead : new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
       developmentMode: new FormControl(null, [Validators.required]),
-      contractedValue: new FormControl(null),
+      contractedValue: new FormControl(0),
       project: new FormControl(localStorage.getItem('projectId'))
     });
   }
 
   currencyPipes(){
     this.releaseForm.valueChanges.subscribe( form => {
-      if(form.contractedValue){
-        this.ContractedValueString = form.contractedValue + ''
+      if (form.contractedValue){
+        this.ContractedValueString = form.contractedValue + '';
         this.releaseForm.patchValue({
           contractedValue : this.currencyPipe.transform(this.ContractedValueString.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
-        }, {emitEvent: false})
+        }, {emitEvent: false});
       }
-    })
+    });
   }
 
   onGetProjectById(){
     this.projectService.getProjectById(localStorage.getItem('projectId')).subscribe(response => {
       this.project = response;
     }, error => {
-      alert(error.message)
+      alert(error.message);
     });
   }
 
   // tslint:disable-next-line:typedef
   onSaveRelease(postData, valid: boolean){
-
-    if(postData.contractedValue){
+    if (postData.contractedValue){
       this.ContractedValueString = postData.contractedValue + '';
       this.split = this.ContractedValueString.split(',');
       this.join1 = this.split.join('');
@@ -164,7 +163,8 @@ export class FormReleaseComponent implements OnInit {
       this.releaseService.saveRelease(this.release, this.id)
         .subscribe(response => {
           Swal.fire( 'Success', 'Release berhasil disimpan' , 'success'  );
-          this.router.navigate(['/dashboard/release']);
+          history.back();
+          // this.router.navigate(['/dashboard/release']);
         }, error => {
           Swal.fire( 'Failed', 'Gagal menyimpan release' , 'error'  );
         });

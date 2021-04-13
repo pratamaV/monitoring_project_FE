@@ -256,10 +256,10 @@ export class ListReleaseComponent implements OnInit {
     }
   }
 
-  
+
   onGetReleaseById(id, param){
     localStorage.setItem('releaseId', id);
-    localStorage.setItem('paramviagatetask', param)
-    this.router.navigateByUrl([`/dashboard/release/detail-release/`]+id)
+    localStorage.setItem('paramviagatetask', param);
+    this.router.navigateByUrl([`/dashboard/release/detail-release/`] + id);
   }
 }

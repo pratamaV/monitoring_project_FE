@@ -146,14 +146,6 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col">Status Initiatif
-                  <button (click)="onGetProjectBySort('statusProject', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('statusProject', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
                 <th scope="col">Keyword
                   <button (click)="onGetProjectBySort('projectDependency', 'ASC')" *ngIf="asc == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
@@ -178,7 +170,15 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <th scope="col" [hidden]="userRole != '01'">Update Status Project</th>
+                <th scope="col">Status Initiatif
+                  <button (click)="onGetProjectBySort('statusProject', 'ASC')" *ngIf="asc == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="onGetProjectBySort('statusProject', 'DESC')" *ngIf="asc == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col" [hidden]="userRole != '01'">Update Status Inisiatif</th>
               </tr>
               </thead>
               <tbody>
@@ -201,11 +201,11 @@
                 <td>{{project.status}}</td>
                 <!--                                        <td>{{project.weight | number : '1.2-2'}}</td>-->
                 <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
-                <td>{{project.statusProject}}</td>
                 <!--                                        <td [ngClass]="project.statusProject === 'aktif' ? 'color-red' : 'color-green'">{{project.statusProject}}</td>-->
                 <td>{{project.projectDependency}}</td>
                 <td>{{project.budget  | currency:'Rp.'}}</td>
                 <td>{{project.paymentRealization  | currency:'Rp.'}}</td>
+                <td>{{project.statusProject}}</td>
                 <td [hidden]="userRole != '01'">
                   <select class="form-select-sm" (change)="onChangeStatusProject(project.id, $event)"
                           aria-label="Default select example">

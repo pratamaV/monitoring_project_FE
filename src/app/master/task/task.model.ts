@@ -89,7 +89,7 @@ export interface TaskModel5{
 }
 
 export interface ApiResponseTask {
-  content: TaskModel2;
+  content: TaskModel2[];
   totalPages: number;
   totalElements: number;
   numberOfElements: number;

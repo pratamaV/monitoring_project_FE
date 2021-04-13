@@ -27,27 +27,27 @@
                     <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i> Charts
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="user.userRole !== '01'">
                 <a class="nav-link text-dark" [routerLink]="['/dashboard/project']" routerLinkActive="router-link-active">
                     <i class="fa fa-product-hunt mr-3 text-primary fa-fw"></i> Project
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="user.userRole !== '01'">
                 <a class="nav-link text-dark" [routerLink]="['/dashboard/release/release-view']" routerLinkActive="router-link-active">
-                    <i class="fa fa-file-archive-o mr-3 text-primary fa-fw"></i> Release-View
+                    <i class="fa fa-file-archive-o mr-3 text-primary fa-fw"></i> Release
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="user.userRole !== '05'">
                 <a class="nav-link text-dark" [routerLink]="['/dashboard/project/project-user']" routerLinkActive="router-link-active">
                     <i class="fa fa-percent mr-3 text-primary fa-fw"></i> Project-View
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="user.userRole === '03'">
                 <a class="nav-link text-dark" [routerLink]="['/dashboard/task/my-task']" routerLinkActive="router-link-active">
                     <i class="fa fa-tasks mr-3 text-primary fa-fw"></i> My-Task <span class="badge badge-pill badge-warning ml-2">{{numberTask}}</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" [hidden]="user.userRole !== '01'">
                 <a class="nav-link text-dark" [routerLink]="['/dashboard/user']" routerLinkActive="router-link-active">
                     <i class="fa fa-user-plus mr-3 text-primary fa-fw"></i> User
                 </a>

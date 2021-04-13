@@ -5,7 +5,7 @@
         <div class="panel panel-default panel-table col-lg-12">
             <div class="panel-heading">
                 <div class="col col-xs-6 mt-4 mb-3 text-left">
-                    <h4><i class="fa fa-chevron-circle-left" (click)="goToReleaseList()"></i> Detail Release {{release.releaseName}}</h4>
+                    <h4><i class="fa fa-chevron-circle-left" onclick="history.back()"></i> Detail Release {{release.releaseName}}</h4>
                 </div>
                 <br>
                 <div class="row">
@@ -128,7 +128,7 @@
                                         <td>{{release.status}}</td>
                                     </tr>
                                     <tr>
-                                        <td>Status Release</td>
+                                        <td>Status Inisiatif</td>
                                         <td>:</td>
                                         <td>{{release.statusRelease}}</td>
                                     </tr>

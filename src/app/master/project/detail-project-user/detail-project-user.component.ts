@@ -4,6 +4,7 @@ import {TaskModel, TaskModel2} from './../../task/task.model';
 import {ReleaseModel} from './../../release/release.model';
 import {ProjectServiceService} from "../project-service.service";
 import {Router} from "@angular/router";
+import {TaskService} from "../../task/task.service";
 
 @Component({
   selector: 'app-detail-project-user',
@@ -13,10 +14,15 @@ import {Router} from "@angular/router";
 export class DetailProjectUserComponent implements OnInit {
 
   projectModel: ProjectModel;
-  taskModel: TaskModel[] = [];
+  taskModel: TaskModel2[] = [];
   releaseModel: ReleaseModel[];
+  paramNull = {
+    assignTo: null,
+    statusDone: null
+  };
   constructor(private projectService: ProjectServiceService,
-              private router: Router) { }
+              private router: Router,
+              private taskService: TaskService) { }
 
   ngOnInit(): void {
     this.projectModel = history.state;
@@ -29,9 +35,10 @@ export class DetailProjectUserComponent implements OnInit {
 
 
   getTaskByReleaseId(id){
-    this.projectService.getTaskByReleaseId(id)
+    this.taskService.getTaskByReleaseId(id, this.paramNull)
       .subscribe(data => {
-        this.taskModel = data;
+        console.log(data);
+        this.taskModel = data.content;
       }, error => {
         alert(error);
       });

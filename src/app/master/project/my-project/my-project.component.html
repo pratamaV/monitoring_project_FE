@@ -123,15 +123,16 @@
                   <button (click)="onGetProjectById(project.id, 'backmyproject')" class="btn btn-outline-success btn-sm"
                           data-toggle="tooltip" data-placement="bottom" title="Detail"><i
                     class="fa fa-eye"></i></button>&nbsp;
-                  <button (click)="onGetReleaseByProjectId(project, 'backmyproject')" class="btn btn-outline-success btn-sm"
+                  <button (click)="onGetReleaseByProjectId(project, 'backmyproject')"
+                          class="btn btn-outline-success btn-sm"
                           data-toggle="tooltip" data-placement="bottom" title="Release"><i
                     class="fa fa-bars"></i></button>&nbsp;
                 </td>
 
                 <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
                 <td>{{project.projectDependency}}</td>
-                <td>{{project.budget}}</td>
-                <td>{{project.paymentRealization}}</td>
+                <td>{{project.budget | currency : 'Rp '}}</td>
+                <td>{{project.paymentRealization | currency : 'Rp '}}</td>
               </tr>
               </tbody>
             </table>

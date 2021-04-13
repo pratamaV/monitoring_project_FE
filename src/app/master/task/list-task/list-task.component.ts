@@ -20,7 +20,7 @@ export class ListTaskComponent implements OnInit {
   filterForm: FormGroup;
   task: TaskModel;
   assigntoId: '';
-  loadedTask: TaskModel2;
+  loadedTask: TaskModel2[] = [];
   loadedUser: UserModel[] = [];
   paramNull = {
     assignTo: null,

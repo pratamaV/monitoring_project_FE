@@ -23,9 +23,7 @@ export class DetailReleaseComponent implements OnInit {
   onGetReleaseById(){
     this.releaseService.getReleaseById(localStorage.getItem('releaseId'))
     .subscribe( data => {
-      // this.release = data;
-      console.log(this.release);
-      
+      this.release = data;
     }, error => {
       alert(error.message);
     } )
