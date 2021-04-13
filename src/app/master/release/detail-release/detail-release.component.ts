@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ReleaseModel2 } from '../release.model';
+import { ReleaseService } from '../release.service';
 
 @Component({
   selector: 'app-detail-release',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailReleaseComponent implements OnInit {
 
-  constructor() { }
+  release : ReleaseModel2
+
+  constructor(private releaseService : ReleaseService,
+              private router : Router
+    ) { }
 
   ngOnInit(): void {
+    this.onGetReleaseById();
   }
+
+  onGetReleaseById(){
+    this.releaseService.getReleaseById(localStorage.getItem('releaseId'))
+    .subscribe( data => {
+      // this.release = data;
+      console.log(this.release);
+      
+    }, error => {
+      alert(error.message);
+    } )
+  }
+
+  goToReleaseList(){
+    this.router.navigate(['dashboard/release/release-view'])
+  }
+
 
 }

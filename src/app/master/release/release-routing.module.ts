@@ -41,7 +41,7 @@ const routes: Routes = [
     component: FormReleaseComponent
   },
   {
-    path: 'detail-release',
+    path: 'detail-release/:id',
     component: DetailReleaseComponent
   }
 ];

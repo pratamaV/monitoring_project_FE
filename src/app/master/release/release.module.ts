@@ -7,10 +7,11 @@ import { ListReleaseComponent } from './list-release/list-release.component';
 import {SidebarModule} from "../../layout/sidebar/sidebar.module";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReleaseViewComponent } from './release-view/release-view.component';
+import { DetailReleaseComponent } from './detail-release/detail-release.component';
 
 
 @NgModule({
-  declarations: [ListReleaseComponent, ReleaseViewComponent],
+  declarations: [ListReleaseComponent, ReleaseViewComponent, DetailReleaseComponent],
     imports: [
         CommonModule,
         ReleaseRoutingModule,
