@@ -3,80 +3,66 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <head>
-<<<<<<< HEAD
     <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
 </head> -->
-=======
-  <script
-    src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
-</head>
->>>>>>> d84b0dceb209ba15d85e15d407a5fdb52d3f0206
 
 <body>
-<div class="main-content">
-  <app-sidebar></app-sidebar>
-  <div id="cover">
-    <!-- Table -->
-    <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i>
-      List Release</h4>
-    <div class="row">
+    <div class="main-content">
+        <app-sidebar></app-sidebar>
+        <div id="cover">
+            <!-- Table -->
+            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListProject()"></i> List Release</h4>
+            <div class="row">
 
-      <div class="col">
-        <div class="card shadow">
-          <div class="card-header border-0">
-            <div class="row col-xs-12">
-              <div class="col-9 col-xs-8">
-                <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
-                  <div class="row">
+                <div class="col">
+                    <div class="card shadow">
+                        <div class="card-header border-0">
+                            <div class="row col-xs-12">
+                                <div class="col col-xs-8">
+                                    <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetListReleaseFilter(filterForm.value)">
+                                        <div class="row">
 
-                    <div class="form-group col">
-                      <label for="userPM" style="float: left;">User PM</label>
-                      <select class="custom-select" formControlName="userPM" id="userPM"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="userPM" style="float: left;">User PM</label>
+                                                <select class="custom-select" formControlName="userPM" id="userPM" aria-label="Default select example">
                         <option *ngFor="let user of usersPm; let i = index" [ngValue]="user.id">
                           {{ user.username }}
                         </option>
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col">
-                      <label for="userPMO" style="float: left;">User PMO</label>
-                      <select class="custom-select" formControlName="userPMO" id="userPMO"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="userPMO" style="float: left;">User PMO</label>
+                                                <select class="custom-select" formControlName="userPMO" id="userPMO" aria-label="Default select example">
                         <option *ngFor="let user of usersPmo; let i = index" [ngValue]="user.id">
                           {{ user.username }}
                         </option>
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col">
-                      <label for="userCoPM" style="float: left;">User CO-PM</label>
-                      <select class="custom-select" formControlName="userCoPM" id="userCoPM"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="userCoPM" style="float: left;">User CO-PM</label>
+                                                <select class="custom-select" formControlName="userCoPM" id="userCoPM" aria-label="Default select example">
                         <option *ngFor="let user of usersCoPM; let i = index" [ngValue]="user.id">
                           {{ user.username }}
                         </option>
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col">
-                      <label for="status" style="float: left;">Status</label>
-                      <select class="form-select" formControlName="status" id="status"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="status" style="float: left;">Status</label>
+                                                <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
                         <option value="Not Started">Not Started</option>
                         <option value="On Schedule">On Schedule</option>
                         <option value="PTR/ Live">PTR/ Live</option>
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col">
-                      <label for="stage" style="float: left;">Stage</label>
-                      <select class="form-select" formControlName="stage" id="stage"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="stage" style="float: left;">Stage</label>
+                                                <select class="form-select" formControlName="stage" id="stage" aria-label="Default select example">
                         <option value="Delivery Barang">Delivery Barang</option>
                         <option value="Development">Development</option>
                         <option value="Implementation">Implementation</option>
@@ -88,287 +74,207 @@
                         <option value="Requirement Gathering">Requirement Gathering</option>
                         <option value="UAT">UAT</option>
                       </select>
-                    </div>
+                                            </div>
 
-                  </div>
-                  <div class="row">
+                                        </div>
+                                        <div class="row">
 
-                    <div class="form-group col-2">
-                      <label for="divisi" style="float: left;">Divisi Owner</label>
-                      <select class="custom-select" formControlName="divisi" id="divisi"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="divisi" style="float: left;">Divisi Owner</label>
+                                                <select class="custom-select" formControlName="divisi" id="divisi" aria-label="Default select example">
                         <option *ngFor="let divisi of divitions; let i = index"
                                 [ngValue]="divisi.id">
                           {{ divisi.divisionName }}
                         </option>
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col-3">
-                      <label for="directoratUser" style="float: left;">Direktorate Owner</label>
-                      <select class="form-select" formControlName="directoratUser" id="directoratUser"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="directoratUser" style="float: left;">Direktorate Owner</label>
+                                                <select class="form-select" formControlName="directoratUser" id="directoratUser" aria-label="Default select example">
                         <option value="Kepatuhan & SDM">Kepatuhan & SDM</option>
                         <option value="Keuangan">Keuangan</option>
                         <option value="Operational Retail">Operational Retail</option>
                         <option value="Teknik">Teknik</option>
                         <option value="Utama">Utama</option>
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col-2">
-                      <label for="projectName" style="float: left;">Project Name</label>
-                      <select class="form-select" formControlName="projectName" id="projectName"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="projectName" style="float: left;">Project Name</label>
+                                                <select class="form-select" formControlName="projectName" id="projectName" aria-label="Default select example">
                         <option *ngFor="let projectName of projectNames"
                                 [ngValue]="projectName">{{projectName}}</option>
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col-2">
-                      <label for="projectCode" style="float: left;">Project Code</label>
-                      <select class="form-select" formControlName="projectCode" id="projectCode"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="projectCode" style="float: left;">Project Code</label>
+                                                <select class="form-select" formControlName="projectCode" id="projectCode" aria-label="Default select example">
                         <option *ngFor="let projectCode of projectCodes"
                                 [ngValue]="projectCode">{{projectCode}}</option>
 
                       </select>
-                    </div>
+                                            </div>
 
-                    <div class="form-group col-3">
-                      <label for="developmentMode">Mode Pengembangan <small style="color: red;">*</small></label>
-                      <select class="form-select" formControlName="developmentMode" id="developmentMode"
-                              aria-label="Default select example">
+                                            <div class="form-group col">
+                                                <label for="developmentMode">Mode Pengembangan <small style="color: red;">*</small></label>
+                                                <select class="form-select" formControlName="developmentMode" id="developmentMode" aria-label="Default select example">
                         <option value="Internal Development">Internal Development</option>
                         <option value="Vendor">Vendor</option>
                         <option value="Join Development">Join Development</option>
                       </select>
-                    </div>
+                                            </div>
 
-                  </div>
+                                        </div>
 
-                  <div id="button-filter">
-                    <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;"
-                            (click)="onGetListRelease()">Reset Filter
-                    </button>&nbsp;
-                    <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
-                      Filter
-                    </button>
-                  </div>
+                                        <div id="button-filter">
+                                            <button class="btn btn-success btn-sm" style="float: right;" (click)="onGetListRelease()">Reset Filter</button>&nbsp;
+                                            <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply Filter</button>
+                                            <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
+                                              class="fa fa-file"></i> Export to excel</button>
+                                            <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddRelease()"><i
+                                              class="fa fa-plus"></i> Add New Release</button>
+                                        </div>
 
-                </form>
-              </div>
+                                    </form>
+                                </div>
+                                <!-- 
+                                <div id="button-atas" class="col col-xs">
+                                    
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table align-items-center table-flush" id="excel-table">
+                                <thead class="thead-light">
+                                    <tr style="text-align: center;">
+                                        <th scope="col">Release Code
+                                            <button (click)="onGetReleaseByIdSort('releaseCode', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('releaseCode', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Release Name
+                                            <button (click)="onGetReleaseByIdSort('releaseName', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('releaseName', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col" style="width: 100px;">Action</th>
+                                        <th scope="col">PM
+                                            <button (click)="onGetReleaseByIdSort('pm.username', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('pm.username', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">PMO
+                                            <button (click)="onGetReleaseByIdSort('pmo.username', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('pmo.username', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">coPM
+                                            <button (click)="onGetReleaseByIdSort('coPM.username', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('coPM.username', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Status
+                                            <button (click)="onGetReleaseByIdSort('status', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('status', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Stage
+                                            <button (click)="onGetReleaseByIdSort('stage', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('stage', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Divisi
+                                            <button (click)="onGetReleaseByIdSort('divisiUser.divisionName', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('divisiUser.divisionName', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Directorat Owner
+                                            <button (click)="onGetReleaseByIdSort('directoratUser', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('directoratUser', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Release Precentage
+                                            <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">StartDate Plan
+                                            <button (click)="onGetReleaseByIdSort('estStartdate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('estStartdate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">StartDate Actual
+                                            <button (click)="onGetReleaseByIdSort('actStartdate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('actStartdate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">End Date Plan
+                                            <button (click)="onGetReleaseByIdSort('estEnddate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('estEnddate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">End Date Actual
+                                            <button (click)="onGetReleaseByIdSort('actEnddate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('actEnddate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Status Release
+                                            <button (click)="onGetReleaseByIdSort('statusRelease', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseByIdSort('statusRelease', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Update Status Release</th>
 
-              <div id="button-atas" class="col col-xs">
-                <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
-                  class="fa fa-file"></i> Export to excel
-                </button>
-                <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddRelease()"><i
-                  class="fa fa-plus"></i> Add New Release
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table align-items-center table-flush" id="excel-table">
-              <thead class="thead-light">
-              <tr style="text-align: center;">
-                <th scope="col">Release Code
-                  <button (click)="onGetReleaseByIdSort('releaseCode', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('releaseCode', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Release Name
-                  <button (click)="onGetReleaseByIdSort('releaseName', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('releaseName', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col" style="width: 100px;">Action</th>
-                <th scope="col">PM
-                  <button (click)="onGetReleaseByIdSort('pm.username', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('pm.username', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">PMO
-                  <button (click)="onGetReleaseByIdSort('pmo.username', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('pmo.username', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">coPM
-                  <button (click)="onGetReleaseByIdSort('coPM.username', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('coPM.username', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Status
-                  <button (click)="onGetReleaseByIdSort('status', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('status', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Stage
-                  <button (click)="onGetReleaseByIdSort('stage', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('stage', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Divisi
-                  <button (click)="onGetReleaseByIdSort('divisiUser.divisionName', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('divisiUser.divisionName', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Directorat Owner
-                  <button (click)="onGetReleaseByIdSort('directoratUser', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('directoratUser', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Release Precentage
-                  <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('prosentaseRelease', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">StartDate Plan
-                  <button (click)="onGetReleaseByIdSort('estStartdate', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('estStartdate', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">StartDate Actual
-                  <button (click)="onGetReleaseByIdSort('actStartdate', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('actStartdate', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">End Date Plan
-                  <button (click)="onGetReleaseByIdSort('estEnddate', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('estEnddate', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">End Date Actual
-                  <button (click)="onGetReleaseByIdSort('actEnddate', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('actEnddate', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Status Release
-                  <button (click)="onGetReleaseByIdSort('statusRelease', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetReleaseByIdSort('statusRelease', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Update Status Release</th>
-
-              </tr>
-              </thead>
-              <tbody>
-              <tr
-                *ngFor="let release of loadedRelease | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
-                [ngStyle]="getStyle(release)">
-                <th scope="row">{{release.releaseCode}}</th>
-                <td>{{release.releaseName}}</td>
-                <td style="width: 200px;">
-                  <button [disabled]="release.statusRelease === 'Completed'" (click)="updateRelease(release)"
-                          class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="Update"><i
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let release of loadedRelease | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(release)">
+                                        <th scope="row">{{release.releaseCode}}</th>
+                                        <td>{{release.releaseName}}</td>
+                                        <td style="width: 200px;">
+                                            <button [disabled]="release.statusRelease === 'Completed'" (click)="updateRelease(release)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
                     class="fa fa-edit"></i></button>&nbsp;
-                  <button (click)="onGoTask(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
-                          data-placement="bottom" title="Task"><i
+                                            <button (click)="onGoTask(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i
                     class="fa fa-tasks"></i></button>&nbsp;
-                  <button (click)="onAddIssued(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip"
-                          data-placement="bottom" title="Add Issue"><i
+                                            <button (click)="onAddIssued(release.id)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Add Issue"><i
                     class="fa fa-folder"></i></button>&nbsp;
-                </td>
-                <td>{{release.pm.username}}</td>
-                <td>{{release.pmo.username}}</td>
-                <td>{{release.coPM.username}}</td>
-                <td>{{release.status}}</td>
-                <td>{{release.stage}}</td>
-                <td>{{release.divisiUser.divisionName}}</td>
-                <td>{{release.directorateUser}}</td>
-                <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
-                <td>{{release.estStartdate | date}}</td>
-                <td>{{release.actStartdate | date}}</td>
-                <td>{{release.estEnddate | date}}</td>
-                <td>{{release.actEnddate | date}}</td>
-                <td>{{release.statusRelease}}</td>
-                <td>
-                  <select class="form-select-sm" (change)="onChangeStatusRelease(release.id, $event)"
-                          aria-label="Default select example">
+                                        </td>
+                                        <td>{{release.pm.username}}</td>
+                                        <td>{{release.pmo.username}}</td>
+                                        <td>{{release.coPM.username}}</td>
+                                        <td>{{release.status}}</td>
+                                        <td>{{release.stage}}</td>
+                                        <td>{{release.divisiUser.divisionName}}</td>
+                                        <td>{{release.directorateUser}}</td>
+                                        <td>{{release.prosentaseRelease * 100 | number : '1.2-2'}}%</td>
+                                        <td>{{release.estStartdate | date}}</td>
+                                        <td>{{release.actStartdate | date}}</td>
+                                        <td>{{release.estEnddate | date}}</td>
+                                        <td>{{release.actEnddate | date}}</td>
+                                        <td>{{release.statusRelease}}</td>
+                                        <td>
+                                            <select class="form-select-sm" (change)="onChangeStatusRelease(release.id, $event)" aria-label="Default select example">
                     <option disabled="disabled" selected="selected">Select an option.</option>
                     <option value="Active">Active</option>
                     <option value="Not Active">Not Active</option>
                     <option value="Completed">Completed</option>
                   </select>
-                </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;"
-                               (pageChange)="onPageChanges($event)"></pagination-controls>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;" (pageChange)="onPageChanges($event)"></pagination-controls>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="container" *ngIf="isLoading == true">
-    <div id="id01" class="modal">
-      <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
-        <div class="spinner-border text-info"></div>
-      </div>
-    </div>
-  </div>
+        <div class="container" *ngIf="isLoading == true">
+            <div id="id01" class="modal">
+                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <div class="spinner-border text-info"></div>
+                </div>
+            </div>
+        </div>
 
-</div>
-<footer class="footer">
-  <div class="row align-items-center justify-content-xl-between">
-    <div class="col-xl-6 m-auto text-center">
-      <div class="copyright">
-        <p></p>
-      </div>
     </div>
-  </div>
-</footer>
-<script
-  src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
-<script
-  src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6 m-auto text-center">
+                <div class="copyright">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

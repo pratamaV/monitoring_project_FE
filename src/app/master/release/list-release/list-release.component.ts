@@ -6,6 +6,7 @@ import {ProjectModel2} from '../../project/project.model';
 import * as XLSX from 'xlsx';
 import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
 import {ProjectServiceService} from '../../project/project-service.service';
+import { CurrencyPipe } from '@angular/common';
 
 
 @Component({
@@ -42,7 +43,8 @@ export class ListReleaseComponent implements OnInit {
   userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
   constructor(private releaseService: ReleaseService,
               private projectService: ProjectServiceService,
-              private router: Router) {
+              private router: Router,
+              ) {
   }
 
   ngOnInit(): void {

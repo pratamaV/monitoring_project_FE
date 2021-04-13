@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit {
           .subscribe(response => {
             // tslint:disable-next-line:no-shadowed-variable
           }, error => {
-            alert('Gagal merekam kesalahan');
+            // alert('Gagal merekam kesalahan');
           });
         this.router.navigate(['/']);
       }

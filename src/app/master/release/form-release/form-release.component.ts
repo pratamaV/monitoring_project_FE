@@ -6,6 +6,7 @@ import {ReleaseModel} from '../release.model';
 import Swal from 'sweetalert2';
 import {DivisionModel, ProjectModel, UserModel} from '../../project/project.model';
 import {ProjectServiceService} from "../../project/project-service.service";
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-form-release',
@@ -27,16 +28,26 @@ export class FormReleaseComponent implements OnInit {
   coPMId: '';
   divisionId: '';
   project: ProjectModel;
+  ContractedValueString: string;
+  split: any;
+  join1: any;
+  match : any;
+  join2: any;
+  fixContractedValue: number;
+
+
   constructor(private route: ActivatedRoute,
               private releaseService: ReleaseService,
               private router: Router,
-              private projectService: ProjectServiceService) { }
+              private projectService: ProjectServiceService,
+              private currencyPipe: CurrencyPipe) { }
 
   ngOnInit(): void {
     this.onGetProjectById();
     this.onGetAllDivision();
     this.onGetAllUser();
     this.buildForm();
+    this.currencyPipes();
     this.route.params.subscribe(params => {
       if (params && params.id) {
         const id: string = params.id;
@@ -76,9 +87,20 @@ export class FormReleaseComponent implements OnInit {
       departmentHead : new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
       developmentMode: new FormControl(null, [Validators.required]),
-      contractedValue: new FormControl(0 ),
+      contractedValue: new FormControl(null),
       project: new FormControl(localStorage.getItem('projectId'))
     });
+  }
+
+  currencyPipes(){
+    this.releaseForm.valueChanges.subscribe( form => {
+      if(form.contractedValue){
+        this.ContractedValueString = form.contractedValue + ''
+        this.releaseForm.patchValue({
+          contractedValue : this.currencyPipe.transform(this.ContractedValueString.replace(/\D+/g, '').replace(/^0+/, ''), 'RP ', 'symbol', '1.0-0')
+        }, {emitEvent: false})
+      }
+    })
   }
 
   onGetProjectById(){
@@ -91,6 +113,15 @@ export class FormReleaseComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSaveRelease(postData, valid: boolean){
+
+    if(postData.contractedValue){
+      this.ContractedValueString = postData.contractedValue + '';
+      this.split = this.ContractedValueString.split(',');
+      this.join1 = this.split.join('');
+      this.match = this.join1.match(/\d/g);
+      this.join2 = this.match.join('');
+      this.fixContractedValue = parseInt(this.join2);
+    }
     this.release = {
       id: postData.id,
       releaseCode: postData.releaseCode,
@@ -120,7 +151,7 @@ export class FormReleaseComponent implements OnInit {
       },
       directorateUser: postData.directorateUser,
       categoryActivity: postData.categoryActivity,
-      contractedValue: postData.contractedValue,
+      contractedValue: this.fixContractedValue,
       departmentHead: {
         id: postData.departmentHead.id
       },

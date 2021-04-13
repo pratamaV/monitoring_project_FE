@@ -1,15 +1,14 @@
 .my-pagination /deep/ .ngx-pagination .current {
-  background: grey;
-  font-size: 15px;
-  color: black;
-  border-radius: 20px;
+    background: grey;
+    font-size: 15px;
+    color: black;
+    border-radius: 20px;
 }
 
-.my-pagination /deep/ .ngx-pagination{
-  text-align: center;
-  font-size: 15px;
+.my-pagination /deep/ .ngx-pagination {
+    text-align: center;
+    font-size: 15px;
 }
-
 
 .changecolor {
     background-color: rgb(255, 82, 82);
@@ -25,7 +24,7 @@
 #export-excel {
     width: 200px;
     /* float: right; */
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
 }
 
 #add-project {
