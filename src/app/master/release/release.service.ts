@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Observable, Observer} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -15,7 +15,8 @@ export class ReleaseService {
   logError: LogErrorModel;
 
   constructor(private http: HttpClient,
-              private logErrorService: LogErrorService) { }
+              private logErrorService: LogErrorService) {
+  }
 
   getAllRelease(): Observable<ReleaseModel2[]> {
     return new Observable((observer: Observer<ReleaseModel2[]>) => {
@@ -116,16 +117,16 @@ export class ReleaseService {
     const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&projectCode=${param.projectCode}&projectName=${param.projectName}&developmentMode=${param.developmentMode}`;
     console.log(url);
     return new Observable((observer: Observer<ApiResponseRelease>) => {
-     this.http.get(url, header)
-     .pipe(map((responseData: any) => {
-      const temp = {
-        content: responseData.content,
-        totalPages: responseData.totalPages,
-        totalElements: responseData.totalElements,
-        numberOfElements: responseData.numberOfElements
-      };
-      return temp;
-    }))
+      this.http.get(url, header)
+        .pipe(map((responseData: any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
         .subscribe((data: ApiResponseRelease) => {
           observer.next(data);
         }, error => {
@@ -277,6 +278,47 @@ export class ReleaseService {
       }
 
       const url = `/api/releasesPage?projectName=${param.projectName}&pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&developmentMode=${param.developmentMode}`;
+
+      this.http
+        .get(url, header)
+        .pipe(map((responseData: any) => {
+          const temp = {
+            content: responseData.content,
+            totalPages: responseData.totalPages,
+            totalElements: responseData.totalElements,
+            numberOfElements: responseData.numberOfElements
+          };
+          return temp;
+        }))
+        .subscribe(
+          (data: ApiResponseRelease) => {
+            observer.next(data);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get All Release-View',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
+    });
+  }
+
+  getAllReleaseSearch(projectDependency, projectName): Observable<ApiResponseRelease> {
+    return new Observable((observer: Observer<ApiResponseRelease>) => {
+      const header = {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      };
+      const url = `/api/releases-search?projectDependency=${projectDependency}&projectName=${projectName}`;
 
       this.http
         .get(url, header)

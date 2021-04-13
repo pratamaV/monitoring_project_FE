@@ -121,17 +121,31 @@
                       </select>
                                             </div>
                                         </div>
-                                        <div id="button-filter">
-                                            <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetListRelease()">Reset Filter
-                    </button>&nbsp;
-                                            <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
-                      Filter
-                    </button>
-                                            <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
-                      class="fa fa-file"></i> Export to excel
-                    </button>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                                                        <input [(ngModel)]="resultSearch" name="projectDependency" type="text" class="form-control" placeholder="Cari berdasarkan keyword atau project name" (keyup)="searchLive()">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <div id="button-filter">
+                                                    <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetListRelease()">Reset Filter
+                                            </button>&nbsp;
+                                                    <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
+                                              Filter
+                                              </button>
+                                                    <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
+                                              class="fa fa-file"></i> Export to excel
+                                            </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
+
                                 </div>
 
 
@@ -144,6 +158,10 @@
                                         <th scope="col">Project Code
                                             <button (click)="onGetReleaseSort('project.projectCode', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
                                             <button (click)="onGetReleaseSort('project.projectCode', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                        </th>
+                                        <th scope="col">Project Name
+                                            <button (click)="onGetReleaseSort('project.projectName', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                            <button (click)="onGetReleaseSort('project.projectName', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                                         </th>
                                         <th scope="col">Release Code
                                             <button (click)="onGetReleaseSort('releaseCode', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
@@ -213,11 +231,12 @@
                                 <tbody>
                                     <tr *ngFor="let release of loadedRelease | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(release)">
                                         <th scope="row">{{release.project.projectCode}}</th>
+                                        <th scope="row">{{release.project.projectName}}</th>
                                         <th scope="row">{{release.releaseCode}}</th>
                                         <td>{{release.releaseName}}</td>
                                         <td style="width: 200px;">
                                             <button (click)="onGetReleaseById(release.id, 'listRelease')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i
-                          class="fa fa-eye"></i></button>&nbsp;
+                    class="fa fa-eye"></i></button>&nbsp;
                                             <button [disabled]="release.statusRelease === 'Completed'" (click)="updateRelease(release)" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
                     class="fa fa-edit"></i></button>&nbsp;
                                             <button (click)="onGoTask(release.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Task"><i
