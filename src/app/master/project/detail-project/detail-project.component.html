@@ -1,101 +1,107 @@
 <app-sidebar></app-sidebar>
 <div class="card">
 
-    <div class="container-sm">
-        <div class="panel panel-default panel-table col-lg-12">
-            <div class="panel-heading">
-                <div class="col col-xs-6 mt-4 mb-3 text-left">
-                    <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Detail Project {{project.projectName}}</h4>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col col-xs-6 mt-3 mb-3">
-                        <div class="panel-body" style="overflow-x:auto;">
-                            <table class="table table-striped ">
-                                <tbody class="text-left">
-                                    <tr>
-                                        <td>Project Code</td>
-                                        <td>:</td>
-                                        <td>{{project.projectCode}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Project Name</td>
-                                        <td>:</td>
-                                        <td>{{project.projectName}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Benefit</td>
-                                        <td>:</td>
-                                        <td>{{project.benefit}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Category Initiative</td>
-                                        <td>:</td>
-                                        <td>{{project.categoryInitiative}}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Status Inisiatif</td>
-                                        <td>:</td>
-                                        <td>{{project.statusProject}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Status Project</td>
-                                      <td>:</td>
-                                      <td>{{project.status}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col col-xs-6 mt-3 mb-3">
-                        <div class="panel-body" style="overflow-x:auto;">
-                            <table class="table table-striped ">
-                                <tbody class="text-left">
-
-                                    <tr>
-                                        <td>Prosentase Project</td>
-                                        <td>:</td>
-                                        <td>{{project.prosentaseProject*100 | number : '1.2-2'}}%</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Budget</td>
-                                        <td>:</td>
-                                        <td>{{project.budget | currency:'Rp.'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Contracted Value</td>
-                                        <td>:</td>
-                                        <td>{{project.contractedValue | currency:'Rp.'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Payment Realization</td>
-                                        <td>:</td>
-                                        <td>{{project.paymentRealization | currency:'Rp.'}}</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Mata Anggaran</td>
-                                      <td>:</td>
-                                      <td>{{project.lineItem}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Keyword</td>
-                                        <td>:</td>
-                                        <td>{{project.projectDependency}}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Weight</td>
-                                        <td>:</td>
-                                        <td>{{project.weight | number : '1.2-2'}}</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="container-sm">
+    <div class="panel panel-default panel-table col-lg-12">
+      <div class="panel-heading">
+        <div class="col col-xs-6 mt-4 mb-3 text-left">
+          <h4><i class="fa fa-chevron-circle-left" (click)="onGolistProject()"></i> Detail
+            Project {{project.projectName}}</h4>
         </div>
+        <br>
+        <div class="row">
+          <div class="col col-xs-6 mt-3 mb-3">
+            <div class="panel-body" style="overflow-x:auto;">
+              <table class="table table-striped ">
+                <tbody class="text-left">
+                <tr>
+                  <td>Project Code</td>
+                  <td>:</td>
+                  <td>{{project.projectCode}}</td>
+                </tr>
+                <tr>
+                  <td>Project Name</td>
+                  <td>:</td>
+                  <td>{{project.projectName}}</td>
+                </tr>
+                <tr>
+                  <td>Benefit</td>
+                  <td>:</td>
+                  <td>{{project.benefit}}</td>
+                </tr>
+                <tr>
+                  <td>Category Initiative</td>
+                  <td>:</td>
+                  <td>{{project.categoryInitiative}}</td>
+                </tr>
+
+                <tr>
+                  <td>Status Inisiatif</td>
+                  <td>:</td>
+                  <td>{{project.statusProject}}</td>
+                </tr>
+                <tr>
+                  <td>Status Project</td>
+                  <td>:</td>
+                  <td>{{project.status}}</td>
+                </tr>
+                <tr>
+                  <td>Score</td>
+                  <td>:</td>
+                  <td>{{project.score}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col col-xs-6 mt-3 mb-3">
+            <div class="panel-body" style="overflow-x:auto;">
+              <table class="table table-striped ">
+                <tbody class="text-left">
+
+                <tr>
+                  <td>Prosentase Project</td>
+                  <td>:</td>
+                  <td>{{project.prosentaseProject * 100 | number : '1.2-2'}}%</td>
+                </tr>
+                <tr>
+                  <td>Budget</td>
+                  <td>:</td>
+                  <td>{{project.budget | currency:'Rp.'}}</td>
+                </tr>
+                <tr>
+                  <td>Contracted Value</td>
+                  <td>:</td>
+                  <td>{{project.contractedValue | currency:'Rp.'}}</td>
+                </tr>
+                <tr>
+                  <td>Payment Realization</td>
+                  <td>:</td>
+                  <td>{{project.paymentRealization | currency:'Rp.'}}</td>
+                </tr>
+                <tr>
+                  <td>Mata Anggaran</td>
+                  <td>:</td>
+                  <td>{{project.lineItem}}</td>
+                </tr>
+                <tr>
+                  <td>Keyword</td>
+                  <td>:</td>
+                  <td>{{project.projectDependency}}</td>
+                </tr>
+
+                <tr>
+                  <td>Weight</td>
+                  <td>:</td>
+                  <td>{{project.weight | number : '1.2-2'}}</td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
