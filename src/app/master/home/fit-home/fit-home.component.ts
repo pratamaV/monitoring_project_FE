@@ -16,9 +16,12 @@ import {LogErrorService} from '../../log-error.service';
 })
 export class FitHomeComponent implements OnInit {
 
+  idLog: string;
+  logError: LogErrorModel;
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
   projectDependency = '';
+  directorateUser: string;
   // paramNull = {
   //   divisi: '',
   //   userPM: '',
@@ -27,9 +30,6 @@ export class FitHomeComponent implements OnInit {
   //   status: ''
   // };
 
-  idLog: string;
-  logError: LogErrorModel;
-
 
   constructor(private homeService: HomeService,
               private projectService: ProjectServiceService,
@@ -37,11 +37,12 @@ export class FitHomeComponent implements OnInit {
               private logErrorService: LogErrorService) {
   }
 
+  // @ts-ignore
   ngOnInit(): void {
     this.onGetUserByPerformance();
     this.onGetTaskDeadline();
     Chart.defaults.global.defaultFontFamily = 'Helvetica';
-    Chart.defaults.global.defaultFontSize = 12;
+    Chart.defaults.global.defaultFontSize = 14;
     Chart.plugins.register(ChartDataLabels);
 
     this.homeService.getAllRelease()
@@ -56,6 +57,11 @@ export class FitHomeComponent implements OnInit {
         let PTR = 0;
         let requirementGathering = 0;
         let uat = 0;
+        const KepatuhanandSDM = [];
+        const Keuangan = [];
+        const Operasional = [];
+        const Teknik = [];
+        const Utama = [];
         for (const release of data) {
           if (release.statusRelease === 'Active') {
             if (release.stage === 'Delivery Barang') {
@@ -80,7 +86,114 @@ export class FitHomeComponent implements OnInit {
               uat = uat + 1;
             }
           }
+
+          if (release.statusRelease === 'Active') {
+            if (release.directorateUser === 'Kepatuhan & SDM'){
+              if (KepatuhanandSDM.length <= 0) {
+                KepatuhanandSDM.push(release.project.projectCode);
+              }
+              const existKepatuhanandSDM = KepatuhanandSDM.includes(release.project.projectCode);
+              if (!existKepatuhanandSDM) {
+                KepatuhanandSDM.push(release.project.projectCode);
+              }
+            } else if (release.directorateUser === 'Teknik'){
+              if (Teknik.length <= 0) {
+                Teknik.push(release.project.projectCode);
+              }
+              const existTeknik = Teknik.includes(release.project.projectCode);
+              if (!existTeknik) {
+                Teknik.push(release.project.projectCode);
+              }
+            }else if (release.directorateUser === 'Utama'){
+              if (Utama.length <= 0) {
+                Utama.push(release.project.projectCode);
+              }
+              const existUtama = Utama.includes(release.project.projectCode);
+              if (!existUtama) {
+                Utama.push(release.project.projectCode);
+              }
+            }else if (release.directorateUser === 'Operasional'){
+              if (Operasional.length <= 0) {
+                Operasional.push(release.project.projectCode);
+              }
+              const existOperasional = Operasional.includes(release.project.projectCode);
+              if (!existOperasional) {
+                Operasional.push(release.project.projectCode);
+              }
+            }
+            else if (release.directorateUser === 'Keuangan'){
+              if (Keuangan.length <= 0) {
+                Keuangan.push(release.project.projectCode);
+              }
+              const existKeuangan = Keuangan.includes(release.project.projectCode);
+              if (!existKeuangan) {
+                Keuangan.push(release.project.projectCode);
+              }
+            }
+          }
         }
+
+
+
+        let updateDataProject2;
+        const colorHorBarChart = ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'];
+
+        const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
+          type: 'horizontalBar',
+          data: {
+            labels: ['Kepatuhan & SDM', 'Keuangan', 'Operasional', 'Teknik', 'Utama'],
+            datasets: [
+              {
+                label: '',
+                backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850'],
+                data: [KepatuhanandSDM.length, Keuangan.length, Operasional.length, Teknik.length, Utama.length]
+              }
+            ]
+          },
+          options: {
+            legend: {display: false},
+            plugins: {
+              datalabels: {
+                color: 'white',
+                anchor: 'center',
+                align: 'center',
+                formatter: Math.round,
+                font: {
+                  weight: 'bold'
+                }
+              }
+            },
+            scales: {
+              xAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  maxRotation: 90,
+                  minRotation: 80
+                }
+              }]
+            }
+          }
+        });
+
+
+        // tslint:disable-next-line:typedef
+        function updateHorBarChart(chart, dataProject2, color) {
+          chart.data.datasets.pop();
+          chart.data.datasets.push({
+            data: dataProject2,
+            backgroundColor: color
+          });
+          chart.update();
+        }
+
+        setInterval(() => {
+          updateDataProject2 = [KepatuhanandSDM, Keuangan, Operasional, Teknik, Utama];
+          updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
+        }, 1800000);
 
         let updateDataRelease;
         const colorBarChart = ['#f9e0ae',
@@ -141,6 +254,7 @@ export class FitHomeComponent implements OnInit {
             }]
           },
           options: {
+            indexAxis: 'y',
             legend: {display: false},
             plugins: {
               datalabels: {
@@ -158,13 +272,13 @@ export class FitHomeComponent implements OnInit {
             scales: {
               xAxes: [{
                 ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
+                  beginAtZero: true
                 }
               }],
               yAxes: [{
                 ticks: {
-                  beginAtZero: true
+                  maxRotation: 90,
+                  minRotation: 80
                 }
               }]
             }
@@ -205,36 +319,19 @@ export class FitHomeComponent implements OnInit {
 
     this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
-        const KepatuhanandSDM = 0;
-        const Keuangan = 0;
-        const OperationalRetail = 0;
-        const Teknik = 0;
-        const Utama = 0;
         let notStarted = 0;
         let onSchedule = 0;
         let ptr = 0;
         let delay = 0;
+        let potentialToBeDelay = 0;
+        let drop = 0;
         const allDirectorate = 0;
-        const contractedValueBebanUsaha = 0;
-        const contractedValueBelanjaModal = 0;
-        const budgetBebanUsaha = 0;
-        const budgetBelanjaModal = 0;
+        let contractedValueBebanUsaha = 0;
+        let contractedValueBelanjaModal = 0;
+        let budgetBebanUsaha = 0;
+        let budgetBelanjaModal = 0;
         for (const project of data.content) {
           if (project.statusProject === 'Active') {
-            // if (project.directorateUser === 'Kepatuhan & SDM') {
-            //   KepatuhanandSDM = KepatuhanandSDM + 1;
-            // } else if (project.directorateUser === 'Keuangan') {
-            //   Keuangan = Keuangan + 1;
-            // } else if (project.directorateUser === 'Operational Retail') {
-            //   OperationalRetail = OperationalRetail + 1;
-            // } else if (project.directorateUser === 'Teknik') {
-            //   Teknik = Teknik + 1;
-            // } else if (project.directorateUser === 'Utama') {
-            //   Utama = Utama + 1;
-            // } else {
-            //   allDirectorate = allDirectorate + 1;
-            // }
-
             if (project.status === 'Not Started') {
               notStarted = notStarted + 1;
             } else if (project.status === 'On Schedule') {
@@ -243,15 +340,19 @@ export class FitHomeComponent implements OnInit {
               ptr = ptr + 1;
             } else if (project.status === 'Delay') {
               delay = delay + 1;
+            } else if (project.status === 'Potential To Be Delay') {
+              potentialToBeDelay = potentialToBeDelay + 1;
+            } else if (project.status === 'Drop') {
+              drop = drop + 1;
             }
-            //
-            // if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
-            //   budgetBelanjaModal = budgetBelanjaModal + project.budget;
-            //   contractedValueBelanjaModal = contractedValueBelanjaModal + project.contracted_value;
-            // } else if (project.lineItem === 'Beban Usaha') {
-            //   budgetBebanUsaha = budgetBebanUsaha + project.budget;
-            //   contractedValueBebanUsaha = contractedValueBebanUsaha + project.contracted_value;
-            // }
+
+            if (project.lineItem === 'Belanja Modal/ Software' || project.lineItem === 'Belanja Modal/ Hardware') {
+              budgetBelanjaModal = budgetBelanjaModal + project.budget;
+              contractedValueBelanjaModal = contractedValueBelanjaModal + project.contractedValue;
+            } else if (project.lineItem === 'Beban Usaha') {
+              budgetBebanUsaha = budgetBebanUsaha + project.budget;
+              contractedValueBebanUsaha = contractedValueBebanUsaha + project.contractedValue;
+            }
           }
         }
 
@@ -260,17 +361,21 @@ export class FitHomeComponent implements OnInit {
         const colorPieChart = ['#43c6f3',
           '#ea710f',
           '#0ca506',
-          '#de0808'];
+          '#de0808',
+          '#3114d0',
+          '#070606'];
         const projectData = {
           labels: [
             'Not Started',
             'On Schedule',
             'PTR/ Live',
-            'Delay'
+            'Delay',
+            'Potential To Be Delay',
+            'Drop'
           ],
           datasets: [
             {
-              data: [notStarted, onSchedule, ptr, delay],
+              data: [notStarted, onSchedule, ptr, delay, potentialToBeDelay, drop],
               backgroundColor: colorPieChart
             }]
         };
@@ -305,6 +410,7 @@ export class FitHomeComponent implements OnInit {
           chart.update();
         }
 
+
         const projectByBebanUsahaCanvas = document.getElementById('projectByBebanUsaha');
         let updateDataProject3;
         const colorPieChart2 = ['#ffc1b6', '#fdffbc'];
@@ -326,9 +432,7 @@ export class FitHomeComponent implements OnInit {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
-                // tslint:disable-next-line:only-arrow-functions
                 formatter(value) {
-                  // tslint:disable-next-line:prefer-const
                   let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
@@ -379,8 +483,8 @@ export class FitHomeComponent implements OnInit {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
+                // tslint:disable-next-line:typedef
                 formatter(value) {
-                  // tslint:disable-next-line:prefer-const
                   let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
@@ -410,67 +514,9 @@ export class FitHomeComponent implements OnInit {
           chart.update();
         }
 
-        let updateDataProject2;
-        const colorHorBarChart = ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'];
-
-        const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
-          type: 'horizontalBar',
-          data: {
-            labels: ['Kepatuhan & SDM', 'Keuangan', 'Operasional', 'Teknik', 'Utama', 'Semua Direktorat'],
-            datasets: [
-              {
-                label: '',
-                backgroundColor: colorHorBarChart,
-                data: [KepatuhanandSDM, Keuangan, OperationalRetail, Teknik, Utama, allDirectorate]
-              }
-            ]
-          },
-          options: {
-            legend: {display: false},
-            plugins: {
-              datalabels: {
-                color: 'white',
-                anchor: 'center',
-                align: 'center',
-                formatter: Math.round,
-                font: {
-                  weight: 'bold'
-                }
-              }
-            },
-            scales: {
-              xAxes: [{
-                ticks: {
-                  beginAtZero: true,
-                }
-              }],
-              yAxes: [{
-                ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
-                }
-              }]
-            }
-          }
-        });
-
-        // tslint:disable-next-line:typedef
-        function updateHorBarChart(chart, dataProject2, color) {
-          chart.data.datasets.pop();
-          chart.data.datasets.push({
-            data: dataProject2,
-            backgroundColor: color
-          });
-          chart.update();
-        }
-
-
         setInterval(() => {
           updateDataProject = [notStarted, onSchedule, ptr, delay];
           updatePieChart(pieChart, updateDataProject, colorPieChart);
-
-          updateDataProject2 = [KepatuhanandSDM, Keuangan, OperationalRetail, Teknik, Utama, allDirectorate];
-          updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
 
           updateDataProject3 = [budgetBebanUsaha, contractedValueBebanUsaha];
           updatePieChart2(pieChart2, updateDataProject3, colorPieChart2);
@@ -479,6 +525,7 @@ export class FitHomeComponent implements OnInit {
           updatePieChart3(pieChart3, updateDataProject4, colorPieChart3);
         }, 1800000);
       }, error => {
+        alert(error.message);
         this.logError = {
           errorMessage: error.message,
           incidentDate: new Date(),
@@ -492,6 +539,15 @@ export class FitHomeComponent implements OnInit {
             alert('Gagal merekam kesalahan');
           });
       });
+
+
+
+    // const KepatuhanandSDM = 0;
+    // const Keuangan = 0;
+    // const Operasional = 0;
+    // const Teknik = 0;
+    // const Utama = 0;
+
 
 
     setInterval(() => {
@@ -510,6 +566,7 @@ export class FitHomeComponent implements OnInit {
           this.user.push(data[i]);
         }
       }, error => {
+        alert('Gagal Memuat');
         this.logError = {
           errorMessage: error.message,
           incidentDate: new Date(),
@@ -536,6 +593,7 @@ export class FitHomeComponent implements OnInit {
           this.taskDeadline.push(data[i]);
         }
       }, error => {
+        alert('Gagal Memuat');
         this.logError = {
           errorMessage: error.message,
           incidentDate: new Date(),
@@ -550,6 +608,5 @@ export class FitHomeComponent implements OnInit {
           });
       });
   }
-
 
 }

@@ -51,7 +51,6 @@ export class DetailTaskComponent implements OnInit {
       .subscribe(data => {
         this.myTask = data;
         this.files = this.myTask.fileList;
-        console.log(this.files);
       }, error => {
         alert(error);
       });

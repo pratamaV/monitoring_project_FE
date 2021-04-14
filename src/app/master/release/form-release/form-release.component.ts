@@ -160,6 +160,7 @@ export class FormReleaseComponent implements OnInit {
         id: postData.project
       }
     };
+    console.log(this.release);
     if (valid) {
       this.releaseService.saveRelease(this.release, this.id)
         .subscribe(response => {
