@@ -22,13 +22,6 @@ export class FitHomeComponent implements OnInit {
   taskDeadline: TaskModel2[] = [];
   projectDependency = '';
   directorateUser: string;
-  // paramNull = {
-  //   divisi: '',
-  //   userPM: '',
-  //   userPMO: '',
-  //   direktorate: '',
-  //   status: ''
-  // };
 
 
   constructor(private homeService: HomeService,
@@ -195,6 +188,8 @@ export class FitHomeComponent implements OnInit {
           updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
         }, 1800000);
 
+
+
         let updateDataRelease;
         const colorBarChart = ['#f9e0ae',
           '#43c6f3',
@@ -208,9 +203,9 @@ export class FitHomeComponent implements OnInit {
           '#0ca506',
           '#0ca506'];
 
-        const ctx = document.getElementById('barChart');
+        // const ctx = document.getElementById('barChart');
         const myChart = new Chart('barChart', {
-          type: 'bar',
+          type: 'horizontalBar',
           data: {
             labels: ['Not Started',
               'Requirement Gathering',
@@ -226,53 +221,27 @@ export class FitHomeComponent implements OnInit {
             datasets: [{
               label: '',
               data: [notStarted, requirementGathering, procurement, development, deliveryStage, uat, migration, PTR, implementation, live],
-              backgroundColor: [
-                '#43c6f3',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#0ca506',
-                '#0ca506',
-                '#0ca506'
-              ],
-              borderColor: [
-                '#43c6f3',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#ea710f',
-                '#0ca506',
-                '#0ca506',
-                '#0ca506'
-              ],
-              borderWidth: 1
+              backgroundColor: ['#43c6f3', '#ea710f', '#ea710f', '#ea710f', '#ea710f', '#ea710f', '#ea710f', '#0ca506', '#0ca506', '#0ca506'
+              ]
             }]
           },
           options: {
-            indexAxis: 'y',
             legend: {display: false},
             plugins: {
               datalabels: {
                 color: 'white',
-                anchor: 'end',
-                align: 'bottom',
+                anchor: 'center',
+                align: 'center',
                 formatter: Math.round,
                 font: {
-                  color: 'blue',
                   weight: 'bold'
                 }
               }
             },
-            responsive: true,
             scales: {
               xAxes: [{
                 ticks: {
-                  beginAtZero: true
+                  beginAtZero: true,
                 }
               }],
               yAxes: [{

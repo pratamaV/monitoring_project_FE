@@ -4,32 +4,27 @@
   <div class="row" id="main">
     <div class="col-sm-12 col-md-12 well" id="content">
       <div class="row">
-        <h4 style="text-align: left; margin-bottom: 30px"><i class="fa fa-search-plus float-start"
-                                                             style="margin-right: 10px;" aria-hidden="true"
-                                                             routerLink="/fit-home"></i>Dashboard</h4>
-
+        <h4 style="text-align: center; margin-bottom: 30px">
+<!--          <i class="fa fa-search-plus float-start" style="margin-right: 10px;" aria-hidden="true" routerLink="/fit-home"></i>-->
+          Dashboard</h4>
       </div>
 
       <div class="row">
-        <div id="divChart" class="col-4">
+        <div id="divChart" class="col-3">
           <h6 style="text-align: center">Precentage Project by Status</h6>
-          <canvas id="projectByStatus" width="600" height="400"></canvas>
+          <canvas id="projectByStatus" width="400" height="300"></canvas>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <h6 style="text-align: center">Budget vs Contracted Value Beban Usaha</h6>
           <canvas id="projectByBebanUsaha" width="600" height="400"></canvas>
         </div>
-        <div class="col-4">
-          <h6 style="text-align: center">Budget vs Contracted Value Belanja Modal</h6>
+        <div class="col-3">
+          <h6 style="text-align: center; font-size: 14px">Budget vs Contracted Value Belanja Modal</h6>
           <canvas id="projectByBelanjaModal" width="600" height="400"></canvas>
         </div>
-      </div>
-
-      <br><br>
-      <div class="row">
-        <div class="col-6">
+        <div class="col-3">
           <div class="container-fluid">
-            <h5 style="text-align: center">Best Performance</h5>
+            <h5 style="text-align: center; font-size: 16px">Best Performance</h5>
             <div class="table-wrapper-scroll-y my-custom-scrollbar">
               <table class="table table-bordered table-striped mb-0">
                 <thead>
@@ -50,8 +45,19 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="col-6" [hidden]="taskDeadline.length===0">
+      <div class="row">
+        <div class="col-4">
+          <h6>Progress Release by Stage</h6>
+          <canvas id="barChart" width="400" height="300"></canvas>
+        </div>
+        <div class="col-4">
+          <h6>Number of projects per directorate</h6>
+          <canvas id="bar-chart-horizontal" width="400" height="300">
+          </canvas>
+        </div>
+        <div class="col-4" [hidden]="taskDeadline.length===0">
           <h5 style="text-align: center">Task Out of The Date</h5>
           <div class="table-wrapper-scroll-y my-custom-scrollbar">
             <table class="table table-bordered table-striped mb-0">
@@ -81,16 +87,7 @@
 
 
       <div class="row">
-        <div id="divChart3" class="col-6">
-          <h6>Progress Release by Stage</h6>
-          <canvas id="barChart" width="400" height="300"></canvas>
-        </div>
 
-        <div class="col-6">
-          <h6>Number of projects per directorate</h6>
-          <canvas id="bar-chart-horizontal" width="500" height="400">
-          </canvas>
-        </div>
       </div>
 
     </div>
