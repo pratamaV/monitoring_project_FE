@@ -105,11 +105,21 @@ export class FormReleaseComponent implements OnInit {
   }
 
   onGetProjectById(){
-    this.projectService.getProjectById(history.state.project.id).subscribe(response => {
-      this.project = response;
-    }, error => {
-      alert(error.message);
-    });
+    console.log(localStorage.getItem('projectId'));
+    if (localStorage.getItem('projectId')){
+      this.projectService.getProjectById(localStorage.getItem('projectId')).subscribe(response => {
+        this.project = response;
+      }, error => {
+        alert(error.message);
+      });
+    } else {
+      this.projectService.getProjectById(history.state.project.id).subscribe(response => {
+        this.project = response;
+      }, error => {
+        alert(error.message);
+      });
+    }
+
   }
 
   // tslint:disable-next-line:typedef
