@@ -34,6 +34,7 @@ export class FormReleaseComponent implements OnInit {
   match: any;
   join2: any;
   fixContractedValue: number;
+  projectId: string;
 
 
   constructor(private route: ActivatedRoute,
@@ -53,8 +54,8 @@ export class FormReleaseComponent implements OnInit {
         const id: string = params.id;
         this.releaseService.getReleaseById(id)
           .subscribe((response) => {
-              this.id = id;
-              this.setDataToForm(response);
+            this.id = id;
+            this.setDataToForm(response);
             }, error => {
               alert(error.message);
             }
@@ -104,7 +105,7 @@ export class FormReleaseComponent implements OnInit {
   }
 
   onGetProjectById(){
-    this.projectService.getProjectById(localStorage.getItem('projectId')).subscribe(response => {
+    this.projectService.getProjectById(history.state.project.id).subscribe(response => {
       this.project = response;
     }, error => {
       alert(error.message);
@@ -195,6 +196,7 @@ export class FormReleaseComponent implements OnInit {
       this.releaseForm.get('directorateUser').setValue(this.release.directorateUser);
       this.releaseForm.get('departmentHead').setValue(this.release.departmentHead);
       this.releaseForm.get('categoryActivity').setValue(this.release.categoryActivity);
+      this.releaseForm.get('developmentMode').setValue(this.release.developmentMode);
       this.releaseForm.get('project').setValue(this.release.project.id);
     }
   }

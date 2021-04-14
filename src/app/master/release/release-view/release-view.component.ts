@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup} from "@angular/forms";
-import {ReleaseModel, ReleaseModel2} from "../release.model";
-import {ReleaseService} from "../release.service";
-import {ProjectServiceService} from "../../project/project-service.service";
-import {Router} from "@angular/router";
-import * as XLSX from "xlsx";
-import {ProjectModel} from "../../project/project.model";
+import {AbstractControl, FormControl, FormGroup} from '@angular/forms';
+import {ReleaseModel, ReleaseModel2} from '../release.model';
+import {ReleaseService} from '../release.service';
+import {ProjectServiceService} from '../../project/project-service.service';
+import {Router} from '@angular/router';
+import * as XLSX from 'xlsx';
+import {ProjectModel} from '../../project/project.model';
 
 @Component({
   selector: 'app-release-view',
@@ -165,7 +165,6 @@ export class ReleaseViewComponent implements OnInit {
   // tslint:disable-next-line:typedef
   searchLive(){
     if (this.resultSearch === ''){
-      console.log('masuk sini');
       this.isLoading = true;
       this.filterForm2.get('projectName').setValue(null);
       this.filterForm2.get('userPM').setValue(null);
@@ -286,8 +285,8 @@ export class ReleaseViewComponent implements OnInit {
 
   onGetReleaseById(id, param){
     localStorage.setItem('releaseId', id);
-    localStorage.setItem('paramviagatetask', param)
-    this.router.navigateByUrl([`/dashboard/release/detail-release/`]+id)
+    localStorage.setItem('paramviagatetask', param);
+    this.router.navigateByUrl([`/dashboard/release/detail-release/`] + id);
   }
 
 }
