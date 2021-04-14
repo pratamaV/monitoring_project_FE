@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {IssuedService} from '../issued.service';
 import {Router} from '@angular/router';
 import {IssuedModel, IssuedModel2} from '../issued.model';
-import * as XLSX from "xlsx";
-import Swal from "sweetalert2";
-import {LogErrorModel} from "../../log-error.model";
-import {LogErrorService} from "../../log-error.service";
+import * as XLSX from 'xlsx';
+import Swal from 'sweetalert2';
+import {LogErrorModel} from '../../log-error.model';
+import {LogErrorService} from '../../log-error.service';
 
 @Component({
   selector: 'app-list-issued',
@@ -28,10 +28,10 @@ export class ListIssuedComponent implements OnInit {
   }
 
   onGetListIssued() {
-    this.isLoading = true
+    this.isLoading = true;
     this.issuedService.getIssuedByReleaseId(localStorage.getItem('idRelease'))
       .subscribe(data => {
-        this.isLoading = false
+        this.isLoading = false;
         this.loadedIssued = data;
       }, error => {
         Swal.fire( 'Failed', 'maybe you are not logged in' , 'question'  );

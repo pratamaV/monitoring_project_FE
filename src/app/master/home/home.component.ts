@@ -91,23 +91,51 @@ export class HomeComponent implements OnInit {
 
           if (release.statusRelease === 'Active') {
             if (release.directorateUser === 'Kepatuhan & SDM'){
-              KepatuhanandSDM.push(release.project);
-              for (const project of KepatuhanandSDM) {
-                if (release.project === project){
-                  KepatuhanandSDM.pop();
-                }
+              if (KepatuhanandSDM.length <= 0) {
+                KepatuhanandSDM.push(release.project.projectCode);
+              }
+              const existKepatuhanandSDM = KepatuhanandSDM.includes(release.project.projectCode);
+              if (!existKepatuhanandSDM) {
+                KepatuhanandSDM.push(release.project.projectCode);
               }
             } else if (release.directorateUser === 'Teknik'){
-              for (const project of Teknik) {
-                if (release.project === project){
-                  Teknik.pop();
-                }
+              if (Teknik.length <= 0) {
+                Teknik.push(release.project.projectCode);
+              }
+              const existTeknik = Teknik.includes(release.project.projectCode);
+              if (!existTeknik) {
+                Teknik.push(release.project.projectCode);
+              }
+            }else if (release.directorateUser === 'Utama'){
+              if (Utama.length <= 0) {
+                Utama.push(release.project.projectCode);
+              }
+              const existUtama = Utama.includes(release.project.projectCode);
+              if (!existUtama) {
+                Utama.push(release.project.projectCode);
+              }
+            }else if (release.directorateUser === 'Operasional'){
+              if (Operasional.length <= 0) {
+                Operasional.push(release.project.projectCode);
+              }
+              const existOperasional = Operasional.includes(release.project.projectCode);
+              if (!existOperasional) {
+                Operasional.push(release.project.projectCode);
+              }
+            }
+            else if (release.directorateUser === 'Keuangan'){
+              if (Keuangan.length <= 0) {
+                Keuangan.push(release.project.projectCode);
+              }
+              const existKeuangan = Keuangan.includes(release.project.projectCode);
+              if (!existKeuangan) {
+                Keuangan.push(release.project.projectCode);
               }
             }
           }
         }
 
-        console.log(KepatuhanandSDM);
+
 
         let updateDataProject2;
         const colorHorBarChart = ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'];
@@ -582,6 +610,5 @@ export class HomeComponent implements OnInit {
           });
       });
   }
-
 }
 

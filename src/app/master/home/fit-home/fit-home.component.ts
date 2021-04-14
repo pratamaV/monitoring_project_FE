@@ -5,9 +5,9 @@ import {HomeService} from '../home.service';
 import {ProjectServiceService} from '../../project/project-service.service';
 import {TaskService} from '../../task/task.service';
 import {Chart} from 'node_modules/chart.js';
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import {LogErrorModel} from "../../log-error.model";
-import {LogErrorService} from "../../log-error.service";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import {LogErrorModel} from '../../log-error.model';
+import {LogErrorService} from '../../log-error.service';
 
 @Component({
   selector: 'app-fit-home',
@@ -18,7 +18,7 @@ export class FitHomeComponent implements OnInit {
 
   user: UserModel[] = [];
   taskDeadline: TaskModel2[] = [];
-  projectDependency= '';
+  projectDependency = '';
   // paramNull = {
   //   divisi: '',
   //   userPM: '',
@@ -205,20 +205,20 @@ export class FitHomeComponent implements OnInit {
 
     this.projectService.getAllProject(this.projectDependency)
       .subscribe(data => {
-        let KepatuhanandSDM = 0;
-        let Keuangan = 0;
-        let OperationalRetail = 0;
-        let Teknik = 0;
-        let Utama = 0;
+        const KepatuhanandSDM = 0;
+        const Keuangan = 0;
+        const OperationalRetail = 0;
+        const Teknik = 0;
+        const Utama = 0;
         let notStarted = 0;
         let onSchedule = 0;
         let ptr = 0;
         let delay = 0;
-        let allDirectorate = 0;
-        let contractedValueBebanUsaha = 0;
-        let contractedValueBelanjaModal = 0;
-        let budgetBebanUsaha = 0;
-        let budgetBelanjaModal = 0;
+        const allDirectorate = 0;
+        const contractedValueBebanUsaha = 0;
+        const contractedValueBelanjaModal = 0;
+        const budgetBebanUsaha = 0;
+        const budgetBelanjaModal = 0;
         for (const project of data.content) {
           if (project.statusProject === 'Active') {
             // if (project.directorateUser === 'Kepatuhan & SDM') {
@@ -327,9 +327,9 @@ export class FitHomeComponent implements OnInit {
                 anchor: 'center',
                 align: 'center',
                 // tslint:disable-next-line:only-arrow-functions
-                formatter: function (value) {
+                formatter(value) {
                   // tslint:disable-next-line:prefer-const
-                  var number_string = value.toString(),
+                  let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
                     ribuan = number_string.substr(sisa).match(/\d{3}/g);
@@ -379,9 +379,9 @@ export class FitHomeComponent implements OnInit {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
-                formatter: function (value) {
+                formatter(value) {
                   // tslint:disable-next-line:prefer-const
-                  var number_string = value.toString(),
+                  let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
                     ribuan = number_string.substr(sisa).match(/\d{3}/g);
