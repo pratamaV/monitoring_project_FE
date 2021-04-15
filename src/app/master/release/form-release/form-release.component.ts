@@ -119,7 +119,6 @@ export class FormReleaseComponent implements OnInit {
         alert(error.message);
       });
     }
-
   }
 
   // tslint:disable-next-line:typedef
