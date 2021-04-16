@@ -207,9 +207,9 @@ export class MyTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getAllProjectName() {
-    this.projectService.getAllProject(this.projectDependency)
+    this.projectService.getProjects()
       .subscribe(data => {
-        this.projectName = data.content;
+        this.projectName = data;
       }, error => {
         alert(error);
       });

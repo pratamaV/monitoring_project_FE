@@ -211,7 +211,7 @@ export class MyProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-    this.projectService.getAllProject(this.searchByKeyword).subscribe(
+    this.projectService.getAllProject(this.searchByKeyword, this.page).subscribe(
       data => {
         this.loadedProject = data.content;
       },

@@ -28,13 +28,13 @@ export class ProjectServiceService {
               private logErrorService: LogErrorService) {
   }
 
-  getAllProject(projectDependency): Observable<ApiResponseModel> {
+  getAllProject(projectDependency, page): Observable<ApiResponseModel> {
     return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       };
       // const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
-      const url = `/api/projects-page?projectDependency=${projectDependency}`;
+      const url = `/api/projects-page?projectDependency=${projectDependency}&page=${page - 1}`;
 
       this.http
         .get(url, header)

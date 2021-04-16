@@ -37,6 +37,8 @@ export class ListProjectComponent implements OnInit {
   token: any;
   role: any;
   userRole: any;
+  orderBy;
+  sort;
 
   page = 1;
   pageSize = 10;
@@ -97,7 +99,7 @@ export class ListProjectComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onGetListProject() {
     this.isLoading = true;
-    this.projectService.getAllProject(this.projectDependency).subscribe(
+    this.projectService.getAllProject(this.projectDependency, this.page).subscribe(
       data => {
         this.isLoading = false;
         if (this.userRole !== '01') {
@@ -218,7 +220,7 @@ export class ListProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-      this.projectService.getAllProject(this.searchByKeyword).subscribe(
+      this.projectService.getAllProject(this.searchByKeyword, this.page).subscribe(
         data => {
           this.loadedProject = data.content;
         },
