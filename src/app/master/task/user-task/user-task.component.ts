@@ -54,28 +54,28 @@ export class UserTaskComponent implements OnInit {
           });
 
 
-        if (this.user.userRole === '03') {
-          this.projectService.getProjectBycoPMId(localStorage.getItem('userIdTask'))
-            .subscribe(data3 => {
-              this.loadedProject = data3;
-            }, error => {
-              alert(error);
-            });
-        } else if (this.user.userRole === '02') {
-          this.projectService.getProjectByPMId(localStorage.getItem('userIdTask'))
-            .subscribe(data4 => {
-              this.loadedProject = data4;
-            }, error => {
-              alert(error);
-            });
-        } else if (this.user.userRole === '01') {
-          this.projectService.getProjectByPMOId(localStorage.getItem('userIdTask'))
-            .subscribe(data5 => {
-              this.loadedProject = data5;
-            }, error => {
-              alert(error);
-            });
-        }
+        // if (this.user.userRole === '03') {
+        //   this.projectService.getProjectBycoPMId(localStorage.getItem('userIdTask'))
+        //     .subscribe(data3 => {
+        //       this.loadedProject = data3;
+        //     }, error => {
+        //       alert(error);
+        //     });
+        // } else if (this.user.userRole === '02') {
+        //   this.projectService.getProjectByPMId(localStorage.getItem('userIdTask'))
+        //     .subscribe(data4 => {
+        //       this.loadedProject = data4;
+        //     }, error => {
+        //       alert(error);
+        //     });
+        // } else if (this.user.userRole === '01') {
+        //   this.projectService.getProjectByPMOId(localStorage.getItem('userIdTask'))
+        //     .subscribe(data5 => {
+        //       this.loadedProject = data5;
+        //     }, error => {
+        //       alert(error);
+        //     });
+        // }
       }, error => {
         alert(error);
       });
