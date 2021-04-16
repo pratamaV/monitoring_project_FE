@@ -234,6 +234,7 @@ export class TaskService {
       // tslint:disable-next-line:max-line-length
       this.http.get(`api/document-task/${taskCode}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, {responseType: 'blob' as 'json'})
         .subscribe((response: any) => {
+          console.log(response);
           const dataType = response.type;
           const binaryData = [];
           binaryData.push(response);
