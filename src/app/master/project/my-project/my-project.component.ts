@@ -31,6 +31,8 @@ export class MyProjectComponent implements OnInit {
 
   searchByKeyword: string;
   projectDependency = '';
+  orderBy = 'projectCode';
+  sort = 'ASC';
 
   token: any;
   role: any;
@@ -211,7 +213,7 @@ export class MyProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-    this.projectService.getAllProject(this.searchByKeyword).subscribe(
+    this.projectService.getAllProject(this.searchByKeyword, this.orderBy, this.sort, this.page).subscribe(
       data => {
         this.loadedProject = data.content;
       },

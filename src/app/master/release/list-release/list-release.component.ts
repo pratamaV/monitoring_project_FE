@@ -41,6 +41,9 @@ export class ListReleaseComponent implements OnInit {
   usersPmo: any[] = [];
   usersCoPM: any[] = [];
   userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
+  key: string = 'releaseCode';
+  reverse: boolean = false;
+
   constructor(private releaseService: ReleaseService,
               private projectService: ProjectServiceService,
               private router: Router,
@@ -52,6 +55,12 @@ export class ListReleaseComponent implements OnInit {
     this.onGetListRelease();
     this.getAllDivisi();
     this.getAllUser();
+  }
+
+  // tslint:disable-next-line:typedef
+  sortColumn(key){
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
   // tslint:disable-next-line:typedef

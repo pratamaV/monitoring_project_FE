@@ -33,6 +33,8 @@ export class ListTaskComponent implements OnInit {
   page = 1;
   pageSize = 10;
   totalItems = 0;
+  key: string = 'taskCode';
+  reverse: boolean = false;
 
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
@@ -44,6 +46,12 @@ export class ListTaskComponent implements OnInit {
     this.buildForm();
     this.onGetAllUser();
     this.onGetAllTask();
+  }
+
+  // tslint:disable-next-line:typedef
+  sortColumn(key){
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
   // tslint:disable-next-line:typedef

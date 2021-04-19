@@ -41,6 +41,8 @@ export class ReleaseViewComponent implements OnInit {
   usersPmo: any[] = [];
   usersCoPM: any[] = [];
   userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
+  key: string = 'releaseCode';
+  reverse: boolean = false;
 
   resultSearch: string;
 
@@ -55,6 +57,11 @@ export class ReleaseViewComponent implements OnInit {
     this.getAllDivisi();
     this.getAllUser();
     this.getProjects();
+  }
+
+  sortColumn(key){
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
   // tslint:disable-next-line:typedef

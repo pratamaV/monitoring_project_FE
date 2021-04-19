@@ -11,17 +11,14 @@ import {Router} from "@angular/router";
 export class ListProjectUserComponent implements OnInit {
   loadedProject: ProjectModel[] = [];
   projectDependency = '';
-  // paramNull = {
-  //   divisi: '',
-  //   userPM: '',
-  //   userPMO: '',
-  //   direktorate: '',
-  //   status: ''
-  // };
-  isLoading = false
+  isLoading = false;
+  orderBy = 'mst_project.project_code';
+  sort = 'ASC';
   page = 1;
   pageSize = 10;
   totalItems = 0;
+  key: string = 'projectCode';
+  reverse: boolean = false;
   userRole = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
 
   constructor(private projectService: ProjectServiceService,
@@ -34,7 +31,7 @@ export class ListProjectUserComponent implements OnInit {
   onGetListProject() {
     this.loadedProject = [];
     this.isLoading = true;
-    this.projectService.getAllProject(this.projectDependency)
+    this.projectService.getAllProject(this.projectDependency, this.orderBy, this.sort, this.page)
       .subscribe(data => {
         if (this.userRole !== '01'){
           for (const project of data.content) {
@@ -53,6 +50,12 @@ export class ListProjectUserComponent implements OnInit {
         alert(error);
       });
   }
+
+  sortColumn(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
   onPageChanges(event) {
     this.page = event;
     this.onGetListProject();

@@ -30,15 +30,10 @@ export class MyTaskComponent implements OnInit {
     estStartDateTo: '',
     estEndDateTo: ''
   };
+  key: string = 'taskCode';
+  reverse: boolean = false;
 
   projectDependency='';
-  // paramNull2 = {
-  //   divisi: '',
-  //   userPM: '',
-  //   userPMO: '',
-  //   direktorate: '',
-  //   status: ''
-  // };
 
   role: string;
   fileName = 'List-MyTask-' + new Date().toDateString() + '.xlsx';
@@ -67,6 +62,11 @@ export class MyTaskComponent implements OnInit {
     this.getAllReleaseName();
   }
 
+  sortColumn(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
   private buildForm(): void {
     this.taskForm = new FormGroup({
       statusDone: new FormControl(null),
@@ -93,10 +93,6 @@ export class MyTaskComponent implements OnInit {
     this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
       .subscribe(data => {
         this.isLoading = false;
-        // for (const datum of data.content) {
-        //   if (datum.release.project.statusProject === 'Active')
-        // }
-        // console.log(data.content, 'ini apa')
         this.loadedTask = data.content;
         this.totalItems = data.totalElements;
         for (const iterator of this.loadedTask) {
@@ -195,41 +191,37 @@ export class MyTaskComponent implements OnInit {
     this.releaseService.getAllRelease()
     .subscribe(data => {
       console.log(data);
-      this.releaseName = data
-      // console.log(this.releaseName);
-
-
-      this.releaseName = data
+      this.releaseName = data;
     }, error => {
-      alert(error)
-    })
+      alert(error);
+    });
   }
 
   // tslint:disable-next-line:typedef
   getAllProjectName() {
-    this.projectService.getAllProject(this.projectDependency)
+    this.projectService.getProjects()
       .subscribe(data => {
-        this.projectName = data.content;
+        this.projectName = data;
       }, error => {
         alert(error);
       });
   }
 
-  onGetTaskByIdUserSort(orderBy: string, sort: string) {
-    this.taskService.getAllTaskByIdUserSort(localStorage.getItem('idUser'), orderBy, sort).subscribe(
-      data => {
-        this.isLoading = false;
-        this.loadedTask = data.content;
-        if (sort === 'ASC') {
-          this.asc = true;
-        } else if (sort === 'DESC') {
-          this.asc = false;
-        }
-      },
-      error => {
-        alert(error);
-      }
-    );
-  }
+  // onGetTaskByIdUserSort(orderBy: string, sort: string) {
+  //   this.taskService.getAllTaskByIdUserSort(localStorage.getItem('idUser'), orderBy, sort).subscribe(
+  //     data => {
+  //       this.isLoading = false;
+  //       this.loadedTask = data.content;
+  //       if (sort === 'ASC') {
+  //         this.asc = true;
+  //       } else if (sort === 'DESC') {
+  //         this.asc = false;
+  //       }
+  //     },
+  //     error => {
+  //       alert(error);
+  //     }
+  //   );
+  // }
 
 }

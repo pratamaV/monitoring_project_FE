@@ -2,7 +2,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <!------ Include the above in your HEAD tag ---------->
-<!-- 
+<!--
 <head>
   <script
     src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -24,9 +24,27 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">Project Code</th>
-                                        <th scope="col">Project Name</th>
-                                        <th scope="col">Prosentase Project</th>
+                                        <th scope="col">Project Code
+                                          <button (click)="sortColumn('projectCode') " *ngIf="reverse == true"
+                                                  class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                  title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                          <button (click)="sortColumn('projectCode') " *ngIf="reverse == false"
+                                                  class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                  title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button></th>
+                                        <th scope="col">Project Name
+                                          <button (click)="sortColumn('projectName') " *ngIf="reverse == true"
+                                                  class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                  title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                          <button (click)="sortColumn('projectName') " *ngIf="reverse == false"
+                                                  class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                  title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button></th>
+                                        <th scope="col">Prosentase Project
+                                          <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                                                  class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                  title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                          <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                                                  class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                  title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button></th>
                                         <th scope="col">Detail Project</th>
                                     </tr>
                                 </thead>

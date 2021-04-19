@@ -10,162 +10,210 @@
 </head> -->
 
 <body>
-    <div class="main-content">
-        <app-sidebar></app-sidebar>
-        <div id="cover">
-            <!-- Table -->
-            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" onclick="history.back()"></i> List Task</h4>
-            <div class="row">
+<div class="main-content">
+  <app-sidebar></app-sidebar>
+  <div id="cover">
+    <!-- Table -->
+    <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" onclick="history.back()"></i> List
+      Task</h4>
+    <div class="row">
 
-                <div class="col">
-                    <div class="card shadow">
-                        <div class="card-header border-0">
-                            <div class="row col col-xs-12">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header border-0">
+            <div class="row col col-xs-12">
 
-                                <div class="col-9 col-xs-6 float-right">
-                                    <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetFilterTask(filterForm.value)">
-                                        <div class="row">
-                                            <div class="form-group col">
-                                                <label for="assignTo" style="float: left;">Assign To</label>
-                                                <select class="form-select" formControlName="assignTo" id="assignTo" aria-label="Default select example">
+              <div class="col-9 col-xs-6 float-right">
+                <form [formGroup]="filterForm" method="POST" (ngSubmit)="onGetFilterTask(filterForm.value)">
+                  <div class="row">
+                    <div class="form-group col">
+                      <label for="assignTo" style="float: left;">Assign To</label>
+                      <select class="form-select" formControlName="assignTo" id="assignTo"
+                              aria-label="Default select example">
                         <option *ngFor="let user of loadedUser" [value]="user.id"
                                 [selected]="assigntoId===user.id">{{user.username}}</option>
                       </select>
-                                                <small class="form-text text-danger " *ngIf="form('assignTo').invalid && form('assignTo').dirty || form('assignTo').touched">
+                      <small class="form-text text-danger "
+                             *ngIf="form('assignTo').invalid && form('assignTo').dirty || form('assignTo').touched">
                         <div *ngIf="form('assignTo').errors?.required">
                           Bagian ini harus terisi
                         </div>
                       </small>
-                                            </div>
+                    </div>
 
-                                            <div class="form-group col">
-                                                <label for="statusDone" style="float: left;">Status</label>
-                                                <select class="form-select" formControlName="statusDone" id="statusDone" aria-label="Default select example">
+                    <div class="form-group col">
+                      <label for="statusDone" style="float: left;">Status</label>
+                      <select class="form-select" formControlName="statusDone" id="statusDone"
+                              aria-label="Default select example">
                         <option value="ON_PROGRESS">ON PROGRESS</option>
                         <option value="NOT STARTED">NOT STARTED</option>
                         <option value="DONE">DONE</option>
                       </select>
-                                            </div>
-                                        </div>
-                                        <div id="button-filter">
-                                            <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;" (click)="onGetAllTask()">Reset Filter
+                    </div>
+                  </div>
+                  <div id="button-filter">
+                    <button class="btn btn-success btn-sm" style="float: right; margin-left: 10px;"
+                            (click)="onGetAllTask()">Reset Filter
                     </button>&nbsp;
-                                            <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
+                    <button type="submit" class="btn btn-info btn-sm" style="float: right;">Apply
                       Filter
                     </button>
-                                        </div>
+                  </div>
 
-                                    </form>
-                                </div>
-                                <div id="button-atas" class="col col-xs-6">
-                                    <button id="export-excel" class="btn btn-warning btn-sm" (click)="exportexcel()"><i
+                </form>
+              </div>
+              <div id="button-atas" class="col col-xs-6">
+                <button id="export-excel" class="btn btn-warning btn-sm" (click)="exportexcel()"><i
                   class="fa fa-file"></i> Export to excel
                 </button>
-                                    <button id="add-project" class="btn btn-dark btn-sm" (click)="onSaveTaskByReleaseId()"><i
+                <button id="add-project" class="btn btn-dark btn-sm" (click)="onSaveTaskByReleaseId()"><i
                   class="fa fa-plus"></i> Add New Task
                 </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush" id="excel-table">
-                                <thead class="thead-light">
-                                    <tr style="text-align: center;">
-                                        <th scope="col">Task Code
-                                            <button (click)="onGetTaskByIdReleaseSort('taskCode', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('taskCode', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">Task Name
-                                            <button (click)="onGetTaskByIdReleaseSort('taskName', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('taskName', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">Action</th>
-                                        <th scope="col">Assigned To
-                                            <button (click)="onGetTaskByIdReleaseSort('assignedTo.username', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('assignedTo.username', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">Score</th>
-                                        <th scope="col">Weight</th>
-                                        <th scope="col">Status
-                                            <button (click)="onGetTaskByIdReleaseSort('statusDone', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('statusDone', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">Prosentase Task
-                                            <button (click)="onGetTaskByIdReleaseSort('taskProsentase', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('taskProsentase', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">Start Date Plan
-                                            <button (click)="onGetTaskByIdReleaseSort('estStartDate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('estStartDate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">End Date Plan
-                                            <button (click)="onGetTaskByIdReleaseSort('estEndDate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('estEndDate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">Start Date Actual
-                                            <button (click)="onGetTaskByIdReleaseSort('actStartDate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('actStartDate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <th scope="col">End Date Actual
-                                            <button (click)="onGetTaskByIdReleaseSort('actEndDate', 'ASC')" *ngIf="asc == false" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                                            <button (click)="onGetTaskByIdReleaseSort('actEndDate', 'DESC')" *ngIf="asc == true" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                                        </th>
-                                        <!--                                        <th scope="col">Detail</th>-->
-                                        <!--                                        <th scope="col">Action</th>-->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let task of loadedTask | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)" style="text-align: center;">
-                                        <th scope="row">{{task.taskCode}}</th>
-                                        <td>{{task.taskName}}</td>
-                                        <td style="text-align: center;">
-                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush" id="excel-table">
+              <thead class="thead-light">
+              <tr style="text-align: center;">
+                <th scope="col">Task Code
+                  <button (click)="sortColumn('taskCode') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('taskCode') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Task Name
+                  <button (click)="sortColumn('taskName') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('taskName') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Action</th>
+                <th scope="col">Assigned To
+                  <button (click)="sortColumn('assignedTo.username') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('assignedTo.username') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Score</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Status
+                  <button (click)="sortColumn('statusDone') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('statusDone') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Prosentase Task
+                  <button (click)="sortColumn('taskProsentase') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('taskProsentase') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Start Date Plan
+                  <button (click)="sortColumn('estStartDate') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('estStartDate') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">End Date Plan
+                  <button (click)="sortColumn('estEndDate') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('estEndDate') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Start Date Actual
+                  <button (click)="sortColumn('actStartDate') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('actStartDate') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">End Date Actual
+                  <button (click)="sortColumn('actEndDate') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('actEndDate') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <!--                                        <th scope="col">Detail</th>-->
+                <!--                                        <th scope="col">Action</th>-->
+              </tr>
+              </thead>
+              <tbody>
+              <tr
+                *ngFor="let task of loadedTask | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
+                [ngStyle]="getStyle(task.estEndDate, task.statusDone)" style="text-align: center;">
+                <th scope="row">{{task.taskCode}}</th>
+                <td>{{task.taskName}}</td>
+                <td style="text-align: center;">
+                  <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm"
+                          data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i>
                   </button>&nbsp;
-                                            <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
+                  <button (click)="updateTask(task)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
+                          data-placement="bottom" title="Update"><i
                     class="fa fa-edit"></i></button>&nbsp;
-                                        </td>
-                                        <td>{{task.assignedTo.username}}</td>
-                                        <td>{{task.score}}</td>
-                                        <td>{{task.weight | number : '1.2-2'}}</td>
-                                        <td>{{task.statusDone}}</td>
-                                        <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
-                                        <td>{{task.estStartDate | date}}</td>
-                                        <td>{{task.estEndDate | date}}</td>
-                                        <td>{{task.actStartDate | date}}</td>
-                                        <td>{{task.actEndDate | date}}</td>
-                                        <!--                                        <td style="text-align: center;">-->
-                                        <!--                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;-->
-                                        <!--                                        </td>-->
+                </td>
+                <td>{{task.assignedTo.username}}</td>
+                <td>{{task.score}}</td>
+                <td>{{task.weight | number : '1.2-2'}}</td>
+                <td>{{task.statusDone}}</td>
+                <td>{{task.taskProsentase * 100 | number : '1.2-2'}}%</td>
+                <td>{{task.estStartDate | date}}</td>
+                <td>{{task.estEndDate | date}}</td>
+                <td>{{task.actStartDate | date}}</td>
+                <td>{{task.actEndDate | date}}</td>
+                <!--                                        <td style="text-align: center;">-->
+                <!--                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;-->
+                <!--                                        </td>-->
 
-                                    </tr>
-                                </tbody>
-                            </table>
+              </tr>
+              </tbody>
+            </table>
 
-                        </div>
-                        <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;" (pageChange)="onPageChanges($event)"></pagination-controls>
+          </div>
+          <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;"
+                               (pageChange)="onPageChanges($event)"></pagination-controls>
 
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="container" *ngIf="isLoading == true">
-            <div id="id01" class="modal">
-                <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                    <div class="spinner-border text-info"></div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <footer class="footer">
-        <div class="row align-items-center justify-content-xl-between">
-            <div class="col-xl-6 m-auto text-center">
-                <div class="copyright">
-                    <p></p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </div>
+  <div class="container" *ngIf="isLoading == true">
+    <div id="id01" class="modal">
+      <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <div class="spinner-border text-info"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="row align-items-center justify-content-xl-between">
+    <div class="col-xl-6 m-auto text-center">
+      <div class="copyright">
+        <p></p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script
+  src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+<script
+  src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>

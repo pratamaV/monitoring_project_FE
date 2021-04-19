@@ -4,7 +4,6 @@ import {ProjectServiceService} from '../project-service.service';
 import {Router} from '@angular/router';
 import * as XLSX from 'xlsx';
 import {FormControl, FormGroup} from '@angular/forms';
-import {UserModel} from '../../user/user.model';
 import {UserService} from '../../user/user.service';
 
 @Component({
@@ -21,22 +20,22 @@ export class ListProjectComponent implements OnInit {
   filterForm: FormGroup;
   loadedRelease: any;
   filter = false;
-
   asc = true;
   fileName = 'List-Project-' + new Date().toDateString() + '.xlsx';
   divitions: any[] = [];
   users: any[] = [];
   usersPm: any[] = [];
   usersPmo: any[] = [];
-
   projectStatus: string;
-
   searchByKeyword: string;
   projectDependency = '';
-
+  orderBy = 'mst_project.project_code';
+  sort = 'ASC';
   token: any;
   role: any;
   userRole: any;
+  key: string = 'projectCode';
+  reverse: boolean = false;
 
   page = 1;
   pageSize = 10;
@@ -72,6 +71,12 @@ export class ListProjectComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
+  sortColumn(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
+  // tslint:disable-next-line:typedef
   getAllUser() {
     this.projectService.getAllUser().subscribe(
       response => {
@@ -93,11 +98,10 @@ export class ListProjectComponent implements OnInit {
     );
   }
 
-
   // tslint:disable-next-line:typedef
   onGetListProject() {
     this.isLoading = true;
-    this.projectService.getAllProject(this.projectDependency).subscribe(
+    this.projectService.getAllProject(this.projectDependency, this.orderBy, this.sort, this.page).subscribe(
       data => {
         this.isLoading = false;
         if (this.userRole !== '01') {
@@ -115,6 +119,8 @@ export class ListProjectComponent implements OnInit {
         alert(error);
       }
     );
+
+
   }
 
   // tslint:disable-next-line:typedef
@@ -143,36 +149,36 @@ export class ListProjectComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onGetProjectBySort(orderBy: string, sort: string) {
-    this.loadedProject = [];
-    this.projectService.getAllProjectSort(orderBy, sort).subscribe(
-      data => {
-        if (this.userRoleNew !== '01'){
-          for (const project of data.content) {
-            if (project.statusProject === 'Active'){
-              this.isLoading = false;
-              this.loadedProject.push(project);
-              if (sort === 'ASC') {
-                this.asc = true;
-              } else if (sort === 'DESC') {
-                this.asc = false;
-              }
-            }
-          }
-        } else {
-          this.loadedProject = data.content;
-          if (sort === 'ASC') {
-            this.asc = true;
-          } else if (sort === 'DESC') {
-            this.asc = false;
-          }
-        }
-      },
-      error => {
-        alert(error);
-      }
-    );
-  }
+  // onGetProjectBySort(orderBy: string, sort: string) {
+  //   this.loadedProject = [];
+  //   this.projectService.getAllProjectSort(orderBy, sort).subscribe(
+  //     data => {
+  //       if (this.userRoleNew !== '01'){
+  //         for (const project of data.content) {
+  //           if (project.statusProject === 'Active'){
+  //             this.isLoading = false;
+  //             this.loadedProject.push(project);
+  //             if (sort === 'ASC') {
+  //               this.asc = true;
+  //             } else if (sort === 'DESC') {
+  //               this.asc = false;
+  //             }
+  //           }
+  //         }
+  //       } else {
+  //         this.loadedProject = data.content;
+  //         if (sort === 'ASC') {
+  //           this.asc = true;
+  //         } else if (sort === 'DESC') {
+  //           this.asc = false;
+  //         }
+  //       }
+  //     },
+  //     error => {
+  //       alert(error);
+  //     }
+  //   );
+  // }
 
   // tslint:disable-next-line:typedef
   updateProject(project: ProjectModel2) {
@@ -218,7 +224,7 @@ export class ListProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-      this.projectService.getAllProject(this.searchByKeyword).subscribe(
+      this.projectService.getAllProject(this.searchByKeyword, this.orderBy, this.sort, this.page).subscribe(
         data => {
           this.loadedProject = data.content;
         },

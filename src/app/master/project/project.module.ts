@@ -7,10 +7,11 @@ import {ProjectRoutingModule} from './project-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ListProjectUserComponent } from './list-project-user/list-project-user.component';
 import { DetailProjectUserComponent } from './detail-project-user/detail-project-user.component';
-import {SidebarModule} from "../../layout/sidebar/sidebar.module";
+import {SidebarModule} from '../../layout/sidebar/sidebar.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyProjectComponent } from './my-project/my-project.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 
 
@@ -23,7 +24,8 @@ import { MyProjectComponent } from './my-project/my-project.component';
         ReactiveFormsModule,
         SidebarModule,
         SharedModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        Ng2OrderModule
     ],
     providers: [CurrencyPipe]
 })

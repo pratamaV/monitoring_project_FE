@@ -286,7 +286,7 @@ export class FitHomeComponent implements OnInit {
       });
 
 
-    this.projectService.getAllProject(this.projectDependency)
+    this.projectService.getProjects()
       .subscribe(data => {
         let notStarted = 0;
         let onSchedule = 0;
@@ -299,7 +299,7 @@ export class FitHomeComponent implements OnInit {
         let contractedValueBelanjaModal = 0;
         let budgetBebanUsaha = 0;
         let budgetBelanjaModal = 0;
-        for (const project of data.content) {
+        for (const project of data) {
           if (project.statusProject === 'Active') {
             if (project.status === 'Not Started') {
               notStarted = notStarted + 1;
