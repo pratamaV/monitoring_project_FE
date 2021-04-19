@@ -213,7 +213,11 @@ export class MyProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
+// <<<<<<< HEAD
     this.projectService.getAllProject(this.searchByKeyword, this.orderBy, this.sort, this.page).subscribe(
+// =======
+//     this.projectService.getAllProject(this.searchByKeyword, this.page).subscribe(
+// >>>>>>> f34b8fbeefc06a8ccedc2818c836b148e4d88e7d
       data => {
         this.loadedProject = data.content;
       },

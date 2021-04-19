@@ -35,7 +35,7 @@ export class FitHomeComponent implements OnInit {
     this.onGetUserByPerformance();
     this.onGetTaskDeadline();
     Chart.defaults.global.defaultFontFamily = 'Helvetica';
-    Chart.defaults.global.defaultFontSize = 14;
+    Chart.defaults.global.defaultFontSize = 12;
     Chart.plugins.register(ChartDataLabels);
 
     this.homeService.getAllRelease()
@@ -159,13 +159,16 @@ export class FitHomeComponent implements OnInit {
             scales: {
               xAxes: [{
                 ticks: {
-                  beginAtZero: true,
+                  display: false
+                  // beginAtZero: true,
                 }
               }],
               yAxes: [{
                 ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
+                  display: true,
+                  fontSize: 12
+                  // maxRotation: 90,
+                  // minRotation: 80
                 }
               }]
             }
@@ -241,13 +244,16 @@ export class FitHomeComponent implements OnInit {
             scales: {
               xAxes: [{
                 ticks: {
-                  beginAtZero: true,
+                  display: false
+                  // beginAtZero: true,
                 }
               }],
               yAxes: [{
                 ticks: {
-                  maxRotation: 90,
-                  minRotation: 80
+                  display: true,
+                  fontSize: 12
+                  // maxRotation: 90,
+                  // minRotation: 80
                 }
               }]
             }
@@ -354,7 +360,18 @@ export class FitHomeComponent implements OnInit {
           type: 'pie',
           data: projectData,
           options: {
+            legend : {
+              position: 'left'
+            },
             plugins: {
+              legend : {
+                display: true,
+                label : {
+                  font: {
+                    size : 10
+                  }
+                }
+              },
               datalabels: {
                 color: 'white',
                 anchor: 'center',
@@ -396,6 +413,9 @@ export class FitHomeComponent implements OnInit {
           type: 'pie',
           data: projectData2,
           options: {
+            legend : {
+              position: 'left'
+            },
             plugins: {
               datalabels: {
                 color: 'black',
@@ -447,6 +467,9 @@ export class FitHomeComponent implements OnInit {
           type: 'pie',
           data: projectData3,
           options: {
+            legend : {
+              position: 'left'
+            },
             plugins: {
               datalabels: {
                 color: 'black',
@@ -508,15 +531,6 @@ export class FitHomeComponent implements OnInit {
             alert('Gagal merekam kesalahan');
           });
       });
-
-
-
-    // const KepatuhanandSDM = 0;
-    // const Keuangan = 0;
-    // const Operasional = 0;
-    // const Teknik = 0;
-    // const Utama = 0;
-
 
 
     setInterval(() => {

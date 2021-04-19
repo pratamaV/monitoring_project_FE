@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectModel} from "../project.model";
+import {ProjectModel} from '../project.model';
 import {ProjectServiceService} from '../project-service.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-project-user',
@@ -31,7 +31,11 @@ export class ListProjectUserComponent implements OnInit {
   onGetListProject() {
     this.loadedProject = [];
     this.isLoading = true;
+// <<<<<<< HEAD
     this.projectService.getAllProject(this.projectDependency, this.orderBy, this.sort, this.page)
+// =======
+//     this.projectService.getAllProject(this.projectDependency, this.page)
+// >>>>>>> f34b8fbeefc06a8ccedc2818c836b148e4d88e7d
       .subscribe(data => {
         if (this.userRole !== '01'){
           for (const project of data.content) {
