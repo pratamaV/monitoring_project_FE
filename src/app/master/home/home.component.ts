@@ -189,7 +189,7 @@ export class HomeComponent implements OnInit {
         }
 
         setInterval(() => {
-          updateDataProject2 = [KepatuhanandSDM, Keuangan, Operasional, Teknik, Utama];
+          updateDataProject2 = [KepatuhanandSDM.length, Keuangan.length, Operasional.length, Teknik.length, Utama.length];
           updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
         }, 1800000);
 
@@ -509,7 +509,7 @@ export class HomeComponent implements OnInit {
         }
 
         setInterval(() => {
-          updateDataProject = [notStarted, onSchedule, ptr, delay];
+          updateDataProject = [notStarted, onSchedule, ptr, delay, potentialToBeDelay, drop];
           updatePieChart(pieChart, updateDataProject, colorPieChart);
 
           updateDataProject3 = [budgetBebanUsaha, contractedValueBebanUsaha];
