@@ -10,6 +10,19 @@
     align-items: stretch;
 }
 
+.col-3 .card {
+  margin-left: 10px;
+  height: 300px;
+  padding: 7px;
+}
+
+.col-4 .card {
+  margin-left: 10px;
+  height: 300px;
+  padding: 7px;
+}
+
+
 
 /*
 .wrapper {
@@ -52,3 +65,4 @@
     display: block;
     font-size: 13px;
 }
+
