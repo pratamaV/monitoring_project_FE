@@ -35,6 +35,7 @@ export class ListTaskComponent implements OnInit {
   totalItems = 0;
   key: string = 'taskCode';
   reverse: boolean = false;
+  pageUser = 1;
 
   constructor(private taskService: TaskService,
               private projectService: ProjectServiceService,
@@ -76,7 +77,7 @@ export class ListTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetAllUser() {
-    this.userService.getAllUser()
+    this.userService.getAllUser(this.pageUser)
       .subscribe(data => {
         this.loadedUser = data.content;
       }, error => {

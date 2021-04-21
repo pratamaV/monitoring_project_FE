@@ -29,7 +29,7 @@ export class ListUserComponent implements OnInit {
 
   onGetListUser() {
     this.isLoading = true
-    this.userService.getAllUser()
+    this.userService.getAllUser(this.page)
       .subscribe(data => {
         this.isLoading = false
         this.loadedUser = data.content;
