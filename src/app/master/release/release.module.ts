@@ -8,6 +8,7 @@ import {SidebarModule} from "../../layout/sidebar/sidebar.module";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReleaseViewComponent } from './release-view/release-view.component';
 import { DetailReleaseComponent } from './detail-release/detail-release.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { DetailReleaseComponent } from './detail-release/detail-release.componen
         FormsModule,
         ReactiveFormsModule,
         SidebarModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        Ng2OrderModule
     ],
     providers: [CurrencyPipe]
 })

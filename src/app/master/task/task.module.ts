@@ -9,6 +9,7 @@ import { UserTaskComponent } from './user-task/user-task.component';
 import {DetailTaskComponent} from './detail-task/detail-task.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ListTaskComponent } from './list-task/list-task.component';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { ListTaskComponent } from './list-task/list-task.component';
         TaskRoutingModule,
         ReactiveFormsModule,
         SidebarModule,
-        NgxPaginationModule
+        NgxPaginationModule, Ng2OrderModule
     ]
 })
 export class TaskModule { }

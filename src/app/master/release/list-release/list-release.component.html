@@ -291,7 +291,7 @@
               </thead>
               <tbody>
               <tr
-                *ngFor="let release of loadedRelease | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
+                *ngFor="let release of loadedRelease  |orderBy: key : reverse| paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
                 [ngStyle]="getStyle(release)">
                 <th scope="row">{{release.releaseCode}}</th>
                 <td>{{release.releaseName}}</td>
