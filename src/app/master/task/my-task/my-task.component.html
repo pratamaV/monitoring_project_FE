@@ -112,8 +112,23 @@
                                                   title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                                         </th>
                                         <!--        <th scope="col">Assigned To</th>-->
-                                        <th scope="col">Score</th>
-                                        <th scope="col">Weight</th>
+                                        <th scope="col">Score
+                                                <button (click)="sortColumn('score') " *ngIf="reverse == true"
+                                                        class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                        title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                                <button (click)="sortColumn('score') " *ngIf="reverse == false"
+                                                        class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                        title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                      
+                                            </th>
+                                            <th scope="col">Weight
+                                                <button (click)="sortColumn('weight') " *ngIf="reverse == true"
+                                                        class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                        title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                                                <button (click)="sortColumn('weight') " *ngIf="reverse == false"
+                                                        class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                                        title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                            </th>
                                         <th scope="col">Status
                                           <button (click)="sortColumn('statusDone') " *ngIf="reverse == true"
                                                   class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
@@ -161,7 +176,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let task of loadedTask | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
+                                    <tr *ngFor="let task of loadedTask | orderBy: key : reverse | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index" [ngStyle]="getStyle(task.estEndDate, task.statusDone)">
                                         <th scope="row">{{task.taskCode}}</th>
                                         <td>{{task.taskName}}</td>
                                         <td>{{task.release.releaseName}}</td>

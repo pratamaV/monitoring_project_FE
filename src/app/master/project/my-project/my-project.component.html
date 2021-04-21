@@ -63,59 +63,60 @@
               <thead class="thead-light">
               <tr style="text-align: center;">
                 <th scope="col">Project Code
-                  <button (click)="onGetProjectBySort('projectCode', 'ASC')" *ngIf="asc == false"
+                  <button (click)="sortColumn('projectCode') " *ngIf="reverse == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('projectCode', 'DESC')" *ngIf="asc == true"
+                  <button (click)="sortColumn('projectCode') " *ngIf="reverse == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Project Name
-                  <button (click)="onGetProjectBySort('projectName', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('projectName', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    <button (click)="sortColumn('projectName') " *ngIf="reverse == true"
+                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                            title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                    <button (click)="sortColumn('projectName') " *ngIf="reverse == false"
+                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                            title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Action</th>
                 <th scope="col">Project Precentage
-                  <button (click)="onGetProjectBySort('prosentaseProject', 'ASC')" *ngIf="asc == false"
+                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('prosentaseProject', 'DESC')" *ngIf="asc == true"
+                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+      
                 </th>
                 <th scope="col">Project Dependency
-                  <button (click)="onGetProjectBySort('projectDependency', 'ASC')" *ngIf="asc == false"
+                    <button (click)="sortColumn('projectDependency') " *ngIf="reverse == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('projectDependency', 'DESC')" *ngIf="asc == true"
+                    <button (click)="sortColumn('projectDependency') " *ngIf="reverse == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th>Bugdet
-                  <button (click)="onGetProjectBySort('budget', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('budget', 'DESC')" *ngIf="asc == true"
+                    <button (click)="sortColumn('budget') " *ngIf="reverse == true"
+                        class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                        title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                    <button (click)="sortColumn('budget') " *ngIf="reverse == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th>Bugdet Realization
-                  <button (click)="onGetProjectBySort('paymentRealization', 'ASC')" *ngIf="asc == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="onGetProjectBySort('paymentRealization', 'DESC')" *ngIf="asc == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    <button (click)="sortColumn('paymentRealization') " *ngIf="reverse == true"
+                        class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                        title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                    <button (click)="sortColumn('paymentRealization') " *ngIf="reverse == false"
+                        class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                        title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
               </tr>
               </thead>
               <tbody>
               <tr
-                *ngFor="let project of loadedProject | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
+                *ngFor="let project of loadedProject | orderBy: key : reverse|  paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
                 [ngStyle]="getStyle(project)">
                 <th scope="row">{{project.projectCode}}</th>
                 <td>{{project.projectName}}</td>

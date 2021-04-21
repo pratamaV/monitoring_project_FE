@@ -33,6 +33,8 @@ export class MyProjectComponent implements OnInit {
   projectDependency = '';
   orderBy = 'projectCode';
   sort = 'ASC';
+  key: string = 'projectCode';
+  reverse: boolean = false;
 
   token: any;
   role: any;
@@ -56,6 +58,12 @@ export class MyProjectComponent implements OnInit {
     this.getAllDivisi();
     this.getAllUser();
   }
+
+  sortColumn(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
 
   // tslint:disable-next-line:typedef
   getAllDivisi() {
