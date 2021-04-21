@@ -33,7 +33,7 @@
             <label for="pmo">PMO <small style="color: red;">*</small></label>
             <select class="form-select" formControlName="pmo" id="pmo" name="pmo" [compareWith]="compareUser"
                     aria-label="Default select example">
-              <option *ngFor="let user of userPMO" [ngValue]="user"
+              <option *ngFor="let user of loadedUser" [ngValue]="user"
                       [selected]="pmoId===user.id">{{user.username}}</option>
             </select>
             <small class="form-text text-danger "
@@ -48,7 +48,7 @@
             <label for="pm">PM <small style="color: red;">*</small></label>
             <select class="form-select" formControlName="pm" id="pm" [compareWith]="compareUser"
                     aria-label="Default select example">
-              <option *ngFor="let user of userPM" [ngValue]="user">{{user.username}}</option>
+              <option *ngFor="let user of loadedUser" [ngValue]="user">{{user.username}}</option>
             </select>
             <small class="form-text text-danger " *ngIf="form('pm').invalid && form('pm').dirty || form('pm').touched">
               <div *ngIf="form('pm').errors?.required">
@@ -61,7 +61,7 @@
             <label for="coPM">CoPM <small style="color: red;">*</small></label>
             <select class="form-select" formControlName="coPM" id="coPM" [compareWith]="compareUser"
                     aria-label="Default select example">
-              <option *ngFor="let user of userCoPM" [ngValue]="user"
+              <option *ngFor="let user of loadedUser" [ngValue]="user"
                       [selected]="coPMId===user.id">{{user.username}}</option>
             </select>
             <small class="form-text text-danger "
@@ -76,7 +76,7 @@
             <label for="departmentHead">Department Head <small style="color: red;">*</small></label>
             <select class="form-select" formControlName="departmentHead" id="departmentHead" [compareWith]="compareUser"
                     aria-label="Default select example">
-              <option *ngFor="let user of userDepartmentHead" [ngValue]="user">{{user.username}}</option>
+              <option *ngFor="let user of loadedUser" [ngValue]="user">{{user.username}}</option>
             </select>
             <small class="form-text text-danger "
                    *ngIf="form('departmentHead').invalid && form('departmentHead').dirty || form('departmentHead').touched">

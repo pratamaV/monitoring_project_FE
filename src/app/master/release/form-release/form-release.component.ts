@@ -22,6 +22,7 @@ export class FormReleaseComponent implements OnInit {
   userPM: UserModel[] = [];
   userCoPM: UserModel[] = [];
   userDepartmentHead: UserModel[] = [];
+  loadedUser: UserModel[] = [];
   loadedDivision: DivisionModel[] = [];
   pmId: '';
   pmoId: '';
@@ -214,20 +215,21 @@ export class FormReleaseComponent implements OnInit {
   onGetAllUser() {
     this.projectService.getAllUser()
       .subscribe(data => {
-        for (const user of data) {
-          if (user.userRole === '01') {
-            this.userPMO.push(user);
-          }
-          if (user.userRole === '02') {
-            this.userPM.push(user);
-          }
-          if (user.userRole === '03') {
-            this.userCoPM.push(user);
-          }
-          if (user.userRole === '05') {
-            this.userDepartmentHead.push(user);
-          }
-        }
+        this.loadedUser = data;
+        // for (const user of data) {
+        //   if (user.userRole === '01') {
+        //     this.userPMO.push(user);
+        //   }
+        //   if (user.userRole === '02') {
+        //     this.userPM.push(user);
+        //   }
+        //   if (user.userRole === '03') {
+        //     this.userCoPM.push(user);
+        //   }
+        //   if (user.userRole === '05') {
+        //     this.userDepartmentHead.push(user);
+        //   }
+        // }
 
       }, error => {
         alert(error);
