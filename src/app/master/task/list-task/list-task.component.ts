@@ -77,9 +77,9 @@ export class ListTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetAllUser() {
-    this.userService.getAllUser(this.pageUser)
+    this.projectService.getAllUser()
       .subscribe(data => {
-        this.loadedUser = data.content;
+        this.loadedUser = data;
       }, error => {
         alert(error);
       });
