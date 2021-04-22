@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
           }
 
           if (release.statusRelease === 'Active') {
-            if (release.directorateUser === 'Kepatuhan & SDM'){
+            if (release.directorateUser === 'Kepatuhan & SDM') {
               if (KepatuhanandSDM.length <= 0) {
                 KepatuhanandSDM.push(release.project.projectCode);
               }
@@ -91,7 +91,7 @@ export class HomeComponent implements OnInit {
               if (!existKepatuhanandSDM) {
                 KepatuhanandSDM.push(release.project.projectCode);
               }
-            } else if (release.directorateUser === 'Teknik'){
+            } else if (release.directorateUser === 'Teknik') {
               if (Teknik.length <= 0) {
                 Teknik.push(release.project.projectCode);
               }
@@ -99,7 +99,7 @@ export class HomeComponent implements OnInit {
               if (!existTeknik) {
                 Teknik.push(release.project.projectCode);
               }
-            }else if (release.directorateUser === 'Utama'){
+            } else if (release.directorateUser === 'Utama') {
               if (Utama.length <= 0) {
                 Utama.push(release.project.projectCode);
               }
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
               if (!existUtama) {
                 Utama.push(release.project.projectCode);
               }
-            }else if (release.directorateUser === 'Operasional'){
+            } else if (release.directorateUser === 'Operasional') {
               if (Operasional.length <= 0) {
                 Operasional.push(release.project.projectCode);
               }
@@ -115,8 +115,7 @@ export class HomeComponent implements OnInit {
               if (!existOperasional) {
                 Operasional.push(release.project.projectCode);
               }
-            }
-            else if (release.directorateUser === 'Keuangan'){
+            } else if (release.directorateUser === 'Keuangan') {
               if (Keuangan.length <= 0) {
                 Keuangan.push(release.project.projectCode);
               }
@@ -133,17 +132,16 @@ export class HomeComponent implements OnInit {
         let updateDataProject2;
         const colorHorBarChart = ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#c45850'];
 
-        const horizontalBar = new Chart(document.getElementById('bar-chart-horizontal'), {
+        // const ctx = document.getElementById('barChart');
+        const horizontalBar = new Chart('bar-chart-horizontal', {
           type: 'horizontalBar',
           data: {
             labels: ['Kepatuhan & SDM', 'Keuangan', 'Operasional', 'Teknik', 'Utama'],
-            datasets: [
-              {
-                label: '',
-                backgroundColor: ['#3e95cd', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850'],
-                data: [KepatuhanandSDM.length, Keuangan.length, Operasional.length, Teknik.length, Utama.length]
-              }
-            ]
+            datasets: [{
+              label: '',
+              data: [KepatuhanandSDM.length, Keuangan.length, Operasional.length, Teknik.length, Utama.length],
+              backgroundColor: colorHorBarChart
+            }]
           },
           options: {
             legend: {display: false},
@@ -161,8 +159,8 @@ export class HomeComponent implements OnInit {
             scales: {
               xAxes: [{
                 ticks: {
-                  display: false
-                  // beginAtZero: true,
+                  display: false,
+                  beginAtZero: true
                 }
               }],
               yAxes: [{
@@ -187,12 +185,6 @@ export class HomeComponent implements OnInit {
           });
           chart.update();
         }
-
-        setInterval(() => {
-          updateDataProject2 = [KepatuhanandSDM.length, Keuangan.length, Operasional.length, Teknik.length, Utama.length];
-          updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
-        }, 1800000);
-
 
 
         let updateDataRelease;
@@ -277,6 +269,9 @@ export class HomeComponent implements OnInit {
           updateDataRelease = [notStarted, requirementGathering, procurement, development,
             deliveryStage, uat, migration, PTR, implementation, live];
           updateBarChart(myChart, updateDataRelease, colorBarChart);
+
+          updateDataProject2 = [KepatuhanandSDM.length, Keuangan.length, Operasional.length, Teknik.length, Utama.length];
+          updateHorBarChart(horizontalBar, updateDataProject2, colorHorBarChart);
         }, 1800000);
       }, error => {
         this.logError = {
@@ -362,15 +357,15 @@ export class HomeComponent implements OnInit {
           type: 'pie',
           data: projectData,
           options: {
-            legend : {
+            legend: {
               position: 'left'
             },
             plugins: {
-              legend : {
+              legend: {
                 display: true,
-                label : {
+                label: {
                   font: {
-                    size : 10
+                    size: 10
                   }
                 }
               },
@@ -415,7 +410,7 @@ export class HomeComponent implements OnInit {
           type: 'pie',
           data: projectData2,
           options: {
-            legend : {
+            legend: {
               position: 'left'
             },
             plugins: {
@@ -469,7 +464,7 @@ export class HomeComponent implements OnInit {
           type: 'pie',
           data: projectData3,
           options: {
-            legend : {
+            legend: {
               position: 'left'
             },
             plugins: {
