@@ -243,7 +243,7 @@ export class ReleaseService {
     });
   }
 
-  getAllReleasePerPage(param): Observable<ApiResponseRelease> {
+  getAllReleasePerPage(param, page): Observable<ApiResponseRelease> {
     return new Observable((observer: Observer<ApiResponseRelease>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
@@ -276,7 +276,7 @@ export class ReleaseService {
         param.developmentMode = '';
       }
 
-      const url = `/api/releasesPage?projectName=${param.projectName}&pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&developmentMode=${param.developmentMode}`;
+      const url = `/api/releasesPage?projectName=${param.projectName}&pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&developmentMode=${param.developmentMode}&page=${page - 1}`;
 
       this.http
         .get(url, header)

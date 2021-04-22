@@ -76,7 +76,7 @@ export class ReleaseViewComponent implements OnInit {
     this.filterForm2.get('divisi').setValue(null);
     this.filterForm2.get('directoratUser').setValue(null);
     this.filterForm2.get('developmentMode').setValue(null);
-    this.releaseService.getAllReleasePerPage(this.paramNull)
+    this.releaseService.getAllReleasePerPage(this.paramNull, this.page)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;
@@ -160,7 +160,7 @@ export class ReleaseViewComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onGetListReleaseFilter(param) {
     this.isLoading = true;
-    this.releaseService.getAllReleasePerPage(param)
+    this.releaseService.getAllReleasePerPage(param, this.page)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;
@@ -182,7 +182,7 @@ export class ReleaseViewComponent implements OnInit {
       this.filterForm2.get('divisi').setValue(null);
       this.filterForm2.get('directoratUser').setValue(null);
       this.filterForm2.get('developmentMode').setValue(null);
-      this.releaseService.getAllReleasePerPage(this.paramNull)
+      this.releaseService.getAllReleasePerPage(this.paramNull, this.page)
         .subscribe(data => {
           this.isLoading = false;
           this.loadedRelease = data.content;
