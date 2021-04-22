@@ -76,7 +76,7 @@ export class ListReleaseComponent implements OnInit {
     this.filterForm.get('projectCode').setValue(null);
     this.filterForm.get('projectName').setValue(null);
     this.filterForm.get('developmentMode').setValue(null);
-    this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull)
+    this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), this.paramNull, this.page)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;
@@ -152,7 +152,7 @@ export class ListReleaseComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onGetListReleaseFilter(param) {
     this.isLoading = true;
-    this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), param)
+    this.releaseService.getReleaseByProjectId(localStorage.getItem('projectId'), param, this.page)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;

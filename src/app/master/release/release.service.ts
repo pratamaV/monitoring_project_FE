@@ -65,7 +65,7 @@ export class ReleaseService {
     });
   }
 
-  getReleaseByProjectId(id, param): Observable<ApiResponseRelease> {
+  getReleaseByProjectId(id, param, page): Observable<ApiResponseRelease> {
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
@@ -114,7 +114,7 @@ export class ReleaseService {
     // else if (!(param.status == null && param.stage == null)){
     //   url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
     // }
-    const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&projectCode=${param.projectCode}&projectName=${param.projectName}&developmentMode=${param.developmentMode}`;
+    const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&projectCode=${param.projectCode}&projectName=${param.projectName}&developmentMode=${param.developmentMode}&page=${page - 1}`;
     return new Observable((observer: Observer<ApiResponseRelease>) => {
       this.http.get(url, header)
         .pipe(map((responseData: any) => {
