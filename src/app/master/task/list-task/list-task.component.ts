@@ -168,7 +168,12 @@ export class ListTaskComponent implements OnInit {
   }
 
   goToListRelease() {
-    this.router.navigate(['/dashboard/release']);
+    const navigate1 = localStorage.getItem('navigate1');
+    if(navigate1 === 'goBackListRelease'){
+      this.router.navigate(['/dashboard/release']);
+    } else if (navigate1 === 'goReleaseView'){
+      this.router.navigate(['dashboard/release/release-view']);
+    }
   }
 
   updateTask(task: TaskModel) {

@@ -211,8 +211,9 @@ export class ReleaseViewComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onGoTask(releaseId) {
+  onGoTask(releaseId, param) {
     localStorage.setItem('releaseId', releaseId);
+    localStorage.setItem('navigate1', param);
     this.router.navigate(['/dashboard/task']);
   }
 
