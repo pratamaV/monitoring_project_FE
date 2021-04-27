@@ -4,13 +4,18 @@ import {Observable, Observer} from "rxjs";
 import {TaskModel2} from "../task/task.model";
 import {IssuedModel, IssuedModel2} from "./issued.model";
 import {ProjectModel, ProjectModel2} from "../project/project.model";
+import {LogErrorModel} from "../log-error.model";
+import {LogErrorService} from '../log-error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IssuedService {
+  idLog: string;
+  logError: LogErrorModel;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private logErrorService: LogErrorService) { }
 
   getAllIssued(): Observable<IssuedModel2[]> {
     return new Observable((observer: Observer<IssuedModel2[]>) => {
@@ -62,6 +67,29 @@ export class IssuedService {
             observer.error(error);
           });
       }
+    });
+  }
+
+  changeStatusIssued(id: string) {
+    return new Observable((observer: Observer<any>) => {
+        this.http.put(`/api/changeStatusIssue/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, id)
+          .subscribe((response: any) => {
+            observer.next(response);
+          }, (error) => {
+            observer.error(error);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Forgot Password',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          });
     });
   }
 }

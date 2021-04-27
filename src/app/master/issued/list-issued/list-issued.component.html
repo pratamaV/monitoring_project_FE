@@ -38,8 +38,9 @@
                                         <th scope="col">Issue Description</th>
                                         <th scope="col">Issue Date</th>
                                         <th scope="col">Action Plan</th>
-                                        <th scope="col">Est. End Date</th>
+                                        <th scope="col">End Date Plan</th>
                                         <th scope="col">PIC</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Release Code</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -51,10 +52,13 @@
                                         <td>{{issued.issuedPlan}}</td>
                                         <td>{{issued.estEnddate}}</td>
                                         <td>{{issued.pic}}</td>
+                                        <td>{{issued.status}}</td>
                                         <td>{{issued.release.releaseCode}}</td>
                                         <td style="text-align: center;">
+                                          <button (click)="updateStatusIssued(issued.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Change Status"><i
+                                            class="fa fa-refresh"></i></button>&nbsp;
                                             <button (click)="updateIssued(issued)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update"><i
-                                                class="fa fa-edit"></i></button>&nbsp;
+                                                class="fa fa-edit"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

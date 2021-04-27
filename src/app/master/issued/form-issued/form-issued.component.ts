@@ -61,6 +61,7 @@ export class FormIssuedComponent implements OnInit {
       issuedPlan: new FormControl(null, [Validators.required]),
       estEnddate: new FormControl(null, [Validators.required]),
       pic: new FormControl(null, [Validators.required]),
+      status: new FormControl('Open'),
       release: new FormControl(localStorage.getItem('idRelease')),
     });
   }
@@ -73,6 +74,7 @@ export class FormIssuedComponent implements OnInit {
       issuedPlan: postData.issuedPlan,
       estEnddate: postData.estEnddate,
       pic: postData.pic,
+      status: postData.status,
       release: {
         id: postData.release
       }

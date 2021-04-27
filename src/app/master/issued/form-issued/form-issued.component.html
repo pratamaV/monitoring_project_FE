@@ -30,7 +30,7 @@
             </div>
 
             <div class="form-group">
-                <label for="estEnddate">Est. End Date</label>
+                <label for="estEnddate">End Date Plan</label>
                 <input type="date" class="form-control" formControlName="estEnddate" id="estEnddate" placeholder="Est. End Date">
                 <small class="form-text text-danger " *ngIf="form('estEnddate').invalid && form('estEnddate').dirty || form('estEnddate').touched">
           <div *ngIf="form('estEnddate').errors?.required">
@@ -50,6 +50,7 @@
             </div>
 
             <div class="form-group">
+              <input type="hidden" class="form-control" formControlName="status" id="status">
                 <input type="hidden" class="form-control" formControlName="release" id="issuedDate">
                 <input type="hidden" class="form-control" formControlName="release" id="release">
             </div>

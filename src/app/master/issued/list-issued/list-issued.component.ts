@@ -74,4 +74,14 @@ export class ListIssuedComponent implements OnInit {
   onGolistRelease() {
     this.router.navigate(['/dashboard/release']);
   }
+
+  updateStatusIssued(id: string) {
+    this.issuedService.changeStatusIssued(id)
+      .subscribe(data => {
+        Swal.fire( 'Success', 'Status Issue Berhasil Diubah' , 'success'  );
+        this.onGetListIssued();
+      }, error => {
+        Swal.fire( 'Failed', 'Gagal mengubah status Issue' , 'error'  );
+      });
+  }
 }

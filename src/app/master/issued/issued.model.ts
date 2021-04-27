@@ -7,6 +7,7 @@ export interface IssuedModel{
   issuedPlan: string;
   estEnddate: Date;
   pic: string;
+  status: string;
   release: {
     id: string
   };
@@ -19,5 +20,6 @@ export interface IssuedModel2{
   issuedPlan: string;
   estEnddate: Date;
   pic: string;
+  status: string;
   release: ReleaseModel2;
 }
