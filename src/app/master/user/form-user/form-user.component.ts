@@ -29,6 +29,7 @@ export class FormUserComponent implements OnInit {
   passwordSecond: string;
   passwordFirstChange: string;
   passwordSecondChange: string;
+  userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
 
 
   constructor(private userService: UserService,
@@ -124,7 +125,11 @@ export class FormUserComponent implements OnInit {
     this.userService.saveUser(this.user, this.userPojo, this.user.id)
         .subscribe(response => {
           Swal.fire( 'Success', 'User berhasil ditambahkan' , 'success'  );
-          this.router.navigate(['/dashboard/user']);
+          if (this.userRoleNew == '04') {
+            this.router.navigate(['/home']);
+          } else {
+            this.router.navigate(['/dashboard/user']);
+          }
         }, error => {
           Swal.fire( 'Failed', 'Gagal menambahkan user' , 'error'  );
         });
