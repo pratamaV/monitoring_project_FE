@@ -438,13 +438,12 @@ export class TaskService {
   }
 
   // tslint:disable-next-line:typedef
-  uploadDocumentTask(postData, id: string) {
+  uploadDocumentTask(file, postData, id: string) {
     const formData = new FormData();
     const data = {documentDescription: postData.filedesc}
-    formData.append('taskDoc', postData.taskDoc);
+    formData.append('taskDoc', file);
     // @ts-ignore
     formData.append('data', JSON.stringify(data));
-    console.log('masuk sini');
     return new Observable((observer) => {
       this.http.post(`api/uploadTaskDoc/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token, formData, {responseType: 'text'})
         .subscribe((response: any) => {
@@ -484,7 +483,6 @@ export class TaskService {
     const header = {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
     };
-    console.log(prosentase);
     const formData = new FormData();
     // @ts-ignore
     formData.append('prosentase', prosentase);
@@ -513,7 +511,6 @@ export class TaskService {
 
   deleteDoc(id) {
     return new Observable((observer: Observer<TaskModel2>) => {
-      console.log(id);
       this.http.delete(`/api/task-file/${id}?access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
         .subscribe((response: TaskModel2) => {
           observer.next(response);

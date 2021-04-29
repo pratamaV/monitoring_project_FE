@@ -13,12 +13,18 @@ import {FileModel} from '../file.model';
 })
 export class DetailTaskComponent implements OnInit {
   detailmytaskForm: FormGroup;
+  accept = '*';
   myTask: TaskModel5;
   files: FileModel[];
   role: string;
+  fileHolder: File | null;
+  isLoading = false;
 
   constructor(private taskService: TaskService,
               private router: Router) {
+
+      this.fileHolder = null;
+
   }
 
   ngOnInit(): void {
@@ -31,7 +37,7 @@ export class DetailTaskComponent implements OnInit {
       filedesc: new FormControl(null, [Validators.required]),
       taskDoc: new FormControl(null, [Validators.required]),
       statusDone: new FormControl(null),
-      prosentase: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9][0-9]?$|^100$/gm)])
+      prosentase: new FormControl(null, [Validators.required])
     });
   }
 
@@ -43,12 +49,14 @@ export class DetailTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetTaskById() {
+    this.isLoading = true;
     this.detailmytaskForm.get('filedesc').setValue(null);
     this.detailmytaskForm.get('taskDoc').setValue(null);
     this.detailmytaskForm.get('statusDone').setValue(null);
     this.detailmytaskForm.get('prosentase').setValue(null);
     this.taskService.getTaskById(localStorage.getItem('taskId'))
       .subscribe(data => {
+        this.isLoading = false;
         this.myTask = data;
         this.files = this.myTask.fileList;
       }, error => {
@@ -92,23 +100,34 @@ export class DetailTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   processFile(imageInput: any) {
+    this.isLoading = true;
     if (imageInput.files.length > 0) {
-      const file = imageInput.files[0];
-      this.detailmytaskForm.get('taskDoc').setValue(file);
+      this.fileHolder = imageInput.files[0];
+      // this.detailmytaskForm.get('taskDoc').setValue(file);
     }
   }
 
+  // onFileChange(event) {
+  //   if (event.target.files && event.target.files.length) {
+  //     this.fileHolder = event.target.files[0];
+  //   }
+  // }
+
+
   // tslint:disable-next-line:typedef
   onUploadDocument(postData, id) {
-    if (postData.taskDoc.size < 1000000) {
-      this.taskService.uploadDocumentTask(postData, id)
+    this.isLoading = true;
+    if (this.fileHolder.size < 10000000) {
+      this.taskService.uploadDocumentTask(this.fileHolder, postData, id)
         .subscribe(response => {
+          this.isLoading = false;
           Swal.fire('Success', 'Dokumen berhasil di unggah', 'success');
           this.onGetTaskById();
         }, error => {
-          Swal.fire('Failed', 'Gagal mengunggah dokumen, cek ukuran dokumen', 'error');
+          Swal.fire('Failed', 'Error Gagal mengunggah dokumen, cek ukuran dokumen', 'error');
         });
     }else {
+      this.isLoading = false;
       Swal.fire('Failed', 'Gagal mengunggah dokumen, cek ukuran dokumen', 'error');
     }
   }

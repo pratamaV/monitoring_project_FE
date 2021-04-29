@@ -1,177 +1,201 @@
 <app-sidebar></app-sidebar>
 <div class="card">
 
-    <div class="container-sm">
-        <div class="panel panel-default panel-table col-lg-12">
-            <div class="panel-heading">
-                <div class="col col-xs-6 mt-4 mb-3 text-left">
-                    <h4><i class="fa fa-chevron-circle-left" (click)="onGolistMyTask()"></i> Detail Task {{myTask.taskName}}</h4>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col col-xs-6 mt-3 mb-3">
-                        <div class="panel-body" style="overflow-x:auto;">
-                            <table class="table table-striped ">
-                                <tbody>
-                                    <tr>
-                                        <td>Task Code</td>
-                                        <td>:</td>
-                                        <td>{{myTask.taskCode}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task Name</td>
-                                        <td>:</td>
-                                        <td>{{myTask.taskName}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Release Name</td>
-                                        <td>:</td>
-                                        <td>{{myTask.release.releaseName}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task Score</td>
-                                        <td>:</td>
-                                        <td>{{myTask.score}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Task Weight</td>
-                                        <td>:</td>
-                                        <td>{{myTask.weight| number : '1.2-2'}}</td>
-                                    </tr>
+  <div class="container-sm">
+    <div *ngIf="isLoading == true">
+      <div id="id01" class="modal">
+        <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+          <div class="spinner-border text-info"></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default panel-table col-lg-12">
+      <div class="panel-heading">
+        <div class="col col-xs-6 mt-4 mb-3 text-left">
+          <h4><i class="fa fa-chevron-circle-left" (click)="onGolistMyTask()"></i> Detail Task {{myTask.taskName}}</h4>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col col-xs-6 mt-3 mb-3">
+            <div class="panel-body" style="overflow-x:auto;">
+              <table class="table table-striped ">
+                <tbody>
+                <tr>
+                  <td>Task Code</td>
+                  <td>:</td>
+                  <td>{{myTask.taskCode}}</td>
+                </tr>
+                <tr>
+                  <td>Task Name</td>
+                  <td>:</td>
+                  <td>{{myTask.taskName}}</td>
+                </tr>
+                <tr>
+                  <td>Release Name</td>
+                  <td>:</td>
+                  <td>{{myTask.release.releaseName}}</td>
+                </tr>
+                <tr>
+                  <td>Task Score</td>
+                  <td>:</td>
+                  <td>{{myTask.score}}</td>
+                </tr>
+                <tr>
+                  <td>Task Weight</td>
+                  <td>:</td>
+                  <td>{{myTask.weight| number : '1.2-2'}}</td>
+                </tr>
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="col col-xs-6 mt-3 mb-3">
-                        <div class="panel-body" style="overflow-x:auto;">
-                            <table class="table table-striped ">
-                                <tbody>
-                                    <tr>
-                                        <td>Task Status</td>
-                                        <td>:</td>
-                                        <td>{{myTask.statusDone}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Start Date Plan</td>
-                                        <td>:</td>
-                                        <td>{{myTask.estStartDate}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>End Date Plan</td>
-                                        <td>:</td>
-                                        <td>{{myTask.estEndDate}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>End Date Actual</td>
-                                        <td>:</td>
-                                        <td>{{myTask.actEndDate}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Assign To</td>
-                                        <td>:</td>
-                                        <td>{{myTask.assignedTo.username}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Prosentase Task</td>
-                                        <td>:</td>
-                                        <td>{{myTask.taskProsentase * 100 | number : '1.2-2'}}%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col col-xs-6 mt-3 mb-3">
+            <div class="panel-body" style="overflow-x:auto;">
+              <table class="table table-striped ">
+                <tbody>
+                <tr>
+                  <td>Task Status</td>
+                  <td>:</td>
+                  <td>{{myTask.statusDone}}</td>
+                </tr>
+                <tr>
+                  <td>Start Date Plan</td>
+                  <td>:</td>
+                  <td>{{myTask.estStartDate}}</td>
+                </tr>
+                <tr>
+                  <td>End Date Plan</td>
+                  <td>:</td>
+                  <td>{{myTask.estEndDate}}</td>
+                </tr>
+                <tr>
+                  <td>End Date Actual</td>
+                  <td>:</td>
+                  <td>{{myTask.actEndDate}}</td>
+                </tr>
+                <tr>
+                  <td>Assign To</td>
+                  <td>:</td>
+                  <td>{{myTask.assignedTo.username}}</td>
+                </tr>
+                <tr>
+                  <td>Prosentase Task</td>
+                  <td>:</td>
+                  <td>{{myTask.taskProsentase * 100 | number : '1.2-2'}}%</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-                </div>
-                <div class="row">
-                    <div class="col col-xs-6 mt-3 mb-3">
-                        <h5 *ngIf="files.length > 0">Dokumen Pendukung</h5>
-                        <br>
-                        <div class="panel-body" style="overflow-x:auto;">
-                            <table *ngIf="files.length > 0" class="table table-striped ">
-                                <tbody>
-                                    <tr>
-                                        <td>Kode Dokumen</td>
-                                        <td>Deskripsi Dokumen</td>
-                                        <td>Tanggal Upload</td>
-                                        <td>Aksi</td>
-                                    </tr>
-                                    <tr *ngFor="let  file of files; let i = index">
-                                        <td>{{file.documentCode}}</td>
-                                        <td>{{file.documentDescription}}</td>
-                                        <td>{{file.createdDate}}</td>
-                                        <td>
-                                            <button (click)="downloadTaskDoc(file.documentName)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i
+        </div>
+        <div class="row">
+          <div class="col col-xs-6 mt-3 mb-3">
+            <h5 *ngIf="files.length > 0">Dokumen Pendukung</h5>
+            <br>
+            <div class="panel-body" style="overflow-x:auto;">
+              <table *ngIf="files.length > 0" class="table table-striped ">
+                <tbody>
+                <tr>
+                  <td>Kode Dokumen</td>
+                  <td>Deskripsi Dokumen</td>
+                  <td>Tanggal Upload</td>
+                  <td>Aksi</td>
+                </tr>
+                <tr *ngFor="let  file of files; let i = index">
+                  <td>{{file.documentCode}}</td>
+                  <td>{{file.documentDescription}}</td>
+                  <td>{{file.createdDate}}</td>
+                  <td>
+                    <button (click)="downloadTaskDoc(file.documentName)" class="btn btn-outline-info btn-sm"
+                            data-toggle="tooltip" data-placement="bottom" title="Download"><i
                       class="fa fa-download"></i></button>&nbsp;&nbsp;
-                                            <button (click)="onDeleteDoc(file.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Download"><i
+                    <button (click)="onDeleteDoc(file.id)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
+                            data-placement="bottom" title="Download"><i
                       class="fa fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
 
-                            <div *ngIf="myTask.release.project.status !== 'Not Active'" class="col-12 row">
-                                <div class="col-9">
-                                    <small>Upload Document (max file 10mb)</small>
-                                    <form [formGroup]="detailmytaskForm" method="post" (ngSubmit)="onUploadDocument(detailmytaskForm.value, myTask.id)">
-                                        <div class="col-12 col-xs-6">
-                                            <div class="row">
-                                                <!-- <small>Upload Document</small> -->
-                                                <div class="input-group-sm col">
-                                                    <input #imageInput formControlName="taskDoc" type="file" accept="image/*" (change)="processFile(imageInput)" class="form-control">
-                                                    <small *ngIf="form('taskDoc').invalid && (form('taskDoc').dirty || form('taskDoc').touched)" class="form-text text-danger">
+              <div *ngIf="myTask.release.project.status !== 'Not Active'" class="col-12 row">
+                <div class="col-9">
+                  <small>Upload Document (max file 10mb)</small>
+                  <form [formGroup]="detailmytaskForm" method="post"
+                        (ngSubmit)="onUploadDocument(detailmytaskForm.value, myTask.id)">
+                    <div class="col-12 col-xs-6">
+                      <div class="row">
+                        <!-- <small>Upload Document</small> -->
+                        <div class="input-group-sm col">
+                          <input #imageInput formControlName="taskDoc" type="file" [accept]="accept"
+                                 (change)="processFile(imageInput)" class="form-control">
+                          <small *ngIf="form('taskDoc').invalid && (form('taskDoc').dirty || form('taskDoc').touched)"
+                                 class="form-text text-danger">
                             <div *ngIf="form('taskDoc').errors?.required">
                               Harus diisi
                             </div>
                           </small>
-                                                </div>
-                                                <div class="input-group-sm col">
-                                                    <input formControlName="filedesc" type="text" id="filedesc" class="form-control" placeholder="Deskripsi Dokumen">
-                                                    <small *ngIf="form('filedesc').invalid && (form('filedesc').dirty || form('filedesc').touched)" class="form-text text-danger">
+                        </div>
+                        <div class="input-group-sm col">
+                          <input formControlName="filedesc" type="text" id="filedesc" class="form-control"
+                                 placeholder="Deskripsi Dokumen">
+                          <small
+                            *ngIf="form('filedesc').invalid && (form('filedesc').dirty || form('filedesc').touched)"
+                            class="form-text text-danger">
                             <div *ngIf="form('filedesc').errors?.required">
                               Harus diisi
                             </div>
                           </small>
-                                                </div>
-                                                <div class="input-group-append col-2" style="margin-left: -20px;">
-                                                    <button [disabled]="form('filedesc').invalid || form('taskDoc').invalid" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-upload"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <small style="color: red">*max file 10MB</small> -->
-                                        <br>
-                                        <br>
-                                    </form>
-                                </div>
-                                <div class="col-3">
-                                    <small>Update Status ( isi angka 0-100 )</small>
-                                    <form [formGroup]="detailmytaskForm" method="POST" (ngSubmit)="updateStatusDoneTask(myTask.id,detailmytaskForm.value)">
-                                        <div class="col-12 col-xs-6">
-                                            <div class="row">
-                                                <div class="input-group-sm col">
-                                                    <input formControlName="prosentase" type="text" (change)="processText(detailmytaskForm.value)" class="form-control" placeholder="Masukkan Presentase">
-                                                    <small *ngIf="form('prosentase').invalid && form('prosentase').dirty || form('prosentase').touched" class="form-text text-danger">
+                        </div>
+                        <div class="input-group-append col-2" style="margin-left: -20px;">
+                          <button [disabled]="form('filedesc').invalid || form('taskDoc').invalid" type="submit"
+                                  class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                  title="Upload"><i class="fa fa-upload"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <small style="color: red">*max file 10MB</small> -->
+                    <br>
+                    <br>
+                  </form>
+                </div>
+
+                <div class="col-3">
+                  <small>Update Status ( isi angka 0-100 )</small>
+                  <form [formGroup]="detailmytaskForm" method="POST"
+                        (ngSubmit)="updateStatusDoneTask(myTask.id,detailmytaskForm.value)">
+                    <div class="col-12 col-xs-6">
+                      <div class="row">
+                        <div class="input-group-sm col">
+                          <input formControlName="prosentase" type="text" (change)="processText(detailmytaskForm.value)"
+                                 class="form-control" placeholder="Masukkan Presentase">
+                          <small
+                            *ngIf="form('prosentase').invalid && form('prosentase').dirty || form('prosentase').touched"
+                            class="form-text text-danger">
                             <div *ngIf="form('prosentase').errors?.required">
                               Harus diisi
                             </div>
-                            <div *ngIf="form('prosentase').errors?.pattern">
-                              Harus berisi angka 1-100
-                            </div>
+                            <!--                            <div *ngIf="form('prosentase').errors?.pattern">-->
+                            <!--                              Harus berisi angka 1-100-->
+                            <!--                            </div>-->
                           </small>
-                                                </div>
-                                                <div class="input-group-append col-2" style="margin-left: -20px;">
-                                                    <button [disabled]="form('prosentase').invalid" type="submit" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Upload"><i class="fa fa-check"></i></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                         </div>
+                        <div class="input-group-append col-2" style="margin-left: -20px;">
+                          <button [disabled]="form('prosentase').invalid" type="submit"
+                                  class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                  title="Upload"><i class="fa fa-check"></i></button>
+                        </div>
+                      </div>
                     </div>
-
+                  </form>
                 </div>
+              </div>
             </div>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </div>
