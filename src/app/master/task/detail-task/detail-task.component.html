@@ -176,9 +176,9 @@
                             <div *ngIf="form('prosentase').errors?.required">
                               Harus diisi
                             </div>
-                            <!--                            <div *ngIf="form('prosentase').errors?.pattern">-->
-                            <!--                              Harus berisi angka 1-100-->
-                            <!--                            </div>-->
+                              <div *ngIf="form('prosentase').errors?.pattern">
+                                Harus berisi angka 0-100
+                              </div>
                           </small>
                         </div>
                         <div class="input-group-append col-2" style="margin-left: -20px;">

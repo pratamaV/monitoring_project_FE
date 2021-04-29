@@ -37,7 +37,7 @@ export class DetailTaskComponent implements OnInit {
       filedesc: new FormControl(null, [Validators.required]),
       taskDoc: new FormControl(null, [Validators.required]),
       statusDone: new FormControl(null),
-      prosentase: new FormControl(null, [Validators.required])
+      prosentase: new FormControl(null, [Validators.required, Validators.pattern('^(?:100|[1-9]?[0-9])$')])
     });
   }
 
