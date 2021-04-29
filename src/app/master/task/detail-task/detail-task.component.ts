@@ -123,7 +123,8 @@ export class DetailTaskComponent implements OnInit {
           Swal.fire('Success', 'Dokumen berhasil di unggah', 'success');
           this.onGetTaskById();
         }, error => {
-          Swal.fire('Failed', 'Error Gagal mengunggah dokumen, cek ukuran dokumen', 'error');
+          this.isLoading = false;
+          Swal.fire('Failed', 'Gagal mengunggah dokumen, cek ukuran dokumen', 'error');
         });
     }else {
       this.isLoading = false;
