@@ -100,7 +100,6 @@ export class DetailTaskComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   processFile(imageInput: any) {
-    this.isLoading = true;
     if (imageInput.files.length > 0) {
       this.fileHolder = imageInput.files[0];
       // this.detailmytaskForm.get('taskDoc').setValue(file);
