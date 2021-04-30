@@ -122,9 +122,10 @@ export class ReleaseViewComponent implements OnInit {
           } else if (user.userRole == '02') {
             this.usersPm.push(user);
             // tslint:disable-next-line:triple-equals
-          }else if (user.userRole == '03') {
-            this.usersCoPM.push(user);
           }
+          // else if (user.userRole == '03') {
+            this.usersCoPM.push(user);
+          // }
         }
       },
       error => {
@@ -136,7 +137,7 @@ export class ReleaseViewComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onPageChanges(event) {
     this.page = event;
-    this.onGetListRelease();
+    this.onGetListReleaseFilter(this.filterForm2.value);
   }
 
   private buildForm(): void {
@@ -164,6 +165,7 @@ export class ReleaseViewComponent implements OnInit {
       .subscribe(data => {
         this.isLoading = false;
         this.loadedRelease = data.content;
+        this.totalItems = data.totalElements;
       }, error => {
         alert(error);
       });

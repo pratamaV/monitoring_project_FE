@@ -100,20 +100,6 @@ export class ReleaseService {
     if (param.developmentMode === null || param.developmentMode === undefined) {
       param.developmentMode = '';
     }
-
-    // let url = ``;
-    // if (param.status == null && param.stage == null){
-    //     url = `api/releaseByProjectId/${id}`;
-    // }
-    // else if (param.stage == null){
-    //     url = `api/releaseByProjectId/${id}?status=${param.status}`;
-    // }
-    // else if (param.status == null){
-    //     url = `api/releaseByProjectId/${id}?stage=${param.stage}`;
-    // }
-    // else if (!(param.status == null && param.stage == null)){
-    //   url = `api/releaseByProjectId/${id}?status=${param.status}&stage=${param.stage}`;
-    // }
     const url = `/api/releaseByProjectId/${id}?pmId=${param.userPM}&pmoId=${param.userPMO}&copmId=${param.userCoPM}&status=${param.status}&stage=${param.stage}&divisionId=${param.divisi}&directoratUser=${param.directoratUser}&projectCode=${param.projectCode}&projectName=${param.projectName}&developmentMode=${param.developmentMode}&page=${page - 1}`;
     return new Observable((observer: Observer<ApiResponseRelease>) => {
       this.http.get(url, header)

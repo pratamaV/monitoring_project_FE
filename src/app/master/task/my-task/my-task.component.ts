@@ -105,7 +105,7 @@ export class MyTaskComponent implements OnInit {
 
   onPageChanges(event) {
     this.page = event;
-    this.onGetTaskByUserId();
+    this.onGetTaskByUserIdFilter(this.taskForm.value);
   }
 
   // tslint:disable-next-line:typedef
@@ -115,6 +115,7 @@ export class MyTaskComponent implements OnInit {
       .subscribe(data => {
         this.isLoading = false;
         this.loadedTask = data.content;
+        this.totalItems = data.totalElements;
       }, error => {
         alert(error);
       });

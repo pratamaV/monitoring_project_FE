@@ -72,7 +72,7 @@ export class ListTaskComponent implements OnInit {
 
   onPageChanges(event) {
     this.page = event;
-    this.onGetAllTask();
+    this.onGetFilterTask(this.filterForm.value);
   }
 
   // tslint:disable-next-line:typedef
@@ -103,6 +103,7 @@ export class ListTaskComponent implements OnInit {
       .subscribe(data => {
         this.isLoading = false
         this.loadedTask = data.content;
+        this.totalItems= data.totalElements;
       }, error => {
         alert(error);
       });
