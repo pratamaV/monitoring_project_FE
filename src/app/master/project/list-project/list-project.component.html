@@ -92,7 +92,7 @@
                       <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
                         class="fa fa-file"></i> Export to excel
                       </button>&nbsp;
-                      <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()"><i
+                      <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()" [hidden]="userRole==='02'"><i
                         class="fa fa-plus"></i> Add New Project
                       </button>&nbsp;
                     </div>
@@ -185,8 +185,6 @@
               <tr
                 *ngFor="let project of loadedProject |orderBy: key : reverse | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
                 [ngStyle]="getStyle(project)">
-<!--              <tr-->
-<!--                *ngFor="let project of loadedProject">-->
                 <th scope="row">{{project.projectCode}}</th>
                 <td>{{project.projectName}}</td>
                 <td style="width: 200px;">
@@ -197,7 +195,7 @@
                           data-toggle="tooltip" data-placement="bottom" title="Release"><i
                     class="fa fa-bars"></i></button>&nbsp;
                   <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
-                          data-placement="bottom" title="Update" [disabled]="project.statusProject==='Completed'"><i
+                          data-placement="bottom" title="Update" [disabled]="project.statusProject==='Completed' || userRole === '02'"><i
                     class="fa fa-edit"></i></button>&nbsp;
                 </td>
                 <td>{{project.status}}</td>

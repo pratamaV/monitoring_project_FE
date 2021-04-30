@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../master/task/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiResponseTask2, TaskModel, TaskModel2} from '../../master/task/task.model';
-import {LogErrorService} from "../../master/log-error.service";
-import {LogErrorModel} from "../../master/log-error.model";
+import {LogErrorService} from '../../master/log-error.service';
+import {LogErrorModel} from '../../master/log-error.model';
 declare var jQuery: any;
 
 @Component({
@@ -12,7 +12,6 @@ declare var jQuery: any;
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-
 
   numberTask = 0;
   token = window.sessionStorage.getItem('token');
@@ -28,6 +27,7 @@ export class SidebarComponent implements OnInit {
 
   idLog: string;
   logError: LogErrorModel;
+  projectAccess;
 
 
   constructor(private taskService: TaskService,
@@ -37,36 +37,9 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.onGetTaskByUserId();
-    // (function ($) {
-    //   $(document).ready(function() {
-    //
-    //     $('#sidebarCollapse').on('click', function() {
-    //         $('#sidebar').toggleClass('active');
-    //     });
-    //
-    // });
-    // $(document).ready(function() {
-    //     $("#sidebar").mCustomScrollbar({
-    //         theme: "minimal"
-    //     });
-    //
-    //     $('#dismiss, .overlay').on('click', function() {
-    //         // hide sidebar
-    //         $('#sidebar').removeClass('active');
-    //         // hide overlay
-    //         $('.overlay').removeClass('active');
-    //     });
-    //
-    //     $('#sidebarCollapse').on('click', function() {
-    //         // open sidebar
-    //         $('#sidebar').addClass('active');
-    //         // fade in the overlay
-    //         $('.overlay').addClass('active');
-    //         $('.collapse.in').toggleClass('in');
-    //         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    //     });
-    // });
-    // })(jQuery);
+    if (this.user.userRole === '01' || this.user.userRole === '02'){
+      return this.projectAccess;
+    }
   }
 
   onGetTaskByUserId() {
