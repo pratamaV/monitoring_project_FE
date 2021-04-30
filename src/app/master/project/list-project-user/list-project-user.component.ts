@@ -31,11 +31,7 @@ export class ListProjectUserComponent implements OnInit {
   onGetListProject() {
     this.loadedProject = [];
     this.isLoading = true;
-// <<<<<<< HEAD
-    this.projectService.getAllProject(this.projectDependency, this.orderBy, this.sort, this.page)
-// =======
-//     this.projectService.getAllProject(this.projectDependency, this.page)
-// >>>>>>> f34b8fbeefc06a8ccedc2818c836b148e4d88e7d
+    this.projectService.getAllProject(this.projectDependency, this.projectDependency, this.orderBy, this.sort, this.page)
       .subscribe(data => {
         if (this.userRole !== '01'){
           for (const project of data.content) {

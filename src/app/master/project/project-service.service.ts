@@ -28,21 +28,13 @@ export class ProjectServiceService {
               private logErrorService: LogErrorService) {
   }
 
-// <<<<<<< HEAD
-  getAllProject(projectDependency, orderBy, sort, page): Observable<ApiResponseModel> {
-// =======
-//   getAllProject(projectDependency, page): Observable<ApiResponseModel> {
-// >>>>>>> f34b8fbeefc06a8ccedc2818c836b148e4d88e7d
+
+  getAllProject(projectDependency, projectName, orderBy, sort, page): Observable<ApiResponseModel> {
     return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       };
-// <<<<<<< HEAD
-      const url = `/api/projects-page?page=${page - 1}&projectDependency=${projectDependency}&orderBy=${orderBy}&sort=${sort}`;
-// =======
-//       // const url = `/api/projects?divisionId=${param.divisi}&pmId=${param.userPM}&pmoId=${param.userPMO}&statusProject=${param.status}&directoratUser=${param.direktorate}`;
-//       const url = `/api/projects-page?projectDependency=${projectDependency}&page=${page - 1}`;
-// >>>>>>> f34b8fbeefc06a8ccedc2818c836b148e4d88e7d
+      const url = `/api/projects-page?page=${page - 1}&projectDependency=${projectDependency}&projectName=${projectName}&orderBy=${orderBy}&sort=${sort}`;
 
       this.http
         .get(url, header)
