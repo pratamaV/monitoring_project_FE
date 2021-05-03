@@ -92,7 +92,7 @@
                       <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
                         class="fa fa-file"></i> Export to excel
                       </button>&nbsp;
-                      <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()" [hidden]="userRole==='02'"><i
+                      <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddProject()" [hidden]="userRole==='02' || userRole === '03'"><i
                         class="fa fa-plus"></i> Add New Project
                       </button>&nbsp;
                     </div>
@@ -195,7 +195,7 @@
                           data-toggle="tooltip" data-placement="bottom" title="Release"><i
                     class="fa fa-bars"></i></button>&nbsp;
                   <button (click)="updateProject(project)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
-                          data-placement="bottom" title="Update" [disabled]="project.statusProject==='Completed' || userRole === '02'"><i
+                          data-placement="bottom" title="Update" [disabled]="project.statusProject==='Completed' || userRole === '02' || userRole ==='03'"><i
                     class="fa fa-edit"></i></button>&nbsp;
                 </td>
                 <td>{{project.status}}</td>

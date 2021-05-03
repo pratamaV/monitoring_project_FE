@@ -147,7 +147,7 @@
                     <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
                       class="fa fa-file"></i> Export to excel
                     </button>
-                    <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddRelease()" [hidden]="userRoleNew==='02'"><i
+                    <button id="add-project" class="btn btn-warning btn-sm" (click)="onAddRelease()" [hidden]="userRoleNew==='02' || userRoleNew === '03'"><i
                       class="fa fa-plus"></i> Add New Release
                     </button>
                   </div>
@@ -299,7 +299,7 @@
                   <button (click)="onGetReleaseById(release.id, 'listRelease')" class="btn btn-outline-success btn-sm"
                           data-toggle="tooltip" data-placement="bottom" title="Detail"><i
                     class="fa fa-eye"></i></button>&nbsp;
-                  <button [disabled]="release.statusRelease === 'Completed' || userRoleNew === '02'" (click)="updateRelease(release)"
+                  <button [disabled]="release.statusRelease === 'Completed' || userRoleNew === '02' || userRoleNew === '03'" (click)="updateRelease(release)"
                           class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="Update"><i
                     class="fa fa-edit"></i></button>&nbsp;
