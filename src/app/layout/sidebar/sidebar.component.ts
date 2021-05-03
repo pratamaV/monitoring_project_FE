@@ -27,19 +27,16 @@ export class SidebarComponent implements OnInit {
 
   idLog: string;
   logError: LogErrorModel;
-  projectAccess;
+  userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
 
 
   constructor(private taskService: TaskService,
               private router: Router,
               private route: ActivatedRoute,
-              private logErrorService: LogErrorService) { }
+              private logErrorService: LogErrorService) {  }
 
   ngOnInit(): void {
     this.onGetTaskByUserId();
-    if (this.user.userRole === '01' || this.user.userRole === '02'){
-      return this.projectAccess;
-    }
   }
 
   onGetTaskByUserId() {

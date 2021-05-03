@@ -64,9 +64,9 @@ export class UserService {
     });
   }
 
-  getAllUser(page: number): Observable<ApiResponseUser> {
+  getAllUser(username, orderBy, sort, page): Observable<ApiResponseUser> {
     return new Observable((observer: Observer<ApiResponseUser>) => {
-      this.http.get(`/api/users?page=${page - 1}&access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
+      this.http.get(`/api/users?page=${page - 1}&username=${username}&orderBy=${orderBy}&sort=${sort}&access_token=` + JSON.parse(window.sessionStorage.getItem('token')).access_token)
       .pipe(map((responseData : any) => {
         const temp = {
           content: responseData.content,

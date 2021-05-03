@@ -14,11 +14,14 @@ import Swal from "sweetalert2";
 export class ListUserComponent implements OnInit {
 
   loadedUser: UserModel[] = [];
-  isLoading = false
+  isLoading = false;
 
   page = 1;
   pageSize = 10;
   totalItems = 0;
+  searchByUsername = '';
+  orderBy = 'username';
+  sort = 'ASC';
 
   constructor(private userService: UserService,
               private router: Router) { }
@@ -28,10 +31,10 @@ export class ListUserComponent implements OnInit {
   }
 
   onGetListUser() {
-    this.isLoading = true
-    this.userService.getAllUser(this.page)
+    this.isLoading = true;
+    this.userService.getAllUser(this.searchByUsername, this.orderBy, this.sort, this.page)
       .subscribe(data => {
-        this.isLoading = false
+        this.isLoading = false;
         this.loadedUser = data.content;
         this.totalItems = data.totalElements;
       }, error => {
@@ -64,5 +67,15 @@ export class ListUserComponent implements OnInit {
     }, error => {
       Swal.fire('Failed', 'Gagal mengubah status user', 'error');
     });
+  }
+
+  searchLive() {
+    this.userService.getAllUser(this.searchByUsername, this.orderBy, this.sort, this.page)
+      .subscribe(data => {
+        this.loadedUser = data.content;
+        this.totalItems = data.totalElements;
+      }, error => {
+        alert(error);
+      });
   }
 }
