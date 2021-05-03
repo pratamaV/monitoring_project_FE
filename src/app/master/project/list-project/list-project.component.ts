@@ -100,6 +100,7 @@ export class ListProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onGetListProject() {
+    this.loadedProject = [];
     this.isLoading = true;
     this.projectService.getAllProject(this.projectDependency, this.projectDependency, this.orderBy, this.sort, this.page).subscribe(
       data => {
