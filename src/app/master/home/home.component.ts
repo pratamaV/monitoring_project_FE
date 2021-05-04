@@ -302,6 +302,10 @@ export class HomeComponent implements OnInit {
         let contractedValueBelanjaModal = 0;
         let budgetBebanUsaha = 0;
         let budgetBelanjaModal = 0;
+        let prosentaseBebanUsaha = 0;
+        let prosentaseBebanUsahaCtr = 0;
+        let prosentaseBelanjaModal = 0;
+        let prosentaseBelanjaModalCtr = 0;
         for (const project of data) {
           if (project.statusProject === 'Active') {
             if (project.status === 'Not Started') {
@@ -326,6 +330,13 @@ export class HomeComponent implements OnInit {
               contractedValueBebanUsaha = contractedValueBebanUsaha + project.contractedValue;
             }
           }
+        }
+        prosentaseBebanUsahaCtr = contractedValueBebanUsaha / (budgetBebanUsaha);
+        prosentaseBelanjaModalCtr = contractedValueBelanjaModal / (budgetBelanjaModal);
+
+        function round(value, precision) {
+          var multiplier = Math.pow(10, precision || 0);
+          return Math.round(value * multiplier) / multiplier;
         }
 
         const projectCanvas = document.getElementById('projectByStatus');
@@ -398,10 +409,10 @@ export class HomeComponent implements OnInit {
         let updateDataProject3;
         const colorPieChart2 = ['#ffc1b6', '#fdffbc'];
         const projectData2 = {
-          labels: ['Budget', 'Contracted Value'],
+          labels: ['Budget', 'Contracted Value ' + round(prosentaseBebanUsahaCtr, 2) + '%'],
           datasets: [
             {
-              data: [budgetBebanUsaha, contractedValueBebanUsaha],
+              data: [budgetBebanUsaha - 130, contractedValueBebanUsaha],
               backgroundColor: colorPieChart2
             }]
         };
@@ -427,7 +438,6 @@ export class HomeComponent implements OnInit {
                   // let percentage = (value*100 / sum).toFixed(2)+"%";
                   // return percentage;
                   // tslint:disable-next-line:prefer-const
-
                   let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
@@ -463,10 +473,10 @@ export class HomeComponent implements OnInit {
         let updateDataProject4;
         const colorPieChart3 = ['#d3e0ea', '#f6f5f5'];
         const projectData3 = {
-          labels: ['Budget', 'Contracted Value'],
+          labels: ['Budget', 'Contracted Value ' + round(prosentaseBelanjaModalCtr, 2) + '%'],
           datasets: [
             {
-              data: [budgetBelanjaModal, contractedValueBelanjaModal],
+              data: [budgetBelanjaModal - 300, contractedValueBelanjaModal],
               backgroundColor: colorPieChart3
             }]
         };
