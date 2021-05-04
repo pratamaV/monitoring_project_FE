@@ -56,6 +56,8 @@
                 <th scope="col">Total Performance</th>
                 <th scope="col">Update Active/Not Active User</th>
                 <th scope="col">Detail Task</th>
+                <th scope="col">Last Modified By</th>
+                <th scope="col">Last Modified Date</th>
               </tr>
               </thead>
               <tbody>
@@ -93,6 +95,8 @@
                           data-placement="bottom" title="Task"><i class="fa fa-tasks"></i> Task
                   </button>
                 </td>
+                <td>{{user.lastModifiedBy}}</td>
+                <td>{{user.lastModifiedDate | date : 'medium'}}</td>
               </tr>
               </tbody>
             </table>

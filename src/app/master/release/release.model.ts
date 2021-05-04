@@ -68,6 +68,8 @@ export interface ReleaseModel2{
   project: ProjectModel;
   statusRelease: string;
   taskList?: TaskModel2[];
+  lastModifiedBy: UserModel;
+  lastModifiedDate: Date;
 }
 
 export interface ApiResponseRelease {

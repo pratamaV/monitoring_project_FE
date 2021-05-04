@@ -307,6 +307,22 @@
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Update Status Inisiatif</th>
+                <th scope="col">Last Modified By
+                  <button (click)="sortColumn('lastModifiedBy') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('lastModifiedBy') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Last Modified Date
+                  <button (click)="sortColumn('lastModifiedDate') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('lastModifiedDate') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
 
               </tr>
               </thead>
@@ -355,6 +371,8 @@
                     <option value="Completed">Completed</option>
                   </select>
                 </td>
+                <td>{{release.lastModifiedBy}}</td>
+                <td>{{release.lastModifiedDate | date : 'medium'}}</td>
               </tr>
               </tbody>
             </table>

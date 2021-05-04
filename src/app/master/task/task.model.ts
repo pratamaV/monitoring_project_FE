@@ -35,6 +35,8 @@ export interface TaskModel2{
   taskDocument: string;
   release: ReleaseModel ;
   fileList: FileModel[];
+  lastModifiedBy: UserModel;
+  lastModifiedDate: Date;
 }
 
 

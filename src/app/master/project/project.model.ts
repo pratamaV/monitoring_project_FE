@@ -1,25 +1,27 @@
 import {ReleaseModel} from '../release/release.model';
 
-export interface ProjectModel{
-    id: string;
-    projectCode: string;
-    projectName: string;
-    benefit: string;
-    status: string;
-    prosentaseProject: number;
-    budget: number;
-    contractedValue: number;
-    paymentRealization: number;
-    score: number;
-    weight: number;
-    categoryInitiative: string;
-    statusProject: string;
-    projectDependency: string;
-    releaseList?: ReleaseModel[];
-    lineItem: string;
+export interface ProjectModel {
+  id: string;
+  projectCode: string;
+  projectName: string;
+  benefit: string;
+  status: string;
+  prosentaseProject: number;
+  budget: number;
+  contractedValue: number;
+  paymentRealization: number;
+  score: number;
+  weight: number;
+  categoryInitiative: string;
+  statusProject: string;
+  projectDependency: string;
+  releaseList?: ReleaseModel[];
+  lineItem: string;
+  lastModifiedBy: UserModel;
+  lastModifiedDate: Date;
 }
 
-export interface ProjectModel2{
+export interface ProjectModel2 {
   id: string;
   projectCode: string;
   projectName: string;
@@ -37,7 +39,7 @@ export interface ProjectModel2{
   lineItem: string;
 }
 
-export interface UserModel{
+export interface UserModel {
   id: string;
   username: string;
   userRole: string;
@@ -56,7 +58,7 @@ export interface DivisionModel {
   divisionCode: string;
 }
 
-export interface ApiResponseModel{
+export interface ApiResponseModel {
   content: ProjectModel[];
   totalPages: number;
   totalElements: number;

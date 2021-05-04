@@ -166,8 +166,22 @@
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
-                <!--                                        <th scope="col">Detail</th>-->
-                <!--                                        <th scope="col">Action</th>-->
+                <th scope="col">Last Modified By
+                  <button (click)="sortColumn('lastModifiedBy') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('lastModifiedBy') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Last Modified Date
+                  <button (click)="sortColumn('lastModifiedDate') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('lastModifiedDate') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
               </tr>
               </thead>
               <tbody>
@@ -193,9 +207,8 @@
                 <td>{{task.estEndDate | date}}</td>
                 <td>{{task.actStartDate | date}}</td>
                 <td>{{task.actEndDate | date}}</td>
-                <!--                                        <td style="text-align: center;">-->
-                <!--                                            <button (click)="onGoDetailTask(task.id, 'listtask')" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="bottom" title="Detail"><i class="fa fa-eye"></i></button>&nbsp;-->
-                <!--                                        </td>-->
+                <td>{{task.lastModifiedBy}}</td>
+                <td>{{task.lastModifiedDate | date : 'medium'}}</td>
 
               </tr>
               </tbody>

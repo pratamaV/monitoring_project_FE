@@ -418,7 +418,16 @@ export class HomeComponent implements OnInit {
                 color: 'black',
                 anchor: 'center',
                 align: 'center',
-                formatter(value) {
+                formatter(value, ctx) {
+                  // let sum = 0;
+                  // let dataArr = ctx.chart.data.datasets[0].data;
+                  // dataArr.map(data => {
+                  //   sum += data;
+                  // });
+                  // let percentage = (value*100 / sum).toFixed(2)+"%";
+                  // return percentage;
+                  // tslint:disable-next-line:prefer-const
+
                   let number_string = value.toString(),
                     sisa = number_string.length % 3,
                     rupiah = number_string.substr(0, sisa),
@@ -428,6 +437,8 @@ export class HomeComponent implements OnInit {
                     rupiah += separator + ribuan.join('.');
                   }
                   return 'Rp ' + rupiah;
+
+
                 },
                 font: {
                   color: 'blue',

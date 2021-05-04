@@ -11,6 +11,8 @@ export interface UserModel{
   statusUser: string;
   totalWeight: number;
   totalPerformance: number;
+  lastModifiedBy: UserModel;
+  lastModifiedDate: Date;
 }
 
 export interface UserModel2{
