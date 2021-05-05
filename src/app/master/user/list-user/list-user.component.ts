@@ -22,6 +22,7 @@ export class ListUserComponent implements OnInit {
   searchByUsername = '';
   orderBy = 'username';
   sort = 'ASC';
+  userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
 
   constructor(private userService: UserService,
               private router: Router) { }

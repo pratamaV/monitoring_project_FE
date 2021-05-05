@@ -21,7 +21,7 @@
         <div class="card shadow">
           <div class="card-header border-0 row">
             <div class="col-6">
-              <button (click)="onAddUser()" class="btn btn-dark mt-2 mb-2" style="width: 200px; align-self: flex-end"><i
+              <button (click)="onAddUser()" class="btn btn-dark mt-2 mb-2" style="width: 200px; align-self: flex-end" [hidden]="userRoleNew === '05'"><i
                 class="fa fa-plus"></i> Add User
               </button>
             </div>
@@ -47,14 +47,14 @@
                 <th scope="col">Name</th>
                 <th scope="col">Role</th>
                 <th scope="col">Function</th>
-                <th scope="col">Edit</th>
+                <th scope="col" [hidden]="userRoleNew === '05'">Edit</th>
                 <th scope="col">Email</th>
                 <th scope="col">Directorate</th>
                 <th scope="col">Divisi</th>
                 <th scope="col">Status User</th>
                 <th scope="col">Total Weight</th>
                 <th scope="col">Total Performance</th>
-                <th scope="col">Update Active/Not Active User</th>
+                <th scope="col" [hidden]="userRoleNew === '05'">Update Active/Not Active User</th>
                 <th scope="col">Detail Task</th>
                 <th scope="col">Last Modified By</th>
                 <th scope="col">Last Modified Date</th>
@@ -70,7 +70,7 @@
                 <td *ngIf="user.userRole === '03'">CO-PM</td>
                 <td *ngIf="user.userRole === '04'">Squad</td>
                 <td *ngIf="user.userRole === '05'">Kepala Bagian</td>
-                <td>
+                <td [hidden]="userRoleNew === '05'">
                   <button (click)="updateUser(user)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                           data-placement="bottom" title="Update"><i
                     class="fa fa-edit"></i></button>&nbsp;
@@ -81,7 +81,7 @@
                 <td>{{user.statusUser}}</td>
                 <td>{{user.totalWeight * 100 | number : '1.2-2'}}%</td>
                 <td>{{user.totalPerformance * 100 | number : '1.2-2'}}%</td>
-                <td *ngIf="user.statusUser === 'Active'">
+                <td *ngIf="user.statusUser === 'Active'" [hidden]="userRoleNew === '05'">
                   <button (click)="updateActiveInactive(user.id,'Not Active')" class="btn btn-danger btn-sm">Not
                     Active
                   </button>
