@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit {
   taskDeadline: TaskModel2[] = [];
   projectDependency = '';
   directorateUser: string;
+  a;
+  b;
+
 
 
   constructor(private homeService: HomeService,
@@ -126,7 +129,6 @@ export class HomeComponent implements OnInit {
             }
           }
         }
-
 
 
         let updateDataProject2;
@@ -333,6 +335,8 @@ export class HomeComponent implements OnInit {
         }
         prosentaseBebanUsahaCtr = contractedValueBebanUsaha / (budgetBebanUsaha);
         prosentaseBelanjaModalCtr = contractedValueBelanjaModal / (budgetBelanjaModal);
+        this.a = round(prosentaseBebanUsahaCtr * 100, 2) + '%';
+        this.b = round(prosentaseBelanjaModalCtr * 100, 2) + '%';
 
         function round(value, precision) {
           var multiplier = Math.pow(10, precision || 0);
@@ -409,7 +413,7 @@ export class HomeComponent implements OnInit {
         let updateDataProject3;
         const colorPieChart2 = ['#ffc1b6', '#fdffbc'];
         const projectData2 = {
-          labels: ['Budget', 'Contracted Value ' + round(prosentaseBebanUsahaCtr, 2) + '%'],
+          labels: ['Budget', 'Contracted Value (' + round(prosentaseBebanUsahaCtr * 100, 2) + '%)'],
           datasets: [
             {
               data: [budgetBebanUsaha - 130, contractedValueBebanUsaha],
@@ -473,7 +477,7 @@ export class HomeComponent implements OnInit {
         let updateDataProject4;
         const colorPieChart3 = ['#d3e0ea', '#f6f5f5'];
         const projectData3 = {
-          labels: ['Budget', 'Contracted Value ' + round(prosentaseBelanjaModalCtr, 2) + '%'],
+          labels: ['Budget', 'Contracted Value (' + round(prosentaseBelanjaModalCtr * 100, 2) + '%) '],
           datasets: [
             {
               data: [budgetBelanjaModal - 300, contractedValueBelanjaModal],
