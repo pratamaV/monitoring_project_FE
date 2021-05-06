@@ -1,6 +1,8 @@
 html,
 body {
-    height: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-image: url(../../../assets/img/background.png);
 }
 
 body.my-login-page {
@@ -17,12 +19,12 @@ body.my-login-page {
 }
 
 .my-login-page .card-wrapper {
-    width: 400px;
+  width: 500px;
 }
 
 .my-login-page .card {
     border-color: transparent;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, .05);*/
 }
 
 .my-login-page .card.fat {
