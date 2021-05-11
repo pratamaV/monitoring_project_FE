@@ -29,7 +29,7 @@ export class MyProjectComponent implements OnInit {
   usersPmo: any[] = [];
   projectStatus: string;
 
-  searchByKeyword: string;
+  searchByKeyword = '';
   projectDependency = '';
   orderBy = 'projectCode';
   sort = 'ASC';
@@ -98,9 +98,10 @@ export class MyProjectComponent implements OnInit {
     );
   }
 
+  // tslint:disable-next-line:typedef
   onGetListProject() {
     this.isLoading = true;
-    this.projectService.getAllProjectByCoPMID(this.userLogin.id).subscribe(
+    this.projectService.getAllProjectByCoPMID(this.userLogin.id, this.projectDependency, this.projectDependency, this.page).subscribe(
       data => {
         this.isLoading = false;
         if (this.userRole !== '01') {
@@ -221,7 +222,7 @@ export class MyProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-    this.projectService.getAllProject(this.searchByKeyword, this.searchByKeyword, this.orderBy, this.sort, this.page).subscribe(
+    this.projectService.getAllProjectByCoPMID(this.searchByKeyword, this.searchByKeyword, this.orderBy, this.page).subscribe(
       data => {
         this.loadedProject = data.content;
       },
