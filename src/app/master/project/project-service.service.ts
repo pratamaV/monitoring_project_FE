@@ -541,7 +541,7 @@ export class ProjectServiceService {
     });
   }
 
-  getAllProjectByCoPMID(id: string, projectDependency, projectName, page): Observable<ApiResponseModel> {
+  getAllProjectByCoPMID(id, projectDependency, projectName, page): Observable<ApiResponseModel> {
     return new Observable((observer: Observer<ApiResponseModel>) => {
       const header = {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + JSON.parse(window.sessionStorage.getItem('token')).access_token)

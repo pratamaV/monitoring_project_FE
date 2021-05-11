@@ -222,7 +222,7 @@ export class MyProjectComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   searchLive() {
-    this.projectService.getAllProjectByCoPMID(this.searchByKeyword, this.searchByKeyword, this.orderBy, this.page).subscribe(
+    this.projectService.getAllProjectByCoPMID(this.userLogin.id, this.searchByKeyword, this.searchByKeyword, this.page).subscribe(
       data => {
         this.loadedProject = data.content;
       },
