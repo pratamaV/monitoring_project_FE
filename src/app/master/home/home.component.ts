@@ -415,10 +415,10 @@ export class HomeComponent implements OnInit {
           options: {
             elements: {
               top: {
-                text2: 'Not Started'
+                text2: ''
               },
               center: {
-                text: this.c
+                text: ''
               }
             },
             legend: {
@@ -440,7 +440,8 @@ export class HomeComponent implements OnInit {
                 formatter: Math.round,
                 font: {
                   color: 'blue',
-                  weight: 'bold'
+                  weight: 'bold',
+                  size: 10
                 }
               }
             }
@@ -474,6 +475,7 @@ export class HomeComponent implements OnInit {
           type: 'doughnut',
           data: projectData2,
           options: {
+            responsive: true,
             elements: {
               top: {
                 text2: 'Contracted'
@@ -511,7 +513,8 @@ export class HomeComponent implements OnInit {
                 },
                 font: {
                   color: 'blue',
-                  weight: 'bold'
+                  weight: 'bold',
+                  size: 10
                 }
               }
             }
@@ -575,7 +578,8 @@ export class HomeComponent implements OnInit {
                 },
                 font: {
                   color: 'blue',
-                  weight: 'bold'
+                  weight: 'bold',
+                  size: 10
                 }
               }
             }
