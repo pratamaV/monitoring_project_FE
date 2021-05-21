@@ -1,13 +1,13 @@
-import {Component, ElementRef, OnChanges, OnInit, ViewChild} from '@angular/core';
-import {Chart} from 'node_modules/chart.js';
-import {HomeService} from './home.service';
-import {ProjectServiceService} from '../project/project-service.service';
-import {UserModel} from '../user/user.model';
-import {TaskService} from '../task/task.service';
-import {TaskModel, TaskModel2} from '../task/task.model';
+import { Component, ElementRef, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Chart } from 'node_modules/chart.js';
+import { HomeService } from './home.service';
+import { ProjectServiceService } from '../project/project-service.service';
+import { UserModel } from '../user/user.model';
+import { TaskService } from '../task/task.service';
+import { TaskModel, TaskModel2 } from '../task/task.model';
 import ChartDataLabels from 'node_modules/chartjs-plugin-datalabels';
-import {LogErrorModel} from '../log-error.model';
-import {LogErrorService} from '../log-error.service';
+import { LogErrorModel } from '../log-error.model';
+import { LogErrorService } from '../log-error.service';
 
 declare var jQuery: any;
 
@@ -26,13 +26,14 @@ export class HomeComponent implements OnInit {
   directorateUser: string;
   a;
   b;
+  c;
 
 
 
   constructor(private homeService: HomeService,
-              private projectService: ProjectServiceService,
-              private taskService: TaskService,
-              private logErrorService: LogErrorService) {
+    private projectService: ProjectServiceService,
+    private taskService: TaskService,
+    private logErrorService: LogErrorService) {
   }
 
   // @ts-ignore
@@ -40,7 +41,28 @@ export class HomeComponent implements OnInit {
     this.onGetUserByPerformance();
     this.onGetTaskDeadline();
     Chart.defaults.global.defaultFontFamily = 'Helvetica';
-    Chart.defaults.global.defaultFontSize = 12;
+    Chart.defaults.global.defaultFontSize = 13;
+    Chart.pluginService.register({
+      beforeDraw: function (chart) {
+        var width = chart.chart.width,
+          height = chart.chart.height,
+          ctx = chart.chart.ctx;
+        ctx.restore();
+        var fontSize = (height / 300).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        var text = chart.config.options.elements.center.text,
+          text2 = chart.config.options.elements.top.text2,
+          textX = Math.round((width - ctx.measureText(text).width) / 4),
+          textY = height / 7,
+          textXX = Math.round((width - ctx.measureText(text).width) / 5),
+          textYY = height / 5;
+        ctx.fillText(text, textX, textY);
+        ctx.fillText(text2, textXX, textYY)
+        ctx.save();
+      }
+    });
+
     Chart.plugins.register(ChartDataLabels);
 
     this.homeService.getAllRelease()
@@ -146,7 +168,15 @@ export class HomeComponent implements OnInit {
             }]
           },
           options: {
-            legend: {display: false},
+            elements: {
+              top: {
+                text2: ''
+              },
+              center: {
+                text: ''
+              }
+            },
+            legend: { display: false },
             plugins: {
               datalabels: {
                 color: 'white',
@@ -225,7 +255,15 @@ export class HomeComponent implements OnInit {
             }]
           },
           options: {
-            legend: {display: false},
+            elements: {
+              top: {
+                text2: ''
+              },
+              center: {
+                text: ''
+              }
+            },
+            legend: { display: false },
             plugins: {
               datalabels: {
                 color: 'white',
@@ -308,6 +346,7 @@ export class HomeComponent implements OnInit {
         let prosentaseBebanUsahaCtr = 0;
         let prosentaseBelanjaModal = 0;
         let prosentaseBelanjaModalCtr = 0;
+        let sumNotStarted = 0;
         for (const project of data) {
           if (project.statusProject === 'Active') {
             if (project.status === 'Not Started') {
@@ -333,10 +372,12 @@ export class HomeComponent implements OnInit {
             }
           }
         }
+        sumNotStarted = notStarted / (data.length);
         prosentaseBebanUsahaCtr = contractedValueBebanUsaha / (budgetBebanUsaha);
         prosentaseBelanjaModalCtr = contractedValueBelanjaModal / (budgetBelanjaModal);
         this.a = round(prosentaseBebanUsahaCtr * 100, 2) + '%';
         this.b = round(prosentaseBelanjaModalCtr * 100, 2) + '%';
+        this.c = round(sumNotStarted * 100, 2) + '%';
 
         function round(value, precision) {
           var multiplier = Math.pow(10, precision || 0);
@@ -369,9 +410,17 @@ export class HomeComponent implements OnInit {
 
 
         const pieChart = new Chart('projectByStatus', {
-          type: 'pie',
+          type: 'doughnut',
           data: projectData,
           options: {
+            elements: {
+              top: {
+                text2: 'Not Started'
+              },
+              center: {
+                text: this.c
+              }
+            },
             legend: {
               position: 'left'
             },
@@ -413,7 +462,7 @@ export class HomeComponent implements OnInit {
         let updateDataProject3;
         const colorPieChart2 = ['#ffc1b6', '#fdffbc'];
         const projectData2 = {
-          labels: ['Budget', 'Contracted Value (' + round(prosentaseBebanUsahaCtr * 100, 2) + '%)'],
+          labels: ['Budget', 'Contracted Value'],
           datasets: [
             {
               data: [budgetBebanUsaha - 130, contractedValueBebanUsaha],
@@ -422,9 +471,17 @@ export class HomeComponent implements OnInit {
         };
 
         const pieChart2 = new Chart('projectByBebanUsaha', {
-          type: 'pie',
+          type: 'doughnut',
           data: projectData2,
           options: {
+            elements: {
+              top: {
+                text2: 'Contracted'
+              },
+              center: {
+                text: this.a
+              }
+            },
             legend: {
               position: 'left'
             },
@@ -451,8 +508,6 @@ export class HomeComponent implements OnInit {
                     rupiah += separator + ribuan.join('.');
                   }
                   return 'Rp ' + rupiah;
-
-
                 },
                 font: {
                   color: 'blue',
@@ -477,7 +532,7 @@ export class HomeComponent implements OnInit {
         let updateDataProject4;
         const colorPieChart3 = ['#d3e0ea', '#f6f5f5'];
         const projectData3 = {
-          labels: ['Budget', 'Contracted Value (' + round(prosentaseBelanjaModalCtr * 100, 2) + '%) '],
+          labels: ['Budget', 'Contracted Value'],
           datasets: [
             {
               data: [budgetBelanjaModal - 300, contractedValueBelanjaModal],
@@ -486,9 +541,18 @@ export class HomeComponent implements OnInit {
         };
 
         const pieChart3 = new Chart('projectByBelanjaModal', {
-          type: 'pie',
+          type: 'doughnut',
           data: projectData3,
           options: {
+            elements: {
+              top: {
+                text2: 'Contracted'
+              },
+              center: {
+                text: this.b
+
+              }
+            },
             legend: {
               position: 'left'
             },
