@@ -89,7 +89,7 @@ export class FormReleaseComponent implements OnInit {
       departmentHead : new FormControl(null),
       categoryActivity: new FormControl(null, [Validators.required]),
       developmentMode: new FormControl(null, [Validators.required]),
-      contractedValue: new FormControl(0),
+      contractedValue: new FormControl(null),
       project: new FormControl(localStorage.getItem('projectId'))
     });
   }
@@ -208,6 +208,7 @@ export class FormReleaseComponent implements OnInit {
       this.releaseForm.get('departmentHead').setValue(this.release.departmentHead);
       this.releaseForm.get('categoryActivity').setValue(this.release.categoryActivity);
       this.releaseForm.get('developmentMode').setValue(this.release.developmentMode);
+      this.releaseForm.get('contractedValue').setValue(this.release.contractedValue);
       this.releaseForm.get('project').setValue(this.release.project.id);
     }
   }
