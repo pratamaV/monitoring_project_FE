@@ -14,7 +14,8 @@
         <div id="cover">
             <!-- Table -->
 
-            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListUser()"></i> List Task {{user.username}}</h4>
+            <h4 class="mb-5" style="padding-top: 70px"><i class="fa fa-chevron-circle-left" (click)="goToListUser()"></i>
+                List Task {{user.username}}</h4>
             <div class="row">
 
                 <div class="col">
@@ -22,15 +23,17 @@
                         <div class="card-header border-0">
                             <div>
                                 <button class="btn btn-warning btn-sm mt-2 mb-2" style="float: right;" (click)="exportexcel()"><i
-                        class="fa fa-file"></i> Export to excel
-                      </button>
+                                        class="fa fa-file"></i> Export to excel
+                                </button>
                             </div>
                         </div>
                         <div class="table-responsive" [hidden]="loadedTask.length===0">
                             <table class="table align-items-center table-flush" id="excel-table">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">Task Code</th>
+                                        <th scope="col">Project Name</th>
+                                        <th scope="col">Release Name</th>
+                                        <!-- <th scope="col">Task Code</th> -->
                                         <th scope="col">Task Name</th>
                                         <th scope="col">Score</th>
                                         <th scope="col">Weight</th>
@@ -41,7 +44,9 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let task of loadedTask; let i = index">
-                                        <th scope="row">{{task.taskCode}}</th>
+                                        <th scope="row">{{task.release.project.projectName}}</th>
+                                        <td>{{task.release.releaseName}}</td>
+                                        <!-- <td>{{task.taskCode}}</td> -->
                                         <td>{{task.taskName}}</td>
                                         <td>{{task.score}}</td>
                                         <td>{{task.weight | number : '1.2-2'}}</td>
