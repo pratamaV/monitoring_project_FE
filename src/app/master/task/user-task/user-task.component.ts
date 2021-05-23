@@ -49,6 +49,8 @@ export class UserTaskComponent implements OnInit {
         this.taskService.getTaskByUserId(localStorage.getItem('userIdTask'), this.paramNull)
           .subscribe(data2 => {
             this.loadedTask = data2.content;
+            console.log(this.loadedTask);
+            
           }, error => {
             alert(error);
           });
