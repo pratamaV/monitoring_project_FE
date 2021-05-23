@@ -1443,7 +1443,9 @@ a.btn-icon-only {
 .table td,
 .table th {
     font-size: .8125rem;
-    white-space: nowrap;
+    /* white-space: xnowrap; */
+    word-wrap: break-word;
+    width: 30%;
 }
 
 .table.align-items-center td,
