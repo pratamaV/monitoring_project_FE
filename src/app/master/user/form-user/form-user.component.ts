@@ -21,6 +21,7 @@ export class FormUserComponent implements OnInit {
   divisionId: string;
   id: string;
   idParam: string;
+  
 
 
   isErrorValidation = false;

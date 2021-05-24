@@ -466,7 +466,7 @@ export class HomeComponent implements OnInit {
           labels: ['Budget', 'Contracted Value'],
           datasets: [
             {
-              data: [budgetBebanUsaha - 130, contractedValueBebanUsaha],
+              data: [budgetBebanUsaha - (130+ contractedValueBebanUsaha), contractedValueBebanUsaha],
               backgroundColor: colorPieChart2
             }]
         };
@@ -538,7 +538,7 @@ export class HomeComponent implements OnInit {
           labels: ['Budget', 'Contracted Value'],
           datasets: [
             {
-              data: [budgetBelanjaModal - 300, contractedValueBelanjaModal],
+              data: [budgetBelanjaModal - (300+ contractedValueBelanjaModal), contractedValueBelanjaModal],
               backgroundColor: colorPieChart3
             }]
         };
