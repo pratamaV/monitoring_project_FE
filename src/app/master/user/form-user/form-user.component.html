@@ -38,7 +38,7 @@
         </div>
 
 
-        <div class="form-group">
+        <div *ngIf="userRoleNew === '01'" class="form-group">
           <label for="userRole" style="text-align: left; float: left;">Role</label>
           <select class="form-select" formControlName="userRole" formControlName="userRole" id="userRole"
                   aria-label="Default select example" style="height: 33px">

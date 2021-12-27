@@ -57,7 +57,6 @@ export class MyTaskComponent implements OnInit {
     this.buildForm();
     this.role = localStorage.getItem('role');
     this.onGetTaskByUserId();
-    console.log('ini current date', this.currentDate);
     this.getAllProjectName();
     this.getAllReleaseName();
   }
@@ -90,10 +89,10 @@ export class MyTaskComponent implements OnInit {
     this.taskForm.get('estEndDateFrom').setValue(null);
     this.taskForm.get('estStartDateTo').setValue(null);
     this.taskForm.get('estEndDateTo').setValue(null);
-    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
+    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull, this.page)
       .subscribe(data => {
         this.isLoading = false;
-        this.loadedTask = data.content;
+        this.loadedTask = data.content;    
         this.totalItems = data.totalElements;
         for (const iterator of this.loadedTask) {
           this.releaseName.push(iterator.release.releaseName);
@@ -111,7 +110,7 @@ export class MyTaskComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onGetTaskByUserIdFilter(param) {
     this.isLoading = true
-        this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param)
+        this.taskService.getTaskByUserId(localStorage.getItem('idUser'), param, this.page)
       .subscribe(data => {
         this.isLoading = false;
         this.loadedTask = data.content;
@@ -191,7 +190,6 @@ export class MyTaskComponent implements OnInit {
   getAllReleaseName(){
     this.releaseService.getAllRelease()
     .subscribe(data => {
-      console.log(data);
       this.releaseName = data;
     }, error => {
       alert(error);

@@ -17,6 +17,7 @@ export class SidebarComponent implements OnInit {
   token = window.sessionStorage.getItem('token');
   tokenParse = JSON.parse(this.token);
   user = this.tokenParse.user;
+  page;
   paramNull = {
     taskDoc: null,
     statusDone: null,
@@ -40,7 +41,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onGetTaskByUserId() {
-    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull)
+    this.taskService.getTaskByUserId(localStorage.getItem('idUser'), this.paramNull, this.page)
       .subscribe((data)  => {
         for (const task of data.content) {
           if (task.statusDone === 'NOT STARTED'){

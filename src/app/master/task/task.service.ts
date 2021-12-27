@@ -338,7 +338,7 @@ export class TaskService {
   //   });
   // }
 
-  getTaskByUserId(id, param): Observable<ApiResponseTask2> {
+  getTaskByUserId(id, param, page): Observable<ApiResponseTask2> {
     if (param.statusDone === null) {
       param.statusDone = '';
     }
@@ -369,7 +369,7 @@ export class TaskService {
     };
 
     // tslint:disable-next-line:max-line-length
-    url = `api/taskByUserId/${id}?statusDone=${param.statusDone}&releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDateFrom=${param.estStartDateFrom}&estStartDateTo=${param.estStartDateTo}&estEndDateFrom=${param.estEndDateFrom}&estEndDateTo=${param.estEndDateTo}`;
+    url = `api/taskByUserId/${id}?page=${page-1}&statusDone=${param.statusDone}&releaseName=${param.releaseName}&projectName=${param.projectName}&estStartDateFrom=${param.estStartDateFrom}&estStartDateTo=${param.estStartDateTo}&estEndDateFrom=${param.estEndDateFrom}&estEndDateTo=${param.estEndDateTo}`;
     return new Observable((observer: Observer<ApiResponseTask2>) => {
       this.http.get(url, header)
       .pipe(map((responseData: ApiResponseTask2) => {

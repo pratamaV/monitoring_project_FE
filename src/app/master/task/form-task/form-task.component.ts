@@ -25,6 +25,7 @@ export class FormTaskComponent implements OnInit {
   assignedTo;
   users: UserModel;
   release: ReleaseModel2;
+  userRoleNew = JSON.parse(window.sessionStorage.getItem('token')).user.userRole;
 
   constructor(private route: ActivatedRoute,
               private taskService: TaskService,
