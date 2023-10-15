@@ -72,7 +72,21 @@ const routes: Routes = [
     },
     loadChildren: () =>
       import('./issued/issued.module').then(p => p.IssuedModule)
-  }
+  },
+  {
+    path: 'training',
+    canActivate: [AuthGuardService],
+    data: {
+      role: [
+        '01',
+        '02',
+        '03',
+        '05',
+      ]
+    },
+    loadChildren: () =>
+      import('./training/training.module').then(p => p.TrainingModule)
+  },
 ];
 
 @NgModule({

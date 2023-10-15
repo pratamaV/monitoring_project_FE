@@ -1,0 +1,244 @@
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<head>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
+</head> -->
+
+<body>
+    <div class="main-content">
+      <app-sidebar></app-sidebar>
+      <div id=cover>
+    
+        <h4 class="mb-5" style="padding-top: 70px">Review Training</h4>
+        <div class="row">
+    
+          <div class="col">
+            <div class="card shadow">
+              <div class="card-header border-0">
+                <div class="row">
+                  <div class="col-12 col-xs-8">
+                    <div class="row">
+                      <div class="col-6" id="search">
+                        <form>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                              <input [(ngModel)]="searchByKeyword" name="searchByKeyword" type="text" class="form-control"
+                                     placeholder="Cari berdasarkan keyword atau project name" (keyup)="searchLive()">
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+    
+                      <div class="col-6" id="button-filter" style="float: right">
+                        <!-- <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
+                          class="fa fa-file"></i> Export to excel
+                        </button>&nbsp;
+                        <button id="add-project" class="btn btn-warning btn-sm" 
+                        (click)="onAddTraining()"
+                                [hidden]="userRole==='02' || userRole === '03'"><i
+                          class="fa fa-plus"></i> Add New Training
+                        </button>&nbsp; -->
+                        <!-- <button id="add-project" class="btn btn-warning btn-sm" 
+                        data-toggle="modal" data-target="#exampleModalCenter"
+                                [hidden]="userRole==='02' || userRole === '03'"><i
+                          class="fa fa-plus"></i> Add New Training
+                        </button>&nbsp; -->
+                      </div>
+                    </div>
+    
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive">
+                <div *ngIf="isLoading == true">
+                  <div id="id01" class="modal">
+                    <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                      <div class="spinner-border text-info"></div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table align-items-center table-flush" class="table" id="excel-table">
+                  <thead class="thead-light">
+                  <tr style="text-align: center;">
+                    <th scope="col">No
+                        <button (click)="sortColumn('projectCode') " *ngIf="reverse == true"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                        <button (click)="sortColumn('projectCode')" *ngIf="reverse == false"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Training Name
+                      <button (click)="sortColumn('projectName') " *ngIf="reverse == true"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                      <button (click)="sortColumn('projectName') " *ngIf="reverse == false"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Competence
+                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Sub Competence
+                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Business Issues
+                      <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                      <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                  </th>
+                  <th scope="col">Performance Issues
+                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                            title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                            title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </th>
+                <th scope="col">Competency Issues
+                  <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                  <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+              </th>
+                    
+                    <th scope="col">Status
+                      <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                      <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Action
+                        <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                        <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Register date
+                        <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                        <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                                title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Update date
+                      <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                      <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr
+                    *ngFor="let training of loadedTraining |orderBy: key : reverse | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
+                    [ngStyle]="getStyle(training)">
+                    <th >{{i+1}}</th>
+                    <td>{{training.masterTraining.trainingName}}</td>
+                    <td>{{training.competence}}</td>
+                    <td>{{training.subCompetence}}</td>
+                    <td>{{training.businessIssues}}</td>
+                    <td>{{training.performanceIssues}}</td>
+                    <td>{{training.competencyIssues}}</td>
+                    <td>  
+                        <div *ngIf="training.staus === '0'; else else1"><span>Draft</span></div>
+                        <ng-template #else1>
+                            <span>Submit</span>
+                            <span *ngIf="training.staus === '1'; else else2">Submit</span>
+                            <ng-template #else2>
+                                <span *ngIf="training.staus === '2'; else else3">Approve</span>
+                                <ng-template #else3>
+                                    <span *ngIf="training.staus === '3';">Reject</span>
+                                </ng-template>
+                            </ng-template>
+                        </ng-template>
+                    </td>
+                    <td style="width: 200px;">
+                        <button (click)="approveTraining(training, 2)"
+                                class="btn btn-outline-success btn-sm"
+                                data-toggle="tooltip" data-placement="bottom" title="Approve"><i
+                          class="fa fa-check"></i></button>&nbsp;
+                        <button (click)="approveTraining(training, 3)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
+                                data-placement="bottom" title="Reject"
+                                [disabled]="training.staus==='1' || training.staus==='2' || training.staus==='3'"><i
+                          class="fa fa-rotate-right"></i></button>&nbsp;
+                    </td>
+                    <td>{{training.creationDate | date : 'medium'}}</td>
+                    <td>{{training.lastModifiedDate | date : 'medium'}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <pagination-controls class="my-pagination" style="font-size: 10pt; margin-top: 2px;"
+                                   (pageChange)="onPageChanges($event)"></pagination-controls>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+        <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                ...
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div> -->
+    
+    
+    </div>
+    <footer class="footer">
+      <div class="row align-items-center justify-content-xl-between">
+        <div class="col-xl-6 m-auto text-center">
+          <div class="copyright">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
+    
+    </body>
+    
