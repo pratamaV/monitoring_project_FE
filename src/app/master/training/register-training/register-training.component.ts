@@ -108,7 +108,8 @@ export class RegisterTrainingComponent implements OnInit {
       competencyIssues : postData.competencyIssues,
       idUsers: this.idUsers,
       divisionCode: this.divisionCode,
-      status: '0'
+      status: '0',
+      type: 'T'
     };
   
     this.trainingService.registerTraining(this.requestPayload)

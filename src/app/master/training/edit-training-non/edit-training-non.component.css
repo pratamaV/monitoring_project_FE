@@ -1,0 +1,40 @@
+.container {
+    align-content: center;
+    text-align: center;
+    padding: 30px;
+    /*margin: 30px;*/
+    text-align: center;
+    width: calc(100% - 17rem);
+    margin-left: 17rem;
+    transition: all 0.4s;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -17rem;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    .container {
+        width: 100%;
+        margin: 0;
+        padding: 10px
+    }
+    .container.active {
+        margin-left: 17rem;
+        width: calc(100% - 17rem);
+    }
+}
+
+h4 {
+    text-align: left;
+}
+
+.container-fluid {
+    text-align: left;
+}
+
+label {
+    font-size: 10pt;
+}

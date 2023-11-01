@@ -67,58 +67,58 @@
                   <thead class="thead-light">
                   <tr style="text-align: center;">
                     <th scope="col">No
-                        <button (click)="sortColumn('projectCode') " *ngIf="reverse == true"
+                        <button (click)="sortColumn('no') " *ngIf="reverse == true"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                        <button (click)="sortColumn('projectCode')" *ngIf="reverse == false"
+                        <button (click)="sortColumn('no')" *ngIf="reverse == false"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
                     <th scope="col">Training Name
-                      <button (click)="sortColumn('projectName') " *ngIf="reverse == true"
+                      <button (click)="sortColumn('trainingName') " *ngIf="reverse == true"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                      <button (click)="sortColumn('projectName') " *ngIf="reverse == false"
+                      <button (click)="sortColumn('trainingName') " *ngIf="reverse == false"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
                     <th scope="col">Competence
-                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                        <button (click)="sortColumn('competence') " *ngIf="reverse == true"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                        <button (click)="sortColumn('competence') " *ngIf="reverse == false"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
                     <th scope="col">Sub Competence
-                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                        <button (click)="sortColumn('subCompetence') " *ngIf="reverse == true"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                        <button (click)="sortColumn('subCompetence') " *ngIf="reverse == false"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
                     <th scope="col">Business Issues
-                      <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                      <button (click)="sortColumn('businessIssues') " *ngIf="reverse == true"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                      <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                      <button (click)="sortColumn('businessIssues') " *ngIf="reverse == false"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                   </th>
                   <th scope="col">Performance Issues
-                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                    <button (click)="sortColumn('performanceIssues') " *ngIf="reverse == true"
                             class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                             title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                    <button (click)="sortColumn('performanceIssues') " *ngIf="reverse == false"
                             class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                             title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                 </th>
                 <th scope="col">Competency Issues
-                  <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
+                  <button (click)="sortColumn('competencyIssues') " *ngIf="reverse == true"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
+                  <button (click)="sortColumn('competencyIssues') " *ngIf="reverse == false"
                           class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                           title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
               </th>
@@ -132,26 +132,26 @@
                               title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
                     <th scope="col">Action
-                        <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                        <button (click)="sortColumn('action') " *ngIf="reverse == true"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                        <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                        <button (click)="sortColumn('action') " *ngIf="reverse == false"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
                     <th scope="col">Register date
-                        <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                        <button (click)="sortColumn('creationDate') " *ngIf="reverse == true"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                        <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                        <button (click)="sortColumn('creationDate') " *ngIf="reverse == false"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
                     <th scope="col">Update date
-                      <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                      <button (click)="sortColumn('lastModifiedDate') " *ngIf="reverse == true"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                      <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                      <button (click)="sortColumn('lastModifiedDate') " *ngIf="reverse == false"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
@@ -168,27 +168,15 @@
                     <td>{{training.businessIssues}}</td>
                     <td>{{training.performanceIssues}}</td>
                     <td>{{training.competencyIssues}}</td>
-                    <td>  
-                        <div *ngIf="training.staus === '0'; else else1"><span>Draft</span></div>
-                        <ng-template #else1>
-                            <span>Submit</span>
-                            <span *ngIf="training.staus === '1'; else else2">Submit</span>
-                            <ng-template #else2>
-                                <span *ngIf="training.staus === '2'; else else3">Approve</span>
-                                <ng-template #else3>
-                                    <span *ngIf="training.staus === '3';">Reject</span>
-                                </ng-template>
-                            </ng-template>
-                        </ng-template>
-                    </td>
+                    <td>{{ training.statusDesc }}</td>
                     <td style="width: 200px;">
                         <button (click)="updateTraining(training)" class="btn btn-outline-info btn-sm" data-toggle="tooltip"
                                 data-placement="bottom" title="Update"
-                                [disabled]="training.staus==='1' || training.staus==='2' || training.staus==='3'"><i
+                                [disabled]="training.status ==='1' || training.status ==='2' "><i
                           class="fa fa-edit"></i></button>&nbsp;
                         <button (click)="submitTraining(training)"
                                 class="btn btn-outline-success btn-sm"
-                                data-toggle="tooltip" data-placement="bottom" title="Detail"><i
+                                data-toggle="tooltip" data-placement="bottom" title="Submit"><i
                           class="fa fa-check"></i></button>&nbsp;
                     </td>
                     <td>{{training.creationDate | date : 'medium'}}</td>

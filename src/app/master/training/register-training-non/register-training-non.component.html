@@ -1,0 +1,181 @@
+<app-sidebar></app-sidebar>
+
+<!-- <div class="card"> -->
+
+<div class="container">
+  <h4><i class="fa fa-chevron-circle-left" (click)="onGolistTraining()"></i> Register Training Non TNA</h4>
+  <br>
+  <div class="container-fluid col-12">
+    <div *ngIf="isLoading == true">
+      <div id="id01" class="modal">
+        <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+          <div class="spinner-border text-info"></div>
+        </div>
+      </div>
+    </div>
+    <form style="padding: 10px" [formGroup]="trainingForm" method="post"
+          (ngSubmit)="onSaveTraining(trainingForm.value, trainingForm.valid)">
+      <div class="row">
+        <div class="col">
+        <div class="Form-group">
+          <input type="hidden" class="form-control" formControlName="id" id="id">
+        </div>
+        <div class="form-group">
+          <label for="trainingName">Training Name</label>
+          <input type="text" class="form-control" formControlName="trainingName" id="trainingName">
+        </div>
+
+        <div class="form-group">
+          <label for="trainingDate">Training Date</label>
+          <input type="date" class="form-control" formControlName="trainingDate" id="trainingDate">
+        </div>
+
+        <div class="form-group">
+          <label for="trainingParticipants">Training Participants</label>
+          <input type="text" class="form-control" formControlName="trainingParticipants" id="trainingParticipants">
+        </div>
+
+        <div class="form-group">
+            <label for="trainingType" style="float: left;">Training Type</label>
+            <select class="form-select" [(ngModel)]="selectedSubCompetence" (change)="onSelectedSubCompetence()" formControlName="trainingType" id="trainingType" aria-label="Default select example">
+                <option value="Public Training">Public Training</option>
+                <option value="In House Training">In House Training</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label for="trainingCost">Training Cost</label>
+          <input type="text" class="form-control" formControlName="trainingCost" id="trainingCost">
+        </div>
+
+        <div class="form-group">
+          <label for="consumptionCost">Consumption Cost</label>
+          <input type="text" class="form-control" formControlName="consumptionCost" id="consumptionCost">
+        </div>
+
+        <div class="form-group">
+          <label for="accommodationCost">Accommodation Cost</label>
+          <input type="text" class="form-control" formControlName="accommodationCost" id="accommodationCost">
+        </div>
+
+        <div class="form-group">
+          <label for="accommodationCost">Upload Dokumen Pendukung</label>
+          <br>
+          <input accept="application/pdf, application/msword,image/png,image/jpg,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
+          formControlName="dokumenFile" type="file" nbInput fullWidth id="file" placeholder="File">
+        </div>
+        
+          <!-- <div class="form-group">
+            <label for="projectName">Project Name <small style="color: red;">*</small></label>
+            <input type="text" class="form-control" formControlName="projectName" id="projectName">
+            <small class="form-text text-danger "
+                   *ngIf="form('projectName').invalid && form('projectName').dirty || form('projectName').touched">
+              <div *ngIf="form('projectName').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
+
+
+          <div class="form-group">
+            <label for="benefit">Benefit</label>
+            <textarea type="text" class="form-control" formControlName="benefit" id="benefit"></textarea>
+          </div>
+
+
+          <div class="form-group">
+            <label for="budget">Budget</label>
+            <input type="text" class="form-control" formControlName="budget" id="budget">
+          </div>
+
+          <div class="form-group">
+            <input type="hidden" class="form-control" formControlName="contractedValue" id="contractedValue">
+          </div>
+
+          <div class="form-group">
+            <label for="paymentRealization">Budget Realization</label>
+            <input type="text" class="form-control" formControlName="paymentRealization" id="paymentRealization">
+          </div> -->
+
+        </div>
+
+        <!-- <div class="col-6">
+          <div class="form-group">
+            <label for="lineItem">Mata Anggaran <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="lineItem" id="lineItem" aria-label="Default select example">
+              <option value="Belanja Modal/ Software">Belanja Modal/ Software</option>
+              <option value="Belanja Modal/ Hardware">Belanja Modal/ Hardware</option>
+              <option value="Beban Usaha">Beban Usaha</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('lineItem').invalid && form('lineItem').dirty || form('lineItem').touched">
+              <div *ngIf="form('lineItem').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="status">Status Project</label>
+            <select class="form-select" formControlName="status" id="status" aria-label="Default select example">
+              <option value="Not Started">Not Started</option>
+              <option value="On Schedule">On Schedule</option>
+              <option value="PTR/ Live">PTR/ Live</option>
+              <option value="Potentital To Be Delay">Potentital To Be Delay</option>
+              <option value="Drop">Drop</option>
+              <option value="Delay">Delay</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('status').invalid && form('status').dirty || form('status').touched">
+              <div *ngIf="form('status').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="projectDependency">Keyword</label>
+            <input type="text" class="form-control" formControlName="projectDependency" id="projectDependency">
+          </div>
+
+          <div class="form-group">
+            <label for="score">Score <small style="color: red;">*</small></label>
+            <input type="text" class="form-control" formControlName="score" id="score"/>
+
+            <small class="form-text text-danger"
+                   *ngIf="form('score').invalid && form('score').dirty || form('score').touched">
+              <div *ngIf="form('score').errors?.required">
+                Bagian ini harus terisi
+              </div>
+              <div *ngIf="form('score').errors?.pattern">
+                Harus menggunakan angka 1-10
+              </div>
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="categoryInitiative">Category Initiative <small style="color: red;">*</small></label>
+            <select class="form-select" formControlName="categoryInitiative" id="categoryInitiative"
+                    aria-label="Default select example">
+              <option value="Project">Project</option>
+              <option value="Enhancement">Enhancement</option>
+            </select>
+            <small class="form-text text-danger "
+                   *ngIf="form('categoryInitiative').invalid && form('categoryInitiative').dirty || form('categoryInitiative').touched">
+              <div *ngIf="form('categoryInitiative').errors?.required">
+                Bagian ini harus terisi
+              </div>
+            </small>
+          </div>
+          <div>
+            <small style="text-align: right; "><small style="color: red;">*</small> Harus diisi</small>
+          </div>
+        </div> -->
+      </div> 
+      <button [disabled]="!trainingForm.valid" type="submit" class="btn btn-primary mt-3" style="width: 100%">Submit
+      </button>
+
+    </form>
+
+  </div>
+</div>

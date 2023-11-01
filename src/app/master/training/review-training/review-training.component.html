@@ -82,47 +82,14 @@
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
-                    <th scope="col">Competence
+                    <th scope="col">Type
                         <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
                         <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                    </th>
-                    <th scope="col">Sub Competence
-                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
-                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                                title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                        <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
-                                class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                                title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                    </th>
-                    <th scope="col">Business Issues
-                      <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
-                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                      <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
-                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                  </th>
-                  <th scope="col">Performance Issues
-                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
-                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                            title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                    <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
-                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                            title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </th>
-                <th scope="col">Competency Issues
-                  <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == true"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                  <button (click)="sortColumn('prosentaseProject') " *ngIf="reverse == false"
-                          class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                          title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-              </th>
-                    
+                    </th>                    
                     <th scope="col">Status
                       <button (click)="sortColumn('status') " *ngIf="reverse == true"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
@@ -162,33 +129,24 @@
                     *ngFor="let training of loadedTraining |orderBy: key : reverse | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
                     [ngStyle]="getStyle(training)">
                     <th >{{i+1}}</th>
-                    <td>{{training.masterTraining.trainingName}}</td>
-                    <td>{{training.competence}}</td>
-                    <td>{{training.subCompetence}}</td>
-                    <td>{{training.businessIssues}}</td>
-                    <td>{{training.performanceIssues}}</td>
-                    <td>{{training.competencyIssues}}</td>
-                    <td>  
-                        <div *ngIf="training.staus === '0'; else else1"><span>Draft</span></div>
+                    <td>{{training.trainingName}}</td>
+                    <td>
+                      <div *ngIf="training.type === 'T'; else else1"><span>TNA</span></div>
                         <ng-template #else1>
-                            <span>Submit</span>
-                            <span *ngIf="training.staus === '1'; else else2">Submit</span>
-                            <ng-template #else2>
-                                <span *ngIf="training.staus === '2'; else else3">Approve</span>
-                                <ng-template #else3>
-                                    <span *ngIf="training.staus === '3';">Reject</span>
-                                </ng-template>
-                            </ng-template>
+                            <span>NON TNA</span>
                         </ng-template>
                     </td>
+                    
+                    <td>{{ training.statusDesc }}</td>
                     <td style="width: 200px;">
                         <button (click)="approveTraining(training, 2)"
                                 class="btn btn-outline-success btn-sm"
-                                data-toggle="tooltip" data-placement="bottom" title="Approve"><i
+                                data-toggle="tooltip" data-placement="bottom" title="Approve"
+                                [disabled]="userRoleNew ==='03'"><i
                           class="fa fa-check"></i></button>&nbsp;
                         <button (click)="approveTraining(training, 3)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
                                 data-placement="bottom" title="Reject"
-                                [disabled]="training.staus==='1' || training.staus==='2' || training.staus==='3'"><i
+                                [disabled]="userRoleNew ==='03'"><i
                           class="fa fa-rotate-right"></i></button>&nbsp;
                     </td>
                     <td>{{training.creationDate | date : 'medium'}}</td>

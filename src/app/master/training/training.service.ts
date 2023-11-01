@@ -77,6 +77,8 @@ export class TrainingService {
   }
 
   registerTraining(training: any): Observable<DefaultResponse> {    
+    console.log('masuk kesini ga?');
+    
     return new Observable((observer: Observer<DefaultResponse>) => {
       this.http
       .post(

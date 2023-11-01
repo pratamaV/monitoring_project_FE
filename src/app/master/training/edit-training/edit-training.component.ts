@@ -128,7 +128,7 @@ export class EditTrainingComponent implements OnInit {
       data => {
         if(data.responseCode === '00'){
           this.isLoading = false;
-          Swal.fire('Success', 'Success submit training', 'success');
+          Swal.fire('Success', 'Success update training', 'success');
         } else {
           Swal.fire('Failed', data.responseCode, 'error');
         }

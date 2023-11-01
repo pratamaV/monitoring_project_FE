@@ -17,8 +17,17 @@ export interface TrainingModel {
     performanceIssues : string;
     competencyIssues : string
     status : string;
+    statusDesc : string;
     divisionCode : string;
     idUsers : UserModel;
+    trainingName : String;
+    trainingDate : Date;
+    trainingParticipants : Number;
+    trainingType : String;
+    trainingCost : Number;
+    consumptionCost : Number;
+    accommodationCost : Number;
+    type : String;
     creationDate : Date;
     lastModifiedBy : Date; 
 }

@@ -5,14 +5,14 @@
 <div class="container">
   <h4><i class="fa fa-chevron-circle-left" (click)="onGolistTraining()"></i> Register Training</h4>
   <br>
-  <div *ngIf="isLoading == true">
-    <div id="id01" class="modal">
-      <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
-        <div class="spinner-border text-info"></div>
+  <div class="container-fluid col-12">
+    <div *ngIf="isLoading == true">
+      <div id="id01" class="modal">
+        <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+          <div class="spinner-border text-info"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container-fluid col-12">
     <form style="padding: 10px" [formGroup]="trainingForm" method="post"
           (ngSubmit)="onSaveTraining(trainingForm.value, trainingForm.valid)">
       <div class="row">

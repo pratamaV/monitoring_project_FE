@@ -30,7 +30,7 @@ export class ListTrainingComponent implements OnInit {
   token: any;
   role: any;
   userRole: any;
-  key: string = 'projectCode';
+  key: string = 'lastModifiedDate';
   reverse: boolean = false;
   idUsers : any;
 
@@ -66,7 +66,9 @@ export class ListTrainingComponent implements OnInit {
       data => {
         this.isLoading = false;
           for (const iterator of data.data) {
-            this.loadedTraining.push(iterator);
+            if(iterator.type === 'T'){
+              this.loadedTraining.push(iterator);
+            }
           }
         // this.totalItems = data.totalElements;
       },
@@ -104,6 +106,7 @@ export class ListTrainingComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   submitTraining(training: TrainingModel) {
+    this.isLoading = true;
     this.requestPayload = {
       idTraining: training.id,
       competence: training.competence,
@@ -114,12 +117,14 @@ export class ListTrainingComponent implements OnInit {
       competencyIssues : training.competencyIssues,
       idUsers: training.idUsers.id,
       divisionCode: training.divisionCode,
-      status: '1'
+      status: '1',
+      type: 'T'
     };
 
     this.trainingService.registerTraining(this.requestPayload)
       .subscribe(
         data => {
+          this.isLoading = false;
           if(data.responseCode === '00'){
             Swal.fire('Success', 'Success submit training', 'success');
           } else {

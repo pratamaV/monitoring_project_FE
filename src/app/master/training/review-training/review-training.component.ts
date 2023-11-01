@@ -65,7 +65,9 @@ export class ReviewTrainingComponent implements OnInit {
       data => {
         this.isLoading = false;
           for (const iterator of data.data) {
-            this.loadedTraining.push(iterator);
+            if(iterator.status === '1' || iterator.status === '2' || iterator.status === '3'){
+              this.loadedTraining.push(iterator);
+            }
           }
         // this.totalItems = data.totalElements;
       },
@@ -104,22 +106,43 @@ export class ReviewTrainingComponent implements OnInit {
   // tslint:disable-next-line:typedef
   approveTraining(training: TrainingModel, status: any) {
     this.isLoading = true;
-    this.requestPayload = {
-      idTraining: training.id,
-      competence: training.competence,
-      subCompetenceCode: training.subCompetenceCode,
-      idMasterTraining: training.masterTraining.id,
-      businessIssues : training.businessIssues,
-      performanceIssues : training.performanceIssues,
-      competencyIssues : training.competencyIssues,
-      idUsers: training.idUsers.id,
-      divisionCode: training.divisionCode,
-      status: status
-    };
+    if(training.type === 'T'){
+      this.requestPayload = {
+        idTraining: training.id,
+        competence: training.competence,
+        subCompetenceCode: training.subCompetenceCode,
+        idMasterTraining: training.masterTraining.id,
+        businessIssues : training.businessIssues,
+        performanceIssues : training.performanceIssues,
+        competencyIssues : training.competencyIssues,
+        idUsers: training.idUsers.id,
+        divisionCode: training.divisionCode,
+        status: status,
+        type : training.type
+      };
+    } else {
+      this.requestPayload = {
+        idTraining: training.id,
+        trainingName: training.trainingName,
+        trainingDate: training.trainingDate,
+        trainingParticipants: training.trainingParticipants,
+        trainingType: training.trainingType,
+        trainingCost : training.trainingCost,
+        consumptionCost : training.consumptionCost,
+        accommodationCost : training.accommodationCost,
+        idUsers: training.idUsers.id,
+        divisionCode: training.divisionCode,
+        status: status,
+        type : training.type
+      };
+    }
+    
+    
 
     this.trainingService.registerTraining(this.requestPayload)
       .subscribe(
         data => {
+          this.isLoading = false;
           if(data.responseCode === '00'){
             Swal.fire('Success', 'Success submit training', 'success');
           } else {
@@ -129,11 +152,11 @@ export class ReviewTrainingComponent implements OnInit {
           // this.router.navigate(['/dashboard/project']);
         },
         error => {
+          this.isLoading = false;
           Swal.fire('Success', error, 'error');
           alert(error);
         }
       );
-      this.isLoading = false;
   }
 
   // tslint:disable-next-line:typedef

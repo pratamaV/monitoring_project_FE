@@ -25,17 +25,27 @@
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
       <a [routerLink]="['/home']" routerLinkActive="router-link-active" class="nav-link text-dark">
-        <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i> Charts
+        <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i> Kalender Pembelajaran
       </a>
     </li>
-    <li class="nav-item" [hidden]="userRoleNew === '04' || userRoleNew === '05'">
+    <li class="nav-item" [hidden]="userRoleNew === '02' || userRoleNew === '03' || userRoleNew === '05'">
       <a class="nav-link text-dark" [routerLink]="['/dashboard/training']" routerLinkActive="router-link-active">
-        <i class="fa fa-tasks mr-3 text-primary fa-fw"></i> Training
+        <i class="fa fa-tasks mr-3 text-primary fa-fw"></i> Training TNA
+      </a>
+    </li>
+    <li class="nav-item" [hidden]="userRoleNew === '02' || userRoleNew === '03' || userRoleNew === '04'">
+      <a class="nav-link text-dark" [routerLink]="['/dashboard/training/non']" routerLinkActive="router-link-active">
+        <i class="fa fa-tasks mr-3 text-primary fa-fw"></i> Training Non TNA
       </a>
     </li>
     <li class="nav-item" [hidden]="userRoleNew === '04' || userRoleNew === '05'">
       <a class="nav-link text-dark" [routerLink]="['/dashboard/training/review']" routerLinkActive="router-link-active">
         <i class="fa fa-file-archive-o mr-3 text-primary fa-fw"></i> Review
+      </a>
+    </li>
+    <li class="nav-item" [hidden]="userRoleNew === '02' || userRoleNew === '04' || userRoleNew === '05'">
+      <a class="nav-link text-dark" [routerLink]="['/dashboard/training/review/aa']" routerLinkActive="router-link-active">
+        <i class="fa fa-file-archive-o mr-3 text-primary fa-fw"></i> Review Askrindo Academy
       </a>
     </li>
     <!-- <li class="nav-item" [hidden]="userRoleNew === '04' || userRoleNew === '05'">
@@ -66,12 +76,12 @@
         <i class="fa fa-tasks mr-3 text-primary fa-fw"></i> My-Task <span
         class="badge badge-pill badge-warning ml-2">{{numberTask}}</span>
       </a>
-    </li>
-    <li class="nav-item" [hidden]="userRoleNew === '02' || userRoleNew === '03' || userRoleNew === '04'">
+    </li>  -->
+    <li class="nav-item" [hidden]="userRoleNew === '02' || userRoleNew === '03' || userRoleNew === '04' || userRoleNew === '05'">
       <a class="nav-link text-dark" [routerLink]="['/dashboard/user']" routerLinkActive="router-link-active">
         <i class="fa fa-user-plus mr-3 text-primary fa-fw"></i> User
       </a>
-    </li> -->
+    </li>
 
     <li class="nav-item" style="float :inline-end;">
       <a class="nav-link text-dark" [routerLink]="['/logout']" routerLinkActive="router-link-active">

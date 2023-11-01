@@ -5,6 +5,10 @@ import { ListTrainingComponent } from './list-training/list-training.component';
 import { RegisterTrainingComponent } from './register-training/register-training.component';
 import { ReviewTrainingComponent } from './review-training/review-training.component';
 import { EditTrainingComponent } from './edit-training/edit-training.component';
+import { ListTrainingNonComponent } from './list-training-non/list-training-non.component';
+import { RegisterTrainingNonComponent } from './register-training-non/register-training-non.component';
+import { ReviewTrainingAaComponent } from './review-training-aa/review-training-aa.component';
+import { EditTrainingNonComponent } from './edit-training-non/edit-training-non.component';
 
 const routes: Routes = [
     {
@@ -22,16 +26,46 @@ const routes: Routes = [
         component: ListTrainingComponent
       },
       {
+        path: 'non',
+        canActivate: [AuthGuardService],
+        data: {
+          role: [
+            '01',
+            '02',
+            '03',
+            '04',
+            '05'
+          ]
+        },
+        component: ListTrainingNonComponent
+      },
+      {
         path: 'register',
         canActivate: [AuthGuardService],
         data: {
           role: [
             '01',
             '02',
+            '03',
+            '04',
             '05'
           ]
         },
         component: RegisterTrainingComponent
+      },
+      {
+        path: 'register/non',
+        canActivate: [AuthGuardService],
+        data: {
+          role: [
+            '01',
+            '02',
+            '03',
+            '04',
+            '05'
+          ]
+        },
+        component: RegisterTrainingNonComponent
       },
       {
         path: 'edit/:id',
@@ -40,10 +74,26 @@ const routes: Routes = [
           role: [
             '01',
             '02',
+            '03',
+            '04',
             '05'
           ]
         },
         component: EditTrainingComponent
+      },
+      {
+        path: 'edit/non/:id',
+        canActivate: [AuthGuardService],
+        data: {
+          role: [
+            '01',
+            '02',
+            '03',
+            '04',
+            '05'
+          ]
+        },
+        component: EditTrainingNonComponent
       },
       {
         path: 'review',
@@ -52,10 +102,26 @@ const routes: Routes = [
           role: [
             '01',
             '02',
+            '03',
+            '04',
             '05'
           ]
         },
         component: ReviewTrainingComponent
+      },
+      {
+        path: 'review/aa',
+        canActivate: [AuthGuardService],
+        data: {
+          role: [
+            '01',
+            '02',
+            '03',
+            '04',
+            '05'
+          ]
+        },
+        component: ReviewTrainingAaComponent
       },
 
 ];
