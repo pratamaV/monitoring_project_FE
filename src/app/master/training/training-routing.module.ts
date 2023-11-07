@@ -9,6 +9,7 @@ import { ListTrainingNonComponent } from './list-training-non/list-training-non.
 import { RegisterTrainingNonComponent } from './register-training-non/register-training-non.component';
 import { ReviewTrainingAaComponent } from './review-training-aa/review-training-aa.component';
 import { EditTrainingNonComponent } from './edit-training-non/edit-training-non.component';
+import { ApproveTrainingAaComponent } from './approve-training-aa/approve-training-aa.component';
 
 const routes: Routes = [
     {
@@ -122,6 +123,20 @@ const routes: Routes = [
           ]
         },
         component: ReviewTrainingAaComponent
+      },
+      {
+        path: 'approval/:id',
+        canActivate: [AuthGuardService],
+        data: {
+          role: [
+            '01',
+            '02',
+            '03',
+            '04',
+            '05'
+          ]
+        },
+        component: ApproveTrainingAaComponent
       },
 
 ];

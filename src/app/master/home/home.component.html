@@ -1,1 +1,686 @@
 <app-sidebar></app-sidebar>
+<div class="card">
+  <!-- Page Heading -->
+  <div class="row" id="main">
+    <div class="col-sm-12 col-md-12 well" id="content">
+      <div class="row">
+        <h4 style="text-align: center; margin-bottom: 30px">
+          <!--          <i class="fa fa-search-plus float-start" style="margin-right: 10px;" aria-hidden="true" routerLink="/fit-home"></i>-->
+          Kalender Pembelajaran</h4>
+      </div>
+
+      <div class="row" style="margin-bottom: 10px">
+        <!-- <div id="divChart" class="col-3">
+          <h6 style="text-align: center">Precentage Project by Status</h6>
+          <canvas id="projectByStatus" width="400" height="300"></canvas>
+        .</div> -->
+        <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Pengembangan TI</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Training Name</th>
+                    <!--                  <th scope="col">Total Weight</th>-->
+                    <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let data of pti; let i = index" style="text-align: left">
+                    <td>{{ i+1 }}</td>
+                    <td>{{data.trainingName}}</td>
+                    <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                    [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                    </td>
+                    
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Infrastruktur & Layanan TI</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of ilti; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Operasional</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of opr; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Askrindo Academy</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of acd; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Sekretaris Perusahaan</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of skper; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Transformasi Perusahaan</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of tp; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Pengelolaan Jaringan Dan Digital</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of pjd; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Penjaminan KUR dan Program</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of kur; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Bisnis Bank dan IKNB</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of bbi; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Bisnis BUMN</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of bbumn; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Bisnis Korporasi dan Energi</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of bkorpo; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Underwriting Asuransi Kredit & Suretyship</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of uwks; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Underwriting Asuransi Umum</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of uwas; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Reasuransi</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of reas; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Aktuaria</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of aktu; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Riset dan Pengembangan Produk</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of rpp; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Akuntansi</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Training Name</th>
+                    <!--                  <th scope="col">Total Weight</th>-->
+                    <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let data of akunt; let i = index" style="text-align: left">
+                    <td>{{ i+1 }}</td>
+                    <td>{{data.trainingName}}</td>
+                    <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                    [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                    </td>
+                    
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Keuangan dan Investasi</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of kiv; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Subrogasi</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of subro; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Strategi Perusahaan dan Pengelolaan Anak Perusahaan</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of sppap; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Kepatuhan dan Hukum</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of khk; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">SDM</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of sdm; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Manajemen Risiko</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of mr; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="card">
+              <h5 style="text-align: center; font-size: 16px">Manajemen Aset Logistik</h5>
+              <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table mb-0">
+                  <thead>
+                        <tr>
+                          <th scope="col">No</th>
+                          <th scope="col">Training Name</th>
+                          <!--                  <th scope="col">Total Weight</th>-->
+                          <th *ngFor="let month of ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']">{{ month }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of mal; let i = index" style="text-align: left">
+                          <td>{{ i+1 }}</td>
+                          <td>{{data.trainingName}}</td>
+                          <td *ngFor="let month of ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']"
+                          [ngClass]="{'scheduled-month': isScheduled(month, data.timeline)}">
+                          </td>
+                          
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>

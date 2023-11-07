@@ -23,7 +23,7 @@
                 <div class="row">
                   <div class="col-12 col-xs-8">
                     <div class="row">
-                      <div class="col-6" id="search">
+                      <!-- <div class="col-6" id="search">
                         <form>
                           <div class="form-group">
                             <div class="input-group">
@@ -33,13 +33,13 @@
                             </div>
                           </div>
                         </form>
-                      </div>
+                      </div> -->
     
-                      <div class="col-6" id="button-filter" style="float: right">
-                        <!-- <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
+                      <div class="col-6" id="button-filter" style="float: left">
+                        <button id="export-excel" class="btn btn-dark btn-sm" (click)="exportexcel()"><i
                           class="fa fa-file"></i> Export to excel
                         </button>&nbsp;
-                        <button id="add-project" class="btn btn-warning btn-sm" 
+                        <!-- <button id="add-project" class="btn btn-warning btn-sm" 
                         (click)="onAddTraining()"
                                 [hidden]="userRole==='02' || userRole === '03'"><i
                           class="fa fa-plus"></i> Add New Training
@@ -74,7 +74,23 @@
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                                 title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
+                    <th scope="col">Action
+                      <button (click)="sortColumn('status') " *ngIf="reverse == true"
+                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                            title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                      <button (click)="sortColumn('status') " *ngIf="reverse == false"
+                            class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                            title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                  </th>
                     <th scope="col">Training Name
+                      <button (click)="sortColumn('projectName') " *ngIf="reverse == true"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
+                      <button (click)="sortColumn('projectName') " *ngIf="reverse == false"
+                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
+                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                    </th>
+                    <th scope="col">Division
                       <button (click)="sortColumn('projectName') " *ngIf="reverse == true"
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
@@ -131,14 +147,7 @@
                               class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
                               title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
                     </th>
-                    <th scope="col">Action
-                        <button (click)="sortColumn('status') " *ngIf="reverse == true"
-                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                              title="ASC"><i class="fa fa-caret-up" aria-hidden="true"></i></button>
-                        <button (click)="sortColumn('status') " *ngIf="reverse == false"
-                              class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
-                              title="DESC"><i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                    </th>
+                    
                     <th scope="col">Register date
                         <button (click)="sortColumn('status') " *ngIf="reverse == true"
                                 class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom"
@@ -162,25 +171,26 @@
                     *ngFor="let training of loadedTraining |orderBy: key : reverse | paginate: {itemsPerPage: pageSize, currentPage: page, totalItems: totalItems}; let i = index"
                     [ngStyle]="getStyle(training)">
                     <th >{{i+1}}</th>
+                    <td style="width: 200px;">
+                      <button (click)="updateTraining(training)"
+                              class="btn btn-outline-success btn-sm"
+                              data-toggle="tooltip" data-placement="bottom" title="Approve"><i
+                        class="fa fa-file"></i></button>&nbsp;
+                      <button (click)="approveTraining(training, 3)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
+                              data-placement="bottom" title="Reject"><i
+                        class="fa fa-rotate-right"></i></button>&nbsp;
+                      <!-- <button (click)="approveTraining(training, 3)" class="btn btn-outline-primary btn-sm" data-toggle="tooltip"
+                              data-placement="bottom" title="Input Date"><i
+                        class="fa fa-file"></i></button>&nbsp; -->
+                  </td>
                     <td>{{training.masterTraining.trainingName}}</td>
+                    <td>{{training.idUsers.divisiUser.divisionName}}</td>
                     <td>{{training.competence}}</td>
                     <td>{{training.subCompetence}}</td>
                     <td>{{training.businessIssues}}</td>
                     <td>{{training.performanceIssues}}</td>
                     <td>{{training.competencyIssues}}</td>
                     <td>{{ training.statusDesc }}</td>
-                    <td style="width: 200px;">
-                        <button (click)="approveTraining(training, 2)"
-                                class="btn btn-outline-success btn-sm"
-                                data-toggle="tooltip" data-placement="bottom" title="Approve"><i
-                          class="fa fa-check"></i></button>&nbsp;
-                        <button (click)="approveTraining(training, 3)" class="btn btn-outline-danger btn-sm" data-toggle="tooltip"
-                                data-placement="bottom" title="Reject"><i
-                          class="fa fa-rotate-right"></i></button>&nbsp;
-                        <button (click)="approveTraining(training, 3)" class="btn btn-outline-primary btn-sm" data-toggle="tooltip"
-                                data-placement="bottom" title="Input Date"><i
-                          class="fa fa-file"></i></button>&nbsp;
-                    </td>
                     <td>{{training.creationDate | date : 'medium'}}</td>
                     <td>{{training.lastModifiedDate | date : 'medium'}}</td>
                   </tr>

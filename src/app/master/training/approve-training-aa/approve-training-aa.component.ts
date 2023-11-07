@@ -9,11 +9,11 @@ import { CurrencyPipe } from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit-training',
-  templateUrl: './edit-training.component.html',
-  styleUrls: ['./edit-training.component.css']
+  selector: 'approve-training-aa',
+  templateUrl: './approve-training-aa.component.html',
+  styleUrls: ['./approve-training-aa.component.css']
 })
-export class EditTrainingComponent implements OnInit {
+export class ApproveTrainingAaComponent implements OnInit {
 
   isLoading = false;
   trainingForm: FormGroup;
@@ -37,6 +37,9 @@ export class EditTrainingComponent implements OnInit {
   ContractedValueString : string;
   PaymentRealizationString : string;
   trainingName : any[] = [];
+  months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  selectedMonths: { [key: string]: boolean } = {};
+  selectedMonthsArray: string[] = [];
 
   constructor(private trainingService: TrainingService,
               private router: Router,
@@ -64,6 +67,12 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
+  updateSelectedMonths() {
+    this.selectedMonthsArray = this.months.filter(month => this.selectedMonths[month]);
+    console.log(this.selectedMonthsArray);
+    
+  }
+
   private buildForm(): void {
     this.trainingForm = new FormGroup({
       id: new FormControl(null),
@@ -72,7 +81,8 @@ export class EditTrainingComponent implements OnInit {
       trainingName: new FormControl(null),
       businessIssues: new FormControl(null),
       performanceIssues: new FormControl(null),
-      competencyIssues: new FormControl(null)
+      competencyIssues: new FormControl(null),
+      timeline: new FormControl(null)
     });
   }
 
@@ -106,6 +116,7 @@ export class EditTrainingComponent implements OnInit {
     }
     
     console.log('id : ' + idTraining);
+    console.log('month : [' + this.selectedMonthsArray + ']');
     
     this.idUsers = JSON.parse(window.sessionStorage.getItem('token')).user.id;
     this.divisionCode = JSON.parse(window.sessionStorage.getItem('token')).user.divisiUser.divisionCode;
@@ -121,7 +132,8 @@ export class EditTrainingComponent implements OnInit {
       idUsers: this.idUsers,
       divisionCode: this.divisionCode,
       type: 'T',
-      status: '0'
+      status: '2',
+      timeline: '['+this.selectedMonthsArray+']'
     };
   
     this.trainingService.registerTraining(this.requestPayload)
@@ -134,7 +146,7 @@ export class EditTrainingComponent implements OnInit {
           Swal.fire('Failed', data.responseCode, 'error');
         }
         // window.location.reload();
-        this.router.navigate(['/dashboard/training']);
+        this.router.navigate(['/dashboard/training/review/aa']);
       },
       error => {
         Swal.fire('Success', error, 'error');
@@ -198,7 +210,7 @@ export class EditTrainingComponent implements OnInit {
   }
 
   onGolistTraining() {
-    this.router.navigate(['/dashboard/training']);
+    this.router.navigate(['/dashboard/training/review/aa']);
   }
 
 }

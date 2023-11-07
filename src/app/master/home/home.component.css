@@ -66,3 +66,8 @@
     font-size: 13px;
 }
 
+.scheduled-month {
+    background-color: rgb(0, 255, 0);
+    color: white;
+  }
+

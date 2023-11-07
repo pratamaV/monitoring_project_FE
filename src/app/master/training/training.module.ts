@@ -14,10 +14,21 @@ import { ListTrainingNonComponent } from "./list-training-non/list-training-non.
 import { RegisterTrainingNonComponent } from "./register-training-non/register-training-non.component";
 import { ReviewTrainingAaComponent } from "./review-training-aa/review-training-aa.component";
 import { EditTrainingNonComponent } from "./edit-training-non/edit-training-non.component";
+import { ApproveTrainingAaComponent } from "./approve-training-aa/approve-training-aa.component";
 
 
 @NgModule({
-    declarations: [ListTrainingComponent, RegisterTrainingComponent, ReviewTrainingComponent, EditTrainingComponent, ListTrainingNonComponent, RegisterTrainingNonComponent, EditTrainingNonComponent, ReviewTrainingAaComponent],
+    declarations: [
+        ListTrainingComponent, 
+        RegisterTrainingComponent, 
+        ReviewTrainingComponent, 
+        EditTrainingComponent, 
+        ListTrainingNonComponent, 
+        RegisterTrainingNonComponent, 
+        EditTrainingNonComponent, 
+        ReviewTrainingAaComponent, 
+        ApproveTrainingAaComponent
+    ],
       imports: [
           CommonModule,
           TrainingRoutingModule,

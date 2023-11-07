@@ -156,5 +156,35 @@ export class TrainingService {
     });
   }
 
+  getTrainingByType(type): Observable<DefaultResponse> {    
+    return new Observable((observer: Observer<DefaultResponse>) => {
+      this.http
+        .get(
+          `api/training/type/${type}?access_token=` +
+          JSON.parse(window.sessionStorage.getItem('token')).access_token
+        )
+        .subscribe(
+          (response: DefaultResponse) => {
+            observer.next(response);
+          },
+          error => {
+            observer.error(error.message);
+            this.logError = {
+              errorMessage: error.message,
+              incidentDate: new Date(),
+              function: 'Get training by type',
+              isActive: true
+            };
+            this.logErrorService.saveLogError(this.logError, this.idLog)
+              .subscribe(response => {
+                // tslint:disable-next-line:no-shadowed-variable
+              }, error => {
+                alert('Gagal merekam kesalahan');
+              });
+          }
+        );
+    });
+  }
+
 
 }

@@ -1,0 +1,79 @@
+<app-sidebar></app-sidebar>
+
+<!-- <div class="card"> -->
+
+<div class="container">
+  <h4><i class="fa fa-chevron-circle-left" (click)="onGolistTraining()"></i>Approval Training</h4>
+  <br>
+  <div class="container-fluid col-12">
+    <div *ngIf="isLoading == true">
+      <div id="id01" class="modal">
+        <div id="loading" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+          <div class="spinner-border text-info"></div>
+        </div>
+      </div>
+    </div>
+    <form style="padding: 10px" [formGroup]="trainingForm" method="post" (ngSubmit)="onSaveTraining(trainingForm.value, trainingForm.valid)">
+      <div class="row">
+        <div class="col-8">
+          <div class="Form-group">
+            <input type="hidden" class="form-control" formControlName="id" id="id">
+          </div>
+          <div class="form-group">
+              <label for="competence" style="float: left;"><b>Competence</b></label>
+              <select disabled selected class="form-select" formControlName="competence" id="competence" aria-label="Default select example">
+                  <option value="Kompetensi Generik">Kompetensi Generik</option>
+              </select>
+          </div>
+
+          <div class="form-group">
+              <label for="subCompetence" style="float: left;"><b>Sub Competence</b></label>
+              <select disabled selected class="form-select" (selectedChange)="selectOption($event)" formControlName="subCompetence" id="subCompetence" aria-label="Default select example">
+                  <option value="1">Risk Management</option>
+                  <option value="2">Organization, Product & Insurance Knowledge</option>
+                  <option value="3">Tech Savy</option>
+              </select>
+          </div>
+
+          <div class="form-group">
+              <label for="trainingName"><b>Training Name</b></label>
+              <select disabled selected type="text" class="form-select" formControlName="trainingName" id="trainingName">
+              <option *ngFor="let item of masterTraining" [ngValue]="item.id">{{item.trainingName}}</option>
+              </select>
+          </div>
+
+          <div class="form-group">
+            <label for="businessIssues"><b>Business Issues</b></label>
+            <input readOnly nbInput type="text" class="form-control" formControlName="businessIssues" id="businessIssues">
+          </div>
+
+          <div class="form-group">
+            <label for="performanceIssues"><b>Performance Issues</b></label>
+            <input readOnly nbInput type="text" class="form-control" formControlName="performanceIssues" id="performanceIssues">
+          </div>
+
+          <div class="form-group">
+            <label for="competencyIssues"><b>Competency Issues</b></label>
+            <input readOnly nbInput type="text" class="form-control" formControlName="competencyIssues" id="competencyIssues">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="timeline"><b>Timeline</b></label>
+            <div *ngFor="let month of months">
+              <label>
+                <input type="checkbox" [(ngModel)]="selectedMonths[month]" (change)="updateSelectedMonths()" formControlName="timeline">
+                {{ month }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div> 
+      <button [disabled]="!trainingForm.valid" type="submit" class="btn btn-primary mt-3" style="width: 100%">Submit
+      </button>
+
+    </form>
+
+  </div>
+</div>

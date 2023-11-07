@@ -61,7 +61,7 @@ export class ReviewTrainingAaComponent implements OnInit {
     this.loadedTraining = [];
     this.isLoading = true;
     this.division = JSON.parse(window.sessionStorage.getItem('token')).user.divisiUser.divisionCode;    
-    this.trainingService.getTrainingByDivision(this.division).subscribe(
+    this.trainingService.getTrainingByType('T').subscribe(
       data => {
         this.isLoading = false;
           for (const iterator of data.data) {
@@ -91,7 +91,7 @@ export class ReviewTrainingAaComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   updateTraining(training: TrainingModel) {
-    this.router.navigateByUrl('/dashboard/training/edit/' + training.id);
+    this.router.navigateByUrl('/dashboard/training/approval/' + training.id);
     // this.router.navigateByUrl('/dashboard/training/register/' + training.id, {
     //   state: training
     // });
